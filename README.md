@@ -11,8 +11,13 @@ Stan Tophoven
 
 Milestones:
 Milestone 1 (Groepsamenstelling & GIT) ✔️
-Milestone 2 (ERD & Class diagram) ❌
-Milestone 3 (Package diagram)❌
-Milestone 4 (Relationeel ontwerp)❌
+
+Milestone 2 (ERD & Class diagram) ✔️
+
+Milestone 3 (Package diagram)✔️
+
+Milestone 4 (Relationeel ontwerp)✔️
+
 MIlestone 5 (Vertical slice)❌
+
 Milestone 6 (Testsets & Validalidatiemethoden)❌
