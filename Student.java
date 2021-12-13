@@ -100,4 +100,13 @@ public class Student {
         this.country = country;
     }
 
+    public ArrayList<Certificate> getCertificates() {
+        return certificates;
+    }
+
+    public void addCertificate(Certificate certificate){
+        certificates.add(certificate);
+    }
+    
+
 }
