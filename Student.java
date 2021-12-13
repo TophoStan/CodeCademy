@@ -100,7 +100,6 @@ public class Student {
         this.country = country;
     }
 
-<<<<<<< HEAD
     public ArrayList<Certificate> getCertificates() {
         return certificates;
     }
@@ -109,11 +108,4 @@ public class Student {
         certificates.add(certificate);
     }
     
-
-=======
-    public void testStijn() {
-        System.out.println("Stijn");        
-    }
-
->>>>>>> 1fe0d4bb1101410635a8ced8942e11505b18af7e
 }
