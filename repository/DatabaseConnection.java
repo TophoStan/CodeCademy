@@ -16,8 +16,9 @@ public class DatabaseConnection {
 
     public void connect() {
         Connection conn = null;
-
+        System.out.println("Trying to connect to the database");
         try {
+            System.out.println("Connection succesfull");
 
             String dbURL = "jdbc:sqlserver://aei-sql2.avans.nl\\studenten:1443;databaseName=CodeCademy7";
             String user = "group7";
