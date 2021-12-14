@@ -1,14 +1,14 @@
-import java.sql.Date;
+package domain;
 
-public class Certificate {
+import java.util.Date;
+
+public class Enrollment {
     private Date enrollmentDate;
-    private double grade;
     private String courseName;
     private String studentName;
 
-    public Certificate(Date enrollmentDate, double grade, String courseName, String studentName) {
+    public Enrollment(Date enrollmentDate, String courseName, String studentName) {
         this.enrollmentDate = enrollmentDate;
-        this.grade = grade;
         this.courseName = courseName;
         this.studentName = studentName;
     }
@@ -19,14 +19,6 @@ public class Certificate {
 
     public void setEnrollmentDate(Date enrollmentDate) {
         this.enrollmentDate = enrollmentDate;
-    }
-
-    public double getGrade() {
-        return grade;
-    }
-
-    public void setGrade(double grade) {
-        this.grade = grade;
     }
 
     public String getCourseName() {
@@ -44,6 +36,5 @@ public class Certificate {
     public void setStudentName(String studentName) {
         this.studentName = studentName;
     }
-    
 
 }

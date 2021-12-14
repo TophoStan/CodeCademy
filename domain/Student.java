@@ -1,5 +1,6 @@
+package domain;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
 
 public class Student {
@@ -13,6 +14,7 @@ public class Student {
     private String city;
     private String country;
     private ArrayList<Certificate> certificates;
+    private ArrayList<Enrollment> enrollments;
 
     public Student(String emailAddress, String name, String gender, Date birthDate, String street, String houseNumber,
             String postalCode, String city, String country) {
@@ -101,11 +103,19 @@ public class Student {
     }
 
     public ArrayList<Certificate> getCertificates() {
-        return certificates;
+        return this.certificates;
     }
 
     public void addCertificate(Certificate certificate){
-        certificates.add(certificate);
+        this.certificates.add(certificate);
+    }
+
+    public ArrayList<Enrollment> getEnrollments(){
+        return this.enrollments;
+    }
+
+    public void addEnrollment(Enrollment enrollment){
+        this.enrollments.add(enrollment);
     }
     
 }
