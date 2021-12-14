@@ -43,27 +43,27 @@ public class DatabaseConnection {
 
         } catch (SQLException ex) {
             ex.printStackTrace();
-        } finally {
-            try {
-                if (conn != null && !conn.isClosed()) {
-                    conn.close();
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-        }
+        } //finally {
+        //     try {
+        //         if (conn != null && !conn.isClosed()) {
+        //             conn.close();
+        //         }
+        //     } catch (SQLException ex) {
+        //         ex.printStackTrace();
+        //     }
+        // }
 
     }
 
     public void viewTable() {
-        String query = "select EmployeeId, Name";
+        String query = "select EmployeeId, Name from Employee";
         try (Statement stmt = conn.createStatement()) {
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-                String coffeeName = rs.getString("COF_NAME");
-                int supplierID = rs.getInt("SUP_ID");
+                String employeeName = rs.getString("Name");
+                int employeeID = rs.getInt("EmployeeId");
                 
-                System.out.println();
+                System.out.println(employeeID + ", " + employeeName);
             }
         } catch (SQLException e) {
             System.out.println(e);

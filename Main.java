@@ -4,8 +4,9 @@ import repository.*;
 public class Main {
     public static void main(String[] args) {
         // database connection
-        DatabaseConnection connection = new DatabaseConnection();
+        DatabaseConnection database = new DatabaseConnection();
 
-        connection.connect();
+        database.connect();
+        database.viewTable();
     }
 }
