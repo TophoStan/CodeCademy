@@ -1,5 +1,7 @@
 package Gui;
 
+import java.util.ArrayList;
+
 import domain.Student;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -12,10 +14,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import repository.DatabaseConnection;
 
 public class App extends Application {
 
-    private Student st;
+    private ArrayList<Student> st = new ArrayList<>();
 
     public void start(Stage window) {
 
@@ -150,10 +153,22 @@ public class App extends Application {
         Label studentListTitle = new Label("Name list:");
         studentListTitle.setFont(Font.font("Monospaced", 18));
 
-        // for (Student name : st) {
-        //     Label newStud = new Label(name.getName());
-        //     studentList.getChildren().add(newStud);
-        // }
+        studentList.getChildren().add(studentListTitle);
+
+        DatabaseConnection database = new DatabaseConnection();
+        database.connect();
+
+        try {
+            ArrayList<Student> students = database.retrieveStudents();
+            for (Student name : students) {
+                Label newStud = new Label(name.getName());
+                studentList.getChildren().add(newStud);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        
 
         // set student content
         studentContent.getChildren().addAll(studentAddPlaces, studentList);
