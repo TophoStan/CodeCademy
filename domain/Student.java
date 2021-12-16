@@ -1,22 +1,28 @@
 package domain;
 
-import java.util.Date;
+import java.sql.Date;
+
+import repository.DatabaseConnection;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
 public class Student {
+    private int id;
     private String emailAddress;
     private String name;
     private String gender;
     private Date birthDate;
     private String street;
-    private String houseNumber;
+    private int houseNumber;
     private String postalCode;
     private String city;
     private String country;
     private ArrayList<Certificate> certificates;
     private ArrayList<Enrollment> enrollments;
 
-    public Student(String emailAddress, String name, String gender, Date birthDate, String street, String houseNumber,
+    public Student(String emailAddress, String name, String gender, Date birthDate, String street, int houseNumber,
             String postalCode, String city, String country) {
         this.emailAddress = emailAddress;
         this.name = name;
@@ -28,6 +34,10 @@ public class Student {
         this.city = city;
         this.country = country;
         this.certificates = new ArrayList<>();
+    }
+
+    public Student() {
+
     }
 
     public String getEmailAddress() {
@@ -70,11 +80,11 @@ public class Student {
         this.street = street;
     }
 
-    public String getHouseNumber() {
+    public int getHouseNumber() {
         return houseNumber;
     }
 
-    public void setHouseNumber(String houseNumber) {
+    public void setHouseNumber(int houseNumber) {
         this.houseNumber = houseNumber;
     }
 
@@ -106,17 +116,29 @@ public class Student {
         return this.certificates;
     }
 
-    public void addCertificate(Certificate certificate){
+    public void addCertificate(Certificate certificate) {
         this.certificates.add(certificate);
     }
 
-    public ArrayList<Enrollment> getEnrollments(){
+    public ArrayList<Enrollment> getEnrollments() {
         return this.enrollments;
     }
 
-    public void addEnrollment(Enrollment enrollment){
+    public void addEnrollment(Enrollment enrollment) {
         this.enrollments.add(enrollment);
     }
-    
-    
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString(){
+        return getName() + ", " + getEmailAddress() + ", " + getGender();
+    }
+
 }
