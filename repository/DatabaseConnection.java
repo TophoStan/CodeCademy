@@ -23,10 +23,19 @@ import domain.Student;
 public class DatabaseConnection {
     private Connection conn;
 
+    /** 
+     * Constructor for the <code>DatabaseConnection</code> class. Initializes <code>Connection</code> object to null.
+     * 
+     */
+
     public DatabaseConnection() {
         this.conn = null;
     }
 
+    /**
+     * Connects to the SQL Server Database using <code>DriverManager</code>.
+     * 
+     */
     public void connect() {
         System.out.println("Connecting to database");
 
@@ -42,52 +51,25 @@ public class DatabaseConnection {
 
         } catch (SQLException ex) {
             System.out.println("Something went wrong");
+            System.out.println(ex.getMessage());
             ex.printStackTrace();
         }
 
     }
 
-    public void viewTable() {
-        String query = "select EmployeeId, Name from Employee";
-        try (Statement stmt = conn.createStatement()) {
-            ResultSet rs = stmt.executeQuery(query);
-            while (rs.next()) {
-                String employeeName = rs.getString("Name");
-                int employeeID = rs.getInt("EmployeeId");
-
-                System.out.println(employeeID + ", " + employeeName);
-            }
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-    }
-
-    public void addToToble(String table) {
-
-        try {
-            String query = "INSERT INTO " + table + " (Name)" + "Values (?)";
-            PreparedStatement preparedStmt = conn.prepareStatement(query);
-
-            preparedStmt.setString(1, "Stijn");
-
-            preparedStmt.execute();
-            System.out.println("Succesfully executed");
-
-        } catch (Exception e) {
-
-            System.out.println(e.getMessage());
-        }
-    }
-
     /**
-     * This method uses the <code>Statement</code> and <code>execute()</code>
+     * This method uses the <code>Statement</code> and <code>execute()</code> to
+     * push the data to the database with a number of
+     * <code>setString(x, student.getMethod);</code>
      * 
-     * @Requires <code>student</code> != null
-     * @signals (NullPointerException) student == null;
+     * @requires conn != null && student != null;
+     * @throws NullPointerException student == null;
+     * @throws SQLException         conn == null;
+     * @return True || False
      * @param student
-     * 
      */
-    public boolean addStudentToDatabase(Student student) {
+
+    public boolean addStudentToDatabase(Student student) throws SQLException, NullPointerException {
         String query = "INSERT INTO Student(Emailaddress, Name, Gender, Birthdate, Street, HouseNumber, PostalCode, City, Country) VALUES(?,?,?,?,?,?,?,?,?)";
 
         try (PreparedStatement stmt = conn.prepareStatement(query)) {
@@ -113,6 +95,16 @@ public class DatabaseConnection {
         }
     }
 
+    /**
+     * This function retrieves all the records from the Student table on the SQL
+     * server.
+     * The method works by using <code>Statement </code> and <code>Resultset </code>
+     * to execute the query.
+     * 
+     * @requires conn != null
+     * @return ArrayList<Student>
+     * @throws SQLException
+     */
     public ArrayList<Student> retrieveStudents() throws SQLException {
 
         Statement stmt = this.conn.createStatement();
@@ -136,7 +128,17 @@ public class DatabaseConnection {
         return students;
     }
 
-    public boolean deleteStudentFromDatabase(Student student) {
+    /**
+     * Deletes a student from the databse if the Student table contains the
+     * EmailAddress of the given <code>student</code> in the parameters
+     * 
+     * @requires student != null && conn != null
+     * @param student
+     * @return boolean
+     * @throws SQLException         conn == null
+     * @throws NullPointerException student == null
+     */
+    public boolean deleteStudentFromDatabase(Student student) throws SQLException, NullPointerException {
         boolean wasSuccesful = false;
 
         try {
@@ -153,6 +155,16 @@ public class DatabaseConnection {
         return wasSuccesful;
     }
 
+    /**
+     * Edits the student's information except for the EmailAddress.
+     * After this method has been executed the changes will take affect immeadiatly.
+     * 
+     * @Requires student != null && conn != null
+     * @param student
+     * @return boolean
+     * @throws SQLException         conn == null
+     * @throws NullPointerException student == null
+     */
     public boolean editStudentInformation(Student student) {
         boolean wasSuccesful = false;
 
