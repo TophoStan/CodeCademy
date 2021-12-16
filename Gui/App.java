@@ -1,6 +1,10 @@
 package Gui;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.sql.Date;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 
 import domain.Student;
 import javafx.application.Application;
@@ -12,6 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import repository.DatabaseConnection;
@@ -19,6 +24,7 @@ import repository.DatabaseConnection;
 public class App extends Application {
 
     private ArrayList<Student> st = new ArrayList<>();
+    private DatabaseConnection dbcn = new DatabaseConnection();
 
     public void start(Stage window) {
 
@@ -117,7 +123,7 @@ public class App extends Application {
         TextField addGenderField = new TextField();
 
         Label addbirthDate = new Label("Birthdate");
-        TextField addBirthDateField = new TextField();
+        TextField addBirthDateField = new TextField("MM-DD-YYYY");
 
         Label addStreet = new Label("Street");
         TextField addStreetField = new TextField();
@@ -131,16 +137,20 @@ public class App extends Application {
         Label addCity = new Label("City");
         TextField addCityField = new TextField();
 
-        Label addCountry = new Label("Housenumber");
+        Label addCountry = new Label("Country");
         TextField addCountryField = new TextField();
 
         Button submitButton = new Button("Submit");
         submitButton.setTranslateY(10);
 
+        Label alert = new Label();
+        alert.setStyle("-fx-text-fill: RED;" +
+                "-fx-padding: 15;");
+
         studentAddPlaces.getChildren().addAll(studentTitle, addName, addNameField, addEmail, addEmailField, addGender,
                 addGenderField, addbirthDate, addBirthDateField, addStreet, addStreetField,
                 addHouseNumber, addHouseNumberField, addPostalCode, addPostalCodeField, addCity, addCityField,
-                addCountry, addCountryField, submitButton);
+                addCountry, addCountryField, submitButton, alert);
 
         // student list
         VBox studentList = new VBox();
@@ -168,8 +178,6 @@ public class App extends Application {
             System.out.println(e);
         }
 
-        
-
         // set student content
         studentContent.getChildren().addAll(studentAddPlaces, studentList);
 
@@ -183,6 +191,14 @@ public class App extends Application {
         Scene student = new Scene(layoutStudent, 700, 600);
 
         // actions
+        addBirthDateField.setOnMouseClicked((event) -> {
+            addBirthDateField.setText("");
+        });
+
+        addNameField.setOnKeyTyped((event) -> {
+            alert.setText("Not saved yet!");
+        });
+
         studentButton.setOnAction((event) -> {
             layoutStudent.getChildren().clear();
             layoutStudent.getChildren().addAll(title, menu, studentContent);
@@ -196,11 +212,46 @@ public class App extends Application {
             layoutHome.getChildren().addAll(title, menu, homeContent);
             homeButton.setDefaultButton(true);
             studentButton.setDefaultButton(false);
+            addBirthDateField.setText("01-01-1001");
             window.setScene(home);
         });
 
         submitButton.setOnAction((event) -> {
+            // add to database
+            String emailAddress = addEmailField.getText();
+            String newName = addNameField.getText();
+            String gender = addGenderField.getText();
+            String birthDate = addBirthDateField.getText();
+            String street = addStreetField.getText();
+            int houseNumber = Integer.parseInt(addHouseNumberField.getText());
+            String postalCode = addPostalCodeField.getText();
+            String city = addCityField.getText();
+            String country = addCountryField.getText();
 
+            SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
+            
+            String[] splits = birthDate.split("-");
+            int[] intDate = new int[3];
+            for (int i = 0; i < 2; i++) {
+                intDate[i] = Integer.parseInt(splits[i]);
+            }
+
+            Calendar cal = Calendar.getInstance();
+            cal.set(Calendar.YEAR, intDate[2]);
+            cal.set(Calendar.MONTH, intDate[0] - 1); // <-- months start
+            // at 0.
+            cal.set(Calendar.DAY_OF_MONTH, intDate[1]);
+
+            java.sql.Date date = new java.sql.Date(cal.getTimeInMillis());
+            System.out.println(sdf.format(date));
+
+            Student newStudent = new Student(emailAddress, newName, gender, date, street, houseNumber, postalCode,
+                    city, country);
+            
+            System.out.println(newStudent);
+
+            
+            alert.setText("Succesfull added!");
         });
 
         // window set
