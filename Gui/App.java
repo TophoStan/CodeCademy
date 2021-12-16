@@ -1,5 +1,6 @@
 package Gui;
 
+import domain.Student;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -14,11 +15,15 @@ import javafx.stage.Stage;
 
 public class App extends Application {
 
+    private Student st;
+
     public void start(Stage window) {
 
         // Home layout
         VBox layoutHome = new VBox();
+        layoutHome.setPadding(new Insets(0, 0, 0, 10));
         VBox layoutStudent = new VBox();
+        layoutStudent.setPadding(new Insets(0, 0, 0, 10));
 
         // Title
         Label title = new Label("Codecademy");
@@ -34,7 +39,7 @@ public class App extends Application {
         menu.getTypeSelector();
 
         menu.setPadding(new Insets(10));
-        menu.getChildren().addAll(homeButton, coursesButton, studentButton);   
+        menu.getChildren().addAll(homeButton, coursesButton, studentButton);
 
         // Content Home
         VBox homeContent = new VBox();
@@ -52,11 +57,17 @@ public class App extends Application {
         // A webcast place
         HBox webcastPlace = new HBox();
 
-        Label webcastTitle = new Label("Test webcast");
-        webcastTitle.setFont(Font.font("Monospaced", 13));
-        Button toCourseButton = new Button("Watch");
+        Label webcastTitle = new Label("Test webcast ");
+        webcastTitle.setFont(Font.font("Monospaced", 18));
+        Button toCourseButton = new Button(">");
 
         webcastPlace.getChildren().addAll(webcastTitle, toCourseButton);
+        webcastPlace.setStyle("-fx-padding: 10;" +
+                "-fx-border-width: 1;" +
+                "-fx-border-insets: 5;" +
+                "-fx-border-radius: 15;" +
+                "-fx-border-color: black;");
+
         webcastGrid.add(webcastPlace, 0, 0);
 
         // Certificates
@@ -65,24 +76,26 @@ public class App extends Application {
         // A webcast place
         HBox certiPlace = new HBox();
 
-        Label certiTitle = new Label("Test certificate");
-        certiTitle.setFont(Font.font("Monospaced", 13));
-        Button toCertiButton = new Button("Start");
+        Label certiTitle = new Label("Test certificate ");
+        certiTitle.setFont(Font.font("Monospaced", 18));
+        Button toCertiButton = new Button(">");
 
         certiPlace.getChildren().addAll(certiTitle, toCertiButton);
+        certiPlace.setStyle("-fx-padding: 10;" +
+                "-fx-border-width: 1;" +
+                "-fx-border-insets: 5;" +
+                "-fx-border-radius: 15;" +
+                "-fx-border-color: black;");
         certificateGrid.add(certiPlace, 0, 0);
 
         // Set home content
         homeContent.getChildren().addAll(webcastsParagraf, webcastGrid, certificateParagraf, certificateGrid);
 
-        
-        
+        // ------------------------------------------------------------------------------------------------------------------------------------
 
-        //------------------------------------------------------------------------------------------------------------------------------------
-        
         // content student
         HBox studentContent = new HBox();
-        
+
         // add places
         VBox studentAddPlaces = new VBox();
         studentAddPlaces.setPadding(new Insets(0, 150, 0, 20));
@@ -93,43 +106,67 @@ public class App extends Application {
         // form
         Label addName = new Label("Name");
         TextField addNameField = new TextField();
-        
+
         Label addEmail = new Label("Email");
         TextField addEmailField = new TextField();
-        
-        studentAddPlaces.getChildren().addAll(studentTitle, addName, addNameField, addEmail, addEmailField);
-        
+
+        Label addGender = new Label("Gender");
+        TextField addGenderField = new TextField();
+
+        Label addbirthDate = new Label("Birthdate");
+        TextField addBirthDateField = new TextField();
+
+        Label addStreet = new Label("Street");
+        TextField addStreetField = new TextField();
+
+        Label addHouseNumber = new Label("Housenumber");
+        TextField addHouseNumberField = new TextField();
+
+        Label addPostalCode = new Label("Postalcode");
+        TextField addPostalCodeField = new TextField();
+
+        Label addCity = new Label("City");
+        TextField addCityField = new TextField();
+
+        Label addCountry = new Label("Housenumber");
+        TextField addCountryField = new TextField();
+
+        Button submitButton = new Button("Submit");
+        submitButton.setTranslateY(10);
+
+        studentAddPlaces.getChildren().addAll(studentTitle, addName, addNameField, addEmail, addEmailField, addGender,
+                addGenderField, addbirthDate, addBirthDateField, addStreet, addStreetField,
+                addHouseNumber, addHouseNumberField, addPostalCode, addPostalCodeField, addCity, addCityField,
+                addCountry, addCountryField, submitButton);
+
         // student list
         VBox studentList = new VBox();
-        studentList.setStyle( "-fx-padding: 10;" +
-        "-fx-border-width: 1;" +
-        "-fx-border-insets: 5;" + 
-            "-fx-border-radius: 15;" + 
-            "-fx-border-color: black;");
-            
-            Label studentListTitle = new Label("List:");
-        studentListTitle.setFont(Font.font("Monospaced", 18));
-        Label testStudent = new Label("Stan Tophoven");
-        Label testStudent2 = new Label("Thomas Quartel");
-        Label testStudent3 = new Label("Stijn Spanjers");
-        Label testStudent4 = new Label("Mickel de Coo");
-        Label testStudent5 = new Label("Stijn Spanjers");
-        Label testStudent6 = new Label("Mickel de Coo");
+        studentList.setStyle("-fx-padding: 10;" +
+                "-fx-border-width: 1;" +
+                "-fx-border-insets: 5;" +
+                "-fx-border-radius: 15;" +
+                "-fx-border-color: black;");
 
-        studentList.getChildren().addAll(studentListTitle, testStudent, testStudent2, testStudent3, testStudent4, testStudent6, testStudent5);
-        
+        Label studentListTitle = new Label("Name list:");
+        studentListTitle.setFont(Font.font("Monospaced", 18));
+
+        // for (Student name : st) {
+        //     Label newStud = new Label(name.getName());
+        //     studentList.getChildren().add(newStud);
+        // }
+
         // set student content
         studentContent.getChildren().addAll(studentAddPlaces, studentList);
-        
+
         // set total layout
         layoutHome.getChildren().addAll(title, menu, homeContent);
-        
+
         // set home view
-        Scene home = new Scene(layoutHome, 700, 500);
-        
+        Scene home = new Scene(layoutHome, 700, 600);
+
         // view set student
-        Scene student = new Scene(layoutStudent, 700, 500);
-        
+        Scene student = new Scene(layoutStudent, 700, 600);
+
         // actions
         studentButton.setOnAction((event) -> {
             layoutStudent.getChildren().clear();
@@ -146,7 +183,11 @@ public class App extends Application {
             studentButton.setDefaultButton(false);
             window.setScene(home);
         });
-        
+
+        submitButton.setOnAction((event) -> {
+
+        });
+
         // window set
         window.setTitle("Thomas Quartel, Mickel de Coo, Stijn Spanjers en Stan Tophoven");
         window.setScene(home);
