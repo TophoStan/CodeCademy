@@ -120,10 +120,10 @@ public class App extends Application {
         TextField addEmailField = new TextField();
 
         Label addGender = new Label("Gender");
-        TextField addGenderField = new TextField();
+        TextField addGenderField = new TextField("M/W/O");
 
         Label addbirthDate = new Label("Birthdate");
-        TextField addBirthDateField = new TextField("MM-DD-YYYY");
+        TextField addBirthDateField = new TextField("DD-MM-YYYY");
 
         Label addStreet = new Label("Street");
         TextField addStreetField = new TextField();
@@ -178,8 +178,30 @@ public class App extends Application {
             System.out.println(e);
         }
 
+        // your added content
+        VBox yourAddedContent = new VBox();
+        yourAddedContent.setStyle("-fx-padding: 10;" +
+                "-fx-border-width: 1;" +
+                "-fx-border-insets: 5;" +
+                "-fx-border-radius: 15;" +
+                "-fx-border-color: black;");
+
+        Label yourAddedContentListTitle = new Label("Your newest info:");
+        yourAddedContentListTitle.setFont(Font.font("Monospaced", 18));
+
+        Label newestName = new Label();
+        Label newestEmail = new Label();
+        Label newestGender = new Label();
+        Label newestBirthDate = new Label();
+        Label newestStreet = new Label();
+        Label newestHouseNumber = new Label();
+        Label newestCity = new Label();
+        Label newestCounty = new Label();
+
+        yourAddedContent.getChildren().addAll(yourAddedContentListTitle, newestName, newestEmail, newestGender, newestBirthDate, newestStreet, newestHouseNumber, newestCity, newestCounty);
+
         // set student content
-        studentContent.getChildren().addAll(studentAddPlaces, studentList);
+        studentContent.getChildren().addAll(studentAddPlaces, studentList, yourAddedContent);
 
         // set total layout
         layoutHome.getChildren().addAll(title, menu, homeContent);
@@ -193,6 +215,10 @@ public class App extends Application {
         // actions
         addBirthDateField.setOnMouseClicked((event) -> {
             addBirthDateField.setText("");
+        });
+
+        addGender.setOnMouseClicked((event) -> {
+            addGender.setText("");
         });
 
         addNameField.setOnKeyTyped((event) -> {
@@ -212,7 +238,8 @@ public class App extends Application {
             layoutHome.getChildren().addAll(title, menu, homeContent);
             homeButton.setDefaultButton(true);
             studentButton.setDefaultButton(false);
-            addBirthDateField.setText("01-01-1001");
+            addBirthDateField.setText("DD-MM-YYYY");
+            addGenderField.setText("M/W/O");
             window.setScene(home);
         });
 
@@ -229,25 +256,25 @@ public class App extends Application {
             String country = addCountryField.getText();
 
             SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
-            
+
             String[] splits = birthDate.split("-");
             int[] intDate = new int[3];
-            for (int i = 0; i < 2; i++) {
+            for (int i = 0; i < 3; i++) {
                 intDate[i] = Integer.parseInt(splits[i]);
             }
 
             Calendar cal = Calendar.getInstance();
             cal.set(Calendar.YEAR, intDate[2]);
-            cal.set(Calendar.MONTH, intDate[0] - 1); // <-- months start
+            cal.set(Calendar.MONTH, intDate[1] - 1); // <-- months start
             // at 0.
-            cal.set(Calendar.DAY_OF_MONTH, intDate[1]);
+            cal.set(Calendar.DAY_OF_MONTH, intDate[0]);
 
             java.sql.Date date = new java.sql.Date(cal.getTimeInMillis());
             System.out.println(sdf.format(date));
 
             Student newStudent = new Student(emailAddress, newName, gender, date, street, houseNumber, postalCode,
                     city, country);
-            
+
             System.out.println(newStudent);
 
             try {
@@ -264,17 +291,45 @@ public class App extends Application {
             alert.setText("Succesfull added!");
 
             try {
-                wait(10000);
+                Thread.sleep(90);
                 studentList.getChildren().clear();
+                studentList.getChildren().add(studentListTitle);
                 ArrayList<Student> students = database.retrieveStudents();
                 for (Student name : students) {
-                    Label newStud = new Label(name.getName());
+                    Label newStud = new Label("- " + name.getName());
                     studentList.getChildren().add(newStud);
                 }
             } catch (Exception e) {
                 System.out.println(e);
             }
-            
+
+            if (gender.equals("M")) {
+                gender += "an";
+            } else if (gender.equals("W")) {
+                gender += "omen";
+            } else {
+                gender = "Other";
+            }
+
+            newestName.setText("Name: " + newName);
+            newestEmail.setText("Email: " + emailAddress);
+            newestGender.setText("Gender: " + gender);
+            newestBirthDate.setText("Birthdate: " + birthDate);
+            newestStreet.setText("Street: " + street);
+            newestHouseNumber.setText("Housenumber: " + String.valueOf(houseNumber));
+            newestCity.setText("City: " + city);
+            newestCounty.setText("Country: " + country);
+
+            addNameField.clear();
+            addEmailField.clear();
+            addBirthDateField.clear();
+            addCityField.clear();
+            addGenderField.clear();
+            addHouseNumberField.clear();
+            addCountryField.clear();
+            addPostalCodeField.clear();
+            addStreetField.clear();
+
         });
 
         // window set
