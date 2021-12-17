@@ -23,8 +23,9 @@ import domain.Student;
 public class DatabaseConnection {
     private Connection conn;
 
-    /** 
-     * Constructor for the <code>DatabaseConnection</code> class. Initializes <code>Connection</code> object to null.
+    /**
+     * Constructor for the <code>DatabaseConnection</code> class. Initializes
+     * <code>Connection</code> object to null.
      * 
      */
 
@@ -167,6 +168,19 @@ public class DatabaseConnection {
      */
     public boolean editStudentInformation(Student student) {
         boolean wasSuccesful = false;
+
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement("UPDATE Student " + "SET Name ='"
+                    + student.getName() + "', Gender ='" + student.getGender() + "', Birthdate = '"
+                    + student.getBirthDate() + "', Street = '" + student.getStreet() + "', Housenumber = "
+                    + student.getHouseNumber() + ", PostalCode = '" + student.getPostalCode() + "', City = '"
+                    + student.getCity() + "', Country = '" + student.getCountry() + "' WHERE Id = " + student.getId());
+
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Something went wrong with updating the student");
+            System.out.println(e.getMessage());
+        }
 
         return wasSuccesful;
     }
