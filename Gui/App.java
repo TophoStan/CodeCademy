@@ -250,8 +250,31 @@ public class App extends Application {
             
             System.out.println(newStudent);
 
-            
+            try {
+                database.addStudentToDatabase(newStudent);
+            } catch (NullPointerException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+
+            alert.setStyle("-fx-text-fill: GREEN;" + "-fx-padding: 15;");
             alert.setText("Succesfull added!");
+
+            try {
+                wait(10000);
+                studentList.getChildren().clear();
+                ArrayList<Student> students = database.retrieveStudents();
+                for (Student name : students) {
+                    Label newStud = new Label(name.getName());
+                    studentList.getChildren().add(newStud);
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+            
         });
 
         // window set
