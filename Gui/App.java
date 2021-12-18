@@ -16,7 +16,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import repository.DatabaseConnection;
@@ -240,6 +239,7 @@ public class App extends Application {
             studentButton.setDefaultButton(false);
             addBirthDateField.setText("DD-MM-YYYY");
             addGenderField.setText("M/W/O");
+            alert.setText("");
             window.setScene(home);
         });
 
