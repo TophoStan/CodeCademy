@@ -24,6 +24,7 @@ public class App extends Application {
 
     private ArrayList<Student> st = new ArrayList<>();
     private DatabaseConnection dbcn = new DatabaseConnection();
+    private Student stud = new Student();
 
     public void start(Stage window) {
 
@@ -48,6 +49,17 @@ public class App extends Application {
 
         menu.setPadding(new Insets(10));
         menu.getChildren().addAll(homeButton, coursesButton, studentButton);
+
+        // Edit, Add and delete Student buttons
+
+        HBox editAddButtons = new HBox();
+        Button addBtn = new Button("Add");
+        addBtn.setDefaultButton(true);
+        Button editBtn = new Button("Edit");
+        Button delBtn = new Button("Delete");
+
+        editAddButtons.setPadding(new Insets(0, 0, 0, 450));
+        editAddButtons.getChildren().addAll(addBtn, editBtn, delBtn);
 
         // Content Home
         VBox homeContent = new VBox();
@@ -104,12 +116,13 @@ public class App extends Application {
         // content student
         HBox studentContent = new HBox();
 
+        // Add content -----------------------------
         // add places
         VBox studentAddPlaces = new VBox();
         studentAddPlaces.setPadding(new Insets(0, 150, 0, 20));
 
-        Label studentTitle = new Label("Student");
-        studentTitle.setFont(Font.font("Monospaced", 30));
+        Label studentTitleAdd = new Label("Student - add");
+        studentTitleAdd.setFont(Font.font("Monospaced", 30));
 
         // form
         Label addName = new Label("Name");
@@ -146,7 +159,7 @@ public class App extends Application {
         alert.setStyle("-fx-text-fill: RED;" +
                 "-fx-padding: 15;");
 
-        studentAddPlaces.getChildren().addAll(studentTitle, addName, addNameField, addEmail, addEmailField, addGender,
+        studentAddPlaces.getChildren().addAll(studentTitleAdd, addName, addNameField, addEmail, addEmailField, addGender,
                 addGenderField, addbirthDate, addBirthDateField, addStreet, addStreetField,
                 addHouseNumber, addHouseNumberField, addPostalCode, addPostalCodeField, addCity, addCityField,
                 addCountry, addCountryField, submitButton, alert);
@@ -197,19 +210,75 @@ public class App extends Application {
         Label newestCity = new Label();
         Label newestCounty = new Label();
 
-        yourAddedContent.getChildren().addAll(yourAddedContentListTitle, newestName, newestEmail, newestGender, newestBirthDate, newestStreet, newestHouseNumber, newestCity, newestCounty);
+        yourAddedContent.getChildren().addAll(yourAddedContentListTitle, newestName, newestEmail, newestGender,
+                newestBirthDate, newestStreet, newestHouseNumber, newestCity, newestCounty);
 
-        // set student content
-        studentContent.getChildren().addAll(studentAddPlaces, studentList, yourAddedContent);
+        // edit content ----------------------------------------
+        VBox studentEditPlaces = new VBox();
+        studentEditPlaces.setPadding(new Insets(0, 90, 0, 20));
+
+        Label studentTitleEdit = new Label("Student - edit");
+        studentTitleEdit.setFont(Font.font("Monospaced", 30));
+
+        Label editInstruction = new Label("Your email");
+        TextField editInput = new TextField();
+        Button editGoBtn = new Button("Go");
+        editGoBtn.setTranslateY(10);
+
+        Label editAlert = new Label("");
+        editAlert.setStyle("-fx-text-fill: RED;" +
+        "-fx-padding: 15;");
+
+        VBox infoFromEditInput = new VBox();
+        infoFromEditInput.setStyle("-fx-padding: 10;" +
+                "-fx-border-width: 1;" +
+                "-fx-border-insets: 5;" +
+                "-fx-border-radius: 15;" +
+                "-fx-border-color: black;");
+
+        Label infoFromEditInputListTitle = new Label("Your info:");
+        infoFromEditInputListTitle.setFont(Font.font("Monospaced", 18));
+        infoFromEditInput.setMaxHeight(70);
+
+        Label dataName = new Label();
+        Label dataEmail = new Label();
+        Label dataGender = new Label();
+        Label dataBirthDate = new Label();
+        Label dataStreet = new Label();
+        Label dataHouseNumber = new Label();
+        Label dataCity = new Label();
+        Label dataCounty = new Label();
+
+        infoFromEditInput.getChildren().addAll(infoFromEditInputListTitle, dataName, dataEmail, dataGender,
+        dataBirthDate, dataStreet, dataHouseNumber, dataCity, dataCounty);
+
+        studentEditPlaces.getChildren().addAll(studentTitleEdit, editInstruction, editInput, editGoBtn, editAlert);
+
+        // actual edit place
+
+        HBox actualEditPlace = new HBox();
+        actualEditPlace.setPadding(new Insets(80, 0, 0, 0));
+
+        Label test = new Label("Test");
+        actualEditPlace.getChildren().add(test);
+
+
+
+
+        // delete content --------------------------------------
 
         // set total layout
         layoutHome.getChildren().addAll(title, menu, homeContent);
 
         // set home view
-        Scene home = new Scene(layoutHome, 700, 600);
+        Scene home = new Scene(layoutHome, 800, 600);
 
         // view set student
-        Scene student = new Scene(layoutStudent, 700, 600);
+        Scene student = new Scene(layoutStudent, 800, 600);
+
+
+
+
 
         // actions
         addBirthDateField.setOnMouseClicked((event) -> {
@@ -225,15 +294,25 @@ public class App extends Application {
         });
 
         studentButton.setOnAction((event) -> {
-            layoutStudent.getChildren().clear();
-            layoutStudent.getChildren().addAll(title, menu, studentContent);
-            studentButton.setDefaultButton(true);
-            homeButton.setDefaultButton(false);
-            window.setScene(student);
+            if (!studentButton.isDefaultButton()) {
+                layoutStudent.getChildren().clear();
+                menu.getChildren().add(editAddButtons);
+                studentContent.getChildren().clear();
+                studentContent.getChildren().addAll(studentAddPlaces, studentList, yourAddedContent);
+                layoutStudent.getChildren().addAll(title, menu, studentContent);
+                studentButton.setDefaultButton(true);
+                homeButton.setDefaultButton(false);
+                editBtn.setDefaultButton(false);
+                delBtn.setDefaultButton(false);
+                addBtn.setDefaultButton(true);
+                window.setScene(student);
+            }
         });
 
         homeButton.setOnAction((event) -> {
             layoutHome.getChildren().clear();
+            menu.getChildren().clear();
+            menu.getChildren().addAll(homeButton, coursesButton, studentButton);
             layoutHome.getChildren().addAll(title, menu, homeContent);
             homeButton.setDefaultButton(true);
             studentButton.setDefaultButton(false);
@@ -241,6 +320,65 @@ public class App extends Application {
             addGenderField.setText("M/W/O");
             alert.setText("");
             window.setScene(home);
+        });
+
+        addBtn.setOnAction((event) -> {
+            studentContent.getChildren().clear();
+            editBtn.setDefaultButton(false);
+            delBtn.setDefaultButton(false);
+            studentContent.getChildren().addAll(studentAddPlaces, studentList, yourAddedContent);
+            addBtn.setDefaultButton(true);
+        });
+
+        editBtn.setOnAction((event) -> {
+            studentContent.getChildren().clear();
+            addBtn.setDefaultButton(false);
+            delBtn.setDefaultButton(false);
+            studentContent.getChildren().add(studentEditPlaces);
+            editBtn.setDefaultButton(true);
+        });
+
+        delBtn.setOnAction((event) -> {
+            studentContent.getChildren().clear();
+            addBtn.setDefaultButton(false);
+            editBtn.setDefaultButton(false);
+            studentContent.getChildren().addAll();
+            delBtn.setDefaultButton(true);
+        });
+
+        editGoBtn.setOnAction((event) -> {
+            studentContent.getChildren().clear();
+            studentContent.getChildren().add(studentEditPlaces);
+            String emailAddress = editInput.getText();
+            ArrayList<Student> studInfo = new ArrayList<>();
+            try {
+                studInfo = database.retrieveStudents();
+                Thread.sleep(90);
+                
+                for (Student i : studInfo) {
+                    if (i.getEmailAddress().equals(emailAddress)) {
+                        dataName.setText(i.getName());
+                        dataEmail.setText(i.getEmailAddress());
+                        dataGender.setText(i.getGender());
+                        dataBirthDate.setText(String.valueOf(i.getBirthDate()));
+                        dataStreet.setText(i.getStreet());
+                        dataHouseNumber.setText(String.valueOf(i.getHouseNumber()));
+                        dataCity.setText(i.getCity());
+                        dataCounty.setText(i.getCountry());
+                        studentContent.getChildren().add(infoFromEditInput);
+                        editInput.setText("");
+                        editAlert.setText("");
+                        studentEditPlaces.getChildren().add(actualEditPlace);
+                    }
+                }
+
+                if (!dataEmail.getText().equals(emailAddress)) {
+                    editAlert.setText("No falid Email");
+                }
+
+            } catch (Exception e) {
+                System.out.println(e);
+            } 
         });
 
         submitButton.setOnAction((event) -> {
