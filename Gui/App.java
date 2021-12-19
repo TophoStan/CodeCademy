@@ -458,7 +458,7 @@ public class App extends Application {
                 database.editStudentInformation(editStudent);
             } catch (Exception e) {
                 //TODO: handle exception
-                editAlert.setText("Something went wrong..");
+                editAlert.setText("Something went wrong...");
             }
 
         });
