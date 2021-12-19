@@ -207,11 +207,12 @@ public class App extends Application {
         Label newestBirthDate = new Label();
         Label newestStreet = new Label();
         Label newestHouseNumber = new Label();
+        Label newestPostalCode = new Label();
         Label newestCity = new Label();
         Label newestCounty = new Label();
 
         yourAddedContent.getChildren().addAll(yourAddedContentListTitle, newestName, newestEmail, newestGender,
-                newestBirthDate, newestStreet, newestHouseNumber, newestCity, newestCounty);
+                newestBirthDate, newestStreet, newestHouseNumber, newestPostalCode, newestCity, newestCounty);
 
         // edit content ----------------------------------------
         VBox studentEditPlaces = new VBox();
@@ -238,7 +239,7 @@ public class App extends Application {
 
         Label infoFromEditInputListTitle = new Label("Your info:");
         infoFromEditInputListTitle.setFont(Font.font("Monospaced", 18));
-        infoFromEditInput.setMaxHeight(70);
+        infoFromEditInput.setMaxHeight(80);
 
         Label dataName = new Label();
         Label dataEmail = new Label();
@@ -246,11 +247,12 @@ public class App extends Application {
         Label dataBirthDate = new Label();
         Label dataStreet = new Label();
         Label dataHouseNumber = new Label();
+        Label dataPostalCode = new Label();
         Label dataCity = new Label();
         Label dataCounty = new Label();
 
         infoFromEditInput.getChildren().addAll(infoFromEditInputListTitle, dataName, dataEmail, dataGender,
-        dataBirthDate, dataStreet, dataHouseNumber, dataCity, dataCounty);
+        dataBirthDate, dataStreet, dataHouseNumber, dataPostalCode ,dataCity, dataCounty);
 
         studentEditPlaces.getChildren().addAll(studentTitleEdit, editInstruction, editInput, editGoBtn, editAlert);
 
@@ -259,13 +261,55 @@ public class App extends Application {
         HBox actualEditPlace = new HBox();
         actualEditPlace.setPadding(new Insets(80, 0, 0, 0));
 
-        Label test = new Label("Test");
-        actualEditPlace.getChildren().add(test);
+        Label editTitle = new Label("Edit here");
+        editTitle.setFont(Font.font("Monospaced", 14));
+        editTitle.setPadding(new Insets(4, 0, 0, 0));
+        
+
+        VBox firstRow = new VBox();
+        firstRow.setPadding(new Insets(0, 20, 0, 0));
+
+        Label editNameLabel = new Label("Name");
+        TextField  editName = new TextField();
+
+        Label editEmailLabel = new Label("Email");
+        TextField  editEmail = new TextField();
+
+        Label editGenderLabel = new Label("Gender");
+        TextField  editGender = new TextField("M/W/O");
+
+        Label editBdateLabel = new Label("Birthdate");
+        TextField  editBdate = new TextField("DD-MM-YYYY");
+
+        Button editSubmitBtn = new Button("Submit");
+        editSubmitBtn.setTranslateY(10);
+
+        firstRow.getChildren().addAll(editTitle, editNameLabel, editName, editEmailLabel, editEmail, editGenderLabel, editGender, editBdateLabel, editBdate, editSubmitBtn);
+
+        VBox secondRow = new VBox();
+        secondRow.setPadding(new Insets(20, 0, 0, 0));
+
+        Label editStreetLabel = new Label("Street");
+        TextField  editStreet = new TextField();
+        Label editHousnumberLabel = new Label("Housenumber");
+        TextField  editHouseNumber = new TextField();
+        Label editPostalCodeLabel = new Label("Postal Code");
+        TextField editPostalCode = new TextField();
+        Label editCityLabel = new Label("City");
+        TextField  editCity = new TextField();
+        Label editCountryLabel = new Label("Country");
+        TextField  editCountry = new TextField();
+        
+        secondRow.getChildren().addAll(editStreetLabel, editStreet, editHousnumberLabel, editHouseNumber, editPostalCodeLabel, editPostalCode, editCityLabel, editCity, editCountryLabel, editCountry);
 
 
+        actualEditPlace.getChildren().addAll(firstRow, secondRow);
 
 
         // delete content --------------------------------------
+
+
+
 
         // set total layout
         layoutHome.getChildren().addAll(title, menu, homeContent);
@@ -275,8 +319,6 @@ public class App extends Application {
 
         // view set student
         Scene student = new Scene(layoutStudent, 800, 600);
-
-
 
 
 
@@ -292,6 +334,15 @@ public class App extends Application {
         addNameField.setOnKeyTyped((event) -> {
             alert.setText("Not saved yet!");
         });
+
+        editGender.setOnMouseClicked((event) -> {
+            editGender.setText("");
+        });
+
+        editBdate.setOnMouseClicked((event) -> {
+            editBdate.setText("");
+        });
+
 
         studentButton.setOnAction((event) -> {
             if (!studentButton.isDefaultButton()) {
@@ -334,6 +385,9 @@ public class App extends Application {
             studentContent.getChildren().clear();
             addBtn.setDefaultButton(false);
             delBtn.setDefaultButton(false);
+            editBdate.setText("DD-MM-YYYY");
+            editGender.setText("M/W/O");
+            actualEditPlace.getChildren().clear();
             studentContent.getChildren().add(studentEditPlaces);
             editBtn.setDefaultButton(true);
         });
@@ -357,28 +411,56 @@ public class App extends Application {
                 
                 for (Student i : studInfo) {
                     if (i.getEmailAddress().equals(emailAddress)) {
-                        dataName.setText(i.getName());
-                        dataEmail.setText(i.getEmailAddress());
-                        dataGender.setText(i.getGender());
-                        dataBirthDate.setText(String.valueOf(i.getBirthDate()));
-                        dataStreet.setText(i.getStreet());
-                        dataHouseNumber.setText(String.valueOf(i.getHouseNumber()));
-                        dataCity.setText(i.getCity());
-                        dataCounty.setText(i.getCountry());
+                        dataName.setText("Name: " + i.getName());
+                        dataEmail.setText("Mail: "+ i.getEmailAddress());
+                        dataGender.setText("Gender: " + i.getGender());
+                        dataBirthDate.setText("Birthday: " + String.valueOf(i.getBirthDate()));
+                        dataStreet.setText("Street: " + i.getStreet());
+                        dataHouseNumber.setText("Housenumber: " + String.valueOf(i.getHouseNumber()));
+                        dataPostalCode.setText("Postal code: " + i.getPostalCode());
+                        dataCity.setText("City: " + i.getCity());
+                        dataCounty.setText("Country: " + i.getCountry());
                         studentContent.getChildren().add(infoFromEditInput);
                         editInput.setText("");
                         editAlert.setText("");
+                        actualEditPlace.getChildren().clear();
+                        actualEditPlace.getChildren().addAll(firstRow, secondRow);
                         studentEditPlaces.getChildren().add(actualEditPlace);
                     }
                 }
 
-                if (!dataEmail.getText().equals(emailAddress)) {
+                if (!dataEmail.getText().equals("Mail: " + emailAddress)) {
                     editAlert.setText("No falid Email");
                 }
 
             } catch (Exception e) {
                 System.out.println(e);
             } 
+        });
+
+        editSubmitBtn.setOnAction((event) -> {
+            String emailAddress = editEmail.getText();
+            String newName = editName.getText();
+            String gender = editGender.getText();
+            String birthDate = editBdate.getText();
+            String street = editStreet.getText();
+            int houseNumber = Integer.parseInt(editHouseNumber.getText());
+            String postalCode = editPostalCode.getText();
+            String city = editCity.getText();
+            String country = editCountry.getText();
+            int id = stud.getId();
+
+            Student editStudent = new Student();
+
+            System.out.println(editStudent);
+
+            try {
+                database.editStudentInformation(editStudent);
+            } catch (Exception e) {
+                //TODO: handle exception
+                editAlert.setText("Something went wrong..");
+            }
+
         });
 
         submitButton.setOnAction((event) -> {
@@ -455,6 +537,7 @@ public class App extends Application {
             newestBirthDate.setText("Birthdate: " + birthDate);
             newestStreet.setText("Street: " + street);
             newestHouseNumber.setText("Housenumber: " + String.valueOf(houseNumber));
+            newestPostalCode.setText("Postal code: " + postalCode);
             newestCity.setText("City: " + city);
             newestCounty.setText("Country: " + country);
 
@@ -464,6 +547,7 @@ public class App extends Application {
             addCityField.clear();
             addGenderField.clear();
             addHouseNumberField.clear();
+            addPostalCodeField.clear();
             addCountryField.clear();
             addPostalCodeField.clear();
             addStreetField.clear();
