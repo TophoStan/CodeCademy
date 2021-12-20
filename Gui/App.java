@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.sql.Date;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 
 import domain.Student;
 import javafx.application.Application;
@@ -23,44 +22,44 @@ import repository.DatabaseConnection;
 public class App extends Application {
 
     private DatabaseConnection dbcn = new DatabaseConnection();
-    private SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
 
     public void start(Stage window) {
 
-        // Home layout
+        // Different layouts
         VBox layoutHome = new VBox();
         layoutHome.setPadding(new Insets(0, 0, 0, 10));
         VBox layoutStudent = new VBox();
         layoutStudent.setPadding(new Insets(0, 0, 0, 10));
 
-        // Title
+        // Title from application
         Label title = new Label("Codecademy");
         title.setFont(Font.font("Monospaced", 40));
 
-        // Menu
+        // Standard menu (shown in home)
         HBox menu = new HBox();
         Button homeButton = new Button("Home");
         homeButton.setDefaultButton(true);
         Button coursesButton = new Button("Courses");
         Button studentButton = new Button("Student");
 
-        menu.getTypeSelector();
-
         menu.setPadding(new Insets(10));
         menu.getChildren().addAll(homeButton, coursesButton, studentButton);
 
-        // Edit, Add and delete Student buttons
-
+        // Edit, Add and Delete Student buttons
+        // add button is selected default
         HBox editAddButtons = new HBox();
         Button addBtn = new Button("Add");
         addBtn.setDefaultButton(true);
         Button editBtn = new Button("Edit");
         Button delBtn = new Button("Delete");
 
+        // added to the standard menu and placed on the right side
         editAddButtons.setPadding(new Insets(0, 0, 0, 450));
         editAddButtons.getChildren().addAll(addBtn, editBtn, delBtn);
 
-        // Content Home
+        // -----------------------------------------------------------------------------------------------
+        // Home page
+
         VBox homeContent = new VBox();
 
         // Different Paragrafs
@@ -111,19 +110,19 @@ public class App extends Application {
         homeContent.getChildren().addAll(webcastsParagraf, webcastGrid, certificateParagraf, certificateGrid);
 
         // ------------------------------------------------------------------------------------------------------------------------------------
+        // Student page
 
-        // content student
+        // Content student
         HBox studentContent = new HBox();
 
-        // Add content -----------------------------
-        // add places
+        // Add content-------------------------------------------------
         VBox studentAddPlaces = new VBox();
         studentAddPlaces.setPadding(new Insets(0, 150, 0, 20));
 
         Label studentTitleAdd = new Label("Student - add");
         studentTitleAdd.setFont(Font.font("Monospaced", 30));
 
-        // form
+        // Add form
         Label addName = new Label("Name");
         TextField addNameField = new TextField();
 
@@ -159,12 +158,11 @@ public class App extends Application {
                 "-fx-padding: 15;");
 
         studentAddPlaces.getChildren().addAll(studentTitleAdd, addName, addNameField, addEmail, addEmailField,
-                addGender,
-                addGenderField, addbirthDate, addBirthDateField, addStreet, addStreetField,
+                addGender, addGenderField, addbirthDate, addBirthDateField, addStreet, addStreetField,
                 addHouseNumber, addHouseNumberField, addPostalCode, addPostalCodeField, addCity, addCityField,
                 addCountry, addCountryField, submitButton, alert);
 
-        // student list
+        // List of student names
         VBox studentList = new VBox();
         studentList.setStyle("-fx-padding: 10;" +
                 "-fx-border-width: 1;" +
@@ -175,11 +173,9 @@ public class App extends Application {
         Label studentListTitle = new Label("Name list:");
         studentListTitle.setFont(Font.font("Monospaced", 18));
 
-        studentList.getChildren().add(studentListTitle);
-
         GetStudentList(studentList, studentListTitle);
 
-        // your added content
+        // the newest added content
         VBox yourAddedContent = new VBox();
         yourAddedContent.setStyle("-fx-padding: 10;" +
                 "-fx-border-width: 1;" +
@@ -203,13 +199,14 @@ public class App extends Application {
         yourAddedContent.getChildren().addAll(yourAddedContentListTitle, newestName, newestEmail, newestGender,
                 newestBirthDate, newestStreet, newestHouseNumber, newestPostalCode, newestCity, newestCounty);
 
-        // edit content ----------------------------------------
+        // Edit content ---------------------------------------------
         VBox studentEditPlaces = new VBox();
         studentEditPlaces.setPadding(new Insets(0, 90, 0, 20));
 
         Label studentTitleEdit = new Label("Student - edit");
         studentTitleEdit.setFont(Font.font("Monospaced", 30));
 
+        // Place to find content for the student
         Label editInstruction = new Label("Your email");
         TextField editInput = new TextField();
         Button editGoBtn = new Button("Go");
@@ -219,16 +216,17 @@ public class App extends Application {
         editAlert.setStyle("-fx-text-fill: RED;" +
                 "-fx-padding: 15;");
 
+        // Content from database for the specific student
         VBox infoFromEditInput = new VBox();
         infoFromEditInput.setStyle("-fx-padding: 10;" +
                 "-fx-border-width: 1;" +
                 "-fx-border-insets: 5;" +
                 "-fx-border-radius: 15;" +
                 "-fx-border-color: black;");
+        infoFromEditInput.setMaxHeight(80);
 
         Label infoFromEditInputListTitle = new Label("Your info:");
         infoFromEditInputListTitle.setFont(Font.font("Monospaced", 18));
-        infoFromEditInput.setMaxHeight(80);
 
         Label dataName = new Label();
         Label dataEmail = new Label();
@@ -245,7 +243,8 @@ public class App extends Application {
 
         studentEditPlaces.getChildren().addAll(studentTitleEdit, editInstruction, editInput, editGoBtn, editAlert);
 
-        // actual edit place
+        // Actual edit place-----
+        // The student will edit their content here
 
         HBox actualEditPlace = new HBox();
         actualEditPlace.setPadding(new Insets(80, 0, 0, 0));
@@ -254,6 +253,7 @@ public class App extends Application {
         editTitle.setFont(Font.font("Monospaced", 14));
         editTitle.setPadding(new Insets(4, 0, 0, 0));
 
+        // Input fields are split in a first and second row for a compact view
         VBox firstRow = new VBox();
         firstRow.setPadding(new Insets(0, 20, 0, 0));
 
@@ -275,6 +275,7 @@ public class App extends Application {
         firstRow.getChildren().addAll(editTitle, editNameLabel, editName, editGenderLabel, editGender, editBdateLabel,
                 editBdate, editStreetLabel, editStreet, editSubmitBtn);
 
+        // Second row will be created here
         VBox secondRow = new VBox();
         secondRow.setPadding(new Insets(20, 0, 0, 0));
 
@@ -290,15 +291,17 @@ public class App extends Application {
         secondRow.getChildren().addAll(editHousnumberLabel, editHouseNumber, editPostalCodeLabel, editPostalCode,
                 editCityLabel, editCity, editCountryLabel, editCountry);
 
+        // Combines the rows together
         actualEditPlace.getChildren().addAll(firstRow, secondRow);
 
-        // delete content --------------------------------------
+        // Delete content ----------------------------------------
         VBox studentDelPlaces = new VBox();
         studentDelPlaces.setPadding(new Insets(0, 90, 0, 20));
 
         Label studentTitleDel = new Label("Student - delete");
         studentTitleDel.setFont(Font.font("Monospaced", 30));
 
+        // Student types his or her email here
         Label delInstruction = new Label("Your email");
         TextField delInput = new TextField();
         Button delGoBtn = new Button("Go");
@@ -310,16 +313,15 @@ public class App extends Application {
 
         studentDelPlaces.getChildren().addAll(studentTitleDel, delInstruction, delInput, delGoBtn, delAlert);
 
-        // set first layout
+        // ---------------------------------------------------------------------------------------------------
+        // Set first layout when starting the application
         layoutHome.getChildren().addAll(title, menu, homeContent);
 
-        // set home view
+        // Sets scenes for home, courses and student
         Scene home = new Scene(layoutHome, 800, 600);
-
-        // set student view
         Scene student = new Scene(layoutStudent, 800, 600);
 
-        // actions
+        // All action below --------------------------------------------------------
 
         // removes text when pressing the field
         addBirthDateField.setOnMouseClicked((event) -> {
@@ -341,6 +343,8 @@ public class App extends Application {
         // gives warning the user haven't saved his changes
         addNameField.setOnKeyTyped((event) -> {
             alert.setText("Not saved yet!");
+            alert.setStyle("-fx-text-fill: RED;" +
+                    "-fx-padding: 15;");
         });
 
         // action on student button
@@ -459,14 +463,24 @@ public class App extends Application {
                     "-fx-padding: 15;");
         });
 
+        // action on go button from delete page
         delGoBtn.setOnAction((event) -> {
+
+            // gets input from TextField
             String emailAddress = delInput.getText();
+
+            // try's to put all students in an Arraylist
             ArrayList<Student> studInfo = new ArrayList<>();
             try {
                 studInfo = dbcn.retrieveStudents();
+                // waits 90ms to retieve the students
                 Thread.sleep(90);
 
+                // loops trough the Arraylist
                 for (Student i : studInfo) {
+
+                    // when the email is the same it will delete the student and gives a
+                    // confirmation
                     if (i.getEmailAddress().equals(emailAddress)) {
 
                         dbcn.deleteStudentFromDatabase(i);
@@ -476,26 +490,41 @@ public class App extends Application {
                     }
                 }
 
+                // if the email hasn't been found it will show 'Unknown mail..'
                 if (!delAlert.getText().equals("Student removed!")) {
                     delAlert.setText("Unknown mail..");
                 }
 
+                // if something fails the error will show 'Something is wrong..'
             } catch (Exception e) {
-                delAlert.setText("Er is een fout opgetreden..");
+                delAlert.setText("Something is wrong..");
             }
         });
 
+        // action on go button from edit page
         editGoBtn.setOnAction((event) -> {
+
+            // clears content and fills it with the right content
             studentContent.getChildren().clear();
             studentContent.getChildren().add(studentEditPlaces);
+
+            // gets input from TextField
             String emailAddress = editInput.getText();
+
+            // try's to put all students in an ArrayList
             ArrayList<Student> studInfo = new ArrayList<>();
             try {
                 studInfo = dbcn.retrieveStudents();
+
+                // waits 90ms to retrieve the studens
                 Thread.sleep(90);
 
                 for (Student i : studInfo) {
+
+                    // this will only happen when an emailadress equals the emailadress
                     if (i.getEmailAddress().equals(emailAddress)) {
+
+                        // sets text for all the labels to show information
                         dataName.setText("Name: " + i.getName());
                         dataEmail.setText("Mail: " + i.getEmailAddress());
                         dataGender.setText("Gender: " + i.getGender());
@@ -505,24 +534,37 @@ public class App extends Application {
                         dataPostalCode.setText("Postal code: " + i.getPostalCode());
                         dataCity.setText("City: " + i.getCity());
                         dataCounty.setText("Country: " + i.getCountry());
+
+                        // add infoFromEditInput to show in the student content
                         studentContent.getChildren().add(infoFromEditInput);
-                        editAlert.setText("");
+
+                        // clears the edit place from previous times and adds the first and second row
                         actualEditPlace.getChildren().clear();
                         actualEditPlace.getChildren().addAll(firstRow, secondRow);
+
+                        // next the edit place will be shown on the page
                         studentEditPlaces.getChildren().add(actualEditPlace);
+
+                        // removes text from the alert
+                        editAlert.setText("");
                     }
                 }
 
+                // if the mail hasn't been found the alert will show 'no falid email'
                 if (!dataEmail.getText().equals("Mail: " + emailAddress)) {
                     editAlert.setText("No falid Email");
                 }
 
+                // if something fails an error will be shown in the terminal
             } catch (Exception e) {
                 System.out.println(e);
             }
         });
 
+        // action for the submit button on the edit page
         editSubmitBtn.setOnAction((event) -> {
+
+            // gets all the text what has been filled in
             String email = editInput.getText();
             String newName = editName.getText();
             String gender = editGender.getText();
@@ -533,12 +575,17 @@ public class App extends Application {
             String city = editCity.getText();
             String country = editCountry.getText();
 
+            // try's to pull all students in an ArrayList
             ArrayList<Student> editStudent = new ArrayList<>();
             try {
                 editStudent = dbcn.retrieveStudents();
+
+                // waits 90ms to retrieve the students
                 Thread.sleep(90);
 
                 for (Student i : editStudent) {
+                    // when an email equals the right email it wil set all the new values to the
+                    // Student
                     if (i.getEmailAddress().equals(email)) {
                         i.setName(newName);
                         i.setGender(gender);
@@ -549,8 +596,11 @@ public class App extends Application {
                         i.setCity(city);
                         i.setCountry(country);
 
+                        // the student will be changes in the database
                         dbcn.editStudentInformation(i);
 
+                        // the new values will be shown in the GUI too
+                        infoFromEditInputListTitle.setText("Your new info:");
                         dataName.setText("Name: " + newName);
                         dataEmail.setText("Mail: " + email);
                         dataGender.setText("Gender: " + gender);
@@ -561,20 +611,22 @@ public class App extends Application {
                         dataCity.setText("City: " + city);
                         dataCounty.setText("Country: " + country);
 
-                        infoFromEditInputListTitle.setText("Your new info:");
-
+                        // the alert text will be update to give a confirmation
                         editAlert.setStyle("-fx-text-fill: GREEN;" + "-fx-padding: 15;");
                         editAlert.setText("Info changed!");
                     }
                 }
 
+                // if something fails an error will be shown in the terminal
             } catch (Exception e) {
                 System.out.println(e);
             }
         });
 
+        // action on submit button in the add page
         submitButton.setOnAction((event) -> {
-            // add to database
+
+            // gets all the text what has been filled in
             String emailAddress = addEmailField.getText();
             String newName = addNameField.getText();
             String gender = addGenderField.getText();
@@ -585,10 +637,11 @@ public class App extends Application {
             String city = addCityField.getText();
             String country = addCountryField.getText();
 
+            // a new student will be created
             Student newStudent = new Student(emailAddress, newName, gender, setDate(birthDate), street, houseNumber,
-                    postalCode,
-                    city, country);
+                    postalCode, city, country);
 
+            // try's to add the student, if it fails it will give an error
             try {
                 dbcn.addStudentToDatabase(newStudent);
             } catch (NullPointerException e) {
@@ -597,11 +650,14 @@ public class App extends Application {
                 e.printStackTrace();
             }
 
+            // alert will be update in a green color and a confirmation
             alert.setStyle("-fx-text-fill: GREEN;" + "-fx-padding: 15;");
             alert.setText("Succesfully added!");
 
+            // the list of student names will be updated
             GetStudentList(studentList, studentListTitle);
 
+            // for styling the M, W or O will become a full word
             if (gender.equals("M")) {
                 gender += "an";
             } else if (gender.equals("W")) {
@@ -610,6 +666,7 @@ public class App extends Application {
                 gender = "Other";
             }
 
+            // an extra list will be added to view your newest content you added
             newestName.setText("Name: " + newName);
             newestEmail.setText("Email: " + emailAddress);
             newestGender.setText("Gender: " + gender);
@@ -620,6 +677,7 @@ public class App extends Application {
             newestCity.setText("City: " + city);
             newestCounty.setText("Country: " + country);
 
+            // the TextField will be cleared for a new student
             clearFields(addNameField, addEmailField, addBirthDateField, addCityField, addGenderField, addStreetField,
                     addHouseNumberField, addPostalCodeField, addCountryField);
 
@@ -642,19 +700,27 @@ public class App extends Application {
 
     public void GetStudentList(VBox studentList, Label studentListTitle) {
 
+        // only connects again when the connection is lost
         if (dbcn.getConn() == null) {
             dbcn.connect();
         }
 
         try {
+            // waits 90ms to be sure the connection is on
             Thread.sleep(90);
+
+            // clears the studentlist from previous names and will add the title already
             studentList.getChildren().clear();
             studentList.getChildren().add(studentListTitle);
+
+            // all the names from the database will be added to the list
             ArrayList<Student> students = dbcn.retrieveStudents();
             for (Student name : students) {
                 Label newStud = new Label("- " + name.getName());
                 studentList.getChildren().add(newStud);
             }
+
+            // when something goes wrong an error in the terminal will be shown
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -668,6 +734,7 @@ public class App extends Application {
      */
 
     public Date setDate(String birthDate) {
+        // split the input to make the date in a format for the database
         String[] splits = birthDate.split("-");
         int[] intDate = new int[3];
         for (int i = 0; i < 3; i++) {
@@ -676,8 +743,7 @@ public class App extends Application {
 
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.YEAR, intDate[2]);
-        cal.set(Calendar.MONTH, intDate[1] - 1); // <-- months start
-        // at 0.
+        cal.set(Calendar.MONTH, intDate[1] - 1);
         cal.set(Calendar.DAY_OF_MONTH, intDate[0]);
 
         java.sql.Date date = new java.sql.Date(cal.getTimeInMillis());
@@ -690,11 +756,13 @@ public class App extends Application {
     public void clearFields(TextField nameField, TextField emailField, TextField birthDateField, TextField cityField,
             TextField genderField, TextField streetField, TextField houseNrField, TextField postalCodeField,
             TextField countryField) {
+
+        // clears all the fields
         nameField.clear();
         emailField.clear();
-        birthDateField.clear();
+        birthDateField.setText("DD-MM-YYYY");
         cityField.clear();
-        genderField.clear();
+        genderField.setText("M/W/O");
         houseNrField.clear();
         postalCodeField.clear();
         countryField.clear();

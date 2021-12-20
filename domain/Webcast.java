@@ -32,8 +32,8 @@ public class Webcast extends ContentItem {
     public void setUrl(String url) {
         this.url = url;
     }
-    public void addView(){
+
+    public void addView() {
         this.views++;
     }
-
 }
