@@ -1,16 +1,48 @@
 package domain;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Enrollment {
+    private int studentId;
+    private int courseId;
+    private int enrollmentId;
     private Date enrollmentDate;
-    private String courseName;
-    private String studentName;
+    private Course course;
+    private Student student;
 
-    public Enrollment(Date enrollmentDate, String courseName, String studentName) {
-        this.enrollmentDate = enrollmentDate;
-        this.courseName = courseName;
-        this.studentName = studentName;
+    public Enrollment(Course course, Student student) {
+        this.course = course;
+        this.student = student;
+        Date date = new Date(0);
+        date = Date.valueOf(date.toLocalDate());
+    }
+
+    public Enrollment() {
+
+    }
+
+    public int getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(int studentId) {
+        this.studentId = studentId;
+    }
+
+    public int getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(int courseId) {
+        this.courseId = courseId;
+    }
+
+    public int getEnrollmentId() {
+        return enrollmentId;
+    }
+
+    public void setEnrollmentId(int enrollmentId) {
+        this.enrollmentId = enrollmentId;
     }
 
     public Date getEnrollmentDate() {
@@ -22,19 +54,27 @@ public class Enrollment {
     }
 
     public String getCourseName() {
-        return courseName;
-    }
-
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
+        return this.course.getName();
     }
 
     public String getStudentName() {
-        return studentName;
+        return this.student.getName();
     }
 
-    public void setStudentName(String studentName) {
-        this.studentName = studentName;
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
     }
 
 }
