@@ -22,6 +22,8 @@ import repository.DatabaseConnection;
 public class App extends Application {
 
     private DatabaseConnection dbcn = new DatabaseConnection();
+    private ArrayList<Button> menuButtons = new ArrayList<>();
+    
 
     public void start(Stage window) {
 
@@ -30,6 +32,8 @@ public class App extends Application {
         layoutHome.setPadding(new Insets(0, 0, 0, 10));
         VBox layoutStudent = new VBox();
         layoutStudent.setPadding(new Insets(0, 0, 0, 10));
+        VBox layoutCourse = new VBox();
+        layoutCourse.setPadding(new Insets(0, 0, 0, 10));
 
         // Title from application
         Label title = new Label("Codecademy");
@@ -41,6 +45,9 @@ public class App extends Application {
         homeButton.setDefaultButton(true);
         Button coursesButton = new Button("Courses");
         Button studentButton = new Button("Student");
+        menuButtons.add(homeButton);
+        menuButtons.add(coursesButton);
+        menuButtons.add(studentButton);
 
         menu.setPadding(new Insets(10));
         menu.getChildren().addAll(homeButton, coursesButton, studentButton);
@@ -63,7 +70,7 @@ public class App extends Application {
         VBox homeContent = new VBox();
 
         // Different Paragrafs
-        Label webcastsParagraf = new Label("Best watched webcasts");
+        Label webcastsParagraf = new Label("Most watched webcasts");
         webcastsParagraf.setFont(Font.font("Monospaced", 20));
 
         Label certificateParagraf = new Label("Most certificates");
@@ -314,14 +321,26 @@ public class App extends Application {
         studentDelPlaces.getChildren().addAll(studentTitleDel, delInstruction, delInput, delGoBtn, delAlert);
 
         // ---------------------------------------------------------------------------------------------------
+
+        // Course page
+        VBox courseContent = new VBox();
+        Label cclName = new Label("Naam");
+        TextField cctfName = new TextField();
+        courseContent.getChildren().addAll(cclName, cctfName);
+        
+
+
+
+
         // Set first layout when starting the application
         layoutHome.getChildren().addAll(title, menu, homeContent);
 
         // Sets scenes for home, courses and student
         Scene home = new Scene(layoutHome, 800, 600);
         Scene student = new Scene(layoutStudent, 800, 600);
+        Scene course = new Scene(layoutCourse, 800, 600);
 
-        // All action below --------------------------------------------------------
+        // All actions below --------------------------------------------------------
 
         // removes text when pressing the field
         addBirthDateField.setOnMouseClicked((event) -> {
@@ -372,8 +391,9 @@ public class App extends Application {
                 alert.setText("");
 
                 // sets default button good according to the page
+                defaultButtonToFalse();
                 studentButton.setDefaultButton(true);
-                homeButton.setDefaultButton(false);
+                
 
                 addBtn.setDefaultButton(true);
                 editBtn.setDefaultButton(false);
@@ -396,11 +416,30 @@ public class App extends Application {
             layoutHome.getChildren().addAll(title, menu, homeContent);
 
             // sets default buttons good according to the page
+            defaultButtonToFalse();
             homeButton.setDefaultButton(true);
-            studentButton.setDefaultButton(false);
+            
 
             // finally sets window to home
             window.setScene(home);
+        });
+
+        // action on course button
+        coursesButton.setOnAction((event) -> {
+            // clears the menu and fills the right buttons
+            menu.getChildren().clear();
+            menu.getChildren().addAll(homeButton, coursesButton, studentButton);
+
+            // clears the layout and fills it with the good layout
+            layoutCourse.getChildren().clear();
+            layoutCourse.getChildren().addAll(title, menu, courseContent);
+
+            // sets default buttons good according to the page
+            defaultButtonToFalse();
+            coursesButton.setDefaultButton(true);
+
+            // finally sets window to home
+            window.setScene(course);
         });
 
         // action on add button
@@ -771,5 +810,11 @@ public class App extends Application {
 
     public void clearLabels() {
 
+    }
+
+    public void defaultButtonToFalse() { 
+        for (Button button : menuButtons) {
+            button.setDefaultButton(false);
+        }
     }
 }
