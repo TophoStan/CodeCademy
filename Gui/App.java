@@ -343,6 +343,8 @@ public class App extends Application {
         // gives warning the user haven't saved his changes
         addNameField.setOnKeyTyped((event) -> {
             alert.setText("Not saved yet!");
+            alert.setStyle("-fx-text-fill: RED;" +
+                    "-fx-padding: 15;");
         });
 
         // action on student button
@@ -758,9 +760,9 @@ public class App extends Application {
         // clears all the fields
         nameField.clear();
         emailField.clear();
-        birthDateField.clear();
+        birthDateField.setText("DD-MM-YYYY");
         cityField.clear();
-        genderField.clear();
+        genderField.setText("M/W/O");
         houseNrField.clear();
         postalCodeField.clear();
         countryField.clear();
