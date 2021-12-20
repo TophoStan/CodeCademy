@@ -620,9 +620,9 @@ public class App extends Application {
 
     public void GetStudentList(VBox studentList, Label studentListTitle) {
 
-        //if () {
+        if (dbcn.getConn() == null) {
             dbcn.connect();
-        //}
+        }
         
         try {
             Thread.sleep(90);
