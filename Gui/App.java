@@ -272,25 +272,23 @@ public class App extends Application {
         Label editNameLabel = new Label("Name");
         TextField  editName = new TextField();
 
-        Label editEmailLabel = new Label("Email");
-        TextField  editEmail = new TextField();
-
         Label editGenderLabel = new Label("Gender");
         TextField  editGender = new TextField("M/W/O");
 
         Label editBdateLabel = new Label("Birthdate");
         TextField  editBdate = new TextField("DD-MM-YYYY");
 
+        Label editStreetLabel = new Label("Street");
+        TextField  editStreet = new TextField();
+
         Button editSubmitBtn = new Button("Submit");
         editSubmitBtn.setTranslateY(10);
 
-        firstRow.getChildren().addAll(editTitle, editNameLabel, editName, editEmailLabel, editEmail, editGenderLabel, editGender, editBdateLabel, editBdate, editSubmitBtn);
+        firstRow.getChildren().addAll(editTitle, editNameLabel, editName, editGenderLabel, editGender, editBdateLabel, editBdate, editStreetLabel, editStreet ,editSubmitBtn);
 
         VBox secondRow = new VBox();
         secondRow.setPadding(new Insets(20, 0, 0, 0));
 
-        Label editStreetLabel = new Label("Street");
-        TextField  editStreet = new TextField();
         Label editHousnumberLabel = new Label("Housenumber");
         TextField  editHouseNumber = new TextField();
         Label editPostalCodeLabel = new Label("Postal Code");
@@ -300,7 +298,7 @@ public class App extends Application {
         Label editCountryLabel = new Label("Country");
         TextField  editCountry = new TextField();
         
-        secondRow.getChildren().addAll(editStreetLabel, editStreet, editHousnumberLabel, editHouseNumber, editPostalCodeLabel, editPostalCode, editCityLabel, editCity, editCountryLabel, editCountry);
+        secondRow.getChildren().addAll(editHousnumberLabel, editHouseNumber, editPostalCodeLabel, editPostalCode, editCityLabel, editCity, editCountryLabel, editCountry);
 
 
         actualEditPlace.getChildren().addAll(firstRow, secondRow);
@@ -421,7 +419,6 @@ public class App extends Application {
                         dataCity.setText("City: " + i.getCity());
                         dataCounty.setText("Country: " + i.getCountry());
                         studentContent.getChildren().add(infoFromEditInput);
-                        editInput.setText("");
                         editAlert.setText("");
                         actualEditPlace.getChildren().clear();
                         actualEditPlace.getChildren().addAll(firstRow, secondRow);
@@ -439,7 +436,7 @@ public class App extends Application {
         });
 
         editSubmitBtn.setOnAction((event) -> {
-            String emailAddress = editEmail.getText();
+            String email = editInput.getText();
             String newName = editName.getText();
             String gender = editGender.getText();
             String birthDate = editBdate.getText();
@@ -448,19 +445,50 @@ public class App extends Application {
             String postalCode = editPostalCode.getText();
             String city = editCity.getText();
             String country = editCountry.getText();
-            int id = stud.getId();
 
-            Student editStudent = new Student();
+            SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
 
-            System.out.println(editStudent);
-
-            try {
-                database.editStudentInformation(editStudent);
-            } catch (Exception e) {
-                //TODO: handle exception
-                editAlert.setText("Something went wrong...");
+            String[] splits = birthDate.split("-");
+            int[] intDate = new int[3];
+            for (int i = 0; i < 3; i++) {
+                intDate[i] = Integer.parseInt(splits[i]);
             }
 
+            Calendar cal = Calendar.getInstance();
+            cal.set(Calendar.YEAR, intDate[2]);
+            cal.set(Calendar.MONTH, intDate[1] - 1); // <-- months start
+            // at 0.
+            cal.set(Calendar.DAY_OF_MONTH, intDate[0]);
+
+            java.sql.Date date = new java.sql.Date(cal.getTimeInMillis());
+            System.out.println(sdf.format(date));
+
+            ArrayList<Student> editStudent = new ArrayList<>();
+            try {
+                editStudent = database.retrieveStudents();
+                Thread.sleep(90);
+                
+                for (Student i : editStudent) {
+                    if (i.getEmailAddress().equals(email)) {
+                        i.setName(newName);
+                        i.setGender(gender);
+                        i.setBirthDate(date);
+                        i.setStreet(street);
+                        i.setHouseNumber(houseNumber);
+                        i.setPostalCode(postalCode);
+                        i.setCity(city);
+                        i.setCountry(country);
+                        
+                        dbcn.editStudentInformation(i);
+                        alert.setText("Done");
+                    }
+                }
+
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+
+            System.out.println(editStudent);
         });
 
         submitButton.setOnAction((event) -> {

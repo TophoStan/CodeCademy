@@ -174,12 +174,12 @@ public class DatabaseConnection {
                     + student.getName() + "', Gender ='" + student.getGender() + "', Birthdate = '"
                     + student.getBirthDate() + "', Street = '" + student.getStreet() + "', Housenumber = "
                     + student.getHouseNumber() + ", PostalCode = '" + student.getPostalCode() + "', City = '"
-                    + student.getCity() + "', Country = '" + student.getCountry() + "' WHERE Id = " + student.getId());
+                    + student.getCity() + "', Country = '" + student.getCountry() + "' WHERE EmailAddress = '" + student.getEmailAddress() + "");
 
             preparedStatement.executeUpdate();
         } catch (Exception e) {
             System.out.println("Something went wrong with updating the student");
-            System.out.println(e.getMessage());
+            System.out.println(e);
         }
 
         return wasSuccesful;
