@@ -141,7 +141,7 @@ public class DatabaseConnection {
      */
     public boolean deleteStudentFromDatabase(Student student) throws SQLException, NullPointerException {
         boolean wasSuccesful = false;
-
+        connect();
         try {
             PreparedStatement st = conn
                     .prepareStatement("DELETE FROM Student WHERE EmailAddress = '" + student.getEmailAddress() + "';");
