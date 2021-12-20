@@ -25,6 +25,7 @@ public class App extends Application {
     private ArrayList<Student> st = new ArrayList<>();
     private DatabaseConnection dbcn = new DatabaseConnection();
     private Student stud = new Student();
+    private SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
 
     public void start(Stage window) {
 
@@ -159,7 +160,8 @@ public class App extends Application {
         alert.setStyle("-fx-text-fill: RED;" +
                 "-fx-padding: 15;");
 
-        studentAddPlaces.getChildren().addAll(studentTitleAdd, addName, addNameField, addEmail, addEmailField, addGender,
+        studentAddPlaces.getChildren().addAll(studentTitleAdd, addName, addNameField, addEmail, addEmailField,
+                addGender,
                 addGenderField, addbirthDate, addBirthDateField, addStreet, addStreetField,
                 addHouseNumber, addHouseNumberField, addPostalCode, addPostalCodeField, addCity, addCityField,
                 addCountry, addCountryField, submitButton, alert);
@@ -177,18 +179,7 @@ public class App extends Application {
 
         studentList.getChildren().add(studentListTitle);
 
-        DatabaseConnection database = new DatabaseConnection();
-        database.connect();
-
-        try {
-            ArrayList<Student> students = database.retrieveStudents();
-            for (Student name : students) {
-                Label newStud = new Label(name.getName());
-                studentList.getChildren().add(newStud);
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+        GetStudentList(studentList, studentListTitle);
 
         // your added content
         VBox yourAddedContent = new VBox();
@@ -228,7 +219,7 @@ public class App extends Application {
 
         Label editAlert = new Label("");
         editAlert.setStyle("-fx-text-fill: RED;" +
-        "-fx-padding: 15;");
+                "-fx-padding: 15;");
 
         VBox infoFromEditInput = new VBox();
         infoFromEditInput.setStyle("-fx-padding: 10;" +
@@ -252,7 +243,7 @@ public class App extends Application {
         Label dataCounty = new Label();
 
         infoFromEditInput.getChildren().addAll(infoFromEditInputListTitle, dataName, dataEmail, dataGender,
-        dataBirthDate, dataStreet, dataHouseNumber, dataPostalCode ,dataCity, dataCounty);
+                dataBirthDate, dataStreet, dataHouseNumber, dataPostalCode, dataCity, dataCounty);
 
         studentEditPlaces.getChildren().addAll(studentTitleEdit, editInstruction, editInput, editGoBtn, editAlert);
 
@@ -264,50 +255,64 @@ public class App extends Application {
         Label editTitle = new Label("Edit here");
         editTitle.setFont(Font.font("Monospaced", 14));
         editTitle.setPadding(new Insets(4, 0, 0, 0));
-        
 
         VBox firstRow = new VBox();
         firstRow.setPadding(new Insets(0, 20, 0, 0));
 
         Label editNameLabel = new Label("Name");
-        TextField  editName = new TextField();
+        TextField editName = new TextField();
 
         Label editGenderLabel = new Label("Gender");
-        TextField  editGender = new TextField("M/W/O");
+        TextField editGender = new TextField("M/W/O");
 
         Label editBdateLabel = new Label("Birthdate");
-        TextField  editBdate = new TextField("DD-MM-YYYY");
+        TextField editBdate = new TextField("DD-MM-YYYY");
 
         Label editStreetLabel = new Label("Street");
-        TextField  editStreet = new TextField();
+        TextField editStreet = new TextField();
 
         Button editSubmitBtn = new Button("Submit");
         editSubmitBtn.setTranslateY(10);
 
-        firstRow.getChildren().addAll(editTitle, editNameLabel, editName, editGenderLabel, editGender, editBdateLabel, editBdate, editStreetLabel, editStreet ,editSubmitBtn);
+        firstRow.getChildren().addAll(editTitle, editNameLabel, editName, editGenderLabel, editGender, editBdateLabel,
+                editBdate, editStreetLabel, editStreet, editSubmitBtn);
 
         VBox secondRow = new VBox();
         secondRow.setPadding(new Insets(20, 0, 0, 0));
 
         Label editHousnumberLabel = new Label("Housenumber");
-        TextField  editHouseNumber = new TextField();
+        TextField editHouseNumber = new TextField();
         Label editPostalCodeLabel = new Label("Postal Code");
         TextField editPostalCode = new TextField();
         Label editCityLabel = new Label("City");
-        TextField  editCity = new TextField();
+        TextField editCity = new TextField();
         Label editCountryLabel = new Label("Country");
-        TextField  editCountry = new TextField();
-        
-        secondRow.getChildren().addAll(editHousnumberLabel, editHouseNumber, editPostalCodeLabel, editPostalCode, editCityLabel, editCity, editCountryLabel, editCountry);
+        TextField editCountry = new TextField();
 
+        secondRow.getChildren().addAll(editHousnumberLabel, editHouseNumber, editPostalCodeLabel, editPostalCode,
+                editCityLabel, editCity, editCountryLabel, editCountry);
 
         actualEditPlace.getChildren().addAll(firstRow, secondRow);
 
-
         // delete content --------------------------------------
+        VBox studentDelPlaces = new VBox();
+        studentDelPlaces.setPadding(new Insets(0, 90, 0, 20));
 
+        Label studentTitleDel = new Label("Student - delete");
+        studentTitleDel.setFont(Font.font("Monospaced", 30));
 
+        Label delInstruction = new Label("Your email");
+        TextField delInput = new TextField();
+        Button delGoBtn = new Button("Go");
+        Button sureBtn = new Button("Sure??");
+        delGoBtn.setTranslateY(10);
+        sureBtn.setTranslateY(10);
 
+        Label delAlert = new Label("");
+        delAlert.setStyle("-fx-text-fill: RED;" +
+                "-fx-padding: 15;");
+
+        studentDelPlaces.getChildren().addAll(studentTitleDel, delInstruction, delInput, delGoBtn, delAlert);
 
         // set total layout
         layoutHome.getChildren().addAll(title, menu, homeContent);
@@ -317,8 +322,6 @@ public class App extends Application {
 
         // view set student
         Scene student = new Scene(layoutStudent, 800, 600);
-
-
 
         // actions
         addBirthDateField.setOnMouseClicked((event) -> {
@@ -341,7 +344,6 @@ public class App extends Application {
             editBdate.setText("");
         });
 
-
         studentButton.setOnAction((event) -> {
             if (!studentButton.isDefaultButton()) {
                 layoutStudent.getChildren().clear();
@@ -355,6 +357,7 @@ public class App extends Application {
                 delBtn.setDefaultButton(false);
                 addBtn.setDefaultButton(true);
                 window.setScene(student);
+                GetStudentList(studentList, studentListTitle);
             }
         });
 
@@ -377,6 +380,7 @@ public class App extends Application {
             delBtn.setDefaultButton(false);
             studentContent.getChildren().addAll(studentAddPlaces, studentList, yourAddedContent);
             addBtn.setDefaultButton(true);
+            GetStudentList(studentList, studentListTitle);
         });
 
         editBtn.setOnAction((event) -> {
@@ -387,15 +391,45 @@ public class App extends Application {
             editGender.setText("M/W/O");
             actualEditPlace.getChildren().clear();
             studentContent.getChildren().add(studentEditPlaces);
+            editAlert.setText("");
             editBtn.setDefaultButton(true);
         });
 
         delBtn.setOnAction((event) -> {
             studentContent.getChildren().clear();
+            delAlert.setText("");
+            delAlert.setStyle("-fx-text-fill: RED;" +
+                    "-fx-padding: 15;");
             addBtn.setDefaultButton(false);
             editBtn.setDefaultButton(false);
-            studentContent.getChildren().addAll();
+            studentContent.getChildren().addAll(studentDelPlaces);
             delBtn.setDefaultButton(true);
+        });
+
+        delGoBtn.setOnAction((event) -> {
+            String emailAddress = delInput.getText();
+            ArrayList<Student> studInfo = new ArrayList<>();
+            try {
+                studInfo = dbcn.retrieveStudents();
+                Thread.sleep(90);
+
+                for (Student i : studInfo) {
+                    if (i.getEmailAddress().equals(emailAddress)) {
+
+                        dbcn.deleteStudentFromDatabase(i);
+                        delInput.setText("");
+                        delAlert.setStyle("-fx-text-fill: GREEN;" + "-fx-padding: 15;");
+                        delAlert.setText("Student removed!");
+                    }
+                }
+
+                if (!delAlert.getText().equals("Student removed!")) {
+                    delAlert.setText("Unknown mail..");
+                }
+
+            } catch (Exception e) {
+                delAlert.setText("Er is een fout opgetreden..");
+            }
         });
 
         editGoBtn.setOnAction((event) -> {
@@ -404,13 +438,13 @@ public class App extends Application {
             String emailAddress = editInput.getText();
             ArrayList<Student> studInfo = new ArrayList<>();
             try {
-                studInfo = database.retrieveStudents();
+                studInfo = dbcn.retrieveStudents();
                 Thread.sleep(90);
-                
+
                 for (Student i : studInfo) {
                     if (i.getEmailAddress().equals(emailAddress)) {
                         dataName.setText("Name: " + i.getName());
-                        dataEmail.setText("Mail: "+ i.getEmailAddress());
+                        dataEmail.setText("Mail: " + i.getEmailAddress());
                         dataGender.setText("Gender: " + i.getGender());
                         dataBirthDate.setText("Birthday: " + String.valueOf(i.getBirthDate()));
                         dataStreet.setText("Street: " + i.getStreet());
@@ -432,7 +466,7 @@ public class App extends Application {
 
             } catch (Exception e) {
                 System.out.println(e);
-            } 
+            }
         });
 
         editSubmitBtn.setOnAction((event) -> {
@@ -445,8 +479,6 @@ public class App extends Application {
             String postalCode = editPostalCode.getText();
             String city = editCity.getText();
             String country = editCountry.getText();
-
-            SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
 
             String[] splits = birthDate.split("-");
             int[] intDate = new int[3];
@@ -461,13 +493,12 @@ public class App extends Application {
             cal.set(Calendar.DAY_OF_MONTH, intDate[0]);
 
             java.sql.Date date = new java.sql.Date(cal.getTimeInMillis());
-            
 
             ArrayList<Student> editStudent = new ArrayList<>();
             try {
-                editStudent = database.retrieveStudents();
+                editStudent = dbcn.retrieveStudents();
                 Thread.sleep(90);
-                
+
                 for (Student i : editStudent) {
                     if (i.getEmailAddress().equals(email)) {
                         i.setName(newName);
@@ -478,9 +509,23 @@ public class App extends Application {
                         i.setPostalCode(postalCode);
                         i.setCity(city);
                         i.setCountry(country);
-                        
+
                         dbcn.editStudentInformation(i);
-                        alert.setText("Done");
+
+                        dataName.setText("Name: " + newName);
+                        dataEmail.setText("Mail: " + email);
+                        dataGender.setText("Gender: " + gender);
+                        dataBirthDate.setText("Birthdate: " + String.valueOf(date));
+                        dataStreet.setText("Street: " + street);
+                        dataHouseNumber.setText("Housenumber: " + String.valueOf(houseNumber));
+                        dataPostalCode.setText("Postalcode: " + postalCode);
+                        dataCity.setText("City: " + city);
+                        dataCounty.setText("Country: " + country);
+
+                        infoFromEditInputListTitle.setText("Your new info:");
+
+                        editAlert.setStyle("-fx-text-fill: GREEN;" + "-fx-padding: 15;");
+                        editAlert.setText("Info changed!");
                     }
                 }
 
@@ -503,8 +548,6 @@ public class App extends Application {
             String city = addCityField.getText();
             String country = addCountryField.getText();
 
-            SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
-
             String[] splits = birthDate.split("-");
             int[] intDate = new int[3];
             for (int i = 0; i < 3; i++) {
@@ -526,30 +569,17 @@ public class App extends Application {
             System.out.println(newStudent);
 
             try {
-                database.addStudentToDatabase(newStudent);
+                dbcn.addStudentToDatabase(newStudent);
             } catch (NullPointerException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             } catch (SQLException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
 
             alert.setStyle("-fx-text-fill: GREEN;" + "-fx-padding: 15;");
-            alert.setText("Succesfull added!");
+            alert.setText("Succesfully added!");
 
-            try {
-                Thread.sleep(90);
-                studentList.getChildren().clear();
-                studentList.getChildren().add(studentListTitle);
-                ArrayList<Student> students = database.retrieveStudents();
-                for (Student name : students) {
-                    Label newStud = new Label("- " + name.getName());
-                    studentList.getChildren().add(newStud);
-                }
-            } catch (Exception e) {
-                System.out.println(e);
-            }
+            GetStudentList(studentList, studentListTitle);
 
             if (gender.equals("M")) {
                 gender += "an";
@@ -582,9 +612,29 @@ public class App extends Application {
 
         });
 
-        // window set
+        // window set and show
         window.setTitle("Thomas Quartel, Mickel de Coo, Stijn Spanjers en Stan Tophoven");
         window.setScene(home);
         window.show();
+    }
+
+    public void GetStudentList(VBox studentList, Label studentListTitle) {
+
+        //if () {
+            dbcn.connect();
+        //}
+        
+        try {
+            Thread.sleep(90);
+            studentList.getChildren().clear();
+            studentList.getChildren().add(studentListTitle);
+            ArrayList<Student> students = dbcn.retrieveStudents();
+            for (Student name : students) {
+                Label newStud = new Label("- " + name.getName());
+                studentList.getChildren().add(newStud);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 }
