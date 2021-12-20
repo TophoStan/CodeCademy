@@ -23,7 +23,6 @@ import repository.DatabaseConnection;
 public class App extends Application {
 
     private DatabaseConnection dbcn = new DatabaseConnection();
-    private SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
 
     public void start(Stage window) {
 
