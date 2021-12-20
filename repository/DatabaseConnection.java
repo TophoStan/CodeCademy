@@ -1,19 +1,18 @@
 package repository;
 
 import java.sql.Connection;
-import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.SQLType;
 import java.sql.Statement;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.sql.Date;
 
+import domain.Certificate;
 import domain.Course;
 import domain.Difficulty;
+import domain.Employee;
 import domain.Enrollment;
 import domain.Student;
 
@@ -299,6 +298,47 @@ public class DatabaseConnection {
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(
                     "DELETE FROM EnrollmentData WHERE EnrollmentId = " + enrollment.getEnrollmentId());
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void addCertificate(Certificate certificate, Employee employee) {
+        try {
+            PreparedStatement preparedStatement = conn
+                    .prepareStatement("INSERT INTO Certificate(Grade, EmployeeId) VALUES (?,?)");
+            preparedStatement.setDouble(1, certificate.getGrade());
+            preparedStatement.setInt(2, employee.getEmployeeId());
+
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public ArrayList<Certificate> retrieveCertificates() {
+        ArrayList<Certificate> certificates = new ArrayList<>();
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Certificate");
+            while (rs.next()) {
+                Certificate certificate = new Certificate();
+                certificate.setGrade(rs.getDouble("Grade"));
+                certificate.setEnrollmentId(rs.getInt("EnrollmentId"));
+                certificate.setEmployeeId(rs.getInt("EmployeeId"));
+                certificates.add(certificate);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return certificates;
+    }
+
+    public void deleteCertificate(Certificate certificate) {
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(
+                    "DELETE FROM Certificate WHERE EnrollmentId = " + certificate.getEnrollmentId());
             preparedStatement.executeUpdate();
         } catch (Exception e) {
             System.out.println(e);
