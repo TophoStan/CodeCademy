@@ -3,6 +3,8 @@ package domain;
 import java.util.ArrayList;
 
 public class Course {
+    private int id;
+    private int trackingNumber;
     private String name;
     private String subject;
     private String text;
@@ -18,6 +20,9 @@ public class Course {
         this.difficulty = difficulty;
         this.modules = new ArrayList<>();
         this.webcast = new ArrayList<>();
+    }
+    public Course(){
+
     }
 
     public String getName() {
@@ -74,4 +79,17 @@ public class Course {
         student.addEnrollment(enrollment);
         this.enrollments.add(enrollment);
     }
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+    public void setTrackingNumber(int trackingNumber) {
+        this.trackingNumber = trackingNumber;
+    }
+    public int getTrackingNumber() {
+        return trackingNumber;
+    }
+
 }

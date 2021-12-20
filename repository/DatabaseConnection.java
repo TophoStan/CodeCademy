@@ -10,6 +10,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.sql.Date;
 
+import domain.Course;
+import domain.Difficulty;
+import domain.Enrollment;
 import domain.Student;
 
 /**
@@ -56,6 +59,9 @@ public class DatabaseConnection {
             ex.printStackTrace();
         }
 
+    }
+    public Connection getConn() {
+        return conn;
     }
 
     /**
@@ -174,7 +180,8 @@ public class DatabaseConnection {
                     + student.getName() + "', Gender ='" + student.getGender() + "', Birthdate = '"
                     + student.getBirthDate() + "', Street = '" + student.getStreet() + "', Housenumber = "
                     + student.getHouseNumber() + ", PostalCode = '" + student.getPostalCode() + "', City = '"
-                    + student.getCity() + "', Country = '" + student.getCountry() + "' WHERE EmailAddress = '" + student.getEmailAddress() + "';");
+                    + student.getCity() + "', Country = '" + student.getCountry() + "' WHERE EmailAddress = " + "'"
+                    + student.getEmailAddress() + "'");
 
             preparedStatement.executeUpdate();
         } catch (Exception e) {
@@ -183,6 +190,77 @@ public class DatabaseConnection {
         }
 
         return wasSuccesful;
+    }
+
+    public void addCourseToDatabase(Course course) {
+        String query = "INSERT INTO Course(CourseName, Subject, IntroductoryText, Difficulty) VALUES(?,?,?,?,?,?,?,?,?)";
+
+        try (PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setString(1, course.getName());
+            stmt.setString(2, course.getSubject());
+            stmt.setString(3, course.getText());
+            stmt.setString(4, course.getDifficulty().toString());
+
+            stmt.execute();
+            System.out.println("Succesfully added course to database");
+
+        } catch (Exception e) {
+            System.out.println("Was not able to add course to database");
+            System.out.println(e);
+
+        }
+    }
+
+    public ArrayList<Course> retrieveCourses() {
+        ArrayList<Course> courses = new ArrayList<>();
+        try {
+            Statement stmt = this.conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Course");
+            while (rs.next()) {
+                Course course = new Course();
+                course.setId(rs.getInt("id"));
+                course.setDifficulty(Difficulty.valueOf((rs.getString("difficulty"))));
+                course.setSubject(rs.getString("Subject"));
+                course.setName(rs.getString("name"));
+                course.setText(rs.getString("IntroductoryText"));
+                courses.add(course);
+
+            }
+        } catch (Exception e) {
+
+        }
+        return courses;
+
+    }
+
+    public void editCourseInformation(Course course) {
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement("UPDATE Course SET Name = '" + course.getName()
+                    + "', Difficulty= '" + course.getDifficulty().toString() + "', Subject= '" + course.getSubject()
+                    + "', IntroductoryText ='" + course.getText() + "'");
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void deleteCourse(Course course) {
+        try {
+            PreparedStatement preparedStatement = conn
+                    .prepareStatement("DELETE FROM Course WHERE id=" + course.getId());
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void addEnrollment(Enrollment enrollment) {
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(
+                    "INSERT INTO Enrollment()");
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
     }
 
 }
