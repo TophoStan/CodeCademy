@@ -1,6 +1,6 @@
 package domain;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Webcast extends ContentItem {
     private int duration;
@@ -14,6 +14,7 @@ public class Webcast extends ContentItem {
         super(title, description, subject, publicationDate, status, percentage);
         this.duration = duration;
         this.url = url;
+        this.views = 0;
     }
 
     public int getDuration() {

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class Course {
     private int id;
-    private int trackingNumber;
     private String name;
     private String subject;
     private String text;
@@ -84,12 +83,6 @@ public class Course {
     }
     public void setId(int id) {
         this.id = id;
-    }
-    public void setTrackingNumber(int trackingNumber) {
-        this.trackingNumber = trackingNumber;
-    }
-    public int getTrackingNumber() {
-        return trackingNumber;
     }
 
 }

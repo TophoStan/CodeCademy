@@ -1,6 +1,6 @@
 package domain;
 
-import java.util.Date;
+import java.sql.*;
 
 abstract class ContentItem {
     private String title;
@@ -15,7 +15,7 @@ abstract class ContentItem {
         this.title = title;
         this.description = description;
         this.subject = subject;
-        this.publicationDate = java.util.Calendar.getInstance().getTime();
+        this.publicationDate = Date.valueOf(publicationDate.toLocalDate());
         this.status = status;
         this.percentage = 0;
     }
