@@ -328,9 +328,10 @@ public class App extends Application {
             addBirthDateField.setText("");
         });
 
-        addGender.setOnMouseClicked((event) -> {
-            addGender.setText("");
+        addGenderField.setOnMouseClicked((event) -> {
+            addGenderField.setText("");
         });
+
 
         addNameField.setOnKeyTyped((event) -> {
             alert.setText("Not saved yet!");
