@@ -22,9 +22,7 @@ import repository.DatabaseConnection;
 
 public class App extends Application {
 
-    private ArrayList<Student> st = new ArrayList<>();
     private DatabaseConnection dbcn = new DatabaseConnection();
-    private Student stud = new Student();
     private SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
 
     public void start(Stage window) {
@@ -304,9 +302,7 @@ public class App extends Application {
         Label delInstruction = new Label("Your email");
         TextField delInput = new TextField();
         Button delGoBtn = new Button("Go");
-        Button sureBtn = new Button("Sure??");
         delGoBtn.setTranslateY(10);
-        sureBtn.setTranslateY(10);
 
         Label delAlert = new Label("");
         delAlert.setStyle("-fx-text-fill: RED;" +
@@ -314,98 +310,153 @@ public class App extends Application {
 
         studentDelPlaces.getChildren().addAll(studentTitleDel, delInstruction, delInput, delGoBtn, delAlert);
 
-        // set total layout
+        // set first layout
         layoutHome.getChildren().addAll(title, menu, homeContent);
 
         // set home view
         Scene home = new Scene(layoutHome, 800, 600);
 
-        // view set student
+        // set student view
         Scene student = new Scene(layoutStudent, 800, 600);
 
         // actions
+
+        // removes text when pressing the field
         addBirthDateField.setOnMouseClicked((event) -> {
             addBirthDateField.setText("");
         });
 
-        addGenderField.setOnMouseClicked((event) -> {
-            addGenderField.setText("");
-        });
-
-
-        addNameField.setOnKeyTyped((event) -> {
-            alert.setText("Not saved yet!");
-        });
-
-        editGender.setOnMouseClicked((event) -> {
-            editGender.setText("");
+        addGender.setOnMouseClicked((event) -> {
+            addGender.setText("");
         });
 
         editBdate.setOnMouseClicked((event) -> {
             editBdate.setText("");
         });
 
+        editGender.setOnMouseClicked((event) -> {
+            editGender.setText("");
+        });
+
+        // gives warning the user haven't saved his changes
+        addNameField.setOnKeyTyped((event) -> {
+            alert.setText("Not saved yet!");
+        });
+
+        // action on student button
         studentButton.setOnAction((event) -> {
+
+            // only when you are NOT on the student page yet
             if (!studentButton.isDefaultButton()) {
-                layoutStudent.getChildren().clear();
+                // adds the edit add and delete buttons
                 menu.getChildren().add(editAddButtons);
+
+                // clears student content and fills it with the good content
                 studentContent.getChildren().clear();
                 studentContent.getChildren().addAll(studentAddPlaces, studentList, yourAddedContent);
+
+                // clears the student layour and fills it with the good layout
+                layoutStudent.getChildren().clear();
                 layoutStudent.getChildren().addAll(title, menu, studentContent);
+
+                // loads student names from database
+                GetStudentList(studentList, studentListTitle);
+
+                // sets text for bdate, gender and alert back to normal text
+                addBirthDateField.setText("DD-MM-YYYY");
+                addGenderField.setText("M/W/O");
+                alert.setText("");
+
+                // sets default button good according to the page
                 studentButton.setDefaultButton(true);
                 homeButton.setDefaultButton(false);
+
+                addBtn.setDefaultButton(true);
                 editBtn.setDefaultButton(false);
                 delBtn.setDefaultButton(false);
-                addBtn.setDefaultButton(true);
+
+                // finally sets window to student
                 window.setScene(student);
-                GetStudentList(studentList, studentListTitle);
             }
         });
 
+        // action on home button
         homeButton.setOnAction((event) -> {
-            layoutHome.getChildren().clear();
+
+            // clears the menu and fills the right buttons
             menu.getChildren().clear();
             menu.getChildren().addAll(homeButton, coursesButton, studentButton);
+
+            // clears the layout and fills it with the good layout
+            layoutHome.getChildren().clear();
             layoutHome.getChildren().addAll(title, menu, homeContent);
+
+            // sets default buttons good according to the page
             homeButton.setDefaultButton(true);
             studentButton.setDefaultButton(false);
-            addBirthDateField.setText("DD-MM-YYYY");
-            addGenderField.setText("M/W/O");
-            alert.setText("");
+
+            // finally sets window to home
             window.setScene(home);
         });
 
+        // action on add button
         addBtn.setOnAction((event) -> {
+
+            // clears content and fills it with the right content
             studentContent.getChildren().clear();
+            studentContent.getChildren().addAll(studentAddPlaces, studentList, yourAddedContent);
+
+            // sets default buttons good according to the page
+            addBtn.setDefaultButton(true);
             editBtn.setDefaultButton(false);
             delBtn.setDefaultButton(false);
-            studentContent.getChildren().addAll(studentAddPlaces, studentList, yourAddedContent);
-            addBtn.setDefaultButton(true);
+
+            // loads student names from database
             GetStudentList(studentList, studentListTitle);
         });
 
+        // action on edit button
         editBtn.setOnAction((event) -> {
+
+            // clears content and fills it with the right content
             studentContent.getChildren().clear();
+            studentContent.getChildren().add(studentEditPlaces);
+
+            // clears the edit page, now you can only see the email input
+            actualEditPlace.getChildren().clear();
+
+            // sets default buttons good according to the page
+            editBtn.setDefaultButton(true);
             addBtn.setDefaultButton(false);
             delBtn.setDefaultButton(false);
+
+            // sets text for bdate, gender, alert and input back to normal text
             editBdate.setText("DD-MM-YYYY");
             editGender.setText("M/W/O");
-            actualEditPlace.getChildren().clear();
-            studentContent.getChildren().add(studentEditPlaces);
-            editInput.setText("");
             editAlert.setText("");
-            editBtn.setDefaultButton(true);
+            editInput.setText("");
+
+            // sets style for alert back
+            editAlert.setStyle("-fx-text-fill: RED;" +
+                    "-fx-padding: 15;");
         });
 
+        // action on delete button
         delBtn.setOnAction((event) -> {
+
+            // clears content and fills it with the right content
             studentContent.getChildren().clear();
+            studentContent.getChildren().addAll(studentDelPlaces);
+
+            // sets default buttons good according to the page
+            delBtn.setDefaultButton(true);
+            addBtn.setDefaultButton(false);
+            editBtn.setDefaultButton(false);
+
+            // sets text and style back to normal state
             delAlert.setText("");
             delAlert.setStyle("-fx-text-fill: RED;" +
                     "-fx-padding: 15;");
-            addBtn.setDefaultButton(false);
-            editBtn.setDefaultButton(false);
-            studentContent.getChildren().addAll(studentDelPlaces);
-            delBtn.setDefaultButton(true);
         });
 
         delGoBtn.setOnAction((event) -> {
@@ -482,20 +533,6 @@ public class App extends Application {
             String city = editCity.getText();
             String country = editCountry.getText();
 
-            String[] splits = birthDate.split("-");
-            int[] intDate = new int[3];
-            for (int i = 0; i < 3; i++) {
-                intDate[i] = Integer.parseInt(splits[i]);
-            }
-
-            Calendar cal = Calendar.getInstance();
-            cal.set(Calendar.YEAR, intDate[2]);
-            cal.set(Calendar.MONTH, intDate[1] - 1); // <-- months start
-            // at 0.
-            cal.set(Calendar.DAY_OF_MONTH, intDate[0]);
-
-            java.sql.Date date = new java.sql.Date(cal.getTimeInMillis());
-
             ArrayList<Student> editStudent = new ArrayList<>();
             try {
                 editStudent = dbcn.retrieveStudents();
@@ -505,7 +542,7 @@ public class App extends Application {
                     if (i.getEmailAddress().equals(email)) {
                         i.setName(newName);
                         i.setGender(gender);
-                        i.setBirthDate(date);
+                        i.setBirthDate(setDate(birthDate));
                         i.setStreet(street);
                         i.setHouseNumber(houseNumber);
                         i.setPostalCode(postalCode);
@@ -517,7 +554,7 @@ public class App extends Application {
                         dataName.setText("Name: " + newName);
                         dataEmail.setText("Mail: " + email);
                         dataGender.setText("Gender: " + gender);
-                        dataBirthDate.setText("Birthdate: " + String.valueOf(date));
+                        dataBirthDate.setText("Birthdate: " + String.valueOf(setDate(birthDate)));
                         dataStreet.setText("Street: " + street);
                         dataHouseNumber.setText("Housenumber: " + String.valueOf(houseNumber));
                         dataPostalCode.setText("Postalcode: " + postalCode);
@@ -534,8 +571,6 @@ public class App extends Application {
             } catch (Exception e) {
                 System.out.println(e);
             }
-
-            System.out.println(editStudent);
         });
 
         submitButton.setOnAction((event) -> {
@@ -550,25 +585,9 @@ public class App extends Application {
             String city = addCityField.getText();
             String country = addCountryField.getText();
 
-            String[] splits = birthDate.split("-");
-            int[] intDate = new int[3];
-            for (int i = 0; i < 3; i++) {
-                intDate[i] = Integer.parseInt(splits[i]);
-            }
-
-            Calendar cal = Calendar.getInstance();
-            cal.set(Calendar.YEAR, intDate[2]);
-            cal.set(Calendar.MONTH, intDate[1] - 1); // <-- months start
-            // at 0.
-            cal.set(Calendar.DAY_OF_MONTH, intDate[0]);
-
-            java.sql.Date date = new java.sql.Date(cal.getTimeInMillis());
-            System.out.println(sdf.format(date));
-
-            Student newStudent = new Student(emailAddress, newName, gender, date, street, houseNumber, postalCode,
+            Student newStudent = new Student(emailAddress, newName, gender, setDate(birthDate), street, houseNumber,
+                    postalCode,
                     city, country);
-
-            System.out.println(newStudent);
 
             try {
                 dbcn.addStudentToDatabase(newStudent);
@@ -601,16 +620,8 @@ public class App extends Application {
             newestCity.setText("City: " + city);
             newestCounty.setText("Country: " + country);
 
-            addNameField.clear();
-            addEmailField.clear();
-            addBirthDateField.clear();
-            addCityField.clear();
-            addGenderField.clear();
-            addHouseNumberField.clear();
-            addPostalCodeField.clear();
-            addCountryField.clear();
-            addPostalCodeField.clear();
-            addStreetField.clear();
+            clearFields(addNameField, addEmailField, addBirthDateField, addCityField, addGenderField, addStreetField,
+                    addHouseNumberField, addPostalCodeField, addCountryField);
 
         });
 
@@ -620,12 +631,21 @@ public class App extends Application {
         window.show();
     }
 
+    // methodes
+
+    /**
+     * hiero stan
+     * 
+     * @param studentList
+     * @param studentListTitle
+     */
+
     public void GetStudentList(VBox studentList, Label studentListTitle) {
 
         if (dbcn.getConn() == null) {
             dbcn.connect();
         }
-        
+
         try {
             Thread.sleep(90);
             studentList.getChildren().clear();
@@ -638,5 +658,50 @@ public class App extends Application {
         } catch (Exception e) {
             System.out.println(e);
         }
+    }
+
+    /**
+     * hiero ook stan
+     * 
+     * @param birthDate
+     * @return
+     */
+
+    public Date setDate(String birthDate) {
+        String[] splits = birthDate.split("-");
+        int[] intDate = new int[3];
+        for (int i = 0; i < 3; i++) {
+            intDate[i] = Integer.parseInt(splits[i]);
+        }
+
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR, intDate[2]);
+        cal.set(Calendar.MONTH, intDate[1] - 1); // <-- months start
+        // at 0.
+        cal.set(Calendar.DAY_OF_MONTH, intDate[0]);
+
+        java.sql.Date date = new java.sql.Date(cal.getTimeInMillis());
+        return date;
+    }
+
+    /**
+     * deze trouwens ook
+     */
+    public void clearFields(TextField nameField, TextField emailField, TextField birthDateField, TextField cityField,
+            TextField genderField, TextField streetField, TextField houseNrField, TextField postalCodeField,
+            TextField countryField) {
+        nameField.clear();
+        emailField.clear();
+        birthDateField.clear();
+        cityField.clear();
+        genderField.clear();
+        houseNrField.clear();
+        postalCodeField.clear();
+        countryField.clear();
+        streetField.clear();
+    }
+
+    public void clearLabels() {
+
     }
 }
