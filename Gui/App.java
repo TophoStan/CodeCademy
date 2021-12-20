@@ -391,6 +391,7 @@ public class App extends Application {
             editGender.setText("M/W/O");
             actualEditPlace.getChildren().clear();
             studentContent.getChildren().add(studentEditPlaces);
+            editInput.setText("");
             editAlert.setText("");
             editBtn.setDefaultButton(true);
         });
