@@ -6,7 +6,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLType;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.sql.Date;
 
@@ -60,6 +62,7 @@ public class DatabaseConnection {
         }
 
     }
+
     public Connection getConn() {
         return conn;
     }
@@ -218,7 +221,7 @@ public class DatabaseConnection {
             ResultSet rs = stmt.executeQuery("SELECT * FROM Course");
             while (rs.next()) {
                 Course course = new Course();
-                course.setId(rs.getInt("id"));
+                course.setId(rs.getInt("courseid"));
                 course.setDifficulty(Difficulty.valueOf((rs.getString("difficulty"))));
                 course.setSubject(rs.getString("Subject"));
                 course.setName(rs.getString("name"));
@@ -254,13 +257,51 @@ public class DatabaseConnection {
         }
     }
 
-    public void addEnrollment(Enrollment enrollment) {
+    public void addEnrollment(Enrollment enrollment, Student student, Course course) {
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(
-                    "INSERT INTO Enrollment()");
+                    "INSERT INTO EnrollmentData(StudentId, CourseId, EnrollmentDate) VALUES (?,?,?)");
+            preparedStatement.setInt(1, student.getId());
+            preparedStatement.setInt(2, course.getId());
+            Date date = new Date(0);
+
+            preparedStatement.setDate(3, Date.valueOf(date.toLocalDate()));
+
+            preparedStatement.execute();
         } catch (Exception e) {
-            // TODO: handle exception
+            System.out.println(e);
         }
     }
 
+    public ArrayList<Enrollment> retrieveEnrollments() {
+        ArrayList<Enrollment> enrollments = new ArrayList<>();
+        try {
+            Statement stmt = this.conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM EnrollmentData");
+
+            while (rs.next()) {
+                Enrollment enrollment = new Enrollment();
+                enrollment.setEnrollmentId(rs.getInt("enrollmentId"));
+                enrollment.setCourseId(rs.getInt("courseId"));
+                enrollment.setStudentId(rs.getInt("studentId"));
+                enrollment.setEnrollmentDate(rs.getDate("EnrollmentDate"));
+                enrollments.add(enrollment);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return enrollments;
+    }
+
+    public void deleteEnrollment(Enrollment enrollment) {
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(
+                    "DELETE FROM EnrollmentData WHERE EnrollmentId = " + enrollment.getEnrollmentId());
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 }
