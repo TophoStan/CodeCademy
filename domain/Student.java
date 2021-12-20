@@ -1,11 +1,6 @@
 package domain;
 
 import java.sql.Date;
-
-import repository.DatabaseConnection;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
 public class Student {
