@@ -387,6 +387,7 @@ public class App extends Application {
             editGender.setText("M/W/O");
             actualEditPlace.getChildren().clear();
             studentContent.getChildren().add(studentEditPlaces);
+            editAlert.setText("");
             editBtn.setDefaultButton(true);
         });
 
@@ -480,7 +481,21 @@ public class App extends Application {
                         i.setCountry(country);
                         
                         dbcn.editStudentInformation(i);
-                        alert.setText("Done");
+
+                        dataName.setText("Name: " +  newName);
+                        dataEmail.setText("Mail: " + email);
+                        dataGender.setText("Gender: " + gender);
+                        dataBirthDate.setText("Birthdate: " + String.valueOf(date));
+                        dataStreet.setText("Street: " + street);
+                        dataHouseNumber.setText("Housenumber: " + String.valueOf(houseNumber));
+                        dataPostalCode.setText("Postalcode: " + postalCode);
+                        dataCity.setText("City: " + city);
+                        dataCounty.setText("Country: " + country);
+
+                        infoFromEditInputListTitle.setText("Your new info:");
+
+                        editAlert.setStyle("-fx-text-fill: GREEN;" + "-fx-padding: 15;");
+                        editAlert.setText("Info changed!");
                     }
                 }
 
