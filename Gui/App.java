@@ -461,7 +461,7 @@ public class App extends Application {
             cal.set(Calendar.DAY_OF_MONTH, intDate[0]);
 
             java.sql.Date date = new java.sql.Date(cal.getTimeInMillis());
-            System.out.println(sdf.format(date));
+            
 
             ArrayList<Student> editStudent = new ArrayList<>();
             try {

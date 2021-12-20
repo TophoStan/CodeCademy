@@ -168,13 +168,13 @@ public class DatabaseConnection {
      */
     public boolean editStudentInformation(Student student) {
         boolean wasSuccesful = false;
-
+        connect();
         try {
             PreparedStatement preparedStatement = conn.prepareStatement("UPDATE Student " + "SET Name ='"
                     + student.getName() + "', Gender ='" + student.getGender() + "', Birthdate = '"
                     + student.getBirthDate() + "', Street = '" + student.getStreet() + "', Housenumber = "
                     + student.getHouseNumber() + ", PostalCode = '" + student.getPostalCode() + "', City = '"
-                    + student.getCity() + "', Country = '" + student.getCountry() + "' WHERE EmailAddress = '" + student.getEmailAddress() + "");
+                    + student.getCity() + "', Country = '" + student.getCountry() + "' WHERE EmailAddress = '" + student.getEmailAddress() + "';");
 
             preparedStatement.executeUpdate();
         } catch (Exception e) {

@@ -1,26 +1,23 @@
 package domain;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Certificate {
-    private Date enrollmentDate;
+
+    private Enrollment enrollment;
     private double grade;
-    private String courseName;
-    private String studentName;
 
-    public Certificate(Date enrollmentDate, double grade, String courseName, String studentName) {
-        this.enrollmentDate = enrollmentDate;
+    public Certificate(Enrollment enrollment, double grade) {
+        this.enrollment = enrollment;
         this.grade = grade;
-        this.courseName = courseName;
-        this.studentName = studentName;
     }
 
-    public Date getEnrollmentDate() {
-        return enrollmentDate;
+    public Enrollment getEnrollment() {
+        return enrollment;
     }
 
-    public void setEnrollmentDate(Date enrollmentDate) {
-        this.enrollmentDate = enrollmentDate;
+    public void setEnrollment(Enrollment enrollment) {
+        this.enrollment = enrollment;
     }
 
     public double getGrade() {
@@ -31,20 +28,9 @@ public class Certificate {
         this.grade = grade;
     }
 
-    public String getCourseName() {
-        return courseName;
+    public String toString(){
+        return "Course:" + enrollment.getCourseName() + "\nGrade: " + this.grade + "\nEnrollmentDate: " + enrollment.getEnrollmentDate();
     }
-
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
-    }
-
-    public String getStudentName() {
-        return studentName;
-    }
-
-    public void setStudentName(String studentName) {
-        this.studentName = studentName;
-    }
+    
 
 }
