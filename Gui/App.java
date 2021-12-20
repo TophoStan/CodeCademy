@@ -328,9 +328,10 @@ public class App extends Application {
             addBirthDateField.setText("");
         });
 
-        addGender.setOnMouseClicked((event) -> {
-            addGender.setText("");
+        addGenderField.setOnMouseClicked((event) -> {
+            addGenderField.setText("");
         });
+
 
         addNameField.setOnKeyTyped((event) -> {
             alert.setText("Not saved yet!");
@@ -391,6 +392,7 @@ public class App extends Application {
             editGender.setText("M/W/O");
             actualEditPlace.getChildren().clear();
             studentContent.getChildren().add(studentEditPlaces);
+            editInput.setText("");
             editAlert.setText("");
             editBtn.setDefaultButton(true);
         });
@@ -620,9 +622,9 @@ public class App extends Application {
 
     public void GetStudentList(VBox studentList, Label studentListTitle) {
 
-        //if () {
+        if (dbcn.getConn() == null) {
             dbcn.connect();
-        //}
+        }
         
         try {
             Thread.sleep(90);
