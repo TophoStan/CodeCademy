@@ -808,10 +808,6 @@ public class App extends Application {
         streetField.clear();
     }
 
-    public void clearLabels() {
-
-    }
-
     public void defaultButtonToFalse() { 
         for (Button button : menuButtons) {
             button.setDefaultButton(false);
