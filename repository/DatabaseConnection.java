@@ -206,7 +206,7 @@ public class DatabaseConnection {
      * @param course
      */
     public void addCourseToDatabase(Course course) {
-        String query = "INSERT INTO Course(CourseName, Subject, IntroductoryText, Difficulty) VALUES(?,?,?,?,?,?,?,?,?)";
+        String query = "INSERT INTO Course(CourseName, Subject, IntroductoryText, Difficulty) VALUES(?,?,?,?)";
 
         try (PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, course.getName());
@@ -455,8 +455,19 @@ public class DatabaseConnection {
         }
     }
 
-    public void addContentItem(ContentItem content) {
+    public void addContentItem(ContentItem content, Course course) {
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO ContentItem(PublicationDate,State,Title,Description,CourseId) VALUES(?,?,?,?,?)");
+            preparedStatement.setDate(1, content.getPublicationDate());
+            preparedStatement.setString(2, content.getStatus());
+            preparedStatement.setString(3, content.getTitle());
+            preparedStatement.setString(4, content.getDescription());
+            preparedStatement.setInt(5, course.getId());
 
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
 }
