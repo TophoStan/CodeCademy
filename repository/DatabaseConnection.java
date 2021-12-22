@@ -16,6 +16,8 @@ import domain.Difficulty;
 import domain.Employee;
 import domain.Enrollment;
 import domain.Student;
+import domain.Webcast;
+import domain.Module;
 
 /**
  * This program demonstrates how to establish database connection to Microsoft
@@ -457,7 +459,8 @@ public class DatabaseConnection {
 
     public void addContentItem(ContentItem content, Course course) {
         try {
-            PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO ContentItem(PublicationDate,State,Title,Description,CourseId) VALUES(?,?,?,?,?)");
+            PreparedStatement preparedStatement = conn.prepareStatement(
+                    "INSERT INTO ContentItem(PublicationDate,State,Title,Description,CourseId) VALUES(?,?,?,?,?)");
             preparedStatement.setDate(1, content.getPublicationDate());
             preparedStatement.setString(2, content.getStatus());
             preparedStatement.setString(3, content.getTitle());
@@ -468,6 +471,105 @@ public class DatabaseConnection {
         } catch (Exception e) {
             System.out.println(e);
         }
+    }
+
+    public ArrayList<ContentItem> retrieveContentItems() {
+        ArrayList<ContentItem> contentItems = new ArrayList<>();
+
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM ContentItem");
+            while (rs.next()) {
+                ContentItem contentItem = new ContentItem() {
+                };
+                contentItem.setDescription(rs.getString("Description"));
+                contentItem.setPublicationDate(rs.getDate("PublicationDate"));
+                contentItem.setStatus(rs.getString("Status"));
+                contentItem.setSubject(rs.getString("Subject"));
+                contentItem.setTitle(rs.getString("Title"));
+                contentItem.setCourseId(rs.getInt("CourseId"));
+                contentItem.setContentItemId(rs.getInt("ContentItemId"));
+                contentItems.add(contentItem);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return contentItems;
+    }
+
+    public void addModule(Module module, ContentItem contentItem) {
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(
+                    "INSERT INTO Module(ContentItemId,Title,Version, ContactPersonId, TrackingNumber) VALUES(?,?,?,?,?)");
+            preparedStatement.setInt(1, contentItem.getContentItemId());
+            preparedStatement.setString(2, module.getTitle());
+            preparedStatement.setString(3, module.getVersion());
+            preparedStatement.setInt(4, module.getContactPersonId());
+            preparedStatement.setInt(5, contentItem.getCourseId());
+
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public ArrayList<Module> retrieveModules() {
+        ArrayList<Module> modules = new ArrayList<>();
+
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Module");
+            while (rs.next()) {
+                Module module = new Module();
+                module.setContactPersonId(rs.getInt("ContactPersonId"));
+                module.setTitle(rs.getString("Title"));
+                module.setVersion(rs.getString("Version"));
+                module.setContentItemId(rs.getInt("ContentItemId"));
+                module.setTrackingNumber(rs.getInt("TrackingNumber"));
+
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return modules;
+
+    }
+
+    public void addWebcast(Webcast webcast, ContentItem contentItem) {
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(
+                    "INSERT INTO Webcast(ContentItemId,Title,SpeakerId, Views) VALUES(?,?,?,?)");
+            preparedStatement.setInt(1, contentItem.getContentItemId());
+            preparedStatement.setString(2, webcast.getTitle());
+            preparedStatement.setInt(3, webcast.getSpeakerId());
+            preparedStatement.setInt(3, webcast.getViews());
+
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public ArrayList<Webcast> retrieveWebcasts() {
+        ArrayList<Webcast> webcasts = new ArrayList<>();
+
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Webcast");
+            while (rs.next()) {
+                Webcast webcast = new Webcast();
+                webcast.setContentItemId(rs.getInt("ContentItemId"));
+                webcast.setTitle(rs.getString("Title"));
+                webcast.setSpeakerId(rs.getInt("SpeakerId"));
+                webcast.setViews(rs.getInt("Views"));
+
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return webcasts;
     }
 
 }
