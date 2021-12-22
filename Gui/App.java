@@ -348,9 +348,9 @@ public class App extends Application {
         instructionTextInput.setMaxWidth(280);
 
         Label difficultyInstruction = new Label("Difficulty");
-        String[] difficultys = { dif.EASY.toString(), dif.NORMAL.toString(), dif.HARD.toString(),
+        String[] difficulties = { dif.EASY.toString(), dif.NORMAL.toString(), dif.HARD.toString(),
                 dif.EXPERT.toString() };
-        ComboBox difficultyDropdown = new ComboBox(FXCollections.observableArrayList(difficultys));
+        ComboBox difficultyDropdown = new ComboBox(FXCollections.observableArrayList(difficulties));
 
         Label moduleInstruction = new Label("Add a module");
         String[] modules = { "Test1", "Test2" };
@@ -359,9 +359,11 @@ public class App extends Application {
         Button courseSubmitButton = new Button("Submit");
         courseSubmitButton.setTranslateY(10);
 
+        Label courseSubmitAlert = new Label("");
+
         addPlaceCourses.getChildren().addAll(coursesTitle, nameInstruction, nameInput, subjectInstruction, subjectInput,
                 instructionText, instructionTextInput, difficultyInstruction, difficultyDropdown, moduleInstruction,
-                moduleDropdown, courseSubmitButton);
+                moduleDropdown, courseSubmitButton, courseSubmitAlert);
 
         VBox courseList = new VBox();
         courseList.setStyle("-fx-padding: 10;" +
@@ -762,6 +764,28 @@ public class App extends Application {
             // the TextField will be cleared for a new student
             clearFields(addNameField, addEmailField, addBirthDateField, addCityField, addGenderField, addStreetField,
                     addHouseNumberField, addPostalCodeField, addCountryField);
+
+        });
+
+        // action on submit button in add course page
+        courseSubmitButton.setOnAction((event) -> {
+
+            String courseTitle = nameInput.getText();
+            String courseSubject = subjectInput.getText();
+            String courseDescription = instructionTextInput.getText();
+            Difficulty courseDifficulty = Difficulty.valueOf(String.valueOf(difficultyDropdown.getValue()));
+            // String courseModule = moduleDropdown.getPromptText();
+            System.out.println(courseDifficulty);
+
+            Course newCourse = new Course(courseTitle, courseSubject, courseDescription, courseDifficulty);
+            
+            try {
+                dbcn.addCourseToDatabase(newCourse);
+                courseSubmitAlert.setText("Course added!");
+                courseSubmitAlert.setStyle("-fx-text-fill: GREEN;" + "-fx-padding: 15;");
+            } catch (Exception e) {
+                System.out.println("NOOOOB");
+            }
 
         });
 
