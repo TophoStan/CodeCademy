@@ -221,7 +221,7 @@ public class DatabaseConnection {
             while (rs.next()) {
                 Course course = new Course();
                 course.setId(rs.getInt("courseid"));
-                course.setDifficulty(Difficulty.valueOf((rs.getString("difficulty"))));
+                course.setDifficulty(Difficulty.valueOf((rs.getString("difficulty").toUpperCase())));
                 course.setSubject(rs.getString("Subject"));
                 course.setName(rs.getString("name"));
                 course.setText(rs.getString("IntroductoryText"));
@@ -229,7 +229,7 @@ public class DatabaseConnection {
 
             }
         } catch (Exception e) {
-
+            System.out.println(e);
         }
         return courses;
 

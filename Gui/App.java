@@ -5,12 +5,17 @@ import java.util.Calendar;
 import java.sql.Date;
 import java.sql.SQLException;
 
+import domain.Course;
+import domain.Difficulty;
 import domain.Student;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -23,7 +28,7 @@ public class App extends Application {
 
     private DatabaseConnection dbcn = new DatabaseConnection();
     private ArrayList<Button> menuButtons = new ArrayList<>();
-    
+    private Difficulty dif;
 
     public void start(Stage window) {
 
@@ -180,7 +185,7 @@ public class App extends Application {
         Label studentListTitle = new Label("Name list:");
         studentListTitle.setFont(Font.font("Monospaced", 18));
 
-        GetStudentList(studentList, studentListTitle);
+        getStudentList(studentList, studentListTitle);
 
         // the newest added content
         VBox yourAddedContent = new VBox();
@@ -323,14 +328,53 @@ public class App extends Application {
         // ---------------------------------------------------------------------------------------------------
 
         // Course page
-        VBox courseContent = new VBox();
-        Label cclName = new Label("Naam");
-        TextField cctfName = new TextField();
-        courseContent.getChildren().addAll(cclName, cctfName);
-        
+        HBox courseContent = new HBox();
 
+        // Course add page
+        VBox addPlaceCourses = new VBox();
+        addPlaceCourses.setPadding(new Insets(0, 150, 0, 20));
 
+        Label coursesTitle = new Label("Courses");
+        coursesTitle.setFont(Font.font("Monospaced", 30));
 
+        Label nameInstruction = new Label("Name");
+        TextField nameInput = new TextField();
+
+        Label subjectInstruction = new Label("Subject");
+        TextField subjectInput = new TextField();
+
+        Label instructionText = new Label("Introduction text");
+        TextArea instructionTextInput = new TextArea("");
+        instructionTextInput.setMaxWidth(280);
+
+        Label difficultyInstruction = new Label("Difficulty");
+        String[] difficultys = { dif.EASY.toString(), dif.NORMAL.toString(), dif.HARD.toString(),
+                dif.EXPERT.toString() };
+        ComboBox difficultyDropdown = new ComboBox(FXCollections.observableArrayList(difficultys));
+
+        Label moduleInstruction = new Label("Add a module");
+        String[] modules = { "Test1", "Test2" };
+        ComboBox moduleDropdown = new ComboBox(FXCollections.observableArrayList(modules));
+
+        Button courseSubmitButton = new Button("Submit");
+        courseSubmitButton.setTranslateY(10);
+
+        addPlaceCourses.getChildren().addAll(coursesTitle, nameInstruction, nameInput, subjectInstruction, subjectInput,
+                instructionText, instructionTextInput, difficultyInstruction, difficultyDropdown, moduleInstruction,
+                moduleDropdown, courseSubmitButton);
+
+        VBox courseList = new VBox();
+        courseList.setStyle("-fx-padding: 10;" +
+                "-fx-border-width: 1;" +
+                "-fx-border-insets: 5;" +
+                "-fx-border-radius: 15;" +
+                "-fx-border-color: black;");
+
+        Label courseListTitle = new Label("Course list:");
+        courseListTitle.setFont(Font.font("Monospaced", 18));
+        getCourseList(courseList, courseListTitle);
+
+        courseContent.getChildren().addAll(addPlaceCourses, courseList);
 
         // Set first layout when starting the application
         layoutHome.getChildren().addAll(title, menu, homeContent);
@@ -372,7 +416,8 @@ public class App extends Application {
             // only when you are NOT on the student page yet
             if (!studentButton.isDefaultButton()) {
                 // adds the edit add and delete buttons
-                menu.getChildren().add(editAddButtons);
+                menu.getChildren().clear();
+                menu.getChildren().addAll(homeButton, coursesButton, studentButton, editAddButtons);
 
                 // clears student content and fills it with the good content
                 studentContent.getChildren().clear();
@@ -383,7 +428,7 @@ public class App extends Application {
                 layoutStudent.getChildren().addAll(title, menu, studentContent);
 
                 // loads student names from database
-                GetStudentList(studentList, studentListTitle);
+                getStudentList(studentList, studentListTitle);
 
                 // sets text for bdate, gender and alert back to normal text
                 addBirthDateField.setText("DD-MM-YYYY");
@@ -393,7 +438,6 @@ public class App extends Application {
                 // sets default button good according to the page
                 defaultButtonToFalse();
                 studentButton.setDefaultButton(true);
-                
 
                 addBtn.setDefaultButton(true);
                 editBtn.setDefaultButton(false);
@@ -418,7 +462,6 @@ public class App extends Application {
             // sets default buttons good according to the page
             defaultButtonToFalse();
             homeButton.setDefaultButton(true);
-            
 
             // finally sets window to home
             window.setScene(home);
@@ -428,7 +471,7 @@ public class App extends Application {
         coursesButton.setOnAction((event) -> {
             // clears the menu and fills the right buttons
             menu.getChildren().clear();
-            menu.getChildren().addAll(homeButton, coursesButton, studentButton);
+            menu.getChildren().addAll(homeButton, coursesButton, studentButton, editAddButtons);
 
             // clears the layout and fills it with the good layout
             layoutCourse.getChildren().clear();
@@ -438,7 +481,7 @@ public class App extends Application {
             defaultButtonToFalse();
             coursesButton.setDefaultButton(true);
 
-            // finally sets window to home
+            // finally sets window to courses
             window.setScene(course);
         });
 
@@ -455,7 +498,7 @@ public class App extends Application {
             delBtn.setDefaultButton(false);
 
             // loads student names from database
-            GetStudentList(studentList, studentListTitle);
+            getStudentList(studentList, studentListTitle);
         });
 
         // action on edit button
@@ -694,7 +737,7 @@ public class App extends Application {
             alert.setText("Succesfully added!");
 
             // the list of student names will be updated
-            GetStudentList(studentList, studentListTitle);
+            getStudentList(studentList, studentListTitle);
 
             // for styling the M, W or O will become a full word
             if (gender.equals("M")) {
@@ -737,7 +780,7 @@ public class App extends Application {
      * @param studentListTitle
      */
 
-    public void GetStudentList(VBox studentList, Label studentListTitle) {
+    public void getStudentList(VBox studentList, Label studentListTitle) {
 
         // only connects again when the connection is lost
         if (dbcn.getConn() == null) {
@@ -757,6 +800,34 @@ public class App extends Application {
             for (Student name : students) {
                 Label newStud = new Label("- " + name.getName());
                 studentList.getChildren().add(newStud);
+            }
+
+            // when something goes wrong an error in the terminal will be shown
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void getCourseList(VBox courseList, Label courseListTitle) {
+
+        // only connects again when the connection is lost
+        if (dbcn.getConn() == null) {
+            dbcn.connect();
+        }
+
+        try {
+            // waits 90ms to be sure the connection is on
+            Thread.sleep(90);
+
+            // clears the courselist from previous names and will add the title already
+            courseList.getChildren().clear();
+            courseList.getChildren().add(courseListTitle);
+
+            // all the names from the database will be added to the list
+            ArrayList<Course> courses = dbcn.retrieveCourses();
+            for (Course name : courses) {
+                Label newCourse = new Label("- " + name.getName());
+                courseList.getChildren().add(newCourse);
             }
 
             // when something goes wrong an error in the terminal will be shown
@@ -808,7 +879,7 @@ public class App extends Application {
         streetField.clear();
     }
 
-    public void defaultButtonToFalse() { 
+    public void defaultButtonToFalse() {
         for (Button button : menuButtons) {
             button.setDefaultButton(false);
         }
