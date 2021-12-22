@@ -21,6 +21,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import repository.DatabaseConnection;
 
@@ -330,11 +331,20 @@ public class App extends Application {
         // Course page
         HBox courseContent = new HBox();
 
-        // Course add page
+        HBox courseEditAddBtns = new HBox();
+        Button courseAddBtn = new Button("Add");
+        courseAddBtn.setDefaultButton(true);
+        Button courseEditBtn = new Button("Edit");
+        Button courseDelBtn = new Button("Delete");
+
+        courseEditAddBtns.setPadding(new Insets(0, 0, 0, 450));
+        courseEditAddBtns.getChildren().addAll(courseAddBtn, courseEditBtn, courseDelBtn);
+
+        // Course add page---------------------
         VBox addPlaceCourses = new VBox();
         addPlaceCourses.setPadding(new Insets(0, 150, 0, 20));
 
-        Label coursesTitle = new Label("Courses");
+        Label coursesTitle = new Label("Courses - add");
         coursesTitle.setFont(Font.font("Monospaced", 30));
 
         Label nameInstruction = new Label("Name");
@@ -360,6 +370,8 @@ public class App extends Application {
         courseSubmitButton.setTranslateY(10);
 
         Label courseSubmitAlert = new Label("");
+        courseSubmitAlert.setStyle("-fx-text-fill: RED;" +
+                "-fx-padding: 15;");
 
         addPlaceCourses.getChildren().addAll(coursesTitle, nameInstruction, nameInput, subjectInstruction, subjectInput,
                 instructionText, instructionTextInput, difficultyInstruction, difficultyDropdown, moduleInstruction,
@@ -374,9 +386,57 @@ public class App extends Application {
 
         Label courseListTitle = new Label("Course list:");
         courseListTitle.setFont(Font.font("Monospaced", 18));
-        getCourseList(courseList, courseListTitle);
 
-        courseContent.getChildren().addAll(addPlaceCourses, courseList);
+        // Course edit page -----------------------
+        VBox editPlaceCourse = new VBox();
+        editPlaceCourse.setPadding(new Insets(0, 150, 0, 20));
+
+        Label coursesEditTitle = new Label("Courses - edit");
+        coursesEditTitle.setFont(Font.font("Monospaced", 30));
+
+        Label courseName = new Label("Course name");
+        TextField courseNameEditInput = new TextField();
+        Button goCourseEditBtn = new Button("Go");
+        goCourseEditBtn.setTranslateY(10);
+
+        Label goCourseEditAlert = new Label("");
+        goCourseEditAlert.setStyle("-fx-text-fill: RED;" +
+                "-fx-padding: 15;");
+
+        editPlaceCourse.getChildren().addAll(coursesEditTitle, courseName, courseNameEditInput, goCourseEditBtn,
+                goCourseEditAlert);
+
+        // actual edit page----
+        HBox actualCourseEditPlace = new HBox();
+        actualEditPlace.setPadding(new Insets(80, 0, 0, 0));
+
+        // Input fields are split in a first and second row for a compact view
+        VBox firstCourseRow = new VBox();
+        firstCourseRow.setPadding(new Insets(0, 20, 0, 0));
+
+        Label editCourseNameLabel = new Label("Name");
+        TextField editCourseName = new TextField();
+
+        Label editSubjectLabel = new Label("Subject");
+        TextField editSubject = new TextField();
+
+        Button editCourseSubmitBtn = new Button("Submit");
+        editCourseSubmitBtn.setTranslateY(10);
+
+        firstCourseRow.getChildren().addAll(editTitle, editCourseNameLabel, editCourseName, editSubjectLabel, editSubject, editCourseSubmitBtn);
+
+        // Second row will be created here
+        VBox secondCourseRow = new VBox();
+        secondCourseRow.setPadding(new Insets(20, 0, 0, 0));
+
+        Label editCourseInstructionLabel = new Label("Instruction");
+        TextArea editCourseInstruction = new TextArea();
+
+        secondCourseRow.getChildren().addAll(editCourseInstructionLabel, editCourseInstruction);
+
+        // Combines the rows together
+        actualCourseEditPlace.getChildren().addAll(firstCourseRow, secondCourseRow);
+
 
         // Set first layout when starting the application
         layoutHome.getChildren().addAll(title, menu, homeContent);
@@ -473,7 +533,12 @@ public class App extends Application {
         coursesButton.setOnAction((event) -> {
             // clears the menu and fills the right buttons
             menu.getChildren().clear();
-            menu.getChildren().addAll(homeButton, coursesButton, studentButton, editAddButtons);
+            menu.getChildren().addAll(homeButton, coursesButton, studentButton, courseEditAddBtns);
+
+            // set add page as default
+            courseContent.getChildren().clear();
+            getCourseList(courseList, courseListTitle);
+            courseContent.getChildren().addAll(addPlaceCourses, courseList);
 
             // clears the layout and fills it with the good layout
             layoutCourse.getChildren().clear();
@@ -482,9 +547,43 @@ public class App extends Application {
             // sets default buttons good according to the page
             defaultButtonToFalse();
             coursesButton.setDefaultButton(true);
+            courseAddBtn.setDefaultButton(true);
+            courseEditBtn.setDefaultButton(false);
+            courseDelBtn.setDefaultButton(false);
+
+            // clears fields
+            clearCourseFields(nameInput, subjectInput, instructionTextInput, difficultyDropdown);
+            courseSubmitAlert.setText("");
+            courseSubmitAlert.setStyle("-fx-text-fill: RED;" +
+                    "-fx-padding: 15;");
 
             // finally sets window to courses
             window.setScene(course);
+        });
+
+        courseAddBtn.setOnAction((event) -> {
+            courseContent.getChildren().clear();
+            getCourseList(courseList, courseListTitle);
+            courseContent.getChildren().addAll(addPlaceCourses, courseList);
+
+            courseAddBtn.setDefaultButton(true);
+            courseEditBtn.setDefaultButton(false);
+            courseDelBtn.setDefaultButton(false);
+
+            // clears fields
+            clearCourseFields(nameInput, subjectInput, instructionTextInput, difficultyDropdown);
+            courseSubmitAlert.setText("");
+            courseSubmitAlert.setStyle("-fx-text-fill: RED;" +
+                    "-fx-padding: 15;");
+        });
+
+        courseEditBtn.setOnAction((event) -> {
+            courseContent.getChildren().clear();
+            courseContent.getChildren().addAll(editPlaceCourse);
+
+            courseEditBtn.setDefaultButton(true);
+            courseAddBtn.setDefaultButton(false);
+            courseDelBtn.setDefaultButton(false);
         });
 
         // action on add button
@@ -707,6 +806,10 @@ public class App extends Application {
             }
         });
 
+        goCourseEditBtn.setOnAction((event) -> {
+            editPlaceCourse.getChildren().add(actualCourseEditPlace);
+        });
+
         // action on submit button in the add page
         submitButton.setOnAction((event) -> {
 
@@ -775,18 +878,18 @@ public class App extends Application {
             String courseDescription = instructionTextInput.getText();
             Difficulty courseDifficulty = Difficulty.valueOf(String.valueOf(difficultyDropdown.getValue()));
             // String courseModule = moduleDropdown.getPromptText();
-            System.out.println(courseDifficulty);
 
             Course newCourse = new Course(courseTitle, courseSubject, courseDescription, courseDifficulty);
-            
+
             try {
                 dbcn.addCourseToDatabase(newCourse);
                 courseSubmitAlert.setText("Course added!");
                 courseSubmitAlert.setStyle("-fx-text-fill: GREEN;" + "-fx-padding: 15;");
             } catch (Exception e) {
-                System.out.println("NOOOOB");
+                System.out.println("Er is een fout opgetreden");
             }
-
+            getCourseList(courseList, courseListTitle);
+            clearCourseFields(nameInput, subjectInput, instructionTextInput, difficultyDropdown);
         });
 
         // window set and show
@@ -907,5 +1010,14 @@ public class App extends Application {
         for (Button button : menuButtons) {
             button.setDefaultButton(false);
         }
+    }
+
+    public void clearCourseFields(TextField nameInput, TextField subjectInput, TextArea instructionTextInput,
+            ComboBox difficultyDropdown) {
+        nameInput.clear();
+        subjectInput.clear();
+        instructionTextInput.clear();
+        difficultyDropdown.getSelectionModel().clearSelection();
+        ;
     }
 }
