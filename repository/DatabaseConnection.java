@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.sql.Date;
 
 import domain.Certificate;
+import domain.ContentItem;
 import domain.Course;
 import domain.Difficulty;
 import domain.Employee;
@@ -78,7 +79,7 @@ public class DatabaseConnection {
      * @param student
      */
 
-    public boolean addStudentToDatabase(Student student) throws SQLException, NullPointerException {
+    public boolean addStudentToDatabase(Student student) throws SQLException, NullPointerException{
         String query = "INSERT INTO Student(Emailaddress, Name, Gender, Birthdate, Street, HouseNumber, PostalCode, City, Country) VALUES(?,?,?,?,?,?,?,?,?)";
 
         try (PreparedStatement stmt = conn.prepareStatement(query)) {
@@ -100,8 +101,8 @@ public class DatabaseConnection {
         } catch (Exception e) {
             System.out.println("Was not able to add student to database");
             System.out.println(e);
-            return false;
         }
+        return false;
     }
 
     /**
@@ -166,7 +167,8 @@ public class DatabaseConnection {
 
     /**
      * Edits the student's information except for the EmailAddress.
-     * After this method has been executed the changes will take affect immeadiatly.
+     * After this method has been executed the changes will take affect
+     * immeadiately.
      * 
      * @Requires student != null && conn != null
      * @param student
@@ -194,6 +196,15 @@ public class DatabaseConnection {
         return wasSuccesful;
     }
 
+    /**
+     * This method uses the <code>Statement</code> and <code>execute()</code> to
+     * push the course to the database with a number of
+     * <code>setString(x, student.getMethod)</code>.
+     * 
+     * @throws SQLException         conn == null
+     * @throws NullPointerException course == null
+     * @param course
+     */
     public void addCourseToDatabase(Course course) {
         String query = "INSERT INTO Course(CourseName, Subject, IntroductoryText, Difficulty) VALUES(?,?,?,?,?,?,?,?,?)";
 
@@ -213,6 +224,16 @@ public class DatabaseConnection {
         }
     }
 
+    /**
+     * Retrieves all the records from the Student table on the SQL
+     * server.
+     * The method works by using <code>Statement </code> and <code>Resultset </code>
+     * to execute the query.
+     * 
+     * @requires conn != null
+     * @return ArrayList < Course >
+     * @throws SQLException conn == null
+     */
     public ArrayList<Course> retrieveCourses() {
         ArrayList<Course> courses = new ArrayList<>();
         try {
@@ -235,6 +256,14 @@ public class DatabaseConnection {
 
     }
 
+    /**
+     * Edits the course's information.
+     * After execution the changes will take affect immeadiately.
+     * 
+     * @Requires course != null && conn != null
+     * @throws SQLException         conn == null
+     * @throws NullPointerException course == null
+     */
     public void editCourseInformation(Course course) {
         try {
             PreparedStatement preparedStatement = conn.prepareStatement("UPDATE Course SET Name = '" + course.getName()
@@ -246,6 +275,16 @@ public class DatabaseConnection {
         }
     }
 
+    /**
+     * Deletes a course from the databse if the course table contains the
+     * courseId of the given <code>course</code> in the parameters
+     * 
+     * @requires course != null && conn != null
+     * @param course
+     * @return boolean
+     * @throws SQLException         conn == null
+     * @throws NullPointerException course == null
+     */
     public void deleteCourse(Course course) {
         try {
             PreparedStatement preparedStatement = conn
@@ -256,6 +295,15 @@ public class DatabaseConnection {
         }
     }
 
+    /**
+     * This method uses the <code>Statement</code> and <code>execute()</code> to
+     * push the Enrollment to the database with a number of
+     * <code>setString(x, student.getMethod)</code>.
+     * 
+     * @throws SQLException         conn == null
+     * @throws NullPointerException Enrollment == null
+     * @param course
+     */
     public void addEnrollment(Enrollment enrollment, Student student, Course course) {
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(
@@ -272,11 +320,23 @@ public class DatabaseConnection {
         }
     }
 
+    /**
+     * Retrieves all the records from the Enrollment table on the SQL
+     * server.
+     * The method works by using <code>Statement </code> and <code>Resultset </code>
+     * to execute the query.
+     * 
+     * @requires conn != null
+     * @return <code>ArrayList <Enrollment></code>
+     * @throws SQLException conn == null
+     */
     public ArrayList<Enrollment> retrieveEnrollments() {
         ArrayList<Enrollment> enrollments = new ArrayList<>();
         try {
             Statement stmt = this.conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM EnrollmentData");
+            ArrayList<Student> students = retrieveStudents();
+            ArrayList<Course> courses = retrieveCourses();
 
             while (rs.next()) {
                 Enrollment enrollment = new Enrollment();
@@ -284,6 +344,17 @@ public class DatabaseConnection {
                 enrollment.setCourseId(rs.getInt("courseId"));
                 enrollment.setStudentId(rs.getInt("studentId"));
                 enrollment.setEnrollmentDate(rs.getDate("EnrollmentDate"));
+                for (Student student : students) {
+                    if (student.getId() == enrollment.getStudentId()) {
+                        enrollment.setStudent(student);
+                    }
+                }
+                for (Course course : courses) {
+                    if (course.getId() == enrollment.getCourseId()) {
+                        enrollment.setCourse(course);
+                    }
+                }
+
                 enrollments.add(enrollment);
             }
 
@@ -294,6 +365,16 @@ public class DatabaseConnection {
         return enrollments;
     }
 
+    /**
+     * Deletes an Enrollment from the databse if the course table contains the
+     * courseId of the given <code>Enrollment</code> in the parameters
+     * 
+     * @requires enrollment != null && conn != null
+     * @param enrollment
+     * @return boolean
+     * @throws SQLException         conn == null
+     * @throws NullPointerException enrollment == null
+     */
     public void deleteEnrollment(Enrollment enrollment) {
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(
@@ -304,6 +385,15 @@ public class DatabaseConnection {
         }
     }
 
+    /**
+     * Uses the <code>Statement</code> and <code>execute()</code> to
+     * push the Certificite to the database with a number of
+     * <code>setString(x, student.getMethod)</code>.
+     * 
+     * @throws SQLException         conn == null
+     * @throws NullPointerException Certificate == null
+     * @param course
+     */
     public void addCertificate(Certificate certificate, Employee employee) {
         try {
             PreparedStatement preparedStatement = conn
@@ -317,6 +407,16 @@ public class DatabaseConnection {
         }
     }
 
+    /**
+     * Retrieves all the records from the Enrollment table on the SQL
+     * server.
+     * The method works by using <code>Statement </code> and <code>Resultset </code>
+     * to execute the query.
+     * 
+     * @requires conn != null
+     * @return <code>ArrayList <Enrollment></code>
+     * @throws SQLException conn == null
+     */
     public ArrayList<Certificate> retrieveCertificates() {
         ArrayList<Certificate> certificates = new ArrayList<>();
         try {
@@ -335,6 +435,16 @@ public class DatabaseConnection {
         return certificates;
     }
 
+    /**
+     * Deletes a Certificate from the databse if the course table contains the
+     * courseId of the given <code>certificate</code> in the parameters
+     * 
+     * @requires certificate != null && conn != null
+     * @param enrollment
+     * @return boolean
+     * @throws SQLException         conn == null
+     * @throws NullPointerException certificate == null
+     */
     public void deleteCertificate(Certificate certificate) {
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(
@@ -344,4 +454,10 @@ public class DatabaseConnection {
             System.out.println(e);
         }
     }
+
+
+    public void addContentItem(ContentItem content){
+
+    }
+
 }

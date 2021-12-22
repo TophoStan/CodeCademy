@@ -2,7 +2,7 @@ package domain;
 
 import java.sql.*;
 
-abstract class ContentItem {
+public abstract class ContentItem {
     private String title;
     private String description;
     private String subject;
