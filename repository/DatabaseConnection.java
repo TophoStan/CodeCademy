@@ -79,7 +79,7 @@ public class DatabaseConnection {
      * @param student
      */
 
-    public boolean addStudentToDatabase(Student student) throws SQLException, NullPointerException{
+    public boolean addStudentToDatabase(Student student) throws SQLException, NullPointerException {
         String query = "INSERT INTO Student(Emailaddress, Name, Gender, Birthdate, Street, HouseNumber, PostalCode, City, Country) VALUES(?,?,?,?,?,?,?,?,?)";
 
         try (PreparedStatement stmt = conn.prepareStatement(query)) {
@@ -241,11 +241,11 @@ public class DatabaseConnection {
             ResultSet rs = stmt.executeQuery("SELECT * FROM Course");
             while (rs.next()) {
                 Course course = new Course();
-                course.setId(rs.getInt("courseid"));
-                course.setDifficulty(Difficulty.valueOf((rs.getString("difficulty").toUpperCase())));
+                course.setId(rs.getInt("Courseid"));
                 course.setSubject(rs.getString("Subject"));
-                course.setName(rs.getString("name"));
+                course.setName(rs.getString("CourseName"));
                 course.setText(rs.getString("IntroductoryText"));
+                course.setDifficulty(Difficulty.valueOf(rs.getString("Difficulty").trim()));
                 courses.add(course);
 
             }
@@ -455,8 +455,7 @@ public class DatabaseConnection {
         }
     }
 
-
-    public void addContentItem(ContentItem content){
+    public void addContentItem(ContentItem content) {
 
     }
 
