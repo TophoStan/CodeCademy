@@ -6,4 +6,6 @@ module com.example.codecademy {
 
     opens com.example.codecademy to javafx.fxml;
     exports com.example.codecademy;
+    exports controllers;
+    opens controllers to javafx.fxml;
 }

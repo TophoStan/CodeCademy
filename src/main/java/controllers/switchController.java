@@ -16,18 +16,19 @@ public class switchController {
 
     public void toHome(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("StudentAdd.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource(".StudentAdd.fxml"));
             stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
+            System.out.println("hier");
             e.printStackTrace();
         }
     }
     public void toStudent(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource(".Home.fxml"));
             stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);

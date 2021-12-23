@@ -5,26 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f6caa24b-064b-4fed-934d-55de25f54851" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/codecademy/App.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/codecademy/Home.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/codecademy/StudentAdd.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/switchController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/codecademy/test.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/ContactPerson.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/ContactPerson.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/Course.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/Employee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/Module.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/Module.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/Speaker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/Speaker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/Student.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/Webcast.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/Webcast.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/codecademy/Home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/codecademy/Home.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/codecademy/StudentAdd.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/codecademy/StudentAdd.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/codecademy/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/codecademy/hello-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/codecademy/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/codecademy/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/switchController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/switchController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/codecademy/Home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Home.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/codecademy/StudentAdd.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/StudentAdd.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/codecademy/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hello-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/codecademy/test.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/test.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/codecademy/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/codecademy/App.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/codecademy/Home.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/codecademy/StudentAdd.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/codecademy/hello-view.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/codecademy/test.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controllers/switchController.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/module-info.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -66,7 +60,10 @@
       <recent name="C:\Users\Stan\Desktop\CodeCademySchool\CodeCademy\src\main\java\com\example\codecademy" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Stan\Desktop\CodeCademySchool\CodeCademy\src\main\resources" />
+      <recent name="C:\Users\Stan\Desktop\CodeCademySchool\CodeCademy\src\main\java\controllers" />
       <recent name="C:\Users\Stan\Desktop\CodeCademySchool\CodeCademy\src\main\resources\com\example\codecademy" />
+      <recent name="C:\Users\Stan\Desktop\CodeCademySchool\CodeCademy\src\main" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.example.codecademy" />
@@ -78,7 +75,7 @@
       <module name="Codecademy" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.example.codecademy.*" />
+          <option name="PATTERN" value="controllers.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -91,7 +88,7 @@
       <module name="Codecademy" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.example.codecademy.*" />
+          <option name="PATTERN" value="controllers.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -118,7 +115,7 @@
       <workItem from="1640279318053" duration="94000" />
       <workItem from="1640279476348" duration="1300000" />
       <workItem from="1640280801294" duration="1237000" />
-      <workItem from="1640282090364" duration="102000" />
+      <workItem from="1640282090364" duration="1156000" />
     </task>
     <servers />
   </component>
