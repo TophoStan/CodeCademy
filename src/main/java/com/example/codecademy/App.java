@@ -11,9 +11,9 @@ public class App extends Application {
     public void start(Stage stage) throws Exception {
         try {
             //Parent root = FXMLLoader.load(getClass().getResource("test.fxml"));
-            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("StudentAdd.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("Home.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
-            stage.setTitle("test");
+            stage.setTitle("Thomas Quartel, Mickel de Coo, Stijn Spanjers en Stan Tophoven");
             stage.setScene(scene);
             stage.show();
 

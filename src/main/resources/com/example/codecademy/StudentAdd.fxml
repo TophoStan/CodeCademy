@@ -41,7 +41,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="418.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17" fx:controller="controllers.switchController">
+<VBox prefHeight="418.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17" fx:controller="controllers.studentController">
     <children>
         <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="472.0" prefWidth="640.0" VBox.vgrow="ALWAYS">
             <children>
@@ -75,8 +75,8 @@
                         <Font name="System Bold Italic" size="22.0" />
                     </font>
                 </Label>
-                <Button fx:id="BtnAddStudent" defaultButton="true" layoutX="14.0" layoutY="85.0" mnemonicParsing="false" text="Add" />
-                <Button fx:id="BtnStudentEdit" layoutX="52.0" layoutY="85.0" mnemonicParsing="false" text="Edit" />
+                <Button fx:id="BtnAddStudent" defaultButton="true" layoutX="14.0" layoutY="85.0" mnemonicParsing="false" text="Add"/>
+                <Button fx:id="BtnStudentEdit" layoutX="52.0" layoutY="85.0" mnemonicParsing="false" text="Edit" onAction="#toStudentEdit" />
                 <Button fx:id="BtnStudentDelete" layoutX="89.0" layoutY="85.0" mnemonicParsing="false" text="Delete" />
                 <ListView fx:id="ListStudent" layoutX="432.0" layoutY="84.0" prefHeight="200.0" prefWidth="200.0" />
                 <Label layoutX="15.0" layoutY="117.0" text="Add a student">

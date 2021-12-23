@@ -8,8 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="464.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.codecademy.StudentEdit">
+<AnchorPane prefHeight="464.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.studentController">
    <children>
       <Label layoutX="14.0" layoutY="14.0" text="Codecademy">
          <font>
@@ -26,22 +25,22 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="BtnCourse" layoutX="126.0" layoutY="46.0" mnemonicParsing="false" text="Course">
+      <Button fx:id="BtnCourse" layoutX="126.0" layoutY="46.0" mnemonicParsing="false" onAction="#toCourse" text="Course">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="BtnEnrollment" layoutX="181.0" layoutY="46.0" mnemonicParsing="false" text="Enrollment">
+      <Button fx:id="BtnEnrollment" layoutX="181.0" layoutY="46.0" mnemonicParsing="false" onAction="#toEnrollment" text="Enrollment">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="BtnContentItem" layoutX="259.0" layoutY="46.0" mnemonicParsing="false" text="ContentItem">
+      <Button fx:id="BtnContentItem" layoutX="259.0" layoutY="46.0" mnemonicParsing="false" onAction="#toContentItem" text="ContentItem">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="BtnAddStudent" layoutX="14.0" layoutY="85.0" mnemonicParsing="false" text="Add" />
+      <Button fx:id="BtnAddStudent" layoutX="14.0" layoutY="85.0" mnemonicParsing="false" onAction="#toStudent" text="Add" />
       <Button fx:id="BtnStudentEdit" defaultButton="true" layoutX="52.0" layoutY="85.0" mnemonicParsing="false" text="Edit" />
       <Button fx:id="BtnStudentDelete" layoutX="89.0" layoutY="85.0" mnemonicParsing="false" text="Delete" />
       <Label layoutX="15.0" layoutY="121.0" text="Edit a student">
@@ -49,28 +48,28 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="15.0" layoutY="165.0" />
-      <Label layoutX="19.0" layoutY="148.0" text="Email" />
-      <Button layoutX="19.0" layoutY="200.0" mnemonicParsing="false" text="Check" />
-      <ListView layoutX="416.0" layoutY="128.0" prefHeight="185.0" prefWidth="138.0" visible="false" />
-      <TextField fx:id="TFStudentAddName" layoutX="21.0" layoutY="249.0" visible="false" />
-      <TextField fx:id="TFStudentAddGender" layoutX="21.0" layoutY="298.0" visible="false" />
-      <Label layoutX="19.0" layoutY="232.0" text="Name" visible="false" />
-      <Label layoutX="21.0" layoutY="280.0" text="Gender" visible="false" />
-      <Label layoutX="21.0" layoutY="323.0" text="Birthdate" visible="false" />
-      <Label layoutX="21.0" layoutY="367.0" text="Street" visible="false" />
-      <DatePicker fx:id="TFStudentAddBirthdate" layoutX="21.0" layoutY="340.0" visible="false" />
-      <Label layoutX="230.0" layoutY="232.0" text="Housenumber" visible="false" />
-      <TextField fx:id="TFStudentAddHousenumber" layoutX="229.0" layoutY="249.0" visible="false" />
-      <Label layoutX="230.0" layoutY="280.0" text="Postalcode" visible="false" />
-      <Label layoutX="230.0" layoutY="322.0" text="City" visible="false" />
-      <Label layoutX="230.0" layoutY="367.0" text="Country" visible="false" />
-      <TextField fx:id="TFStudentAddPostalCode" layoutX="229.0" layoutY="297.0" visible="false" />
-      <TextField fx:id="TFStudentAddCity" layoutX="229.0" layoutY="342.0" visible="false" />
-      <TextField fx:id="TFStudentAddCountry" layoutX="229.0" layoutY="385.0" visible="false" />
-      <Button layoutX="22.0" layoutY="425.0" mnemonicParsing="false" text="Submit" visible="false" />
-      <TextField fx:id="TFStudentAddStreet" layoutX="21.0" layoutY="384.0" visible="false" />
-      <Label layoutX="416.0" layoutY="102.0" text="Your info" visible="false">
+      <TextField fx:id="TFStudentEditEmail" layoutX="15.0" layoutY="165.0" />
+      <Label fx:id="LBStudentEditEmail" layoutX="19.0" layoutY="148.0" text="Email" />
+      <Button fx:id="BtnCheckStudent" layoutX="19.0" layoutY="200.0" mnemonicParsing="false" onAction="#showStudentEditPlace" text="Check" />
+      <ListView fx:id="StudentInfoList" layoutX="416.0" layoutY="128.0" prefHeight="185.0" prefWidth="138.0" visible="false" />
+      <TextField fx:id="TFStudentEditName" layoutX="21.0" layoutY="249.0" visible="false" />
+      <TextField fx:id="TFStudentEditGender" layoutX="21.0" layoutY="298.0" visible="false" />
+      <Label fx:id="LBStudentEditName" layoutX="19.0" layoutY="232.0" text="Name" visible="false" />
+      <Label fx:id="LBStudentEditGender" layoutX="21.0" layoutY="280.0" text="Gender" visible="false" />
+      <Label fx:id="LBStudentEditBirthdate" layoutX="21.0" layoutY="323.0" text="Birthdate" visible="false" />
+      <Label fx:id="LBStudentEditStreet" layoutX="21.0" layoutY="367.0" text="Street" visible="false" />
+      <DatePicker fx:id="TFStudentEditBirthdate" layoutX="21.0" layoutY="340.0" visible="false" />
+      <Label fx:id="LBStudentEditHousenumber" layoutX="230.0" layoutY="232.0" text="Housenumber" visible="false" />
+      <TextField fx:id="TFStudentEditHousenumber" layoutX="229.0" layoutY="249.0" visible="false" />
+      <Label fx:id="LBStudentEditPostalCode" layoutX="230.0" layoutY="280.0" text="Postalcode" visible="false" />
+      <Label fx:id="LBStudentEditCity" layoutX="230.0" layoutY="322.0" text="City" visible="false" />
+      <Label fx:id="LBStudentEditCountry" layoutX="230.0" layoutY="367.0" text="Country" visible="false" />
+      <TextField fx:id="TFStudentEditPostalCode" layoutX="229.0" layoutY="297.0" visible="false" />
+      <TextField fx:id="TFStudentEditCity" layoutX="229.0" layoutY="342.0" visible="false" />
+      <TextField fx:id="TFStudentEditCountry" layoutX="229.0" layoutY="385.0" visible="false" />
+      <Button fx:id="BtnEditStudent" layoutX="22.0" layoutY="425.0" mnemonicParsing="false" text="Submit" visible="false" />
+      <TextField fx:id="TFStudentEditStreet" layoutX="21.0" layoutY="384.0" visible="false" />
+      <Label fx:id="LBStudentEditYourInfo" layoutX="416.0" layoutY="102.0" text="Your info" visible="false">
          <font>
             <Font size="14.0" />
          </font>
