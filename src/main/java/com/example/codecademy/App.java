@@ -11,8 +11,8 @@ public class App extends Application {
     public void start(Stage stage) throws Exception {
         try {
             //Parent root = FXMLLoader.load(getClass().getResource("test.fxml"));
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/codecademy/StudentAdd.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 100, 100);
+            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("StudentAdd.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
             stage.setTitle("test");
             stage.setScene(scene);
             stage.show();

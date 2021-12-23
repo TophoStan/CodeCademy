@@ -1,5 +1,6 @@
 package controllers;
 
+import com.example.codecademy.App;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -16,7 +17,7 @@ public class switchController {
 
     public void toHome(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource(".StudentAdd.fxml"));
+            Parent root = FXMLLoader.load(App.class.getResource("Home.fxml"));
             stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
@@ -28,7 +29,7 @@ public class switchController {
     }
     public void toStudent(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource(".Home.fxml"));
+            Parent root = FXMLLoader.load(App.class.getResource("StudentAdd.fxml"));
             stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
