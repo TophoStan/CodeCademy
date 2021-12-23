@@ -5,17 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f6caa24b-064b-4fed-934d-55de25f54851" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/studentController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Codecademy.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Codecademy.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/codecademy/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/codecademy/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/switchController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/switchController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Home.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/StudentAdd.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/switchController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/homeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/codecademy/Home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/codecademy/Home.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/codecademy/StudentAdd.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/codecademy/StudentAdd.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/codecademy/StudentEdit.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/codecademy/StudentEdit.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/codecademy/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/codecademy/App.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/switchController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controllers/switchController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/hello-view.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/test.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/codecademy/StudentAdd.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/codecademy/StudentAdd.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controllers/switchController.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,8 +24,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -46,6 +45,10 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/com/example/codecademy" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
@@ -113,6 +116,7 @@
       <workItem from="1640279476348" duration="1300000" />
       <workItem from="1640280801294" duration="1237000" />
       <workItem from="1640282090364" duration="1922000" />
+      <workItem from="1640284532408" duration="4408000" />
     </task>
     <servers />
   </component>
