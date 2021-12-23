@@ -367,6 +367,17 @@ public class DatabaseConnection {
         return enrollments;
     }
 
+    public void editEnrollment(Enrollment enrollment, Student student, Course course) {
+        try {
+            PreparedStatement preparedStatement = conn
+                    .prepareStatement("UPDATE Enrollment SET studentId=" + student.getId() + " CourseId="
+                            + course.getId() + " WHERE EnrollmentId =" + enrollment.getEnrollmentId());
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+    }
+
     /**
      * Deletes an Enrollment from the databse if the course table contains the
      * courseId of the given <code>Enrollment</code> in the parameters
@@ -435,6 +446,16 @@ public class DatabaseConnection {
             System.out.println(e);
         }
         return certificates;
+    }
+
+    public void editCertificate(Certificate certificate) {
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement("UPDATE Certificate SET Grade="
+                    + certificate.getGrade() + " WHERE EnrollmentId = " + certificate.getEnrollmentId());
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     /**
