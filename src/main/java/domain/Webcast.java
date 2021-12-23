@@ -9,9 +9,7 @@ public class Webcast extends ContentItem {
     private int views;
 
     public Webcast(String title, String description, String subject, Date publicationDate, String status,
-                   int percentage, int duration, String url)
-
-    {
+                   int percentage, int duration, String url) {
         super(title, description, subject, publicationDate, status, percentage);
         this.duration = duration;
         this.url = url;
@@ -49,9 +47,11 @@ public class Webcast extends ContentItem {
     public void setSpeakerId(int speakerId) {
         this.speakerId = speakerId;
     }
+
     public int getViews() {
         return views;
     }
+
     public void setViews(int views) {
         this.views = views;
     }

@@ -33,7 +33,7 @@ public class Speaker {
         return voicedWebcasts;
     }
 
-    public void addAVoicedWebcast(Webcast webcast){
+    public void addAVoicedWebcast(Webcast webcast) {
         voicedWebcasts.add(webcast);
     }
 }

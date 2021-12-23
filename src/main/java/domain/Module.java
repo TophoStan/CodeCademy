@@ -12,7 +12,8 @@ public class Module extends ContentItem {
         super(title, description, subject, publicationDate, status, percentage);
         this.version = version;
     }
-    public Module(){
+
+    public Module() {
 
     }
 
@@ -31,9 +32,11 @@ public class Module extends ContentItem {
     public void setContactPersonId(int contactPersonId) {
         this.contactPersonId = contactPersonId;
     }
+
     public int getTrackingNumber() {
         return trackingNumber;
     }
+
     public void setTrackingNumber(int trackingNumber) {
         this.trackingNumber = trackingNumber;
     }

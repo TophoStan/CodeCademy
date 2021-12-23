@@ -20,7 +20,8 @@ public class Course {
         this.modules = new ArrayList<>();
         this.webcast = new ArrayList<>();
     }
-    public Course(){
+
+    public Course() {
 
     }
 
@@ -71,16 +72,20 @@ public class Course {
     public void removeModuleFromCourse(Module module) {
         this.modules.remove(module);
     }
-    public ArrayList<Enrollment> listEnrollments(){
+
+    public ArrayList<Enrollment> listEnrollments() {
         return this.enrollments;
     }
-    public void addEnrolledStudentToCourse(Student student, Enrollment enrollment){
+
+    public void addEnrolledStudentToCourse(Student student, Enrollment enrollment) {
         student.addEnrollment(enrollment);
         this.enrollments.add(enrollment);
     }
+
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
