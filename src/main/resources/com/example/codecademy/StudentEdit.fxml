@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="464.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.codecademy.StudentEdit">
+   <children>
+      <Label layoutX="14.0" layoutY="14.0" text="Codecademy">
+         <font>
+            <Font name="System Bold Italic" size="22.0" />
+         </font>
+      </Label>
+      <Button fx:id="BtnHome" layoutX="14.0" layoutY="46.0" mnemonicParsing="false" onAction="#toHome" text="Home">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="BtnStudent" defaultButton="true" layoutX="65.0" layoutY="46.0" mnemonicParsing="false" text="Student">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="BtnCourse" layoutX="126.0" layoutY="46.0" mnemonicParsing="false" text="Course">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="BtnEnrollment" layoutX="181.0" layoutY="46.0" mnemonicParsing="false" text="Enrollment">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="BtnContentItem" layoutX="259.0" layoutY="46.0" mnemonicParsing="false" text="ContentItem">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="BtnAddStudent" layoutX="14.0" layoutY="85.0" mnemonicParsing="false" text="Add" />
+      <Button fx:id="BtnStudentEdit" defaultButton="true" layoutX="52.0" layoutY="85.0" mnemonicParsing="false" text="Edit" />
+      <Button fx:id="BtnStudentDelete" layoutX="89.0" layoutY="85.0" mnemonicParsing="false" text="Delete" />
+      <Label layoutX="15.0" layoutY="121.0" text="Edit a student">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField layoutX="15.0" layoutY="165.0" />
+      <Label layoutX="19.0" layoutY="148.0" text="Email" />
+      <Button layoutX="19.0" layoutY="200.0" mnemonicParsing="false" text="Check" />
+      <ListView layoutX="416.0" layoutY="128.0" prefHeight="185.0" prefWidth="138.0" visible="false" />
+      <TextField fx:id="TFStudentAddName" layoutX="21.0" layoutY="249.0" visible="false" />
+      <TextField fx:id="TFStudentAddGender" layoutX="21.0" layoutY="298.0" visible="false" />
+      <Label layoutX="19.0" layoutY="232.0" text="Name" visible="false" />
+      <Label layoutX="21.0" layoutY="280.0" text="Gender" visible="false" />
+      <Label layoutX="21.0" layoutY="323.0" text="Birthdate" visible="false" />
+      <Label layoutX="21.0" layoutY="367.0" text="Street" visible="false" />
+      <DatePicker fx:id="TFStudentAddBirthdate" layoutX="21.0" layoutY="340.0" visible="false" />
+      <Label layoutX="230.0" layoutY="232.0" text="Housenumber" visible="false" />
+      <TextField fx:id="TFStudentAddHousenumber" layoutX="229.0" layoutY="249.0" visible="false" />
+      <Label layoutX="230.0" layoutY="280.0" text="Postalcode" visible="false" />
+      <Label layoutX="230.0" layoutY="322.0" text="City" visible="false" />
+      <Label layoutX="230.0" layoutY="367.0" text="Country" visible="false" />
+      <TextField fx:id="TFStudentAddPostalCode" layoutX="229.0" layoutY="297.0" visible="false" />
+      <TextField fx:id="TFStudentAddCity" layoutX="229.0" layoutY="342.0" visible="false" />
+      <TextField fx:id="TFStudentAddCountry" layoutX="229.0" layoutY="385.0" visible="false" />
+      <Button layoutX="22.0" layoutY="425.0" mnemonicParsing="false" text="Submit" visible="false" />
+      <TextField fx:id="TFStudentAddStreet" layoutX="21.0" layoutY="384.0" visible="false" />
+      <Label layoutX="416.0" layoutY="102.0" text="Your info" visible="false">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
