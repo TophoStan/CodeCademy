@@ -5,8 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f6caa24b-064b-4fed-934d-55de25f54851" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/codecademy/StudentAdd.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/codecademy/StudentAdd.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Codecademy.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Codecademy.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/codecademy/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/codecademy/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/switchController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/switchController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Home.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/StudentAdd.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/codecademy/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/codecademy/App.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controllers/switchController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controllers/switchController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/hello-view.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/test.fxml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,8 +112,7 @@
       <workItem from="1640279318053" duration="94000" />
       <workItem from="1640279476348" duration="1300000" />
       <workItem from="1640280801294" duration="1237000" />
-      <workItem from="1640282090364" duration="2141000" />
-      <workItem from="1640286188617" duration="1374000" />
+      <workItem from="1640282090364" duration="1922000" />
     </task>
     <servers />
   </component>
