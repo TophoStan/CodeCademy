@@ -227,5 +227,17 @@ public class studentController {
 
         }
     }
+    public void showStudent(){
+        databaseConnection.connect();
+        try {
+            ArrayList<Student> students = new ArrayList<>();
+            students = databaseConnection.retrieveStudents();
+            for (Student student: students) {
+                this.listStudent.getItems().add(student.getName());
+            }
+        } catch(Exception e) {
+            System.out.println(e);
+        }
 
+    }
 }
