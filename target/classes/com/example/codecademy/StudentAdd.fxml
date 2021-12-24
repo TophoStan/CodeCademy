@@ -107,6 +107,11 @@
             <TextField fx:id="tFStudentAddDay" layoutX="21.0" layoutY="289.0" prefHeight="25.0" prefWidth="38.0" promptText="Day" />
             <TextField fx:id="tFStudentAddYear" layoutX="123.0" layoutY="289.0" prefHeight="25.0" prefWidth="49.0" promptText="Year" />
             <TextField fx:id="tFStudentAddMonth" layoutX="64.0" layoutY="289.0" prefHeight="25.0" prefWidth="55.0" promptText="Month" />
+            <Button fx:id="btnStudentAddRefresh" layoutX="570.0" layoutY="289.0" mnemonicParsing="false" onAction="#showStudent" text="Refresh">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Button>
             </children>
         </AnchorPane>
     </children>
