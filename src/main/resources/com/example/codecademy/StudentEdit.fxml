@@ -50,7 +50,7 @@
       <TextField fx:id="tFStudentEditEmail" layoutX="15.0" layoutY="165.0" />
       <Label fx:id="lBStudentEditEmail" layoutX="19.0" layoutY="148.0" text="Email" />
       <Button fx:id="btnCheckStudent" layoutX="19.0" layoutY="200.0" mnemonicParsing="false" onAction="#showStudentEditPlace" text="Check" />
-      <ListView fx:id="studentInfoList" layoutX="416.0" layoutY="128.0" prefHeight="185.0" prefWidth="138.0" visible="false" />
+      <ListView fx:id="studentInfoList" layoutX="416.0" layoutY="128.0" prefHeight="246.0" prefWidth="173.0" visible="false" />
       <TextField fx:id="tFStudentEditName" layoutX="21.0" layoutY="249.0" visible="false" />
       <TextField fx:id="tFStudentEditGender" layoutX="21.0" layoutY="298.0" visible="false" />
       <Label fx:id="lBStudentEditName" layoutX="19.0" layoutY="232.0" text="Name" visible="false" />
@@ -64,7 +64,7 @@
       <TextField fx:id="tFStudentEditPostalCode" layoutX="229.0" layoutY="297.0" visible="false" />
       <TextField fx:id="tFStudentEditCity" layoutX="229.0" layoutY="342.0" visible="false" />
       <TextField fx:id="tFStudentEditCountry" layoutX="229.0" layoutY="385.0" visible="false" />
-      <Button fx:id="btnEditStudent" layoutX="21.0" layoutY="431.0" mnemonicParsing="false" text="Submit" visible="false" />
+      <Button fx:id="btnEditStudent" layoutX="21.0" layoutY="431.0" mnemonicParsing="false" onAction="#editStudentToDatabase" text="Submit" visible="false" />
       <TextField fx:id="tFStudentEditStreet" layoutX="21.0" layoutY="398.0" visible="false" />
       <Label fx:id="lBStudentEditYourInfo" layoutX="416.0" layoutY="102.0" text="Your info" visible="false">
          <font>

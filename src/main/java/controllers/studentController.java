@@ -170,6 +170,8 @@ public class studentController {
             lBStudentEditCountry.setVisible(true);
             tFStudentEditCountry.setVisible(true);
             btnEditStudent.setVisible(true);
+
+            showStudentInfo(email);
         } else {
             tFStudentEditEmail.setText("Wrong email!");
         }
@@ -185,6 +187,7 @@ public class studentController {
             for (Student student : studentsFromDatabase) {
                 if (email.equals(student.getEmailAddress())) {
                     output = true;
+                    break;
                 }
             }
         } catch (Exception e) {
@@ -194,8 +197,63 @@ public class studentController {
     }
 
     public void editStudentToDatabase() {
+        String email = tFStudentEditEmail.getText();
         databaseConnection.connect();
+        ArrayList<Student> editStudent = new ArrayList<>();
 
+        try {
+            editStudent = databaseConnection.retrieveStudents();
+
+            for (Student student : editStudent) {
+                if (student.getEmailAddress().equals(email)) {
+                    student.setName(tFStudentEditName.getText());
+                    student.setGender(tFStudentEditGender.getText());
+                    int day = Integer.parseInt(tFStudentEditDay.getText());
+                    int month = Integer.parseInt(tFStudentEditMonth.getText());
+                    int year = Integer.parseInt(tFStudentEditYear.getText());
+                    student.setBirthDate(convertDate(day, month, year));
+                    student.setStreet(tFStudentEditStreet.getText());
+                    student.setHouseNumber(Integer.parseInt(tFStudentEditHousenumber.getText()));
+                    student.setPostalCode(tFStudentEditPostalCode.getText());
+                    student.setCity(tFStudentEditCity.getText());
+                    student.setCountry(tFStudentEditCountry.getText());
+
+                    databaseConnection.editStudentInformation(student);
+                    tFStudentEditEmail.setText("Student info changed!");
+                    Thread.sleep(90);
+                    showStudentInfo(email);
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void showStudentInfo(String email) {
+        studentInfoList.getItems().clear();
+        databaseConnection.connect();
+        ArrayList<Student> arrayListForStudentInfo = new ArrayList<>();
+
+        try {
+            arrayListForStudentInfo = databaseConnection.retrieveStudents();
+            for (Student student: arrayListForStudentInfo) {
+                if (student.getEmailAddress().equals(email)) {
+                    studentInfoList.getItems().add("Name: " + student.getName());
+                    studentInfoList.getItems().add("Email: " + student.getEmailAddress());
+                    studentInfoList.getItems().add("Gender: " + student.getGender());
+                    studentInfoList.getItems().add("Birthdate: " + student.getBirthDate());
+                    studentInfoList.getItems().add("Street: " + student.getStreet());
+                    studentInfoList.getItems().add("Housenumber: " + student.getHouseNumber());
+                    studentInfoList.getItems().add("Postalcode: " + student.getPostalCode());
+                    studentInfoList.getItems().add("City: " + student.getCity());
+                    studentInfoList.getItems().add("Country: " + student.getCountry());
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -205,17 +263,10 @@ public class studentController {
         student.setName(tfStudentAddName.getText());
         student.setEmailAddress(tFStudentAddEmail.getText());
         student.setGender(tFStudentAddGender.getText());
-        //Converts the
-        SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
         int year = Integer.parseInt(tFStudentAddYear.getText());
         int month = Integer.parseInt(tFStudentAddMonth.getText());
         int day = Integer.parseInt(tFStudentAddDay.getText());
-        Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.YEAR, year);
-        cal.set(Calendar.MONTH, month - 1);
-        cal.set(Calendar.DAY_OF_MONTH, day);
-        java.sql.Date date = new java.sql.Date(cal.getTimeInMillis());
-        student.setBirthDate(date);
+        student.setBirthDate(convertDate(day, month, year));
         student.setStreet(tFStudentAddStreet.getText());
         student.setHouseNumber(Integer.parseInt(tFStudentAddHousenumber.getText()));
         student.setPostalCode(tFStudentAddPostalCode.getText());
@@ -239,5 +290,15 @@ public class studentController {
             System.out.println(e);
         }
 
+    }
+
+    public Date convertDate(int day, int month, int year) {
+        SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR, year);
+        cal.set(Calendar.MONTH, month - 1);
+        cal.set(Calendar.DAY_OF_MONTH, day);
+        java.sql.Date date = new java.sql.Date(cal.getTimeInMillis());
+        return date;
     }
 }
