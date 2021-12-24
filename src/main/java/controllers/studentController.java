@@ -54,7 +54,9 @@ public class studentController {
     @FXML private Label lBStudentEditGender;
     @FXML private TextField tFStudentEditGender;
     @FXML private Label lBStudentEditBirthdate;
-    @FXML private DatePicker tFStudentEditBirthdate;
+    @FXML private TextField tFStudentEditDay;
+    @FXML private TextField tFStudentEditYear;
+    @FXML private TextField tFStudentEditMonth;
     @FXML private Label lBStudentEditStreet;
     @FXML private TextField tFStudentEditStreet;
     @FXML private Label lBStudentEditHousenumber;
@@ -153,7 +155,9 @@ public class studentController {
             lBStudentEditGender.setVisible(true);
             tFStudentEditGender.setVisible(true);
             lBStudentEditBirthdate.setVisible(true);
-            tFStudentEditBirthdate.setVisible(true);
+            tFStudentEditDay.setVisible(true);
+            tFStudentEditMonth.setVisible(true);
+            tFStudentEditYear.setVisible(true);
             lBStudentEditStreet.setVisible(true);
             tFStudentEditStreet.setVisible(true);
             lBStudentEditHousenumber.setVisible(true);
@@ -186,6 +190,11 @@ public class studentController {
             System.out.println(e);
         }
         return output;
+    }
+
+    public void editStudentToDatabase() {
+        databaseConnection.connect();
+
     }
 
 
