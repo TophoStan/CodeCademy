@@ -41,7 +41,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="418.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17" fx:controller="controllers.studentController">
+<VBox prefHeight="418.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.studentController">
     <children>
         <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="472.0" prefWidth="640.0" VBox.vgrow="ALWAYS">
             <children>
@@ -75,15 +75,15 @@
                         <Font name="System Bold Italic" size="22.0" />
                     </font>
                 </Label>
-                <Button fx:id="BtnAddStudent" defaultButton="true" layoutX="14.0" layoutY="85.0" mnemonicParsing="false" text="Add"/>
-                <Button fx:id="BtnStudentEdit" layoutX="52.0" layoutY="85.0" mnemonicParsing="false" text="Edit" onAction="#toStudentEdit" />
+                <Button fx:id="BtnAddStudent" defaultButton="true" layoutX="14.0" layoutY="85.0" mnemonicParsing="false" text="Add" />
+                <Button fx:id="BtnStudentEdit" layoutX="52.0" layoutY="85.0" mnemonicParsing="false" onAction="#toStudentEdit" text="Edit" />
                 <Button fx:id="BtnStudentDelete" layoutX="89.0" layoutY="85.0" mnemonicParsing="false" text="Delete" />
                 <ListView fx:id="ListStudent" layoutX="432.0" layoutY="84.0" prefHeight="200.0" prefWidth="200.0" />
                 <Label layoutX="15.0" layoutY="117.0" text="Add a student">
                <font>
                   <Font size="14.0" />
                </font></Label>
-                <TextField fx:id="TFStudentAddName" layoutX="21.0" layoutY="159.0" />
+                <TextField fx:id="tfStudentAddName" layoutX="21.0" layoutY="159.0" />
                 <TextField fx:id="TFStudentAddEmail" layoutX="21.0" layoutY="204.0" />
                 <TextField fx:id="TFStudentAddGender" layoutX="21.0" layoutY="247.0" />
                 <Label layoutX="19.0" layoutY="142.0" text="Name" />
@@ -101,7 +101,7 @@
                 <TextField fx:id="TFStudentAddPostalCode" layoutX="229.0" layoutY="159.0" />
                 <TextField fx:id="TFStudentAddCity" layoutX="229.0" layoutY="204.0" />
                 <TextField fx:id="TFStudentAddCountry" layoutX="229.0" layoutY="247.0" />
-                <Button fx:id="BtnSubmitAddStudent" layoutX="277.0" layoutY="373.0" mnemonicParsing="false" text="Submit" />
+                <Button fx:id="BtnSubmitAddStudent" layoutX="277.0" layoutY="373.0" mnemonicParsing="false" onAction="#test" text="Submit" />
                 <Label layoutX="432.0" layoutY="63.0" text="Students">
                <font>
                   <Font size="14.0" />
