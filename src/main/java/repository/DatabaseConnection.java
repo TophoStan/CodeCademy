@@ -130,6 +130,7 @@ public class DatabaseConnection {
             student.setCity(rs.getString("City"));
             student.setCountry(rs.getString("Country"));
             students.add(student);
+
         }
 
         return students;
