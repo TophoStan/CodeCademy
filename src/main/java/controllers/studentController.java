@@ -8,8 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.util.converter.LocalDateStringConverter;
 import repository.DatabaseConnection;
@@ -23,10 +22,15 @@ import java.time.format.FormatStyle;
 import java.util.Calendar;
 import java.util.Locale;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+
 public class studentController {
     private Stage stage;
     private Scene scene;
     private Parent root;
+
     @FXML
     private TextField tfStudentAddName;
     @FXML
@@ -51,6 +55,29 @@ public class studentController {
     private TextField tFStudentAddCity;
     @FXML
     private TextField tFStudentAddCountry;
+    // for student add page
+
+    // for student edit page
+    @FXML private TextField tFStudentEditEmail;
+    @FXML private Label lBStudentEditYourInfo;
+    @FXML private ListView studentInfoList;
+    @FXML private Label lBStudentEditName;
+    @FXML private TextField tFStudentEditName;
+    @FXML private Label lBStudentEditGender;
+    @FXML private TextField tFStudentEditGender;
+    @FXML private Label lBStudentEditBirthdate;
+    @FXML private DatePicker tFStudentEditBirthdate;
+    @FXML private Label lBStudentEditStreet;
+    @FXML private TextField tFStudentEditStreet;
+    @FXML private Label lBStudentEditHousenumber;
+    @FXML private TextField tFStudentEditHousenumber;
+    @FXML private Label lBStudentEditPostalCode;
+    @FXML private TextField tFStudentEditPostalCode;
+    @FXML private Label lBStudentEditCity;
+    @FXML private TextField tFStudentEditCity;
+    @FXML private Label lBStudentEditCountry;
+    @FXML private TextField tFStudentEditCountry;
+    @FXML private Button btnEditStudent;
 
     DatabaseConnection databaseConnection = new DatabaseConnection();
 
@@ -128,8 +155,49 @@ public class studentController {
         }
     }
 
-    public void showStudentEditPlace(ActionEvent event) {
+    public void showStudentEditPlace() {
+        String email = tFStudentEditEmail.getText();
+        if (checkEmail(email)) {
+            studentInfoList.setVisible(true);
+            lBStudentEditYourInfo.setVisible(true);
+            lBStudentEditName.setVisible(true);
+            tFStudentEditName.setVisible(true);
+            lBStudentEditGender.setVisible(true);
+            tFStudentEditGender.setVisible(true);
+            lBStudentEditBirthdate.setVisible(true);
+            tFStudentEditBirthdate.setVisible(true);
+            lBStudentEditStreet.setVisible(true);
+            tFStudentEditStreet.setVisible(true);
+            lBStudentEditHousenumber.setVisible(true);
+            tFStudentEditHousenumber.setVisible(true);
+            lBStudentEditPostalCode.setVisible(true);
+            tFStudentEditPostalCode.setVisible(true);
+            lBStudentEditCity.setVisible(true);
+            tFStudentEditCity.setVisible(true);
+            lBStudentEditCountry.setVisible(true);
+            tFStudentEditCountry.setVisible(true);
+            btnEditStudent.setVisible(true);
+        } else {
+            tFStudentEditEmail.setText("Wrong email!");
+        }
+    }
 
+    public boolean checkEmail(String email){
+        boolean output = false;
+        try {
+            databaseConnection.connect();
+            ArrayList<Student> studentsFromDatabase = new ArrayList<>();
+            studentsFromDatabase = databaseConnection.retrieveStudents();
+
+            for (Student student : studentsFromDatabase) {
+                if (email.equals(student.getEmailAddress())) {
+                    output = true;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return output;
     }
 
 
@@ -138,7 +206,7 @@ public class studentController {
         Student student = new Student();
         student.setName(tfStudentAddName.getText());
         student.setEmailAddress(tFStudentAddEmail.getText());
-        student.setGender(tFStudentAddGender.getText());\
+        student.setGender(tFStudentAddGender.getText());
         //Converts the
         SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
         int year = Integer.parseInt(tFStudentAddYear.getText());
