@@ -8,11 +8,15 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controllers/studentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/studentController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/repository/DatabaseConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/DatabaseConnection.java" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/codecademy/StudentAdd.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/codecademy/StudentAdd.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/codecademy/StudentAdd.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/codecademy/StudentAdd.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/controllers/studentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controllers/studentController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/repository/DatabaseConnection$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/repository/DatabaseConnection$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/repository/DatabaseConnection.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/repository/DatabaseConnection.class" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/module-info.class" afterDir="false" />
+>>>>>>> 5d18d57ce648bd0716a68a62b7895dcbed98dabb
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,7 +130,7 @@
       <workItem from="1640337743409" duration="1164000" />
       <workItem from="1640342869374" duration="361000" />
       <workItem from="1640347088846" duration="2378000" />
-      <workItem from="1640350043669" duration="3312000" />
+      <workItem from="1640350043669" duration="3443000" />
     </task>
     <servers />
   </component>

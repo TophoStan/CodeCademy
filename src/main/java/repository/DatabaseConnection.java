@@ -42,7 +42,6 @@ public class DatabaseConnection {
      * Connects to the SQL Server Database using <code>DriverManager</code>.
      */
     public void connect() {
-        System.out.println("Connecting to database");
 
         try {
 
@@ -51,6 +50,7 @@ public class DatabaseConnection {
             String pass = "groepje7";
 
             if (conn == null) {
+                System.out.println("Connecting to database");
                 this.conn = DriverManager.getConnection(dbURL, user, pass);
                 System.out.println("Connection successful");
             }
