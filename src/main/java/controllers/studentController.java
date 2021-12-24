@@ -11,10 +11,17 @@ import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.util.converter.LocalDateStringConverter;
 import repository.DatabaseConnection;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.Calendar;
+import java.util.Locale;
 
 public class studentController {
     private Stage stage;
@@ -30,6 +37,12 @@ public class studentController {
     private TextField tFStudentAddStreet;
     @FXML
     private DatePicker tFStudentAddBirthdate;
+    @FXML
+    private TextField tFStudentAddDay;
+    @FXML
+    private TextField tFStudentAddMonth;
+    @FXML
+    private TextField tFStudentAddYear;
     @FXML
     private TextField tFStudentAddHousenumber;
     @FXML
@@ -125,8 +138,18 @@ public class studentController {
         Student student = new Student();
         student.setName(tfStudentAddName.getText());
         student.setEmailAddress(tFStudentAddEmail.getText());
-        student.setGender(tFStudentAddGender.getText());
-        student.setBirthDate(Date.valueOf(tFStudentAddBirthdate.getValue()));
+        student.setGender(tFStudentAddGender.getText());\
+        //Converts the
+        SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
+        int year = Integer.parseInt(tFStudentAddYear.getText());
+        int month = Integer.parseInt(tFStudentAddMonth.getText());
+        int day = Integer.parseInt(tFStudentAddDay.getText());
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR, year);
+        cal.set(Calendar.MONTH, month - 1);
+        cal.set(Calendar.DAY_OF_MONTH, day);
+        java.sql.Date date = new java.sql.Date(cal.getTimeInMillis());
+        student.setBirthDate(date);
         student.setStreet(tFStudentAddStreet.getText());
         student.setHouseNumber(Integer.parseInt(tFStudentAddHousenumber.getText()));
         student.setPostalCode(tFStudentAddPostalCode.getText());

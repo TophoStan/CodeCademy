@@ -49,9 +49,10 @@ public class DatabaseConnection {
             String dbURL = "jdbc:sqlserver://aei-sql2.avans.nl\\studenten:1443;databaseName=CodeCademy7";
             String user = "group7";
             String pass = "groepje7";
-            this.conn = DriverManager.getConnection(dbURL, user, pass);
-            if (conn != null) {
-                System.out.println("Connection succesfull");
+
+            if (conn == null) {
+                this.conn = DriverManager.getConnection(dbURL, user, pass);
+                System.out.println("Connection successful");
             }
 
         } catch (SQLException ex) {
@@ -62,9 +63,6 @@ public class DatabaseConnection {
 
     }
 
-    public Connection getConn() {
-        return conn;
-    }
 
     /**
      * This method uses the <code>Statement</code> and <code>execute()</code> to

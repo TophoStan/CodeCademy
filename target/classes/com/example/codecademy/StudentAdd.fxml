@@ -33,7 +33,6 @@
 -->
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
@@ -89,9 +88,8 @@
                 <Label layoutX="19.0" layoutY="142.0" text="Name" />
                 <Label layoutX="21.0" layoutY="184.0" text="Email" />
                 <Label layoutX="21.0" layoutY="229.0" text="Gender" />
-                <Label layoutX="21.0" layoutY="272.0" text="Birthdate" />
+                <Label layoutX="21.0" layoutY="272.0" text="Birthdate (DD/MM-YYYY)" />
                 <Label layoutX="21.0" layoutY="316.0" text="Street" />
-                <DatePicker fx:id="tFStudentAddBirthdate" layoutX="21.0" layoutY="289.0" />
                 <Label layoutX="22.0" layoutY="356.0" text="Housenumber" />
                 <TextField fx:id="tFStudentAddStreet" layoutX="21.0" layoutY="333.0" />
                 <TextField fx:id="tFStudentAddHousenumber" layoutX="21.0" layoutY="373.0" />
@@ -106,6 +104,9 @@
                <font>
                   <Font size="14.0" />
                </font></Label>
+            <TextField fx:id="tFStudentAddDay" layoutX="21.0" layoutY="289.0" prefHeight="25.0" prefWidth="38.0" promptText="Day" />
+            <TextField fx:id="tFStudentAddYear" layoutX="123.0" layoutY="289.0" prefHeight="25.0" prefWidth="49.0" promptText="Year" />
+            <TextField fx:id="tFStudentAddMonth" layoutX="64.0" layoutY="289.0" prefHeight="25.0" prefWidth="55.0" promptText="Month" />
             </children>
         </AnchorPane>
     </children>
