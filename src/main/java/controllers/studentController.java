@@ -14,6 +14,7 @@ import javafx.util.converter.LocalDateStringConverter;
 import repository.DatabaseConnection;
 
 import java.io.IOException;
+import java.sql.Array;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -44,7 +45,7 @@ public class studentController {
     @FXML private TextField tFStudentAddPostalCode;
     @FXML private TextField tFStudentAddCity;
     @FXML private TextField tFStudentAddCountry;
-
+    @FXML private ListView listStudent;
     // for student edit page
     @FXML private TextField tFStudentEditEmail;
     @FXML private Label lBStudentEditYourInfo;
@@ -216,5 +217,18 @@ public class studentController {
         } catch (Exception e) {
 
         }
+    }
+    public void showStudent(){
+        databaseConnection.connect();
+        try {
+            ArrayList<Student> students = new ArrayList<>();
+            students = databaseConnection.retrieveStudents();
+            for (Student student: students) {
+                this.listStudent.getItems().add(student.getName());
+            }
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+
     }
 }
