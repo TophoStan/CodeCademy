@@ -31,31 +31,19 @@ public class studentController {
     private Scene scene;
     private Parent root;
 
-    @FXML
-    private TextField tfStudentAddName;
-    @FXML
-    private TextField tFStudentAddEmail;
-    @FXML
-    private TextField tFStudentAddGender;
-    @FXML
-    private TextField tFStudentAddStreet;
-    @FXML
-    private DatePicker tFStudentAddBirthdate;
-    @FXML
-    private TextField tFStudentAddDay;
-    @FXML
-    private TextField tFStudentAddMonth;
-    @FXML
-    private TextField tFStudentAddYear;
-    @FXML
-    private TextField tFStudentAddHousenumber;
-    @FXML
-    private TextField tFStudentAddPostalCode;
-    @FXML
-    private TextField tFStudentAddCity;
-    @FXML
-    private TextField tFStudentAddCountry;
     // for student add page
+    @FXML private TextField tfStudentAddName;
+    @FXML private TextField tFStudentAddEmail;
+    @FXML private TextField tFStudentAddGender;
+    @FXML private TextField tFStudentAddStreet;
+    @FXML private DatePicker tFStudentAddBirthdate;
+    @FXML private TextField tFStudentAddDay;
+    @FXML private TextField tFStudentAddMonth;
+    @FXML private TextField tFStudentAddYear;
+    @FXML private TextField tFStudentAddHousenumber;
+    @FXML private TextField tFStudentAddPostalCode;
+    @FXML private TextField tFStudentAddCity;
+    @FXML private TextField tFStudentAddCountry;
 
     // for student edit page
     @FXML private TextField tFStudentEditEmail;

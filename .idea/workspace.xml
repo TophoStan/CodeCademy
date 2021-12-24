@@ -7,14 +7,7 @@
     <list default="true" id="f6caa24b-064b-4fed-934d-55de25f54851" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controllers/studentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/studentController.java" afterDir="false" />
-<<<<<<< HEAD
-      <change beforePath="$PROJECT_DIR$/src/main/java/repository/DatabaseConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/DatabaseConnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/codecademy/StudentAdd.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/codecademy/StudentAdd.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/codecademy/StudentAdd.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/codecademy/StudentAdd.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/studentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controllers/studentController.class" afterDir="false" />
-=======
       <change beforePath="$PROJECT_DIR$/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/module-info.class" afterDir="false" />
->>>>>>> b3192c18e993ee715120f0b6c9ae9c800c5a80d9
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,14 +24,6 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="GitSEFilterConfiguration">
-    <file-type-list>
-      <filtered-out-file-type name="LOCAL_BRANCH" />
-      <filtered-out-file-type name="REMOTE_BRANCH" />
-      <filtered-out-file-type name="TAG" />
-      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
-    </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/main/resources/com/example/codecademy/EnrollmentAdd.fxml" root0="SKIP_INSPECTION" />
@@ -135,12 +120,8 @@
       <workItem from="1640334130266" duration="1106000" />
       <workItem from="1640337743409" duration="1164000" />
       <workItem from="1640342869374" duration="361000" />
-<<<<<<< HEAD
-      <workItem from="1640347088846" duration="5752000" />
-=======
       <workItem from="1640347088846" duration="2378000" />
-      <workItem from="1640350043669" duration="2705000" />
->>>>>>> b3192c18e993ee715120f0b6c9ae9c800c5a80d9
+      <workItem from="1640350043669" duration="3312000" />
     </task>
     <servers />
   </component>
