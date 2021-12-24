@@ -5,11 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f6caa24b-064b-4fed-934d-55de25f54851" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/lib/mssql-jdbc-9.4.0.jre11.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Codecademy.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Codecademy.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controllers/studentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/studentController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/codecademy/StudentAdd.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/codecademy/StudentAdd.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/codecademy/StudentAdd.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/codecademy/StudentAdd.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/codecademy/StudentEdit.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/codecademy/StudentEdit.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/controllers/studentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controllers/studentController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -43,12 +44,16 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/com/example/codecademy" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/lib/mssql-jdbc-9.4.0.jre11.jar" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
@@ -58,11 +63,11 @@
       <recent name="C:\Users\Stan\Desktop\CodeCademySchool\CodeCademy\src\main\java\com\example\codecademy" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Stan\Desktop\CodeCademySchool\CodeCademy\src\main\lib" />
       <recent name="C:\Users\Stan\Desktop\CodeCademySchool\CodeCademy\src\main" />
       <recent name="C:\Users\Stan\Desktop\CodeCademySchool\CodeCademy\src\resources\com\example\codecademy" />
       <recent name="C:\Users\Stan\Desktop\CodeCademySchool\CodeCademy\src" />
       <recent name="C:\Users\Stan\Desktop\CodeCademySchool\CodeCademy\src\main\resources" />
-      <recent name="C:\Users\Stan\Desktop\CodeCademySchool\CodeCademy\src\main\java\controllers" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.example.codecademy" />
@@ -118,6 +123,8 @@
       <workItem from="1640284532408" duration="4408000" />
       <workItem from="1640334130266" duration="1106000" />
       <workItem from="1640337743409" duration="1164000" />
+      <workItem from="1640342869374" duration="361000" />
+      <workItem from="1640347088846" duration="2378000" />
     </task>
     <servers />
   </component>

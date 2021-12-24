@@ -84,24 +84,24 @@
                   <Font size="14.0" />
                </font></Label>
                 <TextField fx:id="tfStudentAddName" layoutX="21.0" layoutY="159.0" />
-                <TextField fx:id="TFStudentAddEmail" layoutX="21.0" layoutY="204.0" />
-                <TextField fx:id="TFStudentAddGender" layoutX="21.0" layoutY="247.0" />
+                <TextField fx:id="tFStudentAddEmail" layoutX="21.0" layoutY="204.0" />
+                <TextField fx:id="tFStudentAddGender" layoutX="21.0" layoutY="247.0" />
                 <Label layoutX="19.0" layoutY="142.0" text="Name" />
                 <Label layoutX="21.0" layoutY="184.0" text="Email" />
                 <Label layoutX="21.0" layoutY="229.0" text="Gender" />
                 <Label layoutX="21.0" layoutY="272.0" text="Birthdate" />
                 <Label layoutX="21.0" layoutY="316.0" text="Street" />
-                <DatePicker fx:id="TFStudentAddBirthdate" layoutX="21.0" layoutY="289.0" />
+                <DatePicker fx:id="tFStudentAddBirthdate" layoutX="21.0" layoutY="289.0" />
                 <Label layoutX="22.0" layoutY="356.0" text="Housenumber" />
-                <TextField fx:id="TFStudentAddStreet" layoutX="21.0" layoutY="333.0" />
-                <TextField fx:id="TFStudentAddHousenumber" layoutX="21.0" layoutY="373.0" />
+                <TextField fx:id="tFStudentAddStreet" layoutX="21.0" layoutY="333.0" />
+                <TextField fx:id="tFStudentAddHousenumber" layoutX="21.0" layoutY="373.0" />
                 <Label layoutX="230.0" layoutY="142.0" text="Postalcode" />
                 <Label layoutX="230.0" layoutY="184.0" text="City" />
                 <Label layoutX="230.0" layoutY="229.0" text="Country" />
-                <TextField fx:id="TFStudentAddPostalCode" layoutX="229.0" layoutY="159.0" />
-                <TextField fx:id="TFStudentAddCity" layoutX="229.0" layoutY="204.0" />
-                <TextField fx:id="TFStudentAddCountry" layoutX="229.0" layoutY="247.0" />
-                <Button fx:id="BtnSubmitAddStudent" layoutX="277.0" layoutY="373.0" mnemonicParsing="false" onAction="#test" text="Submit" />
+                <TextField fx:id="tFStudentAddPostalCode" layoutX="229.0" layoutY="159.0" />
+                <TextField fx:id="tFStudentAddCity" layoutX="229.0" layoutY="204.0" />
+                <TextField fx:id="tFStudentAddCountry" layoutX="229.0" layoutY="247.0" />
+                <Button fx:id="BtnSubmitAddStudent" layoutX="277.0" layoutY="373.0" mnemonicParsing="false" onAction="#addStudentToDatabase" text="Submit" />
                 <Label layoutX="432.0" layoutY="63.0" text="Students">
                <font>
                   <Font size="14.0" />
