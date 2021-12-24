@@ -5,13 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f6caa24b-064b-4fed-934d-55de25f54851" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/lib/mssql-jdbc-9.4.0.jre11.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Codecademy.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Codecademy.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controllers/studentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/studentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/codecademy/StudentAdd.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/codecademy/StudentAdd.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/codecademy/StudentAdd.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/codecademy/StudentAdd.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/studentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controllers/studentController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/module-info.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,7 +40,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/lib/mssql-jdbc-9.4.0.jre11.jar" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -125,6 +121,7 @@
       <workItem from="1640337743409" duration="1164000" />
       <workItem from="1640342869374" duration="361000" />
       <workItem from="1640347088846" duration="2378000" />
+      <workItem from="1640350043669" duration="2705000" />
     </task>
     <servers />
   </component>
