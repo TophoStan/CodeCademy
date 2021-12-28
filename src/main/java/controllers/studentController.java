@@ -69,6 +69,8 @@ public class studentController {
     @FXML private Label lBStudentEditCountry;
     @FXML private TextField tFStudentEditCountry;
     @FXML private Button btnEditStudent;
+    // for Student delete page
+    @FXML private TextField tFStudentDeleteEmail;
 
     DatabaseConnection databaseConnection = new DatabaseConnection();
 
@@ -137,6 +139,17 @@ public class studentController {
     public void toStudentEdit(ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(App.class.getResource("StudentEdit.fxml"));
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void toStudentDelete(ActionEvent event){
+        try {
+            Parent root = FXMLLoader.load(App.class.getResource("StudentDelete.fxml"));
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
@@ -283,14 +296,25 @@ public class studentController {
         try {
             ArrayList<Student> students = new ArrayList<>();
             students = databaseConnection.retrieveStudents();
+            listStudent.getItems().clear();
             for (Student student: students) {
                 this.listStudent.getItems().add(student.getName());
             }
         } catch(Exception e) {
             System.out.println(e);
         }
-
     }
+    public void deleteStudent(){
+        Student student = new Student();
+        student.setEmailAddress(tFStudentDeleteEmail.getText());
+        try {
+            databaseConnection.deleteStudentFromDatabase(student);
+        }catch (Exception e){
+            System.out.println(e);
+        }
+    }
+
+
 
     public Date convertDate(int day, int month, int year) {
         SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");

@@ -154,7 +154,7 @@ public class DatabaseConnection {
                     .prepareStatement("DELETE FROM Student WHERE EmailAddress = '" + student.getEmailAddress() + "';");
             st.executeUpdate();
             wasSuccesful = true;
-            System.out.println("Succesfully deleted student from the database");
+            System.out.println("Successfully deleted student from the database");
         } catch (Exception e) {
             System.out.println(e);
             wasSuccesful = false;

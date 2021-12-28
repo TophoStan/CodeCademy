@@ -6,6 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="f6caa24b-064b-4fed-934d-55de25f54851" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
+=======
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/studentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/studentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/repository/DatabaseConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/DatabaseConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/codecademy/StudentAdd.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/codecademy/StudentAdd.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/codecademy/StudentAdd.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/codecademy/StudentAdd.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/controllers/studentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controllers/studentController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/repository/DatabaseConnection.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/repository/DatabaseConnection.class" afterDir="false" />
+>>>>>>> d7bba10cdf0da68287e004ec49a45b357d96f6b1
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
