@@ -47,11 +47,11 @@
             <Button fx:id="BtnStudentDelete" defaultButton="true" layoutX="90.0" layoutY="85.0" mnemonicParsing="false" onAction="#showCourses" text="Delete" />
             <Label layoutX="18.0" layoutY="117.0" text="Delete a course" />
             <Label layoutX="24.0" layoutY="134.0" text="Name" />
-            <TextField fx:id="tFNameEditCourse" layoutX="21.0" layoutY="151.0" />
+            <TextField fx:id="tFNameDeleteCourse" layoutX="21.0" layoutY="151.0" />
             <ListView fx:id="courseList" layoutX="442.0" layoutY="101.0" prefHeight="165.0" prefWidth="170.0" />
             <Label layoutX="442.0" layoutY="77.0" text="Courses" />
-            <Button fx:id="BtnCheckEditCourse" layoutX="194.0" layoutY="151.0" mnemonicParsing="false" onAction="#deleteCourse" text="Delete" />
-            <Button fx:id="btnCourseRefresh" layoutX="560.0" layoutY="273.0" mnemonicParsing="false" onAction="#showCourses" text="Button" />
+            <Button fx:id="btnDeleteCourse" layoutX="194.0" layoutY="151.0" mnemonicParsing="false" onAction="#deleteCourse" text="Delete" />
+            <Button fx:id="btnCourseRefresh" layoutX="560.0" layoutY="273.0" mnemonicParsing="false" onAction="#showCourses" text="Refresh" />
          </children>
       </AnchorPane>
    </children>
