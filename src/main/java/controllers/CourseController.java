@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class CourseController {
 
-    private Controller controller;
+    private Controller controller = new Controller();
 
     // for course add page
     @FXML ListView courseList;

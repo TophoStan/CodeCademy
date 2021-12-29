@@ -7,7 +7,6 @@ import javafx.scene.control.*;
 
 import repository.DatabaseConnection;
 
-
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -15,7 +14,7 @@ import java.util.ArrayList;
 
 public class StudentController {
 
-    private Controller controller;
+    private Controller controller = new Controller();
 
     // for student add page
     @FXML private TextField tfStudentAddName;
