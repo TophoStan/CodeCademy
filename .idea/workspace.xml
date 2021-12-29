@@ -5,26 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f6caa24b-064b-4fed-934d-55de25f54851" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/Controller.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/CourseController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/controllers/EnrollmentController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/codecademy/EnrollmentDelete.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/com/example/codecademy/EnrollmentDelete.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/controllers/enrollmentController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/homeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/HomeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/studentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/StudentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/codecademy/CourseAdd.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/codecademy/CourseAdd.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/codecademy/CourseDelete.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/codecademy/CourseDelete.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/codecademy/CourseEdit.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/codecademy/CourseEdit.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/StudentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/StudentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/Enrollment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/Enrollment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/repository/DatabaseConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/DatabaseConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/codecademy/EnrollmentAdd.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/codecademy/EnrollmentAdd.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/codecademy/Home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/codecademy/Home.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/codecademy/StudentAdd.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/codecademy/StudentAdd.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/codecademy/StudentDelete.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/codecademy/StudentDelete.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/codecademy/StudentEdit.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/codecademy/StudentEdit.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/codecademy/CourseAdd.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/codecademy/CourseAdd.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/codecademy/CourseDelete.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/codecademy/CourseDelete.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/codecademy/CourseEdit.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/codecademy/CourseEdit.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/codecademy/EnrollmentAdd.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/codecademy/EnrollmentAdd.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/codecademy/Home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/codecademy/Home.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/codecademy/StudentAdd.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/codecademy/StudentAdd.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/codecademy/StudentDelete.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/codecademy/StudentDelete.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/controllers/homeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controllers/homeController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/controllers/studentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controllers/studentController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/domain/Enrollment.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/Enrollment.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/repository/DatabaseConnection$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/repository/DatabaseConnection$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/repository/DatabaseConnection.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/repository/DatabaseConnection.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

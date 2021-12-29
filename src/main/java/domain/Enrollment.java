@@ -3,8 +3,6 @@ package domain;
 import java.sql.Date;
 
 public class Enrollment {
-    private int studentId;
-    private int courseId;
     private int enrollmentId;
     private Date enrollmentDate;
     private Course course;
@@ -13,8 +11,7 @@ public class Enrollment {
     public Enrollment(Course course, Student student) {
         this.course = course;
         this.student = student;
-        Date date = new Date(0);
-        date = Date.valueOf(date.toLocalDate());
+
     }
 
     public Enrollment() {
@@ -22,19 +19,19 @@ public class Enrollment {
     }
 
     public int getStudentId() {
-        return studentId;
+        return student.getId();
     }
 
     public void setStudentId(int studentId) {
-        this.studentId = studentId;
+        student.setId(studentId);
     }
 
     public int getCourseId() {
-        return courseId;
+        return course.getId();
     }
 
     public void setCourseId(int courseId) {
-        this.courseId = courseId;
+        this.course.setId(courseId);
     }
 
     public int getEnrollmentId() {

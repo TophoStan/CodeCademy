@@ -38,7 +38,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<<<<<<< HEAD
 <VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HomeController">
+=======
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.homeController">
+>>>>>>> f5a6cb5947d2c613747578f2b7c59fed1d4e3090
     <children>
         <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
             <children>
@@ -62,7 +66,7 @@
                         <Font name="System Bold" size="12.0" />
                     </font>
                 </Button>
-                <Button fx:id="BtnEnrollment" layoutX="181.0" layoutY="45.0" mnemonicParsing="false" text="Enrollment">
+                <Button fx:id="BtnEnrollment" layoutX="181.0" layoutY="45.0" mnemonicParsing="false" onAction="#toEnrollment" text="Enrollment">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font>

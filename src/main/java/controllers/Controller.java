@@ -27,4 +27,52 @@ public class Controller {
             e.printStackTrace();
         }
     }
+    public void toHome(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(App.class.getResource("Home.fxml"));
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            System.out.println("Something went wrong");
+            e.printStackTrace();
+        }
+    }
+
+    public void toCourse(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(App.class.getResource("CourseAdd.fxml"));
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void toEnrollment(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(App.class.getResource("EnrollmentAdd.fxml"));
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void toContentItem(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(App.class.getResource("ContentItemAdd.fxml"));
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
