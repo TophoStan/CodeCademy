@@ -29,24 +29,6 @@ public class enrollmentController {
     @FXML private ComboBox cbCourseEnrollment;
     private DatabaseConnection databaseConnection = new DatabaseConnection();
 
-    public void toHome(ActionEvent event) {
-
-    }
-
-    public void toStudent(ActionEvent event) {
-
-    }
-
-    public void toCourse(ActionEvent event) {
-
-    }
-
-    public void toEnrollment(ActionEvent event) {
-
-    }
-    public void toContentItem(ActionEvent event) {
-
-    }
 
     public void addEnrollment(){
         databaseConnection.connect();
