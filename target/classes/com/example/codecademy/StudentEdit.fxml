@@ -41,7 +41,7 @@
       </Button>
       <Button fx:id="BtnAddStudent" layoutX="14.0" layoutY="85.0" mnemonicParsing="false" onAction="#toStudent" text="Add" />
       <Button fx:id="BtnStudentEdit" defaultButton="true" layoutX="52.0" layoutY="85.0" mnemonicParsing="false" text="Edit" />
-      <Button fx:id="BtnStudentDelete" layoutX="89.0" layoutY="85.0" mnemonicParsing="false" text="Delete" />
+      <Button fx:id="BtnStudentDelete" layoutX="89.0" layoutY="85.0" mnemonicParsing="false" onAction="#toStudentDelete" text="Delete" />
       <Label layoutX="15.0" layoutY="121.0" text="Edit a student">
          <font>
             <Font size="14.0" />
