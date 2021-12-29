@@ -287,8 +287,9 @@ public class studentController {
         student.setCountry(tFStudentAddCountry.getText());
         try {
             databaseConnection.addStudentToDatabase(student);
+            showStudent();
         } catch (Exception e) {
-
+            System.out.println(e);
         }
     }
     public void showStudent(){
@@ -310,10 +311,13 @@ public class studentController {
         if (checkEmail(email)) {
             try {
                 databaseConnection.connect();
-                databaseConnection.retrieveStudents();
+                studentsToDelete = databaseConnection.retrieveStudents();
                 for (Student i : studentsToDelete) {
                     if (i.getEmailAddress().equals(email)) {
                         databaseConnection.deleteStudentFromDatabase(i);
+                        tFStudentDeleteEmail.setText("Student removed");
+                        showStudent();
+                        break;
                     }
                 }
             }catch (Exception e){
@@ -323,7 +327,6 @@ public class studentController {
             tFStudentDeleteEmail.setText("Unknown email");
         }
     }
-
 
 
     public Date convertDate(int day, int month, int year) {
