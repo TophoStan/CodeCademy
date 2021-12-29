@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="472.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.studentController">
+<AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="472.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.StudentController">
    <children>
       <TextField fx:id="tFStudentDeleteEmail" layoutX="21.0" layoutY="204.0" />
       <Button fx:id="BtnHome" layoutX="14.0" layoutY="46.0" mnemonicParsing="false" onAction="#toHome" text="Home">
@@ -20,17 +20,17 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="BtnCourse" layoutX="126.0" layoutY="46.0" mnemonicParsing="false" text="Course">
+      <Button fx:id="BtnCourse" layoutX="126.0" layoutY="46.0" mnemonicParsing="false" onAction="#toCourse" text="Course">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="BtnEnrollment" layoutX="181.0" layoutY="46.0" mnemonicParsing="false" text="Enrollment">
+      <Button fx:id="BtnEnrollment" layoutX="181.0" layoutY="46.0" mnemonicParsing="false" onAction="#toEnrollment" text="Enrollment">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="BtnContentItem" layoutX="259.0" layoutY="46.0" mnemonicParsing="false" text="ContentItem">
+      <Button fx:id="BtnContentItem" layoutX="259.0" layoutY="46.0" mnemonicParsing="false" onAction="#toContentItem" text="ContentItem">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -40,7 +40,7 @@
             <Font name="System Bold Italic" size="22.0" />
          </font>
       </Label>
-      <Button fx:id="BtnAddStudent" layoutX="14.0" layoutY="85.0" mnemonicParsing="false" onAction="#toStudent" text="Add" />
+      <Button fx:id="btnStudentAdd" layoutX="14.0" layoutY="85.0" mnemonicParsing="false" onAction="#toStudent" text="Add" />
       <Button fx:id="BtnStudentEdit" layoutX="52.0" layoutY="85.0" mnemonicParsing="false" onAction="#toStudentEdit" text="Edit" />
       <Button fx:id="BtnStudentDelete" defaultButton="true" layoutX="89.0" layoutY="85.0" mnemonicParsing="false" text="Delete" />
       <ListView fx:id="listStudent" layoutX="432.0" layoutY="84.0" prefHeight="200.0" prefWidth="200.0" />

@@ -42,31 +42,31 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CourseController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
-            <Button fx:id="BtnHome" layoutX="14.0" layoutY="46.0" mnemonicParsing="false" onAction="" text="Home">
+            <Button fx:id="BtnHome" layoutX="14.0" layoutY="46.0" mnemonicParsing="false" onAction="#toHome" text="Home">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="BtnStudent" layoutX="65.0" layoutY="46.0" mnemonicParsing="false" text="Student">
+            <Button fx:id="BtnStudent" layoutX="65.0" layoutY="46.0" mnemonicParsing="false" onAction="#toStudent" text="Student">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="BtnCourse" defaultButton="true" layoutX="126.0" layoutY="46.0" mnemonicParsing="false" text="Course">
+            <Button fx:id="BtnCourse" defaultButton="true" layoutX="126.0" layoutY="46.0" mnemonicParsing="false" onAction="#showCourses" text="Course">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="BtnEnrollment" layoutX="181.0" layoutY="46.0" mnemonicParsing="false" text="Enrollment">
+            <Button fx:id="btnEnrollment" layoutX="181.0" layoutY="46.0" mnemonicParsing="false" onAction="#toEnrollment" text="Enrollment">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="BtnContentItem" layoutX="259.0" layoutY="46.0" mnemonicParsing="false" text="ContentItem">
+            <Button fx:id="BtnContentItem" layoutX="259.0" layoutY="46.0" mnemonicParsing="false" onAction="#toContentItem" text="ContentItem">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -76,21 +76,22 @@
                   <Font name="System Bold Italic" size="22.0" />
                </font>
             </Label>
-            <Button fx:id="BtnAddStudent" defaultButton="true" layoutX="15.0" layoutY="85.0" mnemonicParsing="false" text="Add" />
-            <Button fx:id="BtnStudentEdit" layoutX="53.0" layoutY="85.0" mnemonicParsing="false" text="Edit" />
-            <Button fx:id="BtnStudentDelete" layoutX="90.0" layoutY="85.0" mnemonicParsing="false" text="Delete" />
+            <Button fx:id="BtnAddStudent" defaultButton="true" layoutX="15.0" layoutY="85.0" mnemonicParsing="false" onAction="#showCourses" text="Add" />
+            <Button fx:id="BtnStudentEdit" layoutX="53.0" layoutY="85.0" mnemonicParsing="false" onAction="#toCourseEdit" text="Edit" />
+            <Button fx:id="BtnStudentDelete" layoutX="90.0" layoutY="85.0" mnemonicParsing="false" onAction="#toCourseDelete" text="Delete" />
             <Label layoutX="18.0" layoutY="117.0" text="Add a course" />
             <Label layoutX="24.0" layoutY="134.0" text="Name" />
             <Label layoutX="24.0" layoutY="175.0" text="Subject" />
             <Label layoutX="24.0" layoutY="291.0" text="IntroductoryText" />
             <Label layoutX="24.0" layoutY="227.0" text="Difficulty" />
-            <TextField layoutX="21.0" layoutY="151.0" />
-            <TextField layoutX="21.0" layoutY="200.0" />
-            <TextArea layoutX="18.0" layoutY="309.0" prefHeight="71.0" prefWidth="155.0" />
-            <ComboBox layoutX="21.0" layoutY="254.0" prefWidth="150.0" visibleRowCount="4" />
-            <Button layoutX="233.0" layoutY="355.0" mnemonicParsing="false" text="Submit" />
-            <ListView fx:id="CourseList" layoutX="379.0" layoutY="113.0" prefHeight="200.0" prefWidth="200.0" />
+            <TextField fx:id="tFCourseAddName" layoutX="21.0" layoutY="151.0" />
+            <TextField fx:id="tFCourseAddSubject" layoutX="21.0" layoutY="200.0" />
+            <TextArea fx:id="tACourseAddIntroText" layoutX="18.0" layoutY="309.0" prefHeight="71.0" prefWidth="155.0" />
+            <ComboBox fx:id="cBCourseAddDifficulty" layoutX="21.0" layoutY="254.0" prefWidth="150.0" visibleRowCount="4" />
+            <Button layoutX="233.0" layoutY="355.0" mnemonicParsing="false" onAction="#addCourseToDatabase" text="Submit" />
+            <ListView fx:id="courseList" layoutX="379.0" layoutY="113.0" prefHeight="200.0" prefWidth="200.0" />
             <Label layoutX="379.0" layoutY="77.0" text="Courses" />
+            <Button fx:id="btnCourseAddRefresh" layoutX="518.0" layoutY="320.0" mnemonicParsing="false" onAction="#showCourses" prefHeight="25.0" prefWidth="61.0" text="Refresh" />
          </children>
     </AnchorPane>
   </children>
