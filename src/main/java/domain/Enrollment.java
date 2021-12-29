@@ -11,11 +11,11 @@ public class Enrollment {
     public Enrollment(Course course, Student student) {
         this.course = course;
         this.student = student;
-
     }
 
     public Enrollment() {
-
+        this.course = new Course();
+        this.student = new Student();
     }
 
     public int getStudentId() {
@@ -74,4 +74,8 @@ public class Enrollment {
         this.student = student;
     }
 
+    @Override
+    public String toString() {
+        return student.getEmailAddress() + " - " + course.getName();
+    }
 }
