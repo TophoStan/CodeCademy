@@ -1,34 +1,46 @@
 package controllers;
 
-import com.example.codecademy.App;
 import domain.Course;
 import domain.Enrollment;
 import domain.Student;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
+
 import repository.DatabaseConnection;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
-public class enrollmentController {
+public class EnrollmentController {
 
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
-
+    private Controller controller = new Controller();
 
     @FXML private TextField tFEmailEnrollment;
     @FXML private ComboBox cbCourseEnrollment;
+
     private DatabaseConnection databaseConnection = new DatabaseConnection();
 
+    public void toHome(ActionEvent event) {
+        controller.toPage(event, "Home");
+    }
+
+    public void toStudent(ActionEvent event) {
+        controller.toPage(event, "StudentAdd");
+    }
+
+    public void toCourse(ActionEvent event) {
+        controller.toPage(event, "CourseAdd");
+    }
+
+    public void toEnrollment(ActionEvent event) {
+        controller.toPage(event, "EnrollmentAdd");
+    }
+
+    public void toContentItem(ActionEvent event) {
+        controller.toPage(event, "ContentItemAdd");
+    }
 
     public void addEnrollment(){
         databaseConnection.connect();

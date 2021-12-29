@@ -1,43 +1,26 @@
 package controllers;
 
-import com.example.codecademy.App;
 import domain.Student;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
-import javafx.util.converter.LocalDateStringConverter;
+
 import repository.DatabaseConnection;
 
-import java.io.IOException;
-import java.sql.Array;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.Calendar;
-import java.util.Locale;
-
-import java.sql.SQLException;
 import java.util.ArrayList;
 
+public class StudentController {
 
-public class studentController {
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
+    private Controller controller = new Controller();
 
     // for student add page
     @FXML private TextField tfStudentAddName;
     @FXML private TextField tFStudentAddEmail;
     @FXML private TextField tFStudentAddGender;
     @FXML private TextField tFStudentAddStreet;
-    @FXML private DatePicker tFStudentAddBirthdate;
     @FXML private TextField tFStudentAddDay;
     @FXML private TextField tFStudentAddMonth;
     @FXML private TextField tFStudentAddYear;
@@ -46,6 +29,7 @@ public class studentController {
     @FXML private TextField tFStudentAddCity;
     @FXML private TextField tFStudentAddCountry;
     @FXML private ListView listStudent;
+
     // for student edit page
     @FXML private TextField tFStudentEditEmail;
     @FXML private Label lBStudentEditYourInfo;
@@ -69,94 +53,37 @@ public class studentController {
     @FXML private Label lBStudentEditCountry;
     @FXML private TextField tFStudentEditCountry;
     @FXML private Button btnEditStudent;
+
     // for Student delete page
     @FXML private TextField tFStudentDeleteEmail;
 
     DatabaseConnection databaseConnection = new DatabaseConnection();
 
-
     public void toHome(ActionEvent event) {
-        try {
-            Parent root = FXMLLoader.load(App.class.getResource("Home.fxml"));
-            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            System.out.println("Something went wrong");
-            e.printStackTrace();
-        }
+        controller.toPage(event, "Home");
     }
 
     public void toStudent(ActionEvent event) {
-        try {
-            Parent root = FXMLLoader.load(App.class.getResource("StudentAdd.fxml"));
-            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        controller.toPage(event, "StudentAdd");
     }
 
     public void toCourse(ActionEvent event) {
-        try {
-            Parent root = FXMLLoader.load(App.class.getResource("CourseAdd.fxml"));
-            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        controller.toPage(event, "CourseAdd");
     }
 
     public void toEnrollment(ActionEvent event) {
-        try {
-            Parent root = FXMLLoader.load(App.class.getResource("EnrollmentAdd.fxml"));
-            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        controller.toPage(event, "EnrollmentAdd");
     }
 
     public void toContentItem(ActionEvent event) {
-        try {
-            Parent root = FXMLLoader.load(App.class.getResource("ContentItemAdd.fxml"));
-            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        controller.toPage(event, "ContentItemAdd");
     }
 
     public void toStudentEdit(ActionEvent event) {
-        try {
-            Parent root = FXMLLoader.load(App.class.getResource("StudentEdit.fxml"));
-            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        controller.toPage(event, "StudentEdit");
     }
     public void toStudentDelete(ActionEvent event){
-        try {
-            Parent root = FXMLLoader.load(App.class.getResource("StudentDelete.fxml"));
-            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        controller.toPage(event, "StudentDelete");
     }
 
     public void showStudentEditPlace() {
@@ -328,7 +255,6 @@ public class studentController {
             tFStudentDeleteEmail.setText("Unknown email");
         }
     }
-
 
     public Date convertDate(int day, int month, int year) {
         SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
