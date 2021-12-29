@@ -306,6 +306,29 @@ public class studentController {
         }
     }
 
+    public void deleteStudent(){
+        String email = tFStudentDeleteEmail.getText();
+        ArrayList<Student> studentsToDelete = new ArrayList<>();
+        if (checkEmail(email)) {
+            try {
+                databaseConnection.connect();
+                studentsToDelete = databaseConnection.retrieveStudents();
+                for (Student i : studentsToDelete) {
+                    if (i.getEmailAddress().equals(email)) {
+                        databaseConnection.deleteStudentFromDatabase(i);
+                        tFStudentDeleteEmail.setText("Student removed");
+                        showStudent();
+                        break;
+                    }
+                }
+            } catch (Exception e){
+                System.out.println(e);
+            }
+        } else {
+            tFStudentDeleteEmail.setText("Unknown email");
+        }
+    }
+
 
     public Date convertDate(int day, int month, int year) {
         SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
