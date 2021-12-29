@@ -115,6 +115,14 @@ public class CourseController {
 
     public void showCourseEditPlace() {
         String courseName = tFNameEditCourse.getText();
+        lBSubjectEditCourse.setVisible(false);
+        lBDifficultyEditCourse.setVisible(false);
+        lBIntroTextEditCourse.setVisible(false);
+        tFSubjectEditCourse.setVisible(false);
+        tAIntroTextEditCourse.setVisible(false);
+        cBDifficultyEditCourse.setVisible(false);
+        btnSubmitEditCourse.setVisible(false);
+
         if (checkCourseName(courseName)) {
             lBSubjectEditCourse.setVisible(true);
             lBDifficultyEditCourse.setVisible(true);
