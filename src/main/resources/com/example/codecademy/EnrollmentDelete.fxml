@@ -1,14 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controllers.EnrollmentController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane maxHeight="-1.0" maxWidth="-1.0" minHeight="400.0" minWidth="640.0" prefHeight="-1.0" prefWidth="-1.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EnrollmentController">
+   <children>
+      <Button focusTraversable="false" layoutX="460.0" layoutY="299.0" mnemonicParsing="false" onAction="#listEnrollments" text="Update" />
+      <Button fx:id="BtnHome" layoutX="14.0" layoutY="46.0" mnemonicParsing="false" onAction="#toHome" text="Home">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="BtnStudent" layoutX="65.0" layoutY="46.0" mnemonicParsing="false" onAction="#toStudent" text="Student">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="BtnCourse" layoutX="126.0" layoutY="46.0" mnemonicParsing="false" onAction="#toCourse" text="Course">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="BtnEnrollment" defaultButton="true" layoutX="181.0" layoutY="46.0" mnemonicParsing="false" text="Enrollment">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="BtnContentItem" layoutX="259.0" layoutY="46.0" mnemonicParsing="false" onAction="#toContentItem" text="ContentItem">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Label layoutX="14.0" layoutY="14.0" text="Codecademy">
+         <font>
+            <Font name="System Bold Italic" size="22.0" />
+         </font>
+      </Label>
+      <Button fx:id="BtnAddEnrollment" layoutX="15.0" layoutY="85.0" mnemonicParsing="false" onAction="#toEnrollment" text="Add" />
+      <Button fx:id="BtnEditEnrollment" layoutX="53.0" layoutY="85.0" mnemonicParsing="false" text="Edit" />
+      <Button fx:id="BtnDeleteEnrollment" defaultButton="true" layoutX="90.0" layoutY="85.0" mnemonicParsing="false" text="Delete" />
+      <Label layoutX="18.0" layoutY="117.0" text="Delete an enrollment" />
+      <Label layoutX="18.0" layoutY="134.0" text="Student Emailaddress" />
+      <TextField fx:id="tFEmailEnrollmentDelete" layoutX="21.0" layoutY="151.0" />
+      <Label layoutX="21.0" layoutY="183.0" text="Course name" />
+      <Button layoutX="66.0" layoutY="299.0" mnemonicParsing="false" onAction="#deleteEnrollment" text="Delete" />
+      <ListView fx:id="enrollmentList" layoutX="356.0" layoutY="92.0" prefHeight="200.0" prefWidth="261.0" />
+      <Label layoutX="356.0" layoutY="71.0" text="Enrollments" />
+      <ComboBox fx:id="cbCourseEnrollmentDelete" layoutX="21.0" layoutY="200.0" onMouseClicked="#addCoursesToComboBoxOfStudent" prefWidth="150.0" />
+      <ComboBox fx:id="cbDateEnrollment" layoutX="21.0" layoutY="249.0" onMouseClicked="#addDatesToComboBoxOfCourse" prefWidth="150.0" />
+      <Label layoutX="22.0" layoutY="232.0" text="Date" />
+   </children>
 </AnchorPane>
