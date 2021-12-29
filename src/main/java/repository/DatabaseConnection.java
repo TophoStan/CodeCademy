@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.sql.Date;
 
@@ -298,19 +299,17 @@ public class DatabaseConnection {
      * push the Enrollment to the database with a number of
      * <code>setString(x, student.getMethod)</code>.
      *
-     * @param course
+     * @param enrollment
      * @throws SQLException         conn == null
      * @throws NullPointerException Enrollment == null
      */
-    public void addEnrollment(Enrollment enrollment, Student student, Course course) {
+    public void addEnrollment(Enrollment enrollment) {
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(
                     "INSERT INTO EnrollmentData(StudentId, CourseId, EnrollmentDate) VALUES (?,?,?)");
-            preparedStatement.setInt(1, student.getId());
-            preparedStatement.setInt(2, course.getId());
-            Date date = new Date(0);
-
-            preparedStatement.setDate(3, Date.valueOf(date.toLocalDate()));
+            preparedStatement.setInt(1, enrollment.getStudentId());
+            preparedStatement.setInt(2, enrollment.getCourseId());
+            preparedStatement.setDate(3, Date.valueOf(java.time.LocalDate.now()));
 
             preparedStatement.execute();
         } catch (Exception e) {
