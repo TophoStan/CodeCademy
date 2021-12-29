@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f6caa24b-064b-4fed-934d-55de25f54851" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controllers/CourseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controllers/CourseController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/repository/DatabaseConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/DatabaseConnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/codecademy/CourseAdd.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/codecademy/CourseAdd.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/codecademy/CourseDelete.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/codecademy/CourseDelete.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/codecademy/CourseEdit.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/codecademy/CourseEdit.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/controllers/enrollmentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/controllers/enrollmentController.class" afterDir="false" />
-    </list>
+    <list default="true" id="f6caa24b-064b-4fed-934d-55de25f54851" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -133,7 +125,7 @@
       <workItem from="1640350043669" duration="8648000" />
       <workItem from="1640361674855" duration="33000" />
       <workItem from="1640778456677" duration="1225000" />
-      <workItem from="1640781140862" duration="9063000" />
+      <workItem from="1640781140862" duration="9234000" />
     </task>
     <servers />
   </component>
