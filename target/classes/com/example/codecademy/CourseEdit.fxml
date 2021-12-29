@@ -49,19 +49,20 @@
             <Button fx:id="btnStudentDelete" layoutX="90.0" layoutY="85.0" mnemonicParsing="false" onAction="#toCourseDelete" text="Delete" />
             <Label layoutX="18.0" layoutY="117.0" text="Edit a course" />
             <Label layoutX="24.0" layoutY="134.0" text="Name" />
-            <Label fx:id="LBSubjectEditCourse" layoutX="24.0" layoutY="175.0" text="Subject" visible="false" />
-            <Label fx:id="LBIntroTextEditCourse" layoutX="24.0" layoutY="291.0" text="IntroductoryText" visible="false" />
-            <Label fx:id="LBDifficultyEditCourse" layoutX="24.0" layoutY="227.0" text="Difficulty" visible="false" />
+            <Label fx:id="lBSubjectEditCourse" layoutX="24.0" layoutY="175.0" text="Subject" visible="false" />
+            <Label fx:id="lBIntroTextEditCourse" layoutX="24.0" layoutY="291.0" text="IntroductoryText" visible="false" />
+            <Label fx:id="lBDifficultyEditCourse" layoutX="24.0" layoutY="227.0" text="Difficulty" visible="false" />
             <TextField fx:id="tFNameEditCourse" layoutX="21.0" layoutY="151.0" />
-            <TextField fx:id="TFSubjectEditCourse" layoutX="21.0" layoutY="200.0" visible="false" />
-            <TextArea fx:id="TAIntroTextEditCourse" layoutX="18.0" layoutY="309.0" prefHeight="71.0" prefWidth="155.0" visible="false" />
-            <ComboBox fx:id="CBDifficultyEditCourse" layoutX="21.0" layoutY="254.0" prefWidth="150.0" visible="false" visibleRowCount="4" />
-            <Button fx:id="BtnSubmitEditCourse" layoutX="233.0" layoutY="355.0" mnemonicParsing="false" text="Submit" visible="false" />
-            <ListView fx:id="coursesList" layoutX="442.0" layoutY="101.0" prefHeight="165.0" prefWidth="170.0" />
+            <TextField fx:id="tFSubjectEditCourse" layoutX="21.0" layoutY="200.0" visible="false" />
+            <TextArea fx:id="tAIntroTextEditCourse" layoutX="18.0" layoutY="309.0" prefHeight="71.0" prefWidth="155.0" visible="false" />
+            <ComboBox fx:id="cBDifficultyEditCourse" layoutX="21.0" layoutY="254.0" onMouseClicked="#loadDifficulties" prefWidth="150.0" visible="false" visibleRowCount="4" />
+            <Button fx:id="btnSubmitEditCourse" layoutX="233.0" layoutY="355.0" mnemonicParsing="false" onAction="#editCourse" text="Submit" visible="false" />
+            <ListView fx:id="courseList" layoutX="442.0" layoutY="101.0" prefHeight="165.0" prefWidth="170.0" />
             <Label layoutX="442.0" layoutY="78.0" text="Courses" />
             <Button fx:id="btnCheckEditCourse" layoutX="194.0" layoutY="151.0" mnemonicParsing="false" onAction="#showCourseEditPlace" text="Check" />
             <ListView fx:id="courseInfoList" layoutX="287.0" layoutY="103.0" prefHeight="165.0" prefWidth="143.0" />
             <Label layoutX="290.0" layoutY="78.0" text="Course info" />
+            <Button layoutX="560.0" layoutY="279.0" mnemonicParsing="false" onAction="#showCourses" text="Refresh" />
          </children>
       </AnchorPane>
    </children>

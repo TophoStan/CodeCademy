@@ -87,7 +87,7 @@
             <TextField fx:id="tFCourseAddName" layoutX="21.0" layoutY="151.0" />
             <TextField fx:id="tFCourseAddSubject" layoutX="21.0" layoutY="200.0" />
             <TextArea fx:id="tACourseAddIntroText" layoutX="18.0" layoutY="309.0" prefHeight="71.0" prefWidth="155.0" />
-            <ComboBox fx:id="cBCourseAddDifficulty" layoutX="21.0" layoutY="254.0" prefWidth="150.0" visibleRowCount="4" />
+            <ComboBox fx:id="cBCourseAddDifficulty" layoutX="21.0" layoutY="254.0" minHeight="-Infinity" onMouseClicked="#loadDifficulties" prefWidth="150.0" />
             <Button layoutX="233.0" layoutY="355.0" mnemonicParsing="false" onAction="#addCourseToDatabase" text="Submit" />
             <ListView fx:id="courseList" layoutX="379.0" layoutY="113.0" prefHeight="200.0" prefWidth="200.0" />
             <Label layoutX="379.0" layoutY="77.0" text="Courses" />

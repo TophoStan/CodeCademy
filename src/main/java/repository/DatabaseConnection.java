@@ -265,9 +265,9 @@ public class DatabaseConnection {
      */
     public void editCourseInformation(Course course) {
         try {
-            PreparedStatement preparedStatement = conn.prepareStatement("UPDATE Course SET Name = '" + course.getName()
+            PreparedStatement preparedStatement = conn.prepareStatement("UPDATE Course SET CourseName = '" + course.getName()
                     + "', Difficulty= '" + course.getDifficulty().toString() + "', Subject= '" + course.getSubject()
-                    + "', IntroductoryText ='" + course.getText() + "'");
+                    + "', IntroductoryText ='" + course.getText() + "' WHERE CourseId=" + course.getId());
             preparedStatement.executeUpdate();
         } catch (Exception e) {
             System.out.println(e);
@@ -287,7 +287,7 @@ public class DatabaseConnection {
     public void deleteCourse(Course course) {
         try {
             PreparedStatement preparedStatement = conn
-                    .prepareStatement("DELETE FROM Course WHERE id=" + course.getId());
+                    .prepareStatement("DELETE FROM Course WHERE CourseName='" + course.getName() + "'");
             preparedStatement.executeUpdate();
         } catch (Exception e) {
             System.out.println(e);
