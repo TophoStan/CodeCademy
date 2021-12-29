@@ -304,25 +304,7 @@ public class studentController {
             System.out.println(e);
         }
     }
-    public void deleteStudent(){
-        String email = tFStudentDeleteEmail.getText();
-        ArrayList<Student> studentsToDelete = new ArrayList<>();
-        if (checkEmail(email)) {
-            try {
-                databaseConnection.connect();
-                databaseConnection.retrieveStudents();
-                for (Student i : studentsToDelete) {
-                    if (i.getEmailAddress().equals(email)) {
-                        databaseConnection.deleteStudentFromDatabase(i);
-                    }
-                }
-            }catch (Exception e){
-                System.out.println(e);
-            }
-        } else {
-            tFStudentDeleteEmail.setText("Unknown email");
-        }
-    }
+
 
 
 
