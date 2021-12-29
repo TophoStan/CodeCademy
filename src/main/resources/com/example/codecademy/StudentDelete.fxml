@@ -40,9 +40,9 @@
             <Font name="System Bold Italic" size="22.0" />
          </font>
       </Label>
-      <Button fx:id="BtnAddStudent" layoutX="14.0" layoutY="85.0" mnemonicParsing="false" text="Add" />
+      <Button fx:id="BtnAddStudent" layoutX="14.0" layoutY="85.0" mnemonicParsing="false" onAction="#toStudent" text="Add" />
       <Button fx:id="BtnStudentEdit" layoutX="52.0" layoutY="85.0" mnemonicParsing="false" onAction="#toStudentEdit" text="Edit" />
-      <Button fx:id="BtnStudentDelete" defaultButton="true" layoutX="89.0" layoutY="85.0" mnemonicParsing="false" text="Delete" />
+      <Button fx:id="BtnStudentDelete" defaultButton="true" layoutX="89.0" layoutY="85.0" mnemonicParsing="false" onAction="#toStudentDelete" text="Delete" />
       <ListView fx:id="listStudent" layoutX="432.0" layoutY="84.0" prefHeight="200.0" prefWidth="200.0" />
       <Label layoutX="15.0" layoutY="117.0" text="Delete a student">
          <font>
