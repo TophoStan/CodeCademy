@@ -601,4 +601,28 @@ public class DatabaseConnection {
         return webcasts;
     }
 
+    public Course[] retrieveTop3Courses() {
+        Course[] courses = new Course[3];
+        int i = 0;
+
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs =  stmt.executeQuery("SELECT TOP 3 Coursename, COUNT(T3.EnrollmentId) AS Certificates FROM Course AS T1\n" +
+                    " JOIN EnrollmentData AS T2 ON t1.CourseID = t2.CourseId\n" +
+                    " JOIN Certificate AS T3 ON t3.EnrollmentId = t2.EnrollmentId\n" +
+                    " GROUP BY Coursename;");
+            while (rs.next()) {
+                Course course = new Course();
+                course.setName(rs.getString("CourseName"));
+                course.setCertificates(rs.getInt("Certificates"));
+
+                courses[i] = course;
+                i++;
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return courses;
+    }
+
 }

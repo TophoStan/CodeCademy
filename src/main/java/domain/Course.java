@@ -11,6 +11,7 @@ public class Course {
     private ArrayList<Module> modules;
     private ArrayList<Webcast> webcast;
     private ArrayList<Enrollment> enrollments;
+    private int certificates;
 
     public Course(String name, String subject, String text, Difficulty difficulty) {
         this.name = name;
@@ -88,6 +89,14 @@ public class Course {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public void setCertificates(int certificates) {
+        this.certificates = certificates;
+    }
+
+    public int getCertificates() {
+        return this.certificates;
     }
 
     @Override

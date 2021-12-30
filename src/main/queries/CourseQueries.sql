@@ -6,7 +6,7 @@ SELECT Coursename, COUNT(DISTINCT t4.StudentId) FROM Course AS T1
  GROUP BY Coursename
 
  -- Geef top 3 cursusen met meest behaalde certificates
-SELECT TOP 3 Coursename, COUNT(T3.EnrollmentId) FROM Course AS T1
+SELECT TOP 3 Coursename, COUNT(T3.EnrollmentId) AS Certificates FROM Course AS T1
  JOIN EnrollmentData AS T2 ON t1.CourseID = t2.CourseId
  JOIN Certificate AS T3 ON t3.EnrollmentId = t2.EnrollmentId
  GROUP BY Coursename;
