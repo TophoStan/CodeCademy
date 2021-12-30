@@ -93,7 +93,7 @@ public class DatabaseConnection {
             stmt.setString(9, student.getCountry());
 
             stmt.execute();
-            System.out.println("Succesfully added student to database");
+            System.out.println("Successfully added student to database");
 
             return true;
         } catch (Exception e) {
@@ -138,7 +138,7 @@ public class DatabaseConnection {
     }
 
     /**
-     * Deletes a student from the databse if the Student table contains the
+     * Deletes a student from the database if the Student table contains the
      * EmailAddress of the given <code>student</code> in the parameters
      *
      * @param student
@@ -167,7 +167,7 @@ public class DatabaseConnection {
     /**
      * Edits the student's information except for the EmailAddress.
      * After this method has been executed the changes will take affect
-     * immeadiately.
+     * immediately.
      *
      * @param student
      * @return boolean
@@ -214,7 +214,7 @@ public class DatabaseConnection {
             stmt.setString(4, course.getDifficulty().toString());
 
             stmt.execute();
-            System.out.println("Succesfully added course to database");
+            System.out.println("Successfully added course to database");
 
         } catch (Exception e) {
             System.out.println("Was not able to add course to database");
@@ -240,7 +240,7 @@ public class DatabaseConnection {
             ResultSet rs = stmt.executeQuery("SELECT * FROM Course");
             while (rs.next()) {
                 Course course = new Course();
-                course.setId(rs.getInt("Courseid"));
+                course.setId(rs.getInt("CourseId"));
                 course.setSubject(rs.getString("Subject"));
                 course.setName(rs.getString("CourseName"));
                 course.setText(rs.getString("IntroductoryText"));
@@ -257,7 +257,7 @@ public class DatabaseConnection {
 
     /**
      * Edits the course's information.
-     * After execution the changes will take affect immeadiately.
+     * After execution the changes will take effect immediately.
      *
      * @throws SQLException         conn == null
      * @throws NullPointerException course == null
@@ -358,11 +358,11 @@ public class DatabaseConnection {
         return enrollments;
     }
 
-    public void editEnrollment(Enrollment enrollment, Student student, Course course) throws SQLException {
+    public void editEnrollment(Enrollment enrollment) throws SQLException {
 
-        PreparedStatement preparedStatement = conn
-                .prepareStatement("UPDATE Enrollment SET studentId=" + student.getId() + " CourseId="
-                        + course.getId() + " WHERE EnrollmentId =" + enrollment.getEnrollmentId());
+        PreparedStatement preparedStatement = conn.prepareStatement("UPDATE EnrollmentData " +
+                  "SET studentId=" + enrollment.getStudentId() + ", CourseId="+ enrollment.getCourseId() + " ,EnrollmentDate ='" + enrollment.getEnrollmentDate()
+                + "' WHERE EnrollmentId =" + enrollment.getEnrollmentId());
         preparedStatement.executeUpdate();
 
     }
@@ -443,7 +443,7 @@ public class DatabaseConnection {
     }
 
     /**
-     * Deletes a Certificate from the databse if the course table contains the
+     * Deletes a Certificate from the database if the course table contains the
      * courseId of the given <code>certificate</code> in the parameters
      *
      * @param certificate

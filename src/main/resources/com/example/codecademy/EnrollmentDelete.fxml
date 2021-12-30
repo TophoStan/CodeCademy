@@ -42,7 +42,7 @@
          </font>
       </Label>
       <Button fx:id="BtnAddEnrollment" layoutX="15.0" layoutY="85.0" mnemonicParsing="false" onAction="#toEnrollment" text="Add" />
-      <Button fx:id="BtnEditEnrollment" layoutX="53.0" layoutY="85.0" mnemonicParsing="false" text="Edit" />
+      <Button fx:id="BtnEditEnrollment" layoutX="53.0" layoutY="85.0" mnemonicParsing="false" onAction="#toEdit" text="Edit" />
       <Button fx:id="BtnDeleteEnrollment" defaultButton="true" layoutX="90.0" layoutY="85.0" mnemonicParsing="false" text="Delete" />
       <Label layoutX="18.0" layoutY="117.0" text="Delete an enrollment" />
       <Label layoutX="18.0" layoutY="134.0" text="Student Emailaddress" />

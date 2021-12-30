@@ -74,7 +74,7 @@
          </font>
       </Label>
       <Button fx:id="BtnAddEnrollment" defaultButton="true" layoutX="15.0" layoutY="85.0" mnemonicParsing="false" text="Add" />
-      <Button fx:id="BtnEditEnrollment" layoutX="53.0" layoutY="85.0" mnemonicParsing="false" text="Edit" />
+      <Button fx:id="BtnEditEnrollment" layoutX="53.0" layoutY="85.0" mnemonicParsing="false" onAction="#toEdit" text="Edit" />
       <Button fx:id="BtnDeleteEnrollment" layoutX="90.0" layoutY="85.0" mnemonicParsing="false" onAction="#toDelete" text="Delete" />
       <Label layoutX="18.0" layoutY="117.0" text="Add an enrollment" />
       <Label layoutX="18.0" layoutY="134.0" text="Student Emailaddress" />
