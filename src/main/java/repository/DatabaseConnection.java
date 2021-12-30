@@ -569,9 +569,33 @@ public class DatabaseConnection {
                 webcast.setSpeakerId(rs.getInt("SpeakerId"));
                 webcast.setViews(rs.getInt("Views"));
 
+                webcasts.add(webcast);
             }
         } catch (Exception e) {
             System.out.println(e);
+        }
+
+        return webcasts;
+    }
+
+    public Webcast[] retrieveTop3Webcasts() {
+        Webcast[] webcasts = new Webcast[3];
+        int i = 0;
+
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs =  stmt.executeQuery("SELECT TOP 3 title, views FROM webcast\n" +
+                    "ORDER BY Webcast.views DESC");
+            while (rs.next()) {
+                Webcast webcast = new Webcast();
+                webcast.setTitle(rs.getString("Title"));
+                webcast.setViews(rs.getInt("Views"));
+
+                webcasts[i] = webcast;
+                i++;
+            }
+        } catch (SQLException e) {
+            System.out.println(e);;
         }
 
         return webcasts;
