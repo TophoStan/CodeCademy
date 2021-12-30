@@ -6,14 +6,14 @@ import domain.Student;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import repository.DatabaseConnection;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class EnrollmentController {
 
@@ -25,11 +25,19 @@ public class EnrollmentController {
     @FXML private ComboBox cbCourseEnrollmentDelete;
     @FXML private ComboBox cbDateEnrollment;
     @FXML private ListView enrollmentList;
+    @FXML private ComboBox cbCourseEnrollmentToEdit;
+    @FXML private Label lbCourseEdit;
+    @FXML private Label lbDateEdit;
+    @FXML private TextField tfDateDay;
+    @FXML private TextField tfDateMonth;
+    @FXML private TextField tfDateYear;
+    @FXML private Button btnEditEnrollment;
 
     private DatabaseConnection databaseConnection = new DatabaseConnection();
     private Course selectedCourse = new Course();
     private ArrayList<Enrollment> enrollmentsOfStudent = new ArrayList<>();
     private ArrayList<Course> enrolledCoursesOfStudent = new ArrayList<>();
+    private Enrollment enrollmentFromDatabaseThatWillBeEdited = new Enrollment();
 
     public void toHome(ActionEvent event) {
         controller.toPage(event, "Home");
@@ -53,6 +61,7 @@ public class EnrollmentController {
     public void toDelete(ActionEvent event){
         controller.toPage(event, "EnrollmentDelete");
     }
+    public void toEdit(ActionEvent event){ controller.toPage(event, "EnrollmentEdit");}
 
     public void addEnrollment(){
         databaseConnection.connect();
@@ -77,6 +86,7 @@ public class EnrollmentController {
         databaseConnection.addEnrollment(enrollment);
         tFEmailEnrollment.clear();
         cbCourseEnrollment.getItems().clear();
+        listEnrollments();
     }
 
     public void addValuesToComboBox() {
@@ -175,10 +185,125 @@ public class EnrollmentController {
                    databaseConnection.deleteEnrollment(enrollment);
                 }
             }
+            tFEmailEnrollmentDelete.clear();
+            cbDateEnrollment.getItems().clear();
+            cbCourseEnrollmentDelete.getItems().clear();
+            listEnrollments();
         } catch (Exception e){
             System.out.println(e);
         }
     }
+
+    public void editEnrollment(){
+        databaseConnection.connect();
+        Date date = convertDate(Integer.parseInt(tfDateDay.getText()),Integer.parseInt(tfDateMonth.getText()), Integer.parseInt(tfDateYear.getText()));
+        Enrollment enrollmentToEdit = new Enrollment();
+        Course courseToEdit = new Course();
+        Student studentToEdit = new Student();
+        try {
+            //Sets the selected course into a course Object
+            for (Course course: databaseConnection.retrieveCourses()) {
+                if(course.getName().equals(cbCourseEnrollmentToEdit.getValue().toString())){
+                    courseToEdit = course;
+                }
+            }
+
+            for (Student studentFromList : databaseConnection.retrieveStudents()) {
+                if(studentFromList.getEmailAddress().equals(tFEmailEnrollmentDelete.getText())){
+                    studentToEdit = studentFromList;
+                }
+            }
+            enrollmentToEdit.setCourse(courseToEdit);
+            enrollmentToEdit.setStudent(studentToEdit);
+            enrollmentToEdit.setEnrollmentDate(date);
+            enrollmentToEdit.setEnrollmentId(enrollmentFromDatabaseThatWillBeEdited.getEnrollmentId());
+            databaseConnection.editEnrollment(enrollmentToEdit);
+            tFEmailEnrollmentDelete.clear();
+            cbCourseEnrollmentDelete.getItems().clear();
+            cbDateEnrollment.getItems().clear();
+            setVisible(false);
+            listEnrollments();
+        } catch (Exception e){
+            System.out.println(e);
+        }
+    }
+
+    public void checkEnrollment() {
+        Student studentToCheck = new Student();
+        Enrollment enrollmentToCheck = new Enrollment();
+
+        databaseConnection.connect();
+        try {
+            Date date = Date.valueOf(cbDateEnrollment.getValue().toString());
+            enrollmentToCheck.setEnrollmentDate(date);
+            enrollmentToCheck.setCourse(selectedCourse);
+
+            ArrayList<Student> students = databaseConnection.retrieveStudents();
+
+            for (Student studentFromList : students) {
+                if(studentFromList.getEmailAddress().equals(tFEmailEnrollmentDelete.getText())){
+                    studentToCheck = studentFromList;
+                }
+            }
+            enrollmentToCheck.setStudent(studentToCheck);
+            ArrayList<Enrollment> enrollments = databaseConnection.retrieveEnrollments();
+
+            for (Enrollment enrollment: enrollments) {
+                setVisible(false);
+
+                if(enrollment.getCourseName().equals(enrollmentToCheck.getCourseName()) && enrollment.getStudentName().equals(enrollmentToCheck.getStudentName()) && enrollment.getEnrollmentDate().toString().equals(enrollmentToCheck.getEnrollmentDate().toString())){
+                    setVisible(true);
+                    enrollmentFromDatabaseThatWillBeEdited = enrollment;
+                }
+            }
+
+        } catch (Exception e) {
+
+        }
+    }
+
+    public void addAllCoursesToCombobox() {
+        databaseConnection.connect();
+        try {
+            cbCourseEnrollmentToEdit.getItems().clear();
+            for (Course course : databaseConnection.retrieveCourses()) {
+                cbCourseEnrollmentToEdit.getItems().add(course.getName());
+            }
+        } catch (Exception e) {
+
+        }
+    }
+    public void setVisible(boolean truOrFalse){
+        if(truOrFalse){
+            cbCourseEnrollmentToEdit.setVisible(true);
+            lbCourseEdit.setVisible(true);
+            lbDateEdit.setVisible(true);
+            tfDateDay.setVisible(true);
+            tfDateMonth.setVisible(true);
+            tfDateYear.setVisible(true);
+            btnEditEnrollment.setVisible(true);
+        } else {
+            cbCourseEnrollmentToEdit.setVisible(false);
+            lbCourseEdit.setVisible(false);
+            lbDateEdit.setVisible(false);
+            tfDateDay.setVisible(false);
+            tfDateMonth.setVisible(false);
+            tfDateYear.setVisible(false);
+            btnEditEnrollment.setVisible(false);
+        }
+    }
+
+    public Date convertDate(int day, int month, int year) {
+        SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR, year);
+        cal.set(Calendar.MONTH, month - 1);
+        cal.set(Calendar.DAY_OF_MONTH, day);
+        java.sql.Date date = new java.sql.Date(cal.getTimeInMillis());
+        return date;
+    }
+
+
 
 
 }
