@@ -1,5 +1,6 @@
 package controllers;
 
+import domain.ContentItem;
 import domain.Course;
 import domain.Difficulty;
 import javafx.event.ActionEvent;
@@ -9,6 +10,8 @@ import javafx.scene.control.*;
 
 import repository.DatabaseConnection;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CourseController {
 
@@ -31,11 +34,17 @@ public class CourseController {
     @FXML TextArea tAIntroTextEditCourse;
     @FXML ComboBox cBDifficultyEditCourse;
     @FXML Button btnSubmitEditCourse;
-    @FXML ListView coursesList;
     @FXML ListView courseInfoList;
 
     // for course delete page
     @FXML TextField tFNameDeleteCourse;
+
+    // for course select page
+    @FXML TextField tFNameSelectCourse;
+    @FXML Label lBCourseSelectionAmount;
+    @FXML Label lBCourseSelectionProgressTitle;
+    @FXML ListView progressList;
+
 
     DatabaseConnection databaseConnection = new DatabaseConnection();
 
@@ -65,6 +74,10 @@ public class CourseController {
 
     public void toCourseDelete(ActionEvent event) {
         controller.toPage(event,  "CourseDelete");
+    }
+
+    public void toCourseSelection(ActionEvent event) {
+        controller.toPage(event, "CourseSelection");
     }
 
     public void showCourses() {
@@ -228,5 +241,39 @@ public class CourseController {
             System.out.println(e);
         }
         return output;
+    }
+
+    public void selectCourse() {
+        String courseName = tFNameSelectCourse.getText();
+        if (checkCourseName(courseName)) {
+            // Shows how many students finished a course
+
+            int amountOfStudents = databaseConnection.studentsFinishedCourse(courseName);
+            lBCourseSelectionAmount.setVisible(true);
+
+            lBCourseSelectionAmount.setText(courseName + ": " + String.valueOf(amountOfStudents) + " students");
+
+            // Shows for every module the progress percentage of all students
+            HashMap<Integer, Integer> progressHashMap = databaseConnection.getProgressForCourse(courseName);
+            ArrayList<Course> allCourses = databaseConnection.retrieveCourses();
+            lBCourseSelectionProgressTitle.setVisible(true);
+            progressList.getItems().clear();
+            progressList.setVisible(true);
+
+            for (Map.Entry<Integer, Integer> i : progressHashMap.entrySet()) {
+                int courseId = i.getKey();
+                int progress = i.getValue();
+
+                for (Course course: allCourses) {
+                    if (course.getId() == courseId) {
+                        progressList.getItems().add(course.getName() + ": " + progress + "%");
+                        break;
+                    }
+                }
+            }
+
+        } else {
+            tFNameSelectCourse.setText("Wrong course name!");
+        }
     }
 }

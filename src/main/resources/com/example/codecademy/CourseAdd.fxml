@@ -92,6 +92,7 @@
             <ListView fx:id="courseList" layoutX="379.0" layoutY="113.0" prefHeight="200.0" prefWidth="200.0" />
             <Label layoutX="379.0" layoutY="77.0" text="Courses" />
             <Button fx:id="btnCourseAddRefresh" layoutX="518.0" layoutY="320.0" mnemonicParsing="false" onAction="#showCourses" prefHeight="25.0" prefWidth="61.0" text="Refresh" />
+            <Button layoutX="141.0" layoutY="85.0" mnemonicParsing="false" onAction="#toCourseSelection" text="Selection" />
          </children>
     </AnchorPane>
   </children>

@@ -5,12 +5,11 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CourseController">
+<AnchorPane prefHeight="451.0" prefWidth="616.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CourseController">
    <children>
-      <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+      <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="451.0" prefWidth="616.0">
          <children>
             <Button fx:id="BtnHome" layoutX="14.0" layoutY="46.0" mnemonicParsing="false" onAction="#toHome" text="Home">
                <font>
@@ -44,16 +43,19 @@
             </Label>
             <Button fx:id="BtnAddStudent" layoutX="15.0" layoutY="85.0" mnemonicParsing="false" onAction="#toCourse" text="Add" />
             <Button fx:id="BtnStudentEdit" layoutX="53.0" layoutY="85.0" mnemonicParsing="false" onAction="#toCourseEdit" text="Edit" />
-            <Button fx:id="BtnStudentDelete" defaultButton="true" layoutX="90.0" layoutY="85.0" mnemonicParsing="false" onAction="#showCourses" text="Delete" />
-            <Label layoutX="18.0" layoutY="117.0" text="Delete a course" />
+            <Button fx:id="BtnStudentDelete" layoutX="90.0" layoutY="85.0" mnemonicParsing="false" onAction="#toCourseDelete" text="Delete" />
+            <Label layoutX="18.0" layoutY="117.0" text="Select a course" />
             <Label layoutX="24.0" layoutY="134.0" text="Name" />
-            <TextField fx:id="tFNameDeleteCourse" layoutX="21.0" layoutY="151.0" />
+            <TextField fx:id="tFNameSelectCourse" layoutX="21.0" layoutY="151.0" />
             <ListView fx:id="courseList" layoutX="442.0" layoutY="101.0" prefHeight="165.0" prefWidth="170.0" />
             <Label layoutX="442.0" layoutY="77.0" text="Courses" />
-            <Button fx:id="btnDeleteCourse" layoutX="194.0" layoutY="151.0" mnemonicParsing="false" onAction="#deleteCourse" text="Delete" />
+            <Button fx:id="btnSelectCourse" layoutX="194.0" layoutY="151.0" mnemonicParsing="false" onAction="#selectCourse" text="Select" />
             <Button fx:id="btnCourseRefresh" layoutX="560.0" layoutY="273.0" mnemonicParsing="false" onAction="#showCourses" text="Refresh" />
-            <Button layoutX="138.0" layoutY="85.0" mnemonicParsing="false" onAction="#toCourseSelection" text="Selection" />
+            <Button defaultButton="true" layoutX="138.0" layoutY="85.0" mnemonicParsing="false" onAction="#toCourseSelection" text="Selection" />
+            <Label fx:id="lBCourseSelectionAmount" layoutX="20.0" layoutY="192.0" visible="false" />
+            <ListView fx:id="progressList" layoutX="16.0" layoutY="235.0" prefHeight="208.0" prefWidth="200.0" visible="false" />
+            <Label fx:id="lBCourseSelectionProgressTitle" layoutX="20.0" layoutY="209.0" text="Progress for each module" visible="false" />
          </children>
       </AnchorPane>
    </children>
-</VBox>
+</AnchorPane>

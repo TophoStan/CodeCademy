@@ -52,6 +52,7 @@
             <Label layoutX="442.0" layoutY="77.0" text="Courses" />
             <Button fx:id="btnDeleteCourse" layoutX="194.0" layoutY="151.0" mnemonicParsing="false" onAction="#deleteCourse" text="Delete" />
             <Button fx:id="btnCourseRefresh" layoutX="560.0" layoutY="273.0" mnemonicParsing="false" onAction="#showCourses" text="Refresh" />
+            <Button layoutX="138.0" layoutY="85.0" mnemonicParsing="false" onAction="#toCourseSelection" text="Selection" />
          </children>
       </AnchorPane>
    </children>

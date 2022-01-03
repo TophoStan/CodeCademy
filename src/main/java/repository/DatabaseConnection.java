@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.sql.Date;
 import java.util.HashMap;
@@ -648,4 +647,45 @@ public class DatabaseConnection {
         return certificatesFromStudentList;
     }
 
+    public int studentsFinishedCourse(String courseName) {
+        int output = 0;
+
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT Coursename, COUNT(DISTINCT t4.StudentId) AS Amount FROM Course AS T1\n" +
+                    " JOIN EnrollmentData AS T2 ON t1.CourseID = t2.CourseId\n" +
+                    " JOIN Certificate AS T3 ON t3.EnrollmentId = t2.EnrollmentId\n" +
+                    " JOIN Student AS T4 ON t4.StudentId = t2.StudentId\n WHERE Coursename = '" + courseName + "'" +
+                    " GROUP BY Coursename");
+
+            while (rs.next()) {
+                output = rs.getInt("Amount");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return output;
+    }
+
+    public HashMap<Integer, Integer> getProgressForCourse(String courseName) {
+        HashMap<Integer, Integer> progressForCourse = new HashMap<>();
+
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(" SELECT t4.CourseID, t3.ContentItemId, AVG(t1.Percentage) AS average_progress FROM progress AS t1\n" +
+                    "  JOIN ContentItem AS t2 ON t2.ContentItemId = t1.ContentItemID\n" +
+                    "JOIN module AS t3 ON t3.ContentItemId = t2.ContentItemId\n" +
+                    "JOIN course AS t4 ON t4.CourseID = t2.CourseId\n" +
+                    "WHERE t4.CourseName = '" + courseName + "'\n" +
+                    "GROUP BY t4.CourseID, t3.ContentItemId");
+            while (rs.next()) {
+                progressForCourse.put(rs.getInt("ContentItemId"), rs.getInt("average_progress"));
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return progressForCourse;
+    }
 }

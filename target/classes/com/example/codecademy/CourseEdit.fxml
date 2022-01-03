@@ -63,6 +63,7 @@
             <ListView fx:id="courseInfoList" layoutX="287.0" layoutY="103.0" prefHeight="165.0" prefWidth="143.0" />
             <Label layoutX="290.0" layoutY="78.0" text="Course info" />
             <Button layoutX="560.0" layoutY="279.0" mnemonicParsing="false" onAction="#showCourses" text="Refresh" />
+            <Button layoutX="141.0" layoutY="85.0" mnemonicParsing="false" onAction="#toCourseSelection" text="Selection" />
          </children>
       </AnchorPane>
    </children>

@@ -74,6 +74,10 @@ public class Course {
         this.modules.remove(module);
     }
 
+    public ArrayList<Module> getModulesFromCourse() {
+        return this.modules;
+    }
+
     public ArrayList<Enrollment> listEnrollments() {
         return this.enrollments;
     }
