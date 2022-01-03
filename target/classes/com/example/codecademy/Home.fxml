@@ -132,6 +132,62 @@
                   <Font size="10.0" />
                </font>
             </Button>
+            <Label layoutX="320.0" layoutY="109.0" text="Courses with most certificates">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Button layoutX="522.0" layoutY="107.0" mnemonicParsing="false" onAction="#getTop3CourseCertificates" text="Load">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Button>
+            <Accordion layoutX="320.0" layoutY="131.0" maxHeight="180.0" minHeight="123.0" prefHeight="180.0">
+              <panes>
+                <TitledPane fx:id="lBHomeCoursesCollapse1" expanded="false" minHeight="123.0" prefHeight="123.0" text="Title 4 Collapse">
+                  <content>
+                    <AnchorPane maxHeight="123.0" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Label fx:id="lBHomeCourseTitle1" layoutX="14.0" layoutY="14.0" text="Title 1">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lBHomeCourseCertificates1" layoutX="14.0" layoutY="40.0" text="Certificates 1" />
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </TitledPane>
+                <TitledPane fx:id="lBHomeCoursesCollapse2" expanded="false" maxHeight="123.0" minHeight="123.0" prefHeight="123.0" text="Title 5 Collapse">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Label fx:id="lBHomeCourseTitle2" layoutX="14.0" layoutY="14.0" text="Title 2">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lBHomeCourseCertificates2" layoutX="14.0" layoutY="44.0" text="Certificates 2" />
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </TitledPane>
+                <TitledPane fx:id="lBHomeCoursesCollapse3" expanded="false" maxHeight="123.0" minHeight="123.0" prefHeight="123.0" text="Title 6 Collapse">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Label fx:id="lBHomeCourseTitle3" layoutX="14.0" layoutY="14.0" text="Title 3">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lBHomeCourseCertificates3" layoutX="14.0" layoutY="44.0" text="Certificates 3" />
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </TitledPane>
+              </panes>
+            </Accordion>
             </children>
         </AnchorPane>
     </children>
