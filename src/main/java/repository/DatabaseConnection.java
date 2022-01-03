@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.sql.Date;
+import java.util.HashMap;
 
 import domain.*;
 import domain.Module;
@@ -660,6 +661,28 @@ public class DatabaseConnection {
         }
 
         return contactPeople;
+    }
+
+    public ArrayList<Integer> certificatesFromStudent(String email) {
+         ArrayList<Integer> certificatesFromStudentList = new ArrayList<>();
+
+
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Student AS t1\n" +
+                    " INNER JOIN EnrollmentData AS t2 ON t1.StudentId = t2.StudentId\n" +
+                    " INNER JOIN Certificate AS t3 ON t3.EnrollmentId = t2.EnrollmentId\n" +
+                    "WHERE EmailAddress = '"+ email +"'");
+
+
+            while (rs.next()) {
+                certificatesFromStudentList.add(rs.getInt("CourseId"));
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return certificatesFromStudentList;
     }
 
 }

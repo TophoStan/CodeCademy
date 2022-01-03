@@ -1,5 +1,6 @@
 package controllers;
 
+import domain.Course;
 import domain.Student;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -57,6 +58,10 @@ public class StudentController {
     // for Student delete page
     @FXML private TextField tFStudentDeleteEmail;
 
+    // for Student selection page
+    @FXML private TextField tFStudentSelectionEmail;
+    @FXML private ListView certificatesList;
+
     DatabaseConnection databaseConnection = new DatabaseConnection();
 
     public void toHome(ActionEvent event) {
@@ -84,6 +89,9 @@ public class StudentController {
     }
     public void toStudentDelete(ActionEvent event){
         controller.toPage(event, "StudentDelete");
+    }
+    public void toStudentSelection(ActionEvent event) {
+        controller.toPage(event, "StudentSelection");
     }
 
     public void showStudentEditPlace() {
@@ -253,6 +261,33 @@ public class StudentController {
             }
         } else {
             tFStudentDeleteEmail.setText("Unknown email");
+        }
+    }
+
+    public void selectStudent() {
+        String email = tFStudentSelectionEmail.getText();
+        ArrayList<Course> allCourses = new ArrayList<>();
+        ArrayList<Integer> courseIdList = new ArrayList<>();
+
+        if (checkEmail(email)) {
+            certificatesList.getItems().clear();
+            databaseConnection.connect();
+            try {
+                allCourses = databaseConnection.retrieveCourses();
+                courseIdList = databaseConnection.certificatesFromStudent(email);
+
+                for (Course course : allCourses) {
+                    for (Integer i : courseIdList) {
+                        if (i == course.getId()) {
+                            certificatesList.getItems().add(course.getName());
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        } else {
+            tFStudentSelectionEmail.setText("Wrong email!");
         }
     }
 

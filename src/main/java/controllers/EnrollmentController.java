@@ -254,11 +254,12 @@ public class EnrollmentController {
                 if(enrollment.getCourseName().equals(enrollmentToCheck.getCourseName()) && enrollment.getStudentName().equals(enrollmentToCheck.getStudentName()) && enrollment.getEnrollmentDate().toString().equals(enrollmentToCheck.getEnrollmentDate().toString())){
                     setVisible(true);
                     enrollmentFromDatabaseThatWillBeEdited = enrollment;
+                    break;
                 }
             }
 
         } catch (Exception e) {
-
+            System.out.println(e);
         }
     }
 
