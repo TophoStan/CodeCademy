@@ -5,12 +5,25 @@ import java.util.ArrayList;
 public class Speaker {
     private String name;
     private String organisation;
+    private int id;
     private ArrayList<Webcast> voicedWebcasts;
 
     public Speaker(String name, String organisation) {
         this.name = name;
         this.organisation = organisation;
         voicedWebcasts = new ArrayList<>();
+    }
+
+    public Speaker() {
+
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {

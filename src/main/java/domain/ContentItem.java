@@ -7,12 +7,12 @@ public abstract class ContentItem {
     private String description;
     private String subject;
     private Date publicationDate;
-    private String status;
+    private Status status;
     private int percentage;
     private int courseId;
     private int contentItemId;
 
-    public ContentItem(String title, String description, String subject, Date publicationDate, String status,
+    public ContentItem(String title, String description, String subject, Date publicationDate, Status status,
                        int percentage) {
         this.title = title;
         this.description = description;
@@ -58,11 +58,11 @@ public abstract class ContentItem {
         this.publicationDate = publicationDate;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
