@@ -112,6 +112,7 @@
                   <Font size="10.0" />
                </font>
             </Button>
+            <Button layoutX="140.0" layoutY="85.0" mnemonicParsing="false" onAction="#toStudentSelection" text="Selection" />
             </children>
         </AnchorPane>
     </children>

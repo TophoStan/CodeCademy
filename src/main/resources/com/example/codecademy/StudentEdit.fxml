@@ -75,5 +75,6 @@
       <TextField fx:id="tFStudentEditDay" layoutX="20.0" layoutY="351.0" prefHeight="25.0" prefWidth="38.0" promptText="Day" visible="false" />
       <TextField fx:id="tFStudentEditYear" layoutX="122.0" layoutY="351.0" prefHeight="25.0" prefWidth="49.0" promptText="Year" visible="false" />
       <TextField fx:id="tFStudentEditMonth" layoutX="63.0" layoutY="351.0" prefHeight="25.0" prefWidth="55.0" promptText="Month" visible="false" />
+      <Button layoutX="139.0" layoutY="85.0" mnemonicParsing="false" onAction="#toStudentSelection" text="Selection" />
    </children>
 </AnchorPane>
