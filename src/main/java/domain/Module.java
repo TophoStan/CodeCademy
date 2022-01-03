@@ -7,7 +7,7 @@ public class Module extends ContentItem {
     private int contactPersonId;
     private int trackingNumber;
 
-    public Module(String title, String description, String subject, Date publicationDate, String status,
+    public Module(String title, String description, String subject, Date publicationDate, Status status,
                   int percentage, String version) {
         super(title, description, subject, publicationDate, status, percentage);
         this.version = version;

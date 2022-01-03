@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-1.0" maxWidth="-1.0" minHeight="394.0" minWidth="640.0" prefHeight="394.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ContentItemController">
+   <children>
+      <Button focusTraversable="false" layoutX="487.0" layoutY="294.0" mnemonicParsing="false" onAction="#listContentItems" text="Update" />
+      <Button fx:id="BtnHome" layoutX="14.0" layoutY="46.0" mnemonicParsing="false" onAction="#toHome" text="Home">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="BtnStudent" layoutX="65.0" layoutY="46.0" mnemonicParsing="false" onAction="#toStudent" text="Student">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="BtnCourse" layoutX="126.0" layoutY="46.0" mnemonicParsing="false" onAction="#toCourse" text="Course">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="BtnEnrollment" layoutX="181.0" layoutY="46.0" mnemonicParsing="false" text="Enrollment">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="BtnContentItem" defaultButton="true" layoutX="259.0" layoutY="46.0" mnemonicParsing="false" onAction="#toContentItem" text="ContentItem">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Label layoutX="14.0" layoutY="14.0" text="Codecademy">
+         <font>
+            <Font name="System Bold Italic" size="22.0" />
+         </font>
+      </Label>
+      <Button fx:id="BtnAddEnrollment" defaultButton="true" layoutX="15.0" layoutY="85.0" mnemonicParsing="false" text="Add" />
+      <Label layoutX="18.0" layoutY="117.0" text="Add a contentItem" />
+      <Label layoutX="18.0" layoutY="134.0" text="State" />
+      <Button layoutX="270.0" layoutY="343.0" mnemonicParsing="false" onAction="#addContentItem" text="Add" />
+      <ListView fx:id="listView" layoutX="411.0" layoutY="92.0" prefHeight="200.0" prefWidth="206.0" />
+      <Label layoutX="470.0" layoutY="77.0" text="ContentItems" />
+      <Label fx:id="resultLabel" layoutX="181.0" layoutY="307.0" prefHeight="25.0" prefWidth="299.0" text="The date at the moment of pressing the submit button" />
+      <Label fx:id="resultLabel1" layoutX="182.0" layoutY="320.0" prefHeight="25.0" prefWidth="287.0" text="is the date that will be used for the publication date" />
+      <ComboBox fx:id="cbState" layoutX="18.0" layoutY="151.0" onMouseClicked="#addValuesTocbState" prefWidth="150.0" />
+      <Label layoutX="20.0" layoutY="184.0" text="Title" />
+      <TextField fx:id="tfTitle" layoutX="19.0" layoutY="201.0" />
+      <TextArea fx:id="taDescription" layoutX="17.0" layoutY="253.0" prefHeight="54.0" prefWidth="149.0" />
+      <Label layoutX="18.0" layoutY="236.0" text="Description" />
+      <ComboBox fx:id="cbCourses" layoutX="18.0" layoutY="330.0" onMouseClicked="#addValuesTocbCourses" prefWidth="150.0" />
+      <Label layoutX="19.0" layoutY="311.0" text="Course it belongs To" />
+      <RadioButton fx:id="radWebcast" layoutX="214.0" layoutY="109.0" mnemonicParsing="false" onAction="#setVisible" text="Webcast">
+         <toggleGroup>
+            <ToggleGroup fx:id="type" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="radModule" layoutX="214.0" layoutY="126.0" mnemonicParsing="false" onAction="#setVisible" text="Module" toggleGroup="$type" />
+      <Label fx:id="lblVersion" layoutX="214.0" layoutY="155.0" text="Version" visible="false" />
+      <TextField fx:id="tfVersion" layoutX="214.0" layoutY="172.0" prefHeight="25.0" prefWidth="99.0" visible="false" />
+      <ComboBox fx:id="cbContactPerson" layoutX="214.0" layoutY="224.0" onMouseClicked="#addValuesTocbContactPerson" prefWidth="150.0" visible="false" />
+      <Label fx:id="lblContactPerson" layoutX="214.0" layoutY="205.0" text="ContactPerson" visible="false" />
+      <Label fx:id="lblURL" layoutX="214.0" layoutY="155.0" text="URL" visible="false" />
+      <TextField fx:id="tfURL" layoutX="215.0" layoutY="172.0" visible="false" />
+      <Label fx:id="lblSpeaker" layoutX="216.0" layoutY="204.0" text="Speaker" visible="false" />
+      <ComboBox fx:id="cbSpeaker" layoutX="217.0" layoutY="224.0" onMouseClicked="#addValuesTocbSpeaker" prefWidth="150.0" visible="false" />
+   </children>
+</AnchorPane>

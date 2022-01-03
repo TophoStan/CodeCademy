@@ -10,14 +10,7 @@ import java.util.ArrayList;
 import java.sql.Date;
 import java.util.HashMap;
 
-import domain.Certificate;
-import domain.ContentItem;
-import domain.Course;
-import domain.Difficulty;
-import domain.Employee;
-import domain.Enrollment;
-import domain.Student;
-import domain.Webcast;
+import domain.*;
 import domain.Module;
 
 /**
@@ -462,15 +455,15 @@ public class DatabaseConnection {
         }
     }
 
-    public void addContentItem(ContentItem content, Course course) {
+    public void addContentItem(ContentItem content) {
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(
-                    "INSERT INTO ContentItem(PublicationDate,State,Title,Description,CourseId) VALUES(?,?,?,?,?)");
+                    "INSERT INTO ContentItem(PublicationDate,State,Title,Description,CourseId) VALUES(?,?,?,?,?,?)");
             preparedStatement.setDate(1, content.getPublicationDate());
-            preparedStatement.setString(2, content.getStatus());
+            preparedStatement.setString(2, content.getStatus().toString());
             preparedStatement.setString(3, content.getTitle());
             preparedStatement.setString(4, content.getDescription());
-            preparedStatement.setInt(5, course.getId());
+            preparedStatement.setInt(5, content.getCourseId());
 
             preparedStatement.executeUpdate();
         } catch (Exception e) {
@@ -489,8 +482,7 @@ public class DatabaseConnection {
                 };
                 contentItem.setDescription(rs.getString("Description"));
                 contentItem.setPublicationDate(rs.getDate("PublicationDate"));
-                contentItem.setStatus(rs.getString("Status"));
-                contentItem.setSubject(rs.getString("Subject"));
+                contentItem.setStatus(Status.valueOf(rs.getString("State")));
                 contentItem.setTitle(rs.getString("Title"));
                 contentItem.setCourseId(rs.getInt("CourseId"));
                 contentItem.setContentItemId(rs.getInt("ContentItemId"));
@@ -503,15 +495,15 @@ public class DatabaseConnection {
         return contentItems;
     }
 
-    public void addModule(Module module, ContentItem contentItem) {
+    public void addModule(Module module) {
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(
                     "INSERT INTO Module(ContentItemId,Title,Version, ContactPersonId, TrackingNumber) VALUES(?,?,?,?,?)");
-            preparedStatement.setInt(1, contentItem.getContentItemId());
+            preparedStatement.setInt(1, module.getContentItemId());
             preparedStatement.setString(2, module.getTitle());
             preparedStatement.setString(3, module.getVersion());
             preparedStatement.setInt(4, module.getContactPersonId());
-            preparedStatement.setInt(5, contentItem.getCourseId());
+            preparedStatement.setInt(5, module.getCourseId());
 
             preparedStatement.executeUpdate();
         } catch (Exception e) {
@@ -541,14 +533,15 @@ public class DatabaseConnection {
 
     }
 
-    public void addWebcast(Webcast webcast, ContentItem contentItem) {
+    public void addWebcast(Webcast webcast) {
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(
-                    "INSERT INTO Webcast(ContentItemId,Title,SpeakerId, Views) VALUES(?,?,?,?)");
-            preparedStatement.setInt(1, contentItem.getContentItemId());
+                    "INSERT INTO Webcast(ContentItemId,Title,SpeakerId, Views, URL) VALUES(?,?,?,?,?)");
+            preparedStatement.setInt(1, webcast.getContentItemId());
             preparedStatement.setString(2, webcast.getTitle());
             preparedStatement.setInt(3, webcast.getSpeakerId());
-            preparedStatement.setInt(3, webcast.getViews());
+            preparedStatement.setInt(4, webcast.getViews());
+            preparedStatement.setString(5, webcast.getUrl());
 
             preparedStatement.executeUpdate();
         } catch (Exception e) {
@@ -623,6 +616,50 @@ public class DatabaseConnection {
             System.out.println(e);
         }
         return courses;
+    }
+    public ArrayList<Speaker> retrieveSpeakers(){
+
+        ArrayList<Speaker> speakers = new ArrayList<>();
+
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Speaker");
+            while (rs.next()) {
+                Speaker speaker = new Speaker();
+
+                speaker.setName(rs.getString("SpeakerName"));
+                speaker.setId(rs.getInt("SpeakerId"));
+                speaker.setOrganisation(rs.getString("Organisation"));
+
+               speakers.add(speaker);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return speakers;
+    }
+
+    public ArrayList<ContactPerson> retrieveContactPersons() {
+
+        ArrayList<ContactPerson> contactPeople = new ArrayList<>();
+
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Contactperson");
+            while (rs.next()) {
+                ContactPerson contactPerson = new ContactPerson();
+                contactPerson.setId(rs.getInt("ContactPersonId"));
+                contactPerson.setName(rs.getString("Name"));
+                contactPerson.setEmailAddress(rs.getString("EmailAddress"));
+
+                contactPeople.add(contactPerson);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return contactPeople;
     }
 
     public ArrayList<Integer> certificatesFromStudent(String email) {

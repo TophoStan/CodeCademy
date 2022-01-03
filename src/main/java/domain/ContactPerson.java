@@ -5,12 +5,25 @@ import java.util.ArrayList;
 public class ContactPerson {
     private String name;
     private String emailAddress;
+    private int id;
     private ArrayList<Module> modules;
 
     public ContactPerson(String name, String emailAddress) {
         this.name = name;
         this.emailAddress = emailAddress;
         modules = new ArrayList<>();
+    }
+
+    public ContactPerson() {
+
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
