@@ -19,38 +19,38 @@ public class CourseController {
     private String[] difficulties = {Difficulty.EASY.toString(), Difficulty.NORMAL.toString(), Difficulty.HARD.toString(), Difficulty.EXPERT.toString()};
 
     // for course add page
-    @FXML ListView courseList;
-    @FXML TextField tFCourseAddName;
-    @FXML TextField tFCourseAddSubject;
-    @FXML TextArea tACourseAddIntroText;
-    @FXML ComboBox cBCourseAddDifficulty;
+    @FXML private ListView courseList;
+    @FXML private TextField tFCourseAddName;
+    @FXML private TextField tFCourseAddSubject;
+    @FXML private TextArea tACourseAddIntroText;
+    @FXML private ComboBox cBCourseAddDifficulty;
 
     // for course edit page
-    @FXML TextField tFNameEditCourse;
-    @FXML Label lBSubjectEditCourse;
-    @FXML Label lBIntroTextEditCourse;
-    @FXML Label lBDifficultyEditCourse;
-    @FXML TextField tFSubjectEditCourse;
-    @FXML TextArea tAIntroTextEditCourse;
-    @FXML ComboBox cBDifficultyEditCourse;
-    @FXML Button btnSubmitEditCourse;
-    @FXML ListView courseInfoList;
+    @FXML private TextField tFNameEditCourse;
+    @FXML private Label lBSubjectEditCourse;
+    @FXML private Label lBIntroTextEditCourse;
+    @FXML private Label lBDifficultyEditCourse;
+    @FXML private TextField tFSubjectEditCourse;
+    @FXML private TextArea tAIntroTextEditCourse;
+    @FXML private ComboBox cBDifficultyEditCourse;
+    @FXML private Button btnSubmitEditCourse;
+    @FXML private ListView courseInfoList;
 
     // for course delete page
-    @FXML TextField tFNameDeleteCourse;
+    @FXML private TextField tFNameDeleteCourse;
 
     // for course select page
-    @FXML TextField tFNameSelectCourse;
-    @FXML Label lBCourseSelectionAmount;
-    @FXML Label lBCourseSelectionProgressTitle;
-    @FXML ListView progressList;
-    @FXML Label lBCourseSelectionGender;
-    @FXML RadioButton rbCourseSelectionMen;
-    @FXML RadioButton rbCourseSelectionWomen;
-    @FXML RadioButton rbCourseSelectionOther;
-    @FXML ProgressBar pbCourseSelectionGender;
-    @FXML Label lBCourseSelectionPercentage;
-    @FXML ToggleGroup gender;
+    @FXML private TextField tFNameSelectCourse;
+    @FXML private Label lBCourseSelectionAmount;
+    @FXML private Label lBCourseSelectionProgressTitle;
+    @FXML private ListView progressList;
+    @FXML private Label lBCourseSelectionGender;
+    @FXML private RadioButton rbCourseSelectionMen;
+    @FXML private RadioButton rbCourseSelectionWomen;
+    @FXML private RadioButton rbCourseSelectionOther;
+    @FXML private ProgressBar pbCourseSelectionGender;
+    @FXML private Label lBCourseSelectionPercentage;
+    @FXML private ToggleGroup gender;
 
 
     DatabaseConnection databaseConnection = new DatabaseConnection();

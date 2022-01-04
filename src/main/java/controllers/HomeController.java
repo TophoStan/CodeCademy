@@ -12,26 +12,26 @@ import repository.DatabaseConnection;
 public class HomeController {
 
     // Webcasts
-    @FXML TitledPane lBHomeWebcastCollapse1;
-    @FXML Label lBHomeWebcastTitle1;
-    @FXML Label lBHomeWebcastViews1;
-    @FXML TitledPane lBHomeWebcastCollapse2;
-    @FXML Label lBHomeWebcastTitle2;
-    @FXML Label lBHomeWebcastViews2;
-    @FXML TitledPane lBHomeWebcastCollapse3;
-    @FXML Label lBHomeWebcastTitle3;
-    @FXML Label lBHomeWebcastViews3;
+    @FXML private TitledPane lBHomeWebcastCollapse1;
+    @FXML private Label lBHomeWebcastTitle1;
+    @FXML private Label lBHomeWebcastViews1;
+    @FXML private TitledPane lBHomeWebcastCollapse2;
+    @FXML private Label lBHomeWebcastTitle2;
+    @FXML private Label lBHomeWebcastViews2;
+    @FXML private TitledPane lBHomeWebcastCollapse3;
+    @FXML private Label lBHomeWebcastTitle3;
+    @FXML private Label lBHomeWebcastViews3;
 
     // Courses with certificates
-    @FXML TitledPane lBHomeCoursesCollapse1;
-    @FXML Label lBHomeCourseTitle1;
-    @FXML Label lBHomeCourseCertificates1;
-    @FXML TitledPane lBHomeCoursesCollapse2;
-    @FXML Label lBHomeCourseTitle2;
-    @FXML Label lBHomeCourseCertificates2;
-    @FXML TitledPane lBHomeCoursesCollapse3;
-    @FXML Label lBHomeCourseTitle3;
-    @FXML Label lBHomeCourseCertificates3;
+    @FXML private TitledPane lBHomeCoursesCollapse1;
+    @FXML private Label lBHomeCourseTitle1;
+    @FXML private Label lBHomeCourseCertificates1;
+    @FXML private TitledPane lBHomeCoursesCollapse2;
+    @FXML private Label lBHomeCourseTitle2;
+    @FXML private Label lBHomeCourseCertificates2;
+    @FXML private TitledPane lBHomeCoursesCollapse3;
+    @FXML private Label lBHomeCourseTitle3;
+    @FXML private Label lBHomeCourseCertificates3;
 
 
     private Controller controller = new Controller();
