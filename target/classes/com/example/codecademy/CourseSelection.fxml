@@ -9,7 +9,7 @@
 
 <AnchorPane prefHeight="451.0" prefWidth="616.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CourseController">
    <children>
-      <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="451.0" prefWidth="616.0">
+      <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="451.0" prefWidth="629.0">
          <children>
             <Button fx:id="BtnHome" layoutX="14.0" layoutY="46.0" mnemonicParsing="false" onAction="#toHome" text="Home">
                <font>
@@ -54,7 +54,7 @@
             <Button defaultButton="true" layoutX="138.0" layoutY="85.0" mnemonicParsing="false" onAction="#toCourseSelection" text="Selection" />
             <Label fx:id="lBCourseSelectionAmount" layoutX="20.0" layoutY="192.0" visible="false" />
             <ListView fx:id="progressList" layoutX="16.0" layoutY="235.0" prefHeight="208.0" prefWidth="200.0" visible="false" />
-            <Label fx:id="lBCourseSelectionProgressTitle" layoutX="20.0" layoutY="209.0" text="Progress for each module" visible="false" />
+            <Label fx:id="lBCourseSelectionProgressTitle" layoutX="21.0" layoutY="217.0" text="Progress for each module:" visible="false" />
          </children>
       </AnchorPane>
    </children>

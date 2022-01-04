@@ -3,6 +3,7 @@ package controllers;
 import domain.ContentItem;
 import domain.Course;
 import domain.Difficulty;
+import domain.Module;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
@@ -251,25 +252,27 @@ public class CourseController {
             int amountOfStudents = databaseConnection.studentsFinishedCourse(courseName);
             lBCourseSelectionAmount.setVisible(true);
 
-            lBCourseSelectionAmount.setText(courseName + ": " + String.valueOf(amountOfStudents) + " students");
+            lBCourseSelectionAmount.setText("Finished by " + String.valueOf(amountOfStudents) + " students");
 
             // Shows for every module the progress percentage of all students
             HashMap<Integer, Integer> progressHashMap = databaseConnection.getProgressForCourse(courseName);
-            ArrayList<Course> allCourses = databaseConnection.retrieveCourses();
+            ArrayList<ContentItem> allContentItems = databaseConnection.retrieveContentItems();
             lBCourseSelectionProgressTitle.setVisible(true);
             progressList.getItems().clear();
             progressList.setVisible(true);
 
             for (Map.Entry<Integer, Integer> i : progressHashMap.entrySet()) {
-                int courseId = i.getKey();
-                int progress = i.getValue();
+                int contentItemId = i.getKey();
+                int percentage = i.getValue();
+                String contentItemTitle = "";
 
-                for (Course course: allCourses) {
-                    if (course.getId() == courseId) {
-                        progressList.getItems().add(course.getName() + ": " + progress + "%");
+                for (ContentItem contentItem : allContentItems) {
+                    if (contentItemId == contentItem.getContentItemId()) {
+                        contentItemTitle = contentItem.getTitle();
                         break;
                     }
                 }
+                progressList.getItems().add(contentItemTitle + ": " + percentage + "%");
             }
 
         } else {
