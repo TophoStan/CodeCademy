@@ -3,7 +3,10 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -52,9 +55,19 @@
             <Button fx:id="btnSelectCourse" layoutX="194.0" layoutY="151.0" mnemonicParsing="false" onAction="#selectCourse" text="Select" />
             <Button fx:id="btnCourseRefresh" layoutX="560.0" layoutY="273.0" mnemonicParsing="false" onAction="#showCourses" text="Refresh" />
             <Button defaultButton="true" layoutX="138.0" layoutY="85.0" mnemonicParsing="false" onAction="#toCourseSelection" text="Selection" />
-            <Label fx:id="lBCourseSelectionAmount" layoutX="20.0" layoutY="192.0" visible="false" />
+            <Label fx:id="lBCourseSelectionAmount" layoutX="20.0" layoutY="192.0" prefHeight="17.0" prefWidth="190.0" text="Amount of students how finished" visible="false" />
             <ListView fx:id="progressList" layoutX="16.0" layoutY="235.0" prefHeight="208.0" prefWidth="200.0" visible="false" />
             <Label fx:id="lBCourseSelectionProgressTitle" layoutX="21.0" layoutY="217.0" text="Progress for each module:" visible="false" />
+            <Label fx:id="lBCourseSelectionGender" layoutX="260.0" layoutY="217.0" text="Choose a gender:" visible="false" />
+            <RadioButton fx:id="rbCourseSelectionMen" layoutX="260.0" layoutY="241.0" mnemonicParsing="false" onAction="#selectProgressGender" text="Men" visible="false">
+               <toggleGroup>
+                  <ToggleGroup fx:id="gender" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton fx:id="rbCourseSelectionWomen" layoutX="260.0" layoutY="258.0" mnemonicParsing="false" onAction="#selectProgressGender" text="Women" toggleGroup="$gender" visible="false" />
+            <RadioButton fx:id="rbCourseSelectionOther" layoutX="260.0" layoutY="277.0" mnemonicParsing="false" onAction="#selectProgressGender" text="Others" toggleGroup="$gender" visible="false" />
+            <ProgressBar fx:id="pbCourseSelectionGender" layoutX="260.0" layoutY="312.0" prefWidth="200.0" progress="0.0" visible="false" />
+            <Label fx:id="lBCourseSelectionPercentage" layoutX="259.0" layoutY="331.0" text="Percentage%" visible="false" />
          </children>
       </AnchorPane>
    </children>

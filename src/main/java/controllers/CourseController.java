@@ -3,7 +3,6 @@ package controllers;
 import domain.ContentItem;
 import domain.Course;
 import domain.Difficulty;
-import domain.Module;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
@@ -45,6 +44,13 @@ public class CourseController {
     @FXML Label lBCourseSelectionAmount;
     @FXML Label lBCourseSelectionProgressTitle;
     @FXML ListView progressList;
+    @FXML Label lBCourseSelectionGender;
+    @FXML RadioButton rbCourseSelectionMen;
+    @FXML RadioButton rbCourseSelectionWomen;
+    @FXML RadioButton rbCourseSelectionOther;
+    @FXML ProgressBar pbCourseSelectionGender;
+    @FXML Label lBCourseSelectionPercentage;
+    @FXML ToggleGroup gender;
 
 
     DatabaseConnection databaseConnection = new DatabaseConnection();
@@ -248,18 +254,16 @@ public class CourseController {
         String courseName = tFNameSelectCourse.getText();
         if (checkCourseName(courseName)) {
             // Shows how many students finished a course
-
+            makeVisible();
             int amountOfStudents = databaseConnection.studentsFinishedCourse(courseName);
-            lBCourseSelectionAmount.setVisible(true);
+
 
             lBCourseSelectionAmount.setText("Finished by " + String.valueOf(amountOfStudents) + " students");
 
             // Shows for every module the progress percentage of all students
+            progressList.getItems().clear();
             HashMap<Integer, Integer> progressHashMap = databaseConnection.getProgressForCourse(courseName);
             ArrayList<ContentItem> allContentItems = databaseConnection.retrieveContentItems();
-            lBCourseSelectionProgressTitle.setVisible(true);
-            progressList.getItems().clear();
-            progressList.setVisible(true);
 
             for (Map.Entry<Integer, Integer> i : progressHashMap.entrySet()) {
                 int contentItemId = i.getKey();
@@ -274,9 +278,39 @@ public class CourseController {
                 }
                 progressList.getItems().add(contentItemTitle + ": " + percentage + "%");
             }
-
         } else {
             tFNameSelectCourse.setText("Wrong course name!");
         }
+    }
+
+    public void selectProgressGender() {
+        String genderType = "";
+        int percentForLabel = 0;
+        double percentForProgressBar = 0.0;
+
+        if (gender.getSelectedToggle().equals(rbCourseSelectionMen)) {
+            genderType = "M";
+        } else if (gender.getSelectedToggle().equals(rbCourseSelectionWomen)) {
+            genderType = "W";
+        } else if (gender.getSelectedToggle().equals(rbCourseSelectionOther)) {
+            genderType = "O";
+        }
+
+        // methode here
+
+        pbCourseSelectionGender.setProgress(percentForProgressBar);
+        lBCourseSelectionPercentage.setText(percentForLabel + "%");
+    }
+
+    public void makeVisible() {
+        lBCourseSelectionAmount.setVisible(true);
+        lBCourseSelectionProgressTitle.setVisible(true);
+        progressList.setVisible(true);
+        lBCourseSelectionGender.setVisible(true);
+        rbCourseSelectionMen.setVisible(true);
+        rbCourseSelectionWomen.setVisible(true);
+        rbCourseSelectionOther.setVisible(true);
+        pbCourseSelectionGender.setVisible(true);
+        lBCourseSelectionPercentage.setVisible(true);
     }
 }

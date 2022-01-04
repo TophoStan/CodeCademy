@@ -27,3 +27,5 @@ JOIN module AS t3 ON t3.ContentItemId = t2.ContentItemId
 JOIN course AS t4 ON t4.CourseID = t2.CourseId
 WHERE t4.CourseName = ''
 GROUP BY t4.CourseID, t3.ContentItemId
+
+-- Voor een geselecteerd geslacht, geef aan voor hoeveel procent van de cursussen waarvoor ingeschreven is, het certificaat behaald is
