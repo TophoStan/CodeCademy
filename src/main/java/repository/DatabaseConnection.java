@@ -458,7 +458,7 @@ public class DatabaseConnection {
     public void addContentItem(ContentItem content) {
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(
-                    "INSERT INTO ContentItem(PublicationDate,State,Title,Description,CourseId) VALUES(?,?,?,?,?,?)");
+                    "INSERT INTO ContentItem(PublicationDate,State,Title,Description,CourseId) VALUES(?,?,?,?,?)");
             preparedStatement.setDate(1, content.getPublicationDate());
             preparedStatement.setString(2, content.getStatus().toString());
             preparedStatement.setString(3, content.getTitle());

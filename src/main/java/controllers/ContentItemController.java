@@ -67,27 +67,15 @@ public class ContentItemController {
 
         ContentItem contentItem = new ContentItem() {};
         contentItem.setStatus(Status.valueOf(cbState.getValue().toString()));
-        contentItem.setContentItemId(2);
         contentItem.setCourseId(course.getId());
         contentItem.setDescription(taDescription.getText());
         contentItem.setTitle(tfTitle.getText());
         Date date = Date.valueOf(LocalDate.now());
         contentItem.setPublicationDate(date);
 
-        Speaker speaker = new Speaker();
-        for (Speaker speakerFromDatabase: databaseConnection.retrieveSpeakers()) {
-            if(cbSpeaker.getValue().toString().equals(speakerFromDatabase.getName())){
-                speaker =speakerFromDatabase;
-                break;
-            }
-        }
-        ContactPerson contactPerson = new ContactPerson();
-        for (ContactPerson contactPersonFromDatabase : databaseConnection.retrieveContactPersons()) {
-            if(cbContactPerson.getValue().toString().equals(contactPersonFromDatabase.getName())){
-                contactPerson = contactPersonFromDatabase;
-                break;
-            }
-        }
+        databaseConnection.addContentItem(contentItem);
+
+
 
         int id = 0;
         int courseId = 0;
@@ -98,8 +86,17 @@ public class ContentItemController {
                 break;
             }
         }
-        databaseConnection.addContentItem(contentItem);
+
         if(type.getSelectedToggle().equals(radModule)){
+
+            ContactPerson contactPerson = new ContactPerson();
+            for (ContactPerson contactPersonFromDatabase : databaseConnection.retrieveContactPersons()) {
+                if(cbContactPerson.getValue().toString().equals(contactPersonFromDatabase.getName())){
+                    contactPerson = contactPersonFromDatabase;
+                    break;
+                }
+            }
+
             Module module = new Module();
             module.setContentItemId(id);
             module.setCourseId(courseId);
@@ -108,6 +105,15 @@ public class ContentItemController {
             module.setContactPersonId(contactPerson.getId());
             databaseConnection.addModule(module);
         } else {
+
+            Speaker speaker = new Speaker();
+            for (Speaker speakerFromDatabase: databaseConnection.retrieveSpeakers()) {
+                if(cbSpeaker.getValue().toString().equals(speakerFromDatabase.getName())){
+                    speaker =speakerFromDatabase;
+                    break;
+                }
+            }
+
             Webcast webcast = new Webcast();
             webcast.setUrl(tfURL.getText());
             webcast.setSpeakerId(speaker.getId());
@@ -117,6 +123,14 @@ public class ContentItemController {
             webcast.setViews(0);
             databaseConnection.addWebcast(webcast);
         }
+        cbState.getItems().clear();
+        tfTitle.clear();
+        taDescription.clear();
+        cbCourses.getItems().clear();
+        cbContactPerson.getItems().clear();
+        cbSpeaker.getItems().clear();
+        tfURL.clear();
+        tfVersion.clear();
     }
 
     public void addValuesTocbCourses() {
@@ -145,7 +159,7 @@ public class ContentItemController {
         databaseConnection.connect();
         for (ContactPerson person : databaseConnection.retrieveContactPersons()) {
             cbContactPerson.getItems().add(person.getName());
-            System.out.println("test");
+
         }
     }
 
@@ -180,7 +194,6 @@ public class ContentItemController {
         listView.getItems().clear();
         databaseConnection.connect();
         for (ContentItem contentItem : databaseConnection.retrieveContentItems()) {
-            System.out.printf("hallo");
             listView.getItems().add(contentItem.getTitle());
         }
     }
