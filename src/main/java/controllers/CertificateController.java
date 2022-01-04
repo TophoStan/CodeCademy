@@ -60,36 +60,40 @@ public class CertificateController {
     }
 
 
-
-
-
-    public HashMap<Student, ArrayList<Course>> getCompletedCoursesByStudent(){
+    public HashMap<Student, ArrayList<Course>> getCompletedCoursesByStudent() {
         databaseConnection.connect();
         HashMap<Student, ArrayList<Course>> studentsPassedCourses = new HashMap<>();
         try {
             ArrayList<Course> passedCourses = new ArrayList<>();
             //Loops through all progresses
-            for (Progress progress: databaseConnection.retrieveProgress()) {
-                if(progress.getPercentage() == 100){
-                //Loops through Courses of hashmap
-                    int passedContentItems = 0;
-                    for (Map.Entry<Course, ArrayList<ContentItem>> e: contentItemsWithCourse().entrySet()) {
+            for (Progress progress : databaseConnection.retrieveProgress()) {
+                if (progress.getPercentage() == 100) {
+
+                    //Loops through Courses of hashmap
+
+                    for (Map.Entry<Course, ArrayList<ContentItem>> e : contentItemsWithCourse().entrySet()) {
+                        int passedContentItems = 0;
                         //Loops through ContentItems Of the Course of the hashmap
-                        for (ContentItem contentItem: e.getValue()) {
-                            if(contentItem.getContentItemId() == progress.getContentItemId()){
-                                passedContentItems+= 1;
+                        for (ContentItem contentItem : e.getValue()) {
+                            if (contentItem.getContentItemId() == progress.getContentItemId()) {
+                                System.out.println("contentitemId: " + contentItem.getContentItemId());
+                                System.out.println("process: " + progress.getContentItemId());
+                                passedContentItems += 1;
                             }
                         }
-                        if(passedContentItems == e.getValue().size()){
+                        if (passedContentItems == e.getValue().size() && passedContentItems > 0) {
                             passedCourses.add(e.getKey());
                             studentsPassedCourses.put((Student) controller.giveIdentifierReturnObject(progress.getStudentId(), "Student"), passedCourses);
                         }
                     }
+                } else {
+                    System.out.println("Not 100%");
                 }
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
+        System.out.println(studentsPassedCourses);
         return studentsPassedCourses;
     }
 
@@ -100,7 +104,8 @@ public class CertificateController {
         try {
                 Student student = new Student();
                 for (Map.Entry<Student, ArrayList<Course>> e:studentsPassedCourses.entrySet()) {
-                    if(e.getKey().getEmailAddress() == studentEmailAddress){
+                    if(e.getKey().getEmailAddress().equals(studentEmailAddress)){
+                        System.out.println("hier doet ie het");
                         student = e.getKey();
                         cbCompleted.getItems().clear();
                         for (Course course : e.getValue()) {
@@ -109,6 +114,8 @@ public class CertificateController {
                         }
                         isVisible(true);
                         break;
+                    } else {
+                        System.out.println("hiero niet");
                     }
                 }
                 selectedStudentsPassedCourses.put(student, coursesFromStudent);
@@ -120,6 +127,7 @@ public class CertificateController {
 
     public void addDatesTocbDate() {
         HashMap<Student, ArrayList<Course>> map = returnCompletedCoursesFromStudent(tfEmail.getText());
+
         cbDate.getItems().clear();
         try {
             for (Enrollment enrollment : databaseConnection.retrieveEnrollments()) {
