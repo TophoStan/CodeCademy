@@ -12,6 +12,10 @@ public class Employee {
         this.givenCertificates = new ArrayList<>();
     }
 
+    public Employee() {
+
+    }
+
     public String getName() {
         return name;
     }

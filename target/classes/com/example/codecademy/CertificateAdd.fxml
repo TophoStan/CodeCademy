@@ -56,7 +56,7 @@
          </font>
       </Label>
       <Label layoutX="19.0" layoutY="147.0" text="Email" />
-      <Button fx:id="BtnSubmitDelStudent" layoutX="277.0" layoutY="373.0" mnemonicParsing="false" text="Submit" />
+      <Button fx:id="btnSubmit" layoutX="277.0" layoutY="373.0" mnemonicParsing="false" onAction="#addCertificate" text="Submit" visible="false" />
       <Label layoutX="432.0" layoutY="63.0" text="Certificates">
          <font>
             <Font size="14.0" />
@@ -70,9 +70,11 @@
       <ComboBox fx:id="cbCompleted" layoutX="21.0" layoutY="224.0" prefWidth="150.0" visible="false" />
       <Label fx:id="lbCompleted" layoutX="20.0" layoutY="207.0" text="Completed" visible="false" />
       <Label fx:id="lbEmployee" layoutX="21.0" layoutY="310.0" text="Employee" visible="false" />
-      <ComboBox fx:id="cbEmployee" layoutX="22.0" layoutY="326.0" prefWidth="150.0" visible="false" />
+      <ComboBox fx:id="cbEmployee" layoutX="22.0" layoutY="326.0" onMouseClicked="#addEmployeesToCombobox" prefWidth="150.0" visible="false" />
       <Label fx:id="lbDate" layoutX="22.0" layoutY="264.0" text="Date" visible="false" />
       <ComboBox fx:id="cbDate" layoutX="23.0" layoutY="280.0" prefWidth="150.0" visible="false" />
       <Button layoutX="181.0" layoutY="172.0" mnemonicParsing="false" onAction="#addDatesTocbDate" text="Check" />
+      <TextField fx:id="tfGrade" layoutX="24.0" layoutY="386.0" prefHeight="25.0" prefWidth="37.0" visible="false" />
+      <Label fx:id="lbGrade" layoutX="26.0" layoutY="365.0" text="Grade" visible="false" />
    </children>
 </AnchorPane>

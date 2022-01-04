@@ -383,17 +383,16 @@ public class DatabaseConnection {
      * <code>setString(x, student.getMethod)</code>.
      *
      * @param certificate
-     * @param employee
      * @throws SQLException         conn == null
      * @throws NullPointerException Certificate == null
      */
-    public void addCertificate(Certificate certificate, Employee employee) throws SQLException {
+    public void addCertificate(Certificate certificate) throws SQLException {
 
         PreparedStatement preparedStatement = conn
-                .prepareStatement("INSERT INTO Certificate(Grade, EmployeeId) VALUES (?,?)");
+                .prepareStatement("INSERT INTO Certificate(Grade, EmployeeId, EnrollmentId) VALUES (?,?,?)");
         preparedStatement.setDouble(1, certificate.getGrade());
-        preparedStatement.setInt(2, employee.getEmployeeId());
-
+        preparedStatement.setInt(2, certificate.getEmployeeId());
+        preparedStatement.setInt(3, certificate.getEnrollmentId());
         preparedStatement.executeUpdate();
     }
 
@@ -748,5 +747,23 @@ public class DatabaseConnection {
         return progresses;
 
 
+    }
+    public ArrayList<Employee> retrieveEmployee() {
+        ArrayList<Employee> employees = new ArrayList<>();
+
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Employee");
+            while (rs.next()) {
+                Employee employee = new Employee();
+                employee.setEmployeeId(rs.getInt("EmployeeId"));
+                employee.setName(rs.getString("Name"));
+                employees.add(employee);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return employees;
     }
 }

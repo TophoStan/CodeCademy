@@ -3,11 +3,13 @@ package controllers;
 import domain.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import repository.DatabaseConnection;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -21,6 +23,9 @@ public class CertificateController {
     @FXML private Label lbDate;
     @FXML private Label lbEmployee;
     @FXML private Label lbCompleted;
+    @FXML private Label lbGrade;
+    @FXML private TextField tfGrade;
+    @FXML private Button btnSubmit;
 
 
     private Controller controller = new Controller();
@@ -65,15 +70,12 @@ public class CertificateController {
         HashMap<Student, ArrayList<Course>> studentsPassedCourses = new HashMap<>();
         try {
             ArrayList<Course> passedCourses = new ArrayList<>();
-            //Loops through all progresses
-            for (Progress progress : databaseConnection.retrieveProgress()) {
-                if (progress.getPercentage() == 100) {
 
-                    //Loops through Courses of hashmap
-
-                    for (Map.Entry<Course, ArrayList<ContentItem>> e : contentItemsWithCourse().entrySet()) {
-                        int passedContentItems = 0;
-                        //Loops through ContentItems Of the Course of the hashmap
+            for (Map.Entry<Course, ArrayList<ContentItem>> e : contentItemsWithCourse().entrySet()) {
+                //Loops through ContentItems Of the Course of the hashmap
+                int passedContentItems = 0;
+                for (Progress progress : databaseConnection.retrieveProgress()) {
+                    if (progress.getPercentage() == 100) {
                         for (ContentItem contentItem : e.getValue()) {
                             if (contentItem.getContentItemId() == progress.getContentItemId()) {
                                 System.out.println("contentitemId: " + contentItem.getContentItemId());
@@ -81,15 +83,18 @@ public class CertificateController {
                                 passedContentItems += 1;
                             }
                         }
+
                         if (passedContentItems == e.getValue().size() && passedContentItems > 0) {
                             passedCourses.add(e.getKey());
                             studentsPassedCourses.put((Student) controller.giveIdentifierReturnObject(progress.getStudentId(), "Student"), passedCourses);
+                            passedContentItems = 0;
+                            break;
                         }
                     }
-                } else {
-                    System.out.println("Not 100%");
                 }
+
             }
+
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -120,7 +125,8 @@ public class CertificateController {
                 }
                 selectedStudentsPassedCourses.put(student, coursesFromStudent);
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
+            System.out.println("lol");
         }
         return  selectedStudentsPassedCourses;
     }
@@ -154,6 +160,9 @@ public class CertificateController {
         lbDate.setVisible(bool);
         lbEmployee.setVisible(bool);
         lbCompleted.setVisible(bool);
+        btnSubmit.setVisible(bool);
+        lbGrade.setVisible(bool);
+        tfGrade.setVisible(bool);
     }
 
     public HashMap<Course, ArrayList<ContentItem>> contentItemsWithCourse(){
@@ -168,5 +177,53 @@ public class CertificateController {
             map.put(course,contentItems);
         }
         return map;
+    }
+    public void addEmployeesToCombobox(){
+        cbEmployee.getItems().clear();
+        for (Employee employee: databaseConnection.retrieveEmployee()) {
+            cbEmployee.getItems().add(employee.getName() + "-" + employee.getEmployeeId());
+        }
+    }
+    public void addCertificate(){
+        databaseConnection.connect();
+        Certificate certificate = new Certificate();
+        try {
+            String[] splitter = cbEmployee.getValue().toString().split("-");
+            certificate.setEmployeeId(Integer.parseInt(splitter[1]));
+            certificate.setGrade(Integer.parseInt(tfGrade.getText()));
+            certificate.setEnrollmentId(returnEnrollmentId());
+            databaseConnection.addCertificate(certificate);
+        }catch (Exception e){
+            e.printStackTrace();
+            System.out.println("jammer");
+        }
+    }
+    public int returnEnrollmentId(){
+            Enrollment enrollment = new Enrollment();
+        try {
+            enrollment.setEnrollmentDate(Date.valueOf(cbDate.getValue().toString()));
+            for (Course course : databaseConnection.retrieveCourses()) {
+                if (course.getName().equals(cbCompleted.getValue().toString())) {
+                    enrollment.setCourse(course);
+                    break;
+                }
+            }
+            for (Student student : databaseConnection.retrieveStudents()) {
+                if (student.getEmailAddress().equals(tfEmail.getText())) {
+                    enrollment.setStudent(student);
+                    break;
+                }
+            }
+            for (Enrollment enrollmentFromDatabase: databaseConnection.retrieveEnrollments()) {
+                if(enrollment.getCourseName().equals(enrollmentFromDatabase.getCourseName()) && enrollment.getStudentName().equals(enrollmentFromDatabase.getStudentName()) && enrollment.getEnrollmentDate().equals(enrollmentFromDatabase.getEnrollmentDate())){
+                    enrollment = enrollmentFromDatabase;
+                }
+            }
+
+
+        }catch (Exception e){
+            System.out.printf("hallo");
+        }
+    return enrollment.getEnrollmentId();
     }
 }
