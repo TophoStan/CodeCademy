@@ -57,6 +57,10 @@ public class HomeController {
         controller.toPage(event, "ContentItemAdd");
     }
 
+    public void toCertificate(ActionEvent event) {
+        controller.toPage(event, "CertificateAdd");
+    }
+
     public void getTop3Webcasts() {
         Webcast[] webcastsTop3 = new Webcast[3];
         databaseConnection.connect();
