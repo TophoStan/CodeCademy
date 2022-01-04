@@ -184,5 +184,7 @@ public class ContentItemController {
             listView.getItems().add(contentItem.getTitle());
         }
     }
+
+
 }
 

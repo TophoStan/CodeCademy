@@ -725,4 +725,28 @@ public class DatabaseConnection {
 
         return progressForCourse;
     }
+    public ArrayList<Progress> retrieveProgress(){
+
+        ArrayList<Progress> progresses = new ArrayList<>();
+
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Progress");
+            while (rs.next()) {
+                Progress progress = new Progress();
+                progress.setContentItemId(rs.getInt("ContentItemId"));
+                progress.setId(rs.getInt("ProgressId"));
+                progress.setStudentId(rs.getInt("StudentId"));
+                progress.setPercentage(rs.getInt("Percentage"));
+
+                progresses.add(progress);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return progresses;
+
+
+    }
 }
