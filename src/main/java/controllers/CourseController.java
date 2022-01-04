@@ -296,7 +296,7 @@ public class CourseController {
             genderType = "O";
         }
 
-        // methode here
+        // TODO add a methode here
 
         pbCourseSelectionGender.setProgress(percentForProgressBar);
         lBCourseSelectionPercentage.setText(percentForLabel + "%");
