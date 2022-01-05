@@ -3,7 +3,9 @@ package controllers;
 import domain.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import repository.DatabaseConnection;
 
 import java.sql.Date;
@@ -12,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CertificateController {
-
+    @FXML private AnchorPane anchorPane;
     @FXML private TextField tfEmail;
     @FXML private ComboBox cbCompleted;
     @FXML private ComboBox cbEmployee;
@@ -54,10 +56,10 @@ public class CertificateController {
     }
 
     public void toEdit(ActionEvent event) {
-        controller.toPage(event, "CertificateAdd");
+        controller.toPage(event, "CertificateEdit");
     }
     public void toDelete(ActionEvent event) {
-        controller.toPage(event, "CertificateAdd");
+        controller.toPage(event, "CertificateDelete");
     }
 
 
@@ -153,10 +155,12 @@ public class CertificateController {
 
     public void isVisible(boolean bool) {
         cbCompleted.setVisible(bool);
-        cbEmployee.setVisible(bool);
         cbDate.setVisible(bool);
         lbDate.setVisible(bool);
+        if(lbEmployee != null){
+        cbEmployee.setVisible(bool);
         lbEmployee.setVisible(bool);
+        }
         lbCompleted.setVisible(bool);
         btnSubmit.setVisible(bool);
         lbGrade.setVisible(bool);
@@ -191,6 +195,7 @@ public class CertificateController {
             certificate.setGrade(Integer.parseInt(tfGrade.getText()));
             certificate.setEnrollmentId(returnEnrollmentId());
             databaseConnection.addCertificate(certificate);
+            controller.clear(anchorPane);
         }catch (Exception e){
             System.out.println(e);
         }
@@ -253,4 +258,18 @@ public class CertificateController {
             System.out.println(e);
         }
     }
+
+    public void editCertificate() {
+        databaseConnection.connect();
+        int id = returnEnrollmentId();
+        Certificate certificate = (Certificate) controller.giveIdentifierReturnObject(id, "Certificate");
+        certificate.setGrade(Integer.parseInt(tfGrade.getText()));
+        databaseConnection.editCertificate(certificate);
+        getCertificates();
+        controller.clear(anchorPane);
+        isVisible(false);
+    }
+
+
+
 }

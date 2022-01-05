@@ -7,6 +7,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import repository.DatabaseConnection;
 
@@ -135,5 +138,18 @@ public class Controller {
             System.out.println(e);
         }
         return output;
+    }
+    public void clear(AnchorPane anchorPane){
+        for (Node node : anchorPane.getChildren()) {
+            System.out.println("Id: " + node.getId());
+            if (node instanceof TextField) {
+                // clear
+                ((TextField)node).clear();
+            }
+            if(node instanceof ComboBox){
+                ((ComboBox)node).getItems().clear();
+            }
+        }
+
     }
 }
