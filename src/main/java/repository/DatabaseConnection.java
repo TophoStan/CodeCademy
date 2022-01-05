@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.sql.Date;
 import java.util.HashMap;
 
+import controllers.Controller;
 import domain.*;
 import domain.Module;
 
@@ -727,7 +728,6 @@ public class DatabaseConnection {
     public ArrayList<Progress> retrieveProgress(){
 
         ArrayList<Progress> progresses = new ArrayList<>();
-
         try {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM Progress");
