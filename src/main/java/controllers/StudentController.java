@@ -168,27 +168,21 @@ public class StudentController {
     public void showStudentInfo(String email) {
         studentInfoList.getItems().clear();
         databaseConnection.connect();
-        ArrayList<Student> arrayListForStudentInfo = new ArrayList<>();
 
-        try {
-            arrayListForStudentInfo = databaseConnection.retrieveStudents();
-            for (Student student: arrayListForStudentInfo) {
-                if (student.getEmailAddress().equals(email)) {
-                    studentInfoList.getItems().add("Name: " + student.getName());
-                    studentInfoList.getItems().add("Email: " + student.getEmailAddress());
-                    studentInfoList.getItems().add("Gender: " + student.getGender());
-                    studentInfoList.getItems().add("Birthdate: " + student.getBirthDate());
-                    studentInfoList.getItems().add("Street: " + student.getStreet());
-                    studentInfoList.getItems().add("Housenumber: " + student.getHouseNumber());
-                    studentInfoList.getItems().add("Postalcode: " + student.getPostalCode());
-                    studentInfoList.getItems().add("City: " + student.getCity());
-                    studentInfoList.getItems().add("Country: " + student.getCountry());
-                    break;
-                }
+            try {
+                Student student = (Student) controller.giveIdentifierReturnObject(email, "Student");
+                studentInfoList.getItems().add("Name: " + student.getName());
+                studentInfoList.getItems().add("Email: " + student.getEmailAddress());
+                studentInfoList.getItems().add("Gender: " + student.getGender());
+                studentInfoList.getItems().add("Birthdate: " + student.getBirthDate());
+                studentInfoList.getItems().add("Street: " + student.getStreet());
+                studentInfoList.getItems().add("Housenumber: " + student.getHouseNumber());
+                studentInfoList.getItems().add("Postalcode: " + student.getPostalCode());
+                studentInfoList.getItems().add("City: " + student.getCity());
+                studentInfoList.getItems().add("Country: " + student.getCountry());
+            } catch (Exception e) {
+                System.out.println(e);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
 
