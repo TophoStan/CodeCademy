@@ -219,7 +219,7 @@ public class CertificateController {
 
 
         }catch (Exception e){
-            System.out.printf("hallo");
+            System.out.println(e);
         }
     return enrollment.getEnrollmentId();
     }
@@ -227,9 +227,15 @@ public class CertificateController {
     public void getCertificates() {
         databaseConnection.connect();
         listCertificates.getItems().clear();
+
         try {
-            System.out.println(databaseConnection.retrieveCertificates());
-        } catch (Exception e){
+            for (Certificate certificate : databaseConnection.retrieveCertificates()) {
+                Enrollment thisEnrollment = (Enrollment) controller.giveIdentifierReturnObject(certificate.getEnrollmentId(), "Enrollment");
+                Course thisCourse = (Course) controller.giveIdentifierReturnObject(thisEnrollment.getCourseId(), "Course");
+                Student thisStudent = (Student) controller.giveIdentifierReturnObject(thisEnrollment.getStudentId(), "Student");
+                listCertificates.getItems().add(thisCourse.getName() + " by: " + thisStudent.getName() + " | " + certificate.getGrade());
+            }
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
@@ -245,8 +251,6 @@ public class CertificateController {
             }
         } catch (Exception e) {
             System.out.println(e);
-            e.printStackTrace();
         }
-
     }
 }

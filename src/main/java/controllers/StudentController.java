@@ -61,6 +61,7 @@ public class StudentController {
     @FXML private ListView certificatesList;
 
     private Controller controller = new Controller();
+    private CertificateController certificateController = new CertificateController();
     private DatabaseConnection databaseConnection = new DatabaseConnection();
 
     public void toHome(ActionEvent event) {
@@ -276,6 +277,7 @@ public class StudentController {
             tFStudentSelectionEmail.setText("Wrong email!");
         }
     }
+
 
     public Date convertDate(int day, int month, int year) {
         SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
