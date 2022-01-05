@@ -22,7 +22,7 @@ public class Controller {
     private Scene scene;
     private Parent root;
 
-    private DatabaseConnection databaseConnection = new DatabaseConnection();
+    DatabaseConnection databaseConnection = new DatabaseConnection();
 
     public void toPage(ActionEvent event, String page) {
         try {

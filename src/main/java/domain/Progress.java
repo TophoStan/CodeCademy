@@ -1,5 +1,7 @@
 package domain;
 
+import controllers.Controller;
+
 public class Progress {
     private int id;
     private ContentItem contentItem;
@@ -57,5 +59,11 @@ public class Progress {
 
     public void setPercentage(int percentage) {
         this.percentage = percentage;
+    }
+
+    public void correctObjects(Controller controller){
+
+        this.contentItem = (ContentItem)   controller.giveIdentifierReturnObject(this.contentItem.getContentItemId(), "ContentItem");
+        this.student = (Student) controller.giveIdentifierReturnObject(this.student.getId(), "Student");
     }
 }
