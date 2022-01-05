@@ -1,10 +1,7 @@
 package controllers;
 
 import com.example.codecademy.App;
-import domain.Certificate;
-import domain.Course;
-import domain.Enrollment;
-import domain.Student;
+import domain.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -37,7 +34,6 @@ public class Controller {
     public Object giveIdentifierReturnObject(int id, String type) {
         databaseConnection.connect();
         try {
-
             if (type.equals("Student")) {
                 for (Student student : databaseConnection.retrieveStudents()) {
                     if (student.getId() == id) {
@@ -62,12 +58,61 @@ public class Controller {
                         return certificate;
                     }
                 }
+            } else if(type.equals("Employee")) {
+                for (Employee employee : databaseConnection.retrieveEmployee()) {
+                    if (employee.getEmployeeId() == id) {
+                        return employee;
+                    }
+                }
+            } else if(type.equals("Progress")) {
+                for (Progress progress : databaseConnection.retrieveProgress()) {
+                    if (progress.getId() == id) {
+                        return progress;
+                    }
+                }
+            } else if(type.equals("ContentItem")) {
+                for (ContentItem contentItem : databaseConnection.retrieveContentItems()) {
+                    if (contentItem.getContentItemId() == id) {
+                        return contentItem;
+                    }
+                }
+            } else if(type.equals("Speaker")) {
+                for (Speaker speaker : databaseConnection.retrieveSpeakers()) {
+                    if (speaker.getId() == id) {
+                        return speaker;
+                    }
+                }
+            } else if(type.equals("ContactPerson")) {
+                for (ContactPerson contactPerson : databaseConnection.retrieveContactPersons()) {
+                    if (contactPerson.getId() == id) {
+                        return contactPerson;
+                    }
+                }
             }
-
         } catch (Exception e) {
             System.out.println(e);
         }
+        return null;
+    }
 
+    public Object giveIdentifierReturnObject(String id, String type) {
+        try {
+            if (type.equals("Student")) {
+                for (Student student : databaseConnection.retrieveStudents()) {
+                    if(student.getEmailAddress().equals(id)){
+                        return student;
+                    }
+                }
+            } else if (type.equals("Course")){
+                for (Course course: databaseConnection.retrieveCourses()) {
+                    if(course.getName().equals(id)){
+                        return course;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
         return null;
     }
 }

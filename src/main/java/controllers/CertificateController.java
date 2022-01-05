@@ -226,6 +226,14 @@ public class CertificateController {
     public void getCertificates() {
         databaseConnection.connect();
         listCertificates.getItems().clear();
+        try {
+            System.out.println(databaseConnection.retrieveCertificates());
+        } catch (Exception e){
+            System.out.println(e);
+        }
+    }
+
+    public void deleteCertificate(){
 
     }
 }
