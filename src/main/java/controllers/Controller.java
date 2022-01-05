@@ -97,6 +97,7 @@ public class Controller {
     }
 
     public Object giveIdentifierReturnObject(String id, String type) {
+        databaseConnection.connect();
         try {
             if (type.equals("Student")) {
                 for (Student student : databaseConnection.retrieveStudents()) {

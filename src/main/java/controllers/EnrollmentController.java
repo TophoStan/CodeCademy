@@ -106,10 +106,9 @@ public class EnrollmentController {
     public void listEnrollments(){
         databaseConnection.connect();
         try {
-            ArrayList<Enrollment> enrollments = new ArrayList<>();
-            enrollments = databaseConnection.retrieveEnrollments();
+
             enrollmentList.getItems().clear();
-            for (Enrollment enrollment : enrollments) {
+            for (Enrollment enrollment : databaseConnection.retrieveEnrollments()) {
                 enrollmentList.getItems().add(enrollment.toString());
             }
         } catch (Exception e){
@@ -117,23 +116,19 @@ public class EnrollmentController {
         }
     }
     public void addCoursesToComboBoxOfStudent(){
-        databaseConnection.connect();
-        Student selectedStudent = new Student();
-
         try {
-            ArrayList<Student> students = databaseConnection.retrieveStudents();
-            ArrayList<Enrollment> enrollments = databaseConnection.retrieveEnrollments();
-
+            databaseConnection.connect();
+            Student selectedStudent = new Student();
             this.enrollmentsOfStudent = new ArrayList<>();
 
-            for (Student studentFromList : students) {
+            for (Student studentFromList : databaseConnection.retrieveStudents()) {
                 if(studentFromList.getEmailAddress().equals(tFEmailEnrollmentDelete.getText())){
                     selectedStudent = studentFromList;
                 }
             }
             //Gets all the enrollments of the student
             cbCourseEnrollmentDelete.getItems().clear();
-            for (Enrollment enrollment: enrollments) {
+            for (Enrollment enrollment: databaseConnection.retrieveEnrollments()) {
                 if(enrollment.getStudentId() == selectedStudent.getId()){
                     enrolledCoursesOfStudent.add(enrollment.getCourse());
                     cbCourseEnrollmentDelete.getItems().add(enrollment.getCourse().getName());
@@ -149,7 +144,6 @@ public class EnrollmentController {
     }
     public void addDatesToComboBoxOfCourse(){
 
-        //Sets the selected course into a course Object
         for (Course course: enrolledCoursesOfStudent) {
             if(course.getName().equals(cbCourseEnrollmentDelete.getValue().toString())){
                 this.selectedCourse = course;
