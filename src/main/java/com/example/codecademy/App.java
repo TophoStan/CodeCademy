@@ -14,7 +14,7 @@ public class App extends Application {
             //Parent root = FXMLLoader.load(getClass().getResource("test.fxml"));
             FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("Home.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
-            stage.getIcons().add(new Image("https://cdn.discordapp.com/attachments/920258969673547786/928312278913282168/E0rSNE5UcAMHbXP.jpg"));
+            stage.getIcons().add(new Image("https://cdn.discordapp.com/attachments/920258969673547786/928376900169121863/gDtu6nc9JS6MAAAAABJRU5ErkJggg.png"));
             stage.setTitle("Thomas Quartel, Mickel de Coo, Stijn Spanjers en Stan Tophoven");
             stage.setScene(scene);
             stage.show();
