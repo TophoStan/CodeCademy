@@ -68,81 +68,39 @@ public class CertificateController {
         databaseConnection.connect();
         HashMap<Student, ArrayList<Course>> studentsPassedCourses = new HashMap<>();
         HashMap<Student, ArrayList<Course>> test = new HashMap<>();
+
+        HashMap<Student, ArrayList<Course>> hasBeenChecked = new HashMap<>();
         try {
-            ArrayList<Course> passedCourses = new ArrayList<>();
 
-            /*for (Map.Entry<Course, ArrayList<ContentItem>> e : contentItemsWithCourse().entrySet()) {
-                //Loops through ContentItems Of the Course of the hashmap
-                int passedContentItems = 0;
-                for (Progress progress : databaseConnection.retrieveProgress()) {
-                    if (progress.getPercentage() == 100) {
-                        for (ContentItem contentItem : e.getValue()) {
-                            if (contentItem.getContentItemId() == progress.getContentItemId()) {
-                                passedContentItems += 1;
-                            }
-                        }
-
-                        if (passedContentItems == e.getValue().size() && passedContentItems > 0) {
-                            passedCourses.add(e.getKey());
-                            studentsPassedCourses.put((Student) controller.giveIdentifierReturnObject(progress.getStudentId(), "Student"), passedCourses);
-                            passedContentItems = 0;
-                            break;
-                        }
-                    }
-                }
-            }*/
-            /*for (Student student : databaseConnection.retrieveStudents()) {
-
-                for(Progress progress : databaseConnection.retrieveProgress()){
-
-                    progress.correctObjects();
-                    if(progress.getStudentId() == student.getId() && progress.getPercentage() == 100){
-                        for (Map.Entry<Course, ArrayList<ContentItem>> e : contentItemsWithCourse().entrySet()) {
-
-                            int passedContentItems = 0;
-                            for (ContentItem contentItem: e.getValue()) {
-                                System.out.println(contentItem.getTitle() + " : " + progress.getContentItem().getTitle() + "\n");
-                                if(contentItem.getContentItemId() == progress.getContentItemId()){
-                                    passedContentItems++;
-                                }
-                            }
-                            if (passedContentItems == e.getValue().size() && passedContentItems > 0) {
-                                passedCourses.add(e.getKey());
-                                test.put((Student) controller.giveIdentifierReturnObject(progress.getStudentId(), "Student"), passedCourses);
-
-                                break;
-                            }
-
-                        }
-                    }
-                }
-            }*/
-            for (Student student: databaseConnection.retrieveStudents()) {
+            for (Student student : databaseConnection.retrieveStudents()) {
+                ArrayList<Course> passedCourses = new ArrayList<>();
                 for (Map.Entry<Course, ArrayList<ContentItem>> e : contentItemsWithCourse().entrySet()) {
 
-                    for (Progress progress: databaseConnection.retrieveProgress()) {
-                        progress.correctObjects(controller);
-                        if(progress.getPercentage() == 100 && student.getId() == progress.getStudentId()){
-                            int passedContentItems = 0;
-                            for (ContentItem contentItem: e.getValue()) {
+                    int passedContentItems = 0;
+                    for (ContentItem contentItem : e.getValue()) {
+                        for (Progress progress : databaseConnection.retrieveProgress()) {
+                            if (progress.getPercentage() == 100 && student.getId() == progress.getStudentId()) {
 
-                                if(contentItem.getContentItemId() == progress.getContentItemId()){
-                                System.out.println(contentItem.getTitle() + " : " + progress.getContentItem().getTitle() + "\n");
+                                if (contentItem.getContentItemId() == progress.getContentItemId()) {
                                     passedContentItems++;
                                 }
                             }
+
                             if (passedContentItems == e.getValue().size() && passedContentItems > 0) {
                                 passedCourses.add(e.getKey());
                                 test.put((Student) controller.giveIdentifierReturnObject(progress.getStudentId(), "Student"), passedCourses);
+                                System.out.println(student.getEmailAddress() + "-" + passedCourses);
                                 break;
                             }
                         }
                     }
 
+
                 }
+
             }
 
-            System.out.println( test + "test");
+            System.out.println(test);
 
         } catch (Exception e) {
             System.out.println(e);

@@ -141,7 +141,7 @@ public class Controller {
     }
     public void clear(AnchorPane anchorPane){
         for (Node node : anchorPane.getChildren()) {
-            System.out.println("Id: " + node.getId());
+
             if (node instanceof TextField) {
                 // clear
                 ((TextField)node).clear();
