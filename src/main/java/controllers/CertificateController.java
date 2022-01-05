@@ -63,97 +63,44 @@ public class CertificateController {
         controller.toPage(event, "CertificateDelete");
     }
 
-
-    public HashMap<Student, ArrayList<Course>> getCompletedCoursesByStudent() {
+    public ArrayList<Course> returnCompletedCoursesFromStudent(String studentEmailAddress) {
         databaseConnection.connect();
-        HashMap<Student, ArrayList<Course>> studentsPassedCourses = new HashMap<>();
-        HashMap<Student, ArrayList<Course>> test = new HashMap<>();
+        cbCompleted.getItems().clear();
+        ArrayList<Course> completedCourses = new ArrayList<>();
 
-        HashMap<Student, ArrayList<Course>> hasBeenChecked = new HashMap<>();
-        try {
+        Student thisStudent = (Student) controller.giveIdentifierReturnObject(studentEmailAddress, "Student");
+        for (Map.Entry<Course, ArrayList<ContentItem>> e : contentItemsWithCourse().entrySet()) {
+            int passedContentItems = 0;
+            for (Progress progress : databaseConnection.retrieveProgress()) {
+                if (progress.getStudentId() == thisStudent.getId() && progress.getPercentage() == 100) {
 
-            for (Student student : databaseConnection.retrieveStudents()) {
-                ArrayList<Course> passedCourses = new ArrayList<>();
-                for (Map.Entry<Course, ArrayList<ContentItem>> e : contentItemsWithCourse().entrySet()) {
-
-                    int passedContentItems = 0;
                     for (ContentItem contentItem : e.getValue()) {
-                        for (Progress progress : databaseConnection.retrieveProgress()) {
-                            if (progress.getPercentage() == 100 && student.getId() == progress.getStudentId()) {
-
-                                if (contentItem.getContentItemId() == progress.getContentItemId()) {
-                                    passedContentItems++;
-                                }
-                            }
-
-                            if (passedContentItems == e.getValue().size() && passedContentItems > 0) {
-                                passedCourses.add(e.getKey());
-                                test.put((Student) controller.giveIdentifierReturnObject(progress.getStudentId(), "Student"), passedCourses);
-                                System.out.println(student.getEmailAddress() + "-" + passedCourses);
-                                break;
-                            }
+                        if (contentItem.getContentItemId() == progress.getContentItemId()) {
+                            passedContentItems++;
                         }
                     }
-
-
-                }
-
-            }
-
-            System.out.println(test);
-
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        return test;
-    }
-
-    public HashMap<Student, ArrayList<Course>> returnCompletedCoursesFromStudent(String studentEmailAddress) {
-        HashMap<Student, ArrayList<Course>> studentsPassedCourses = getCompletedCoursesByStudent();
-
-        HashMap<Student, ArrayList<Course>> selectedStudentsPassedCourses = new HashMap<>();
-        ArrayList<Course> coursesFromStudent = new ArrayList<>();
-        try {
-            Student student = new Student();
-            for (Map.Entry<Student, ArrayList<Course>> e : studentsPassedCourses.entrySet()) {
-                if (e.getKey().getEmailAddress().equals(studentEmailAddress)) {
-
-                    student = e.getKey();
-                    cbCompleted.getItems().clear();
-                    for (Course course : e.getValue()) {
-                        cbCompleted.getItems().add(course.getName());
-                        coursesFromStudent.add(course);
+                    if (e.getValue().size() == passedContentItems && passedContentItems > 0) {
+                        completedCourses.add(e.getKey());
+                        cbCompleted.getItems().add(e.getKey());
                     }
-                    isVisible(true);
-                    break;
                 }
             }
-            if (student.getName() == null) {
-                tfEmail.setText("No finished courses");
-            }
-            selectedStudentsPassedCourses.put(student, coursesFromStudent);
-        } catch (Exception e) {
-            System.out.println(e);
         }
-        return selectedStudentsPassedCourses;
+        isVisible(true);
+        return completedCourses;
     }
 
     public void addDatesTocbDate() {
         String email = tfEmail.getText();
         if (controller.checkEmail(email)) {
-            HashMap<Student, ArrayList<Course>> map = returnCompletedCoursesFromStudent(email);
+            ArrayList<Course> courses = returnCompletedCoursesFromStudent(email);
 
             cbDate.getItems().clear();
             try {
                 for (Enrollment enrollment : databaseConnection.retrieveEnrollments()) {
-                    for (Map.Entry<Student, ArrayList<Course>> e : map.entrySet()) {
-                        if (enrollment.getStudentId() == e.getKey().getId()) {
-                            for (Course course : e.getValue()) {
-                                if (course.getId() == enrollment.getCourseId()) {
-                                    cbDate.getItems().add(enrollment.getEnrollmentDate().toString());
-                                }
-                            }
-                            break;
+                    for (Course course : courses) {
+                        if (course.getId() == enrollment.getCourseId()) {
+                            cbDate.getItems().add(enrollment.getEnrollmentDate());
                         }
                     }
                 }
