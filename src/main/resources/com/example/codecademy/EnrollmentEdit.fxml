@@ -61,5 +61,10 @@
       <TextField fx:id="tfDateDay" layoutX="22.0" layoutY="349.0" prefHeight="25.0" prefWidth="31.0" visible="false" />
       <TextField fx:id="tfDateMonth" layoutX="58.0" layoutY="349.0" prefHeight="25.0" prefWidth="31.0" visible="false" />
       <TextField fx:id="tfDateYear" layoutX="96.0" layoutY="349.0" prefHeight="25.0" prefWidth="78.0" visible="false" />
+      <Button layoutX="347.0" layoutY="46.0" mnemonicParsing="false" onAction="#toCertificate" text="Certificate">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

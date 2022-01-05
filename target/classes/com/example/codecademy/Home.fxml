@@ -188,7 +188,7 @@
                 </TitledPane>
               </panes>
             </Accordion>
-            <Button layoutX="347.0" layoutY="45.0" mnemonicParsing="false" onAction="#toCertificate" text="Certificate">
+            <Button fx:id="BtnCertificate" layoutX="347.0" layoutY="45.0" mnemonicParsing="false" onAction="#toCertificate" text="Certificate">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>

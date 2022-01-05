@@ -84,6 +84,10 @@ public class StudentController {
         controller.toPage(event, "ContentItemAdd");
     }
 
+    public void toCertificate(ActionEvent event) {
+        controller.toPage(event, "CertificateAdd");
+    }
+
     public void toStudentEdit(ActionEvent event) {
         controller.toPage(event, "StudentEdit");
     }

@@ -75,17 +75,20 @@ public class CourseController {
         controller.toPage(event, "ContentItemAdd");
     }
 
+    public void toCertificate(ActionEvent event) {
+        controller.toPage(event, "CertificateAdd");
+    }
+
     public void toCourseEdit(ActionEvent event) {
         controller.toPage(event, "CourseEdit");
     }
-
     public void toCourseDelete(ActionEvent event) {
         controller.toPage(event,  "CourseDelete");
     }
-
     public void toCourseSelection(ActionEvent event) {
         controller.toPage(event, "CourseSelection");
     }
+
 
     public void showCourses() {
         databaseConnection.connect();

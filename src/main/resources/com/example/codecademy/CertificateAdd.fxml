@@ -16,7 +16,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="BtnStudent" layoutX="65.0" layoutY="46.0" mnemonicParsing="false" text="Student">
+      <Button fx:id="BtnStudent" layoutX="65.0" layoutY="46.0" mnemonicParsing="false" onAction="#toStudent" text="Student">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -46,7 +46,7 @@
             <Font name="System Bold Italic" size="22.0" />
          </font>
       </Label>
-      <Button fx:id="btnStudentAdd" defaultButton="true" layoutX="14.0" layoutY="85.0" mnemonicParsing="false" onAction="#toAdd" text="Add" />
+      <Button fx:id="btnStudentAdd" defaultButton="true" layoutX="14.0" layoutY="85.0" mnemonicParsing="false" onAction="#toCertificate" text="Add" />
       <Button fx:id="BtnStudentEdit" layoutX="52.0" layoutY="85.0" mnemonicParsing="false" onAction="#toEdit" text="Edit" />
       <Button fx:id="BtnStudentDelete" layoutX="89.0" layoutY="85.0" mnemonicParsing="false" onAction="#toDelete" text="Delete" />
       <ListView fx:id="listCertificates" layoutX="432.0" layoutY="84.0" prefHeight="200.0" prefWidth="200.0" />
@@ -62,7 +62,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Button fx:id="btnStudentAddRefresh" layoutX="570.0" layoutY="289.0" mnemonicParsing="false" text="Refresh">
+      <Button fx:id="btnStudentAddRefresh" layoutX="570.0" layoutY="289.0" mnemonicParsing="false" onAction="#getCertificates" text="Refresh">
          <font>
             <Font size="10.0" />
          </font>

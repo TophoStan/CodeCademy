@@ -58,6 +58,11 @@ public class EnrollmentController {
     public void toContentItem(ActionEvent event) {
         controller.toPage(event, "ContentItemAdd");
     }
+
+    public void toCertificate(ActionEvent event) {
+        controller.toPage(event, "CertificateAdd");
+    }
+
     public void toDelete(ActionEvent event){
         controller.toPage(event, "EnrollmentDelete");
     }

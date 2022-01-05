@@ -33,8 +33,7 @@ public class Certificate {
     }
 
     public String toString() {
-        return "Course:" + enrollment.getCourseName() + "\nGrade: " + this.grade + "\nEnrollmentDate: "
-                + enrollment.getEnrollmentDate();
+        return "Course:" + enrollment.getCourseName() + "\nGrade: " + this.grade;
     }
 
     public int getEnrollmentId() {
