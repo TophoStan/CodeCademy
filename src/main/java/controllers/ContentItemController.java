@@ -56,6 +56,10 @@ public class ContentItemController {
         controller.toPage(event, "ContentItemAdd");
     }
 
+    public void toCertificate(ActionEvent event) {
+        controller.toPage(event, "CertificateAdd");
+    }
+
     public void addContentItem(){
         Course course = new Course();
         for (Course courseFromList : databaseConnection.retrieveCourses()) {

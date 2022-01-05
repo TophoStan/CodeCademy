@@ -413,7 +413,7 @@ public class DatabaseConnection {
             ResultSet rs = stmt.executeQuery("SELECT * FROM Certificate");
             while (rs.next()) {
                 Certificate certificate = new Certificate();
-                certificate.setGrade(rs.getDouble("Grade"));
+                certificate.setGrade(rs.getInt("Grade"));
                 certificate.setEnrollmentId(rs.getInt("EnrollmentId"));
                 certificate.setEmployeeId(rs.getInt("EmployeeId"));
                 certificates.add(certificate);

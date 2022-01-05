@@ -64,6 +64,11 @@
             <Label layoutX="290.0" layoutY="78.0" text="Course info" />
             <Button layoutX="560.0" layoutY="279.0" mnemonicParsing="false" onAction="#showCourses" text="Refresh" />
             <Button layoutX="141.0" layoutY="85.0" mnemonicParsing="false" onAction="#toCourseSelection" text="Selection" />
+            <Button layoutX="347.0" layoutY="46.0" mnemonicParsing="false" onAction="#toCertificate" text="Certificate">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
    </children>

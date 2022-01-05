@@ -3,10 +3,7 @@ package controllers;
 import domain.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import repository.DatabaseConnection;
 
 import java.sql.Date;
@@ -26,6 +23,7 @@ public class CertificateController {
     @FXML private Label lbGrade;
     @FXML private TextField tfGrade;
     @FXML private Button btnSubmit;
+    @FXML private ListView listCertificates;
 
 
     private Controller controller = new Controller();
@@ -54,13 +52,11 @@ public class CertificateController {
     public void toCertificate(ActionEvent event) {
         controller.toPage(event, "CertificateAdd");
     }
+
     public void toEdit(ActionEvent event) {
         controller.toPage(event, "CertificateAdd");
     }
     public void toDelete(ActionEvent event) {
-        controller.toPage(event, "CertificateAdd");
-    }
-    public void toAdd(ActionEvent event) {
         controller.toPage(event, "CertificateAdd");
     }
 
@@ -225,5 +221,11 @@ public class CertificateController {
             System.out.printf("hallo");
         }
     return enrollment.getEnrollmentId();
+    }
+
+    public void getCertificates() {
+        databaseConnection.connect();
+        listCertificates.getItems().clear();
+
     }
 }
