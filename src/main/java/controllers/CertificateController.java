@@ -219,7 +219,7 @@ public class CertificateController {
 
 
         }catch (Exception e){
-            System.out.printf("hallo");
+            System.out.println(e);
         }
     return enrollment.getEnrollmentId();
     }
@@ -237,8 +237,6 @@ public class CertificateController {
             }
         } catch (Exception e) {
             System.out.println(e);
-            e.printStackTrace();
         }
-
     }
 }
