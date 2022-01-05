@@ -50,7 +50,7 @@
             <Label layoutX="18.0" layoutY="117.0" text="Select a course" />
             <Label layoutX="24.0" layoutY="134.0" text="Name" />
             <TextField fx:id="tFNameSelectCourse" layoutX="21.0" layoutY="151.0" />
-            <ListView fx:id="courseList" layoutX="442.0" layoutY="101.0" prefHeight="165.0" prefWidth="170.0" />
+            <ListView fx:id="courseList" layoutX="394.0" layoutY="101.0" prefHeight="165.0" prefWidth="218.0" />
             <Label layoutX="442.0" layoutY="77.0" text="Courses" />
             <Button fx:id="btnSelectCourse" layoutX="194.0" layoutY="151.0" mnemonicParsing="false" onAction="#selectCourse" text="Select" />
             <Button fx:id="btnCourseRefresh" layoutX="560.0" layoutY="273.0" mnemonicParsing="false" onAction="#showCourses" text="Refresh" />
