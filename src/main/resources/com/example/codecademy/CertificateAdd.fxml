@@ -49,7 +49,7 @@
       <Button fx:id="btnStudentAdd" defaultButton="true" layoutX="14.0" layoutY="85.0" mnemonicParsing="false" onAction="#toCertificate" text="Add" />
       <Button fx:id="BtnStudentEdit" layoutX="52.0" layoutY="85.0" mnemonicParsing="false" onAction="#toEdit" text="Edit" />
       <Button fx:id="BtnStudentDelete" layoutX="89.0" layoutY="85.0" mnemonicParsing="false" onAction="#toDelete" text="Delete" />
-      <ListView fx:id="listCertificates" layoutX="432.0" layoutY="84.0" prefHeight="200.0" prefWidth="200.0" />
+      <ListView fx:id="listCertificates" layoutX="346.0" layoutY="124.0" prefHeight="200.0" prefWidth="286.0" />
       <Label layoutX="15.0" layoutY="117.0" text="Add a certificate">
          <font>
             <Font size="14.0" />
@@ -57,12 +57,12 @@
       </Label>
       <Label layoutX="19.0" layoutY="147.0" text="Email" />
       <Button fx:id="btnSubmit" layoutX="277.0" layoutY="373.0" mnemonicParsing="false" onAction="#addCertificate" text="Submit" visible="false" />
-      <Label layoutX="432.0" layoutY="63.0" text="Certificates">
+      <Label layoutX="378.0" layoutY="100.0" text="Certificates">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Button fx:id="btnStudentAddRefresh" layoutX="570.0" layoutY="289.0" mnemonicParsing="false" onAction="#getCertificates" text="Refresh">
+      <Button fx:id="btnCertificateRefresh" layoutX="572.0" layoutY="328.0" mnemonicParsing="false" onAction="#getCertificates" text="Refresh">
          <font>
             <Font size="10.0" />
          </font>

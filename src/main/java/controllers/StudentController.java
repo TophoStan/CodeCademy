@@ -15,8 +15,6 @@ import java.util.ArrayList;
 
 public class StudentController {
 
-    private Controller controller = new Controller();
-
     // for student add page
     @FXML private TextField tfStudentAddName;
     @FXML private TextField tFStudentAddEmail;
@@ -62,7 +60,8 @@ public class StudentController {
     @FXML private TextField tFStudentSelectionEmail;
     @FXML private ListView certificatesList;
 
-    DatabaseConnection databaseConnection = new DatabaseConnection();
+    private Controller controller = new Controller();
+    private DatabaseConnection databaseConnection = new DatabaseConnection();
 
     public void toHome(ActionEvent event) {
         controller.toPage(event, "Home");
@@ -100,7 +99,7 @@ public class StudentController {
 
     public void showStudentEditPlace() {
         String email = tFStudentEditEmail.getText();
-        if (checkEmail(email)) {
+        if (controller.checkEmail(email)) {
             studentInfoList.setVisible(true);
             lBStudentEditYourInfo.setVisible(true);
             lBStudentEditName.setVisible(true);
@@ -129,24 +128,7 @@ public class StudentController {
         }
     }
 
-    public boolean checkEmail(String email){
-        boolean output = false;
-        try {
-            databaseConnection.connect();
-            ArrayList<Student> studentsFromDatabase = new ArrayList<>();
-            studentsFromDatabase = databaseConnection.retrieveStudents();
 
-            for (Student student : studentsFromDatabase) {
-                if (email.equals(student.getEmailAddress())) {
-                    output = true;
-                    break;
-                }
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        return output;
-    }
 
     public void editStudentToDatabase() {
         String email = tFStudentEditEmail.getText();
@@ -248,7 +230,7 @@ public class StudentController {
     public void deleteStudent(){
         String email = tFStudentDeleteEmail.getText();
         ArrayList<Student> studentsToDelete = new ArrayList<>();
-        if (checkEmail(email)) {
+        if (controller.checkEmail(email)) {
             try {
                 databaseConnection.connect();
                 studentsToDelete = databaseConnection.retrieveStudents();
@@ -273,7 +255,7 @@ public class StudentController {
         ArrayList<Course> allCourses = new ArrayList<>();
         ArrayList<Integer> courseIdList = new ArrayList<>();
 
-        if (checkEmail(email)) {
+        if (controller.checkEmail(email)) {
             certificatesList.getItems().clear();
             databaseConnection.connect();
             try {

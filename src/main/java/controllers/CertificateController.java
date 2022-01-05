@@ -74,8 +74,6 @@ public class CertificateController {
                     if (progress.getPercentage() == 100) {
                         for (ContentItem contentItem : e.getValue()) {
                             if (contentItem.getContentItemId() == progress.getContentItemId()) {
-                                System.out.println("contentitemId: " + contentItem.getContentItemId());
-                                System.out.println("process: " + progress.getContentItemId());
                                 passedContentItems += 1;
                             }
                         }
@@ -94,7 +92,6 @@ public class CertificateController {
         } catch (Exception e) {
             System.out.println(e);
         }
-        System.out.println(studentsPassedCourses);
         return studentsPassedCourses;
     }
 
@@ -106,7 +103,7 @@ public class CertificateController {
                 Student student = new Student();
                 for (Map.Entry<Student, ArrayList<Course>> e:studentsPassedCourses.entrySet()) {
                     if(e.getKey().getEmailAddress().equals(studentEmailAddress)){
-                        System.out.println("hier doet ie het");
+
                         student = e.getKey();
                         cbCompleted.getItems().clear();
                         for (Course course : e.getValue()) {
@@ -115,37 +112,42 @@ public class CertificateController {
                         }
                         isVisible(true);
                         break;
-                    } else {
-                        System.out.println("hiero niet");
                     }
+                }
+                if (student.getName() == null) {
+                    tfEmail.setText("No finished courses");
                 }
                 selectedStudentsPassedCourses.put(student, coursesFromStudent);
         } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("lol");
+            System.out.println(e);
         }
-        return  selectedStudentsPassedCourses;
+        return selectedStudentsPassedCourses;
     }
 
     public void addDatesTocbDate() {
-        HashMap<Student, ArrayList<Course>> map = returnCompletedCoursesFromStudent(tfEmail.getText());
+        String email = tfEmail.getText();
+        if (controller.checkEmail(email)) {
+            HashMap<Student, ArrayList<Course>> map = returnCompletedCoursesFromStudent(email);
 
-        cbDate.getItems().clear();
-        try {
-            for (Enrollment enrollment : databaseConnection.retrieveEnrollments()) {
-                for (Map.Entry<Student, ArrayList<Course>> e: map.entrySet()) {
-                    if(enrollment.getStudentId() == e.getKey().getId()){
-                        for (Course course: e.getValue()) {
-                            if(course.getId() == enrollment.getCourseId()){
-                                cbDate.getItems().add(enrollment.getEnrollmentDate().toString());
+            cbDate.getItems().clear();
+            try {
+                for (Enrollment enrollment : databaseConnection.retrieveEnrollments()) {
+                    for (Map.Entry<Student, ArrayList<Course>> e : map.entrySet()) {
+                        if (enrollment.getStudentId() == e.getKey().getId()) {
+                            for (Course course : e.getValue()) {
+                                if (course.getId() == enrollment.getCourseId()) {
+                                    cbDate.getItems().add(enrollment.getEnrollmentDate().toString());
+                                }
                             }
+                            break;
                         }
-                        break;
                     }
                 }
+            } catch (Exception e) {
+                System.out.println(e);
             }
-        } catch (Exception e) {
-            System.out.println(e);
+        } else {
+            tfEmail.setText("Unknown email");
         }
     }
 
@@ -190,8 +192,7 @@ public class CertificateController {
             certificate.setEnrollmentId(returnEnrollmentId());
             databaseConnection.addCertificate(certificate);
         }catch (Exception e){
-            e.printStackTrace();
-            System.out.println("jammer");
+            System.out.println(e);
         }
     }
     public int returnEnrollmentId(){
@@ -234,6 +235,18 @@ public class CertificateController {
     }
 
     public void deleteCertificate(){
+
+        try {
+            for (Certificate certificate : databaseConnection.retrieveCertificates()) {
+                Enrollment thisEnrollment = (Enrollment) controller.giveIdentifierReturnObject(certificate.getEnrollmentId(), "Enrollment");
+                Course thisCourse = (Course) controller.giveIdentifierReturnObject(thisEnrollment.getCourseId(), "Course");
+                Student thisStudent = (Student) controller.giveIdentifierReturnObject(thisEnrollment.getStudentId(), "Student");
+                listCertificates.getItems().add(thisCourse.getName() + " by: " + thisStudent.getName() + " | " + certificate.getGrade());
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            e.printStackTrace();
+        }
 
     }
 }

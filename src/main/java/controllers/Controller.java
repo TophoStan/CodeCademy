@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import repository.DatabaseConnection;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Controller {
 
@@ -114,5 +115,24 @@ public class Controller {
             System.out.println(e);
         }
         return null;
+    }
+
+    public boolean checkEmail(String email){
+        boolean output = false;
+        try {
+            databaseConnection.connect();
+            ArrayList<Student> studentsFromDatabase = new ArrayList<>();
+            studentsFromDatabase = databaseConnection.retrieveStudents();
+
+            for (Student student : studentsFromDatabase) {
+                if (email.equals(student.getEmailAddress())) {
+                    output = true;
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return output;
     }
 }
