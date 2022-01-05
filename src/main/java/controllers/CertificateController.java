@@ -239,4 +239,18 @@ public class CertificateController {
             System.out.println(e);
         }
     }
+
+    public void deleteCertificate(){
+
+        try {
+            for (Certificate certificate : databaseConnection.retrieveCertificates()) {
+                Enrollment thisEnrollment = (Enrollment) controller.giveIdentifierReturnObject(certificate.getEnrollmentId(), "Enrollment");
+                Course thisCourse = (Course) controller.giveIdentifierReturnObject(thisEnrollment.getCourseId(), "Course");
+                Student thisStudent = (Student) controller.giveIdentifierReturnObject(thisEnrollment.getStudentId(), "Student");
+                listCertificates.getItems().add(thisCourse.getName() + " by: " + thisStudent.getName() + " | " + certificate.getGrade());
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 }

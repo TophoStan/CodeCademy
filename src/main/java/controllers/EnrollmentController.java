@@ -174,18 +174,13 @@ public class EnrollmentController {
             enrollmentToDelete.setEnrollmentDate(date);
             enrollmentToDelete.setCourse(selectedCourse);
 
-            ArrayList<Student> students = databaseConnection.retrieveStudents();
+            //Turns the selected course into a Student Object
+            studentToDelete = (Student) controller.giveIdentifierReturnObject(tFEmailEnrollmentDelete.getText(), "Student");
 
-            for (Student studentFromList : students) {
-                if(studentFromList.getEmailAddress().equals(tFEmailEnrollmentDelete.getText())){
-                    studentToDelete = studentFromList;
-                }
-            }
             enrollmentToDelete.setStudent(studentToDelete);
             ArrayList<Enrollment> enrollments = databaseConnection.retrieveEnrollments();
 
             for (Enrollment enrollment: enrollments) {
-
                 if(enrollment.getCourseName().equals(enrollmentToDelete.getCourseName()) && enrollment.getStudentName().equals(enrollmentToDelete.getStudentName()) && enrollment.getEnrollmentDate().toString().equals(enrollmentToDelete.getEnrollmentDate().toString())){
                    databaseConnection.deleteEnrollment(enrollment);
                 }
@@ -206,18 +201,11 @@ public class EnrollmentController {
         Course courseToEdit = new Course();
         Student studentToEdit = new Student();
         try {
-            //Sets the selected course into a course Object
-            for (Course course: databaseConnection.retrieveCourses()) {
-                if(course.getName().equals(cbCourseEnrollmentToEdit.getValue().toString())){
-                    courseToEdit = course;
-                }
-            }
+            //Turns the selected course into a Course object
+            courseToEdit = (Course) controller.giveIdentifierReturnObject(cbCourseEnrollmentToEdit.getValue().toString(), "Course");
+            //Turns the selected course into a Student object
+            studentToEdit = (Student) controller.giveIdentifierReturnObject(tFEmailEnrollmentDelete.getText(), "Student");
 
-            for (Student studentFromList : databaseConnection.retrieveStudents()) {
-                if(studentFromList.getEmailAddress().equals(tFEmailEnrollmentDelete.getText())){
-                    studentToEdit = studentFromList;
-                }
-            }
             enrollmentToEdit.setCourse(courseToEdit);
             enrollmentToEdit.setStudent(studentToEdit);
             enrollmentToEdit.setEnrollmentDate(date);
@@ -243,13 +231,8 @@ public class EnrollmentController {
             enrollmentToCheck.setEnrollmentDate(date);
             enrollmentToCheck.setCourse(selectedCourse);
 
-            ArrayList<Student> students = databaseConnection.retrieveStudents();
+            studentToCheck = (Student) controller.giveIdentifierReturnObject(tFEmailEnrollmentDelete.getText(), "Student");
 
-            for (Student studentFromList : students) {
-                if(studentFromList.getEmailAddress().equals(tFEmailEnrollmentDelete.getText())){
-                    studentToCheck = studentFromList;
-                }
-            }
             enrollmentToCheck.setStudent(studentToCheck);
             ArrayList<Enrollment> enrollments = databaseConnection.retrieveEnrollments();
 
@@ -300,7 +283,6 @@ public class EnrollmentController {
     }
 
     public Date convertDate(int day, int month, int year) {
-        SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.YEAR, year);
         cal.set(Calendar.MONTH, month - 1);
