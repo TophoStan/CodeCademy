@@ -311,6 +311,19 @@ public class DatabaseConnection {
         }
     }
 
+    public void addProgress(Progress progress) {
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO Progress(ContentItemID, StudentID, Percentage) VALUES (?,?,?)");
+            preparedStatement.setInt(1, progress.getContentItemId());
+            preparedStatement.setInt(2, progress.getStudentId());
+            preparedStatement.setInt(3, progress.getPercentage());
+
+            preparedStatement.execute();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
     /**
      * Retrieves all the records from the Enrollment table on the SQL
      * server.
@@ -525,6 +538,7 @@ public class DatabaseConnection {
                 module.setContentItemId(rs.getInt("ContentItemId"));
                 module.setTrackingNumber(rs.getInt("TrackingNumber"));
 
+                modules.add(module);
             }
         } catch (Exception e) {
             System.out.println(e);

@@ -1,6 +1,8 @@
 package controllers;
 
+import domain.Certificate;
 import domain.Course;
+import domain.Enrollment;
 import domain.Student;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -267,6 +269,7 @@ public class StudentController {
             } catch (Exception e) {
                 System.out.println(e);
             }
+
         } else {
             tFStudentSelectionEmail.setText("Wrong email!");
         }

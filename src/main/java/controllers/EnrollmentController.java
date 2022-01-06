@@ -1,8 +1,7 @@
 package controllers;
 
-import domain.Course;
-import domain.Enrollment;
-import domain.Student;
+import domain.*;
+import domain.Module;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
@@ -11,7 +10,6 @@ import javafx.scene.control.*;
 import repository.DatabaseConnection;
 
 import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -89,9 +87,39 @@ public class EnrollmentController {
             System.out.println(e);
         }
         databaseConnection.addEnrollment(enrollment);
+        System.out.println(enrollment);
+        addProgresses(enrollment);
         tFEmailEnrollment.clear();
         cbCourseEnrollment.getItems().clear();
         listEnrollments();
+    }
+
+    public void addProgresses(Enrollment enrollment) {
+        try {
+            databaseConnection.connect();
+            Course course = (Course) controller.giveIdentifierReturnObject(enrollment.getCourseId(), "Course");
+
+            ArrayList<Module> modules = databaseConnection.retrieveModules();
+
+            for (Module module : modules) {
+                ContentItem contentItem = (ContentItem) controller.giveIdentifierReturnObject(module.getContentItemId(), "ContentItem");
+                if (contentItem.getCourseId() == course.getId()) {
+
+                    Progress progress = new Progress();
+                    progress.setStudentId(enrollment.getStudentId());
+                    progress.setContentItemId(module.getContentItemId());
+                    progress.setPercentage(0);
+
+                    databaseConnection.addProgress(progress);
+
+                    System.out.println(progress);
+                    System.out.println(module.getTitle() + ": progress added");
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            e.printStackTrace();
+        }
     }
 
     public void addValuesToComboBox() {

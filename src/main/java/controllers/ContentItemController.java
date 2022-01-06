@@ -197,11 +197,20 @@ public class ContentItemController {
     public void listContentItems(){
         listView.getItems().clear();
         databaseConnection.connect();
+
+
         for (ContentItem contentItem : databaseConnection.retrieveContentItems()) {
-            listView.getItems().add(contentItem.getTitle());
+            String sort = "";
+            for (Webcast webcast : databaseConnection.retrieveWebcasts()) {
+                if (webcast.getContentItemId() == contentItem.getContentItemId()) {
+                    sort = "W";
+                    break;
+                } else {
+                    sort = "M";
+                }
+            }
+            listView.getItems().add(contentItem.getTitle() + " - " + sort);
         }
     }
-
-
 }
 
