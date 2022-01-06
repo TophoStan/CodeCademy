@@ -111,8 +111,6 @@ public class EnrollmentController {
                     progress.setPercentage(0);
 
                     databaseConnection.addProgress(progress);
-
-                    System.out.println(progress);
                     System.out.println(module.getTitle() + ": progress added");
                 }
             }
@@ -204,7 +202,10 @@ public class EnrollmentController {
 
             for (Enrollment enrollment: enrollments) {
                 if(enrollment.getCourseName().equals(enrollmentToDelete.getCourseName()) && enrollment.getStudentName().equals(enrollmentToDelete.getStudentName()) && enrollment.getEnrollmentDate().toString().equals(enrollmentToDelete.getEnrollmentDate().toString())){
-                   databaseConnection.deleteEnrollment(enrollment);
+                    databaseConnection.deleteEnrollment(enrollment);
+                    System.out.println("Enrollment deleted");
+                    deleteProgresses(enrollment);
+                    break;
                 }
             }
             tFEmailEnrollmentDelete.clear();
@@ -212,6 +213,28 @@ public class EnrollmentController {
             cbCourseEnrollmentDelete.getItems().clear();
             listEnrollments();
         } catch (Exception e){
+            System.out.println(e);
+        }
+    }
+
+    public void deleteProgresses(Enrollment enrollment) {
+        Course course = (Course) controller.giveIdentifierReturnObject(enrollment.getCourseId(), "Course");
+        try {
+            int contentItemID = -1;
+            for (Module module : databaseConnection.retrieveModules()) {
+                ContentItem contentItem = (ContentItem) controller.giveIdentifierReturnObject(module.getContentItemId(), "ContentItem");
+
+                if (contentItem.getCourseId() == course.getId()) {
+                    contentItemID = contentItem.getContentItemId();
+                    for (Progress progress : databaseConnection.retrieveProgress()) {
+                        if (progress.getContentItemId() == contentItemID && progress.getStudentId() == enrollment.getStudentId()) {
+                            databaseConnection.deleteProgress(progress);
+                            System.out.println("Progress deleted");
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
             System.out.println(e);
         }
     }

@@ -391,6 +391,12 @@ public class DatabaseConnection {
         preparedStatement.executeUpdate();
     }
 
+    public void deleteProgress(Progress progress) throws SQLException {
+        PreparedStatement preparedStatement = conn.prepareStatement(
+                "DELETE FROM Progress WHERE ProgressID = " + progress.getId());
+        preparedStatement.executeUpdate();
+    }
+
     /**
      * Uses the <code>Statement</code> and <code>execute()</code> to
      * push the Certificite to the database with a number of
