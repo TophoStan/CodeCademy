@@ -85,7 +85,14 @@ public class CertificateController {
                 }
             }
         }
-        isVisible(true);
+
+        if (completedCourses.isEmpty()) {
+            tfEmail.setText("No completed courses");
+            isVisible(false);
+        } else {
+            isVisible(true);
+        }
+
         return completedCourses;
     }
 
