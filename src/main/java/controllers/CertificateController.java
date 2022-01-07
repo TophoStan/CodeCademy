@@ -3,7 +3,6 @@ package controllers;
 import domain.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import repository.DatabaseConnection;
@@ -86,7 +85,13 @@ public class CertificateController {
                 }
             }
         }
-        isVisible(true);
+
+        if (completedCourses.isEmpty()) {
+            tfEmail.setText("No completed courses");
+            isVisible(false);
+        } else {
+            isVisible(true);
+        }
         return completedCourses;
     }
 
@@ -96,16 +101,18 @@ public class CertificateController {
             ArrayList<Course> courses = returnCompletedCoursesFromStudent(email);
 
             cbDate.getItems().clear();
-            try {
-                for (Enrollment enrollment : databaseConnection.retrieveEnrollments()) {
-                    for (Course course : courses) {
-                        if (course.getId() == enrollment.getCourseId()) {
-                            cbDate.getItems().add(enrollment.getEnrollmentDate());
+            if (!courses.isEmpty()) {
+                try {
+                    for (Enrollment enrollment : databaseConnection.retrieveEnrollments()) {
+                        for (Course course : courses) {
+                            if (course.getId() == enrollment.getCourseId()) {
+                                cbDate.getItems().add(enrollment.getEnrollmentDate());
+                            }
                         }
                     }
+                } catch (Exception e) {
+                    System.out.println(e);
                 }
-            } catch (Exception e) {
-                System.out.println(e);
             }
         } else {
             tfEmail.setText("Unknown email");
@@ -200,7 +207,7 @@ public class CertificateController {
                 Enrollment thisEnrollment = (Enrollment) controller.giveIdentifierReturnObject(certificate.getEnrollmentId(), "Enrollment");
                 Course thisCourse = (Course) controller.giveIdentifierReturnObject(thisEnrollment.getCourseId(), "Course");
                 Student thisStudent = (Student) controller.giveIdentifierReturnObject(thisEnrollment.getStudentId(), "Student");
-                listCertificates.getItems().add(thisCourse.getName() + " by: " + thisStudent.getName() + " | " + certificate.getGrade());
+                listCertificates.getItems().add(thisCourse.getName() + " by: " + thisStudent.getName() + " - " + certificate.getGrade());
             }
         } catch (Exception e) {
             System.out.println(e);

@@ -66,4 +66,14 @@ public class Progress {
         this.contentItem = (ContentItem)   controller.giveIdentifierReturnObject(this.contentItem.getContentItemId(), "ContentItem");
         this.student = (Student) controller.giveIdentifierReturnObject(this.student.getId(), "Student");
     }
+
+    @Override
+    public String toString() {
+        return "Progress{" +
+                "id=" + id +
+                ", contentItem=" + contentItem.getTitle() +
+                ", student=" + student.getName() +
+                ", percentage=" + percentage +
+                '}';
+    }
 }
