@@ -251,11 +251,14 @@ public class EnrollmentController {
             //Turns the selected course into a Student object
             studentToEdit = (Student) controller.giveIdentifierReturnObject(tFEmailEnrollmentDelete.getText(), "Student");
 
+            deleteProgresses(enrollmentFromDatabaseThatWillBeEdited);
+
             enrollmentToEdit.setCourse(courseToEdit);
             enrollmentToEdit.setStudent(studentToEdit);
             enrollmentToEdit.setEnrollmentDate(date);
             enrollmentToEdit.setEnrollmentId(enrollmentFromDatabaseThatWillBeEdited.getEnrollmentId());
             databaseConnection.editEnrollment(enrollmentToEdit);
+            addProgresses(enrollmentToEdit);
             tFEmailEnrollmentDelete.clear();
             cbCourseEnrollmentDelete.getItems().clear();
             cbDateEnrollment.getItems().clear();

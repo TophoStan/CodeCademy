@@ -10,7 +10,7 @@
 
 <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="472.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CertificateController">
    <children>
-      <TextField fx:id="tfEmail" layoutX="21.0" layoutY="172.0" />
+      <TextField fx:id="tfEmail" layoutX="21.0" layoutY="172.0" prefHeight="25.0" prefWidth="170.0" />
       <Button fx:id="BtnHome" layoutX="14.0" layoutY="46.0" mnemonicParsing="false" onAction="#toHome" text="Home">
          <font>
             <Font name="System Bold" size="12.0" />
@@ -73,7 +73,7 @@
       <ComboBox fx:id="cbEmployee" layoutX="22.0" layoutY="326.0" onMouseClicked="#addEmployeesToCombobox" prefWidth="150.0" visible="false" />
       <Label fx:id="lbDate" layoutX="22.0" layoutY="264.0" text="Date" visible="false" />
       <ComboBox fx:id="cbDate" layoutX="23.0" layoutY="280.0" prefWidth="150.0" visible="false" />
-      <Button layoutX="181.0" layoutY="172.0" mnemonicParsing="false" onAction="#addDatesTocbDate" text="Check" />
+      <Button layoutX="196.0" layoutY="172.0" mnemonicParsing="false" onAction="#addDatesTocbDate" text="Check" />
       <TextField fx:id="tfGrade" layoutX="24.0" layoutY="386.0" prefHeight="25.0" prefWidth="37.0" visible="false" />
       <Label fx:id="lbGrade" layoutX="26.0" layoutY="365.0" text="Grade" visible="false" />
    </children>

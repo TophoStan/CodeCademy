@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.sql.Date;
 import java.util.HashMap;
 
-import controllers.Controller;
 import domain.*;
 import domain.Module;
 
@@ -406,13 +405,12 @@ public class DatabaseConnection {
      * @throws NullPointerException Certificate == null
      */
     public void addCertificate(Certificate certificate) throws SQLException {
-
-        PreparedStatement preparedStatement = conn
-                .prepareStatement("INSERT INTO Certificate(Grade, EmployeeId, EnrollmentId) VALUES (?,?,?)");
-        preparedStatement.setDouble(1, certificate.getGrade());
-        preparedStatement.setInt(2, certificate.getEmployeeId());
-        preparedStatement.setInt(3, certificate.getEnrollmentId());
-        preparedStatement.executeUpdate();
+            PreparedStatement preparedStatement = conn
+                    .prepareStatement("INSERT INTO Certificate(Grade, EmployeeId, EnrollmentId) VALUES (?,?,?)");
+            preparedStatement.setDouble(1, certificate.getGrade());
+            preparedStatement.setInt(2, certificate.getEmployeeId());
+            preparedStatement.setInt(3, certificate.getEnrollmentId());
+            preparedStatement.executeUpdate();
     }
 
     /**

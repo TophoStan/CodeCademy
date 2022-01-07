@@ -30,6 +30,10 @@ public class CertificateController {
     private Controller controller = new Controller();
     private DatabaseConnection databaseConnection = new DatabaseConnection();
 
+    public CertificateController() {
+
+    }
+
     public void toHome(ActionEvent event) {
         controller.toPage(event, "Home");
     }
@@ -166,6 +170,8 @@ public class CertificateController {
             controller.clear(anchorPane);
         } catch (Exception e) {
             System.out.println(e);
+            tfEmail.setText("Certificate already exists");
+            isVisible(false);
         }
     }
 

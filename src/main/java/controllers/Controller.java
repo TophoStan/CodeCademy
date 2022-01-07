@@ -145,6 +145,7 @@ public class Controller {
         }
         return output;
     }
+
     public void clear(AnchorPane anchorPane){
         for (Node node : anchorPane.getChildren()) {
 
