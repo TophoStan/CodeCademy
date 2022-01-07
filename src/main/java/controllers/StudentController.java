@@ -266,6 +266,10 @@ public class StudentController {
                         }
                     }
                 }
+                if (certificatesList.getItems().isEmpty()) {
+                    certificatesList.getItems().add("No certificates");
+                }
+
             } catch (Exception e) {
                 System.out.println(e);
             }

@@ -45,9 +45,8 @@ public class DatabaseConnection {
             String pass = "groepje7";
 
             if (conn == null) {
-                System.out.println("Connecting to database");
                 this.conn = DriverManager.getConnection(dbURL, user, pass);
-                System.out.println("Connection successful");
+                System.out.println("Connected to database");
             }
 
         } catch (SQLException ex) {
@@ -614,12 +613,13 @@ public class DatabaseConnection {
 
         try {
             Statement stmt = conn.createStatement();
-            ResultSet rs =  stmt.executeQuery("SELECT TOP 3 title, views FROM webcast\n" +
+            ResultSet rs =  stmt.executeQuery("SELECT TOP 3 title, views, URL FROM webcast\n" +
                     "ORDER BY Webcast.views DESC");
             while (rs.next()) {
                 Webcast webcast = new Webcast();
                 webcast.setTitle(rs.getString("Title"));
                 webcast.setViews(rs.getInt("Views"));
+                webcast.setUrl(rs.getString("URL"));
 
                 webcasts[i] = webcast;
                 i++;
@@ -650,7 +650,8 @@ public class DatabaseConnection {
                 i++;
             }
         } catch (SQLException e) {
-            System.out.println(e);
+            System.out.println(e + " in database connection");
+
         }
         return courses;
     }

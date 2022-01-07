@@ -88,6 +88,7 @@
                                  </font>
                               </Label>
                               <Label fx:id="lBHomeWebcastViews1" layoutX="14.0" layoutY="45.0" text="Views 1" />
+                              <Label fx:id="lBHomeWebcastUrl1" layoutX="14.0" layoutY="75.0" text="Url 1" />
                            </children>
                         </AnchorPane>
                   </content>
@@ -102,6 +103,7 @@
                                  </font>
                               </Label>
                               <Label fx:id="lBHomeWebcastViews2" layoutX="14.0" layoutY="45.0" text="Views 2" />
+                              <Label fx:id="lBHomeWebcastUrl2" layoutX="14.0" layoutY="78.0" text="Url 2" />
                            </children>
                         </AnchorPane>
                   </content>
@@ -116,6 +118,7 @@
                                  </font>
                               </Label>
                               <Label fx:id="lBHomeWebcastViews3" layoutX="14.0" layoutY="48.0" text="Views 3" />
+                              <Label fx:id="lBHomeWebcastUrl3" layoutX="14.0" layoutY="77.0" text="Url 3" />
                            </children>
                         </AnchorPane>
                   </content>

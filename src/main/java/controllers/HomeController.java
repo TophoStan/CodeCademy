@@ -15,12 +15,16 @@ public class HomeController {
     @FXML private TitledPane lBHomeWebcastCollapse1;
     @FXML private Label lBHomeWebcastTitle1;
     @FXML private Label lBHomeWebcastViews1;
+    @FXML private Label lBHomeWebcastUrl1;
     @FXML private TitledPane lBHomeWebcastCollapse2;
     @FXML private Label lBHomeWebcastTitle2;
     @FXML private Label lBHomeWebcastViews2;
+    @FXML private Label lBHomeWebcastUrl2;
     @FXML private TitledPane lBHomeWebcastCollapse3;
     @FXML private Label lBHomeWebcastTitle3;
     @FXML private Label lBHomeWebcastViews3;
+    @FXML private Label lBHomeWebcastUrl3;
+
 
     // Courses with certificates
     @FXML private TitledPane lBHomeCoursesCollapse1;
@@ -68,20 +72,37 @@ public class HomeController {
         try {
             webcastsTop3 = databaseConnection.retrieveTop3Webcasts();
 
+            int webcastTop3Passed = -1;
+            for (Webcast webcast : webcastsTop3) {
+                if (webcast == null) {
+                    webcastTop3Passed++;
+                    Webcast newWebcast = new Webcast();
+                    newWebcast.setTitle("No more webcasts");
+                    newWebcast.setViews(0);
+                    newWebcast.setUrl("");
+                    webcastsTop3[webcastTop3Passed] = newWebcast;
+                } else {
+                    webcastTop3Passed++;
+                }
+            }
+
             // first
             lBHomeWebcastCollapse1.setText(webcastsTop3[0].getTitle());
             lBHomeWebcastTitle1.setText(webcastsTop3[0].getTitle());
             lBHomeWebcastViews1.setText("Views: " + String.valueOf(webcastsTop3[0].getViews()));
+            lBHomeWebcastUrl1.setText(webcastsTop3[0].getUrl());
 
             // second
             lBHomeWebcastCollapse2.setText(webcastsTop3[1].getTitle());
             lBHomeWebcastTitle2.setText(webcastsTop3[1].getTitle());
             lBHomeWebcastViews2.setText("Views: " + String.valueOf(webcastsTop3[1].getViews()));
+            lBHomeWebcastUrl2.setText(webcastsTop3[1].getUrl());
 
             // third
             lBHomeWebcastCollapse3.setText(webcastsTop3[2].getTitle());
             lBHomeWebcastTitle3.setText(webcastsTop3[2].getTitle());
             lBHomeWebcastViews3.setText("Views: " + String.valueOf(webcastsTop3[2].getViews()));
+            lBHomeWebcastUrl3.setText(webcastsTop3[2].getUrl());
 
         } catch (Exception e) {
             System.out.println(e);
@@ -94,6 +115,20 @@ public class HomeController {
 
         try {
             coursesTop3 = databaseConnection.retrieveTop3Courses();
+
+            int coursesTop3Passed = -1;
+            for (Course course : coursesTop3) {
+                if (course == null) {
+                    coursesTop3Passed++;
+                    Course newCourse = new Course();
+                    newCourse.setName("No more certificates");
+                    newCourse.setCertificates(0);
+                    coursesTop3[coursesTop3Passed] = newCourse;
+                } else {
+                    coursesTop3Passed++;
+                }
+            }
+
 
             // first
             lBHomeCoursesCollapse1.setText(coursesTop3[0].getName());
@@ -110,6 +145,7 @@ public class HomeController {
 
         } catch (Exception e) {
             System.out.println(e);
+
         }
     }
 }
