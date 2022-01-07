@@ -3,11 +3,14 @@ package controllers;
 import domain.ContentItem;
 import domain.Course;
 import domain.Difficulty;
+import domain.Module;
+import domain.Webcast;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 import javafx.scene.control.*;
 
+import javafx.scene.layout.AnchorPane;
 import repository.DatabaseConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,11 +22,13 @@ public class CourseController {
     private String[] difficulties = {Difficulty.EASY.toString(), Difficulty.NORMAL.toString(), Difficulty.HARD.toString(), Difficulty.EXPERT.toString()};
 
     // for course add page
+    @FXML private AnchorPane anchorPane;
     @FXML private ListView courseList;
     @FXML private TextField tFCourseAddName;
     @FXML private TextField tFCourseAddSubject;
     @FXML private TextArea tACourseAddIntroText;
     @FXML private ComboBox cBCourseAddDifficulty;
+    @FXML private ComboBox cbContentItem;
 
     // for course edit page
     @FXML private TextField tFNameEditCourse;
@@ -111,12 +116,42 @@ public class CourseController {
         course.setText(tACourseAddIntroText.getText());
         course.setDifficulty(Difficulty.valueOf(cBCourseAddDifficulty.getValue().toString()));
         course.setSubject(tFCourseAddSubject.getText());
+        String[] splitter = cbContentItem.getValue().toString().split("-");
+
 
         try {
             databaseConnection.addCourseToDatabase(course);
+            Course courseFromDatabase = (Course) controller.giveIdentifierReturnObject(course.getName(), "Course");
+            ContentItem contentItem = (ContentItem) controller.giveIdentifierReturnObject(splitter[1], "ContentItem");
+            contentItem.setCourseId(courseFromDatabase.getId());
+            databaseConnection.editContentItem(contentItem);
             showCourses();
         } catch (Exception e) {
             System.out.println(e);
+        }
+    }
+    public void loadContentItems(){
+        databaseConnection.connect();
+        cbContentItem.getItems().clear();
+        try {
+            for (ContentItem contentItem : databaseConnection.retrieveContentItems()) {
+                if(contentItem.getCourseId() == 0){
+                    String contentItemType ="";
+                    for (Webcast webcast : databaseConnection.retrieveWebcasts()) {
+                        if(webcast.getContentItemId() == contentItem.getContentItemId()){
+                            contentItemType = "Web";
+                        }
+                    }
+                    for (Module module : databaseConnection.retrieveModules()) {
+                        if(module.getContentItemId() == contentItem.getContentItemId()){
+                            contentItemType = "Mod";
+                        }
+                    }
+                    cbContentItem.getItems().add(contentItemType + " - " + contentItem.getTitle());
+                }
+            }
+        } catch (Exception e){
+
         }
     }
 
@@ -315,5 +350,22 @@ public class CourseController {
         rbCourseSelectionOther.setVisible(true);
         pbCourseSelectionGender.setVisible(true);
         lBCourseSelectionPercentage.setVisible(true);
+    }
+    //TODO deze in controller class zetten
+    public HashMap<Course, ArrayList<ContentItem>> contentItemsWithCourse() {
+        HashMap<Course, ArrayList<ContentItem>> map = new HashMap<>();
+        for (Course course : databaseConnection.retrieveCourses()) {
+            ArrayList<ContentItem> contentItems = new ArrayList<>();
+            for (ContentItem contentItem : databaseConnection.retrieveContentItems()) {
+                if (course.getId() == contentItem.getCourseId()) {
+                    contentItems.add(contentItem);
+                }
+            }
+            map.put(course, contentItems);
+        }
+        return map;
+    }
+    public void clearFields(){
+        controller.clear(anchorPane);
     }
 }

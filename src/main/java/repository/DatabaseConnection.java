@@ -457,13 +457,19 @@ public class DatabaseConnection {
 
     public void addContentItem(ContentItem content) {
         try {
-            PreparedStatement preparedStatement = conn.prepareStatement(
-                    "INSERT INTO ContentItem(PublicationDate,State,Title,Description,CourseId) VALUES(?,?,?,?,?)");
+            PreparedStatement preparedStatement;
+            if (content.getCourseId() == 0) {
+                preparedStatement = conn.prepareStatement(
+                        "INSERT INTO ContentItem(PublicationDate,State,Title,Description) VALUES(?,?,?,?)");
+            } else {
+                preparedStatement = conn.prepareStatement(
+                        "INSERT INTO ContentItem(PublicationDate,State,Title,Description,CourseId) VALUES(?,?,?,?,?)");
+                preparedStatement.setInt(5, content.getCourseId());
+            }
             preparedStatement.setDate(1, content.getPublicationDate());
             preparedStatement.setString(2, content.getStatus().toString());
             preparedStatement.setString(3, content.getTitle());
             preparedStatement.setString(4, content.getDescription());
-            preparedStatement.setInt(5, content.getCourseId());
 
             preparedStatement.executeUpdate();
         } catch (Exception e) {
@@ -494,6 +500,17 @@ public class DatabaseConnection {
 
         return contentItems;
     }
+    public void editContentItem(ContentItem contentItem){
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement("UPDATE ContentItem SET CourseId="
+                    + contentItem.getCourseId() + " WHERE ContentItemId = " + contentItem.getContentItemId());
+            preparedStatement.executeUpdate();
+        } catch (Exception e){
+
+        }
+    }
+
+
 
     public void addModule(Module module) {
         try {

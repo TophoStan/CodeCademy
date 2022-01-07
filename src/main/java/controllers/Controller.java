@@ -114,6 +114,12 @@ public class Controller {
                         return course;
                     }
                 }
+            } else if(type.equals("ContentItem")){
+                for (ContentItem contentItem: databaseConnection.retrieveContentItems()) {
+                    if(contentItem.getTitle().equals(id)){
+                        return contentItem;
+                    }
+                }
             }
         } catch (Exception e) {
             System.out.println(e);
