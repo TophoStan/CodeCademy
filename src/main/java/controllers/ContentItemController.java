@@ -5,6 +5,7 @@ import domain.Module;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import repository.DatabaseConnection;
 
 import java.lang.reflect.Array;
@@ -60,26 +61,29 @@ public class ContentItemController {
         controller.toPage(event, "CertificateAdd");
     }
 
-    public void addContentItem(){
+    public void addContentItem() {
         Course course = new Course();
-        for (Course courseFromList : databaseConnection.retrieveCourses()) {
-            if (cbCourses.getValue().toString().equals(courseFromList.getName())) {
-                course = courseFromList;
-                break;
+        if (!(cbCourses.getValue() == null)) {
+            for (Course courseFromList : databaseConnection.retrieveCourses()) {
+                if (cbCourses.getValue().toString().equals(courseFromList.getName())) {
+                    course = courseFromList;
+                    break;
+                }
             }
         }
 
         ContentItem contentItem = new ContentItem() {};
+
         contentItem.setStatus(Status.valueOf(cbState.getValue().toString()));
-        contentItem.setCourseId(course.getId());
+        if (!(cbCourses.getValue() == null)) {
+            contentItem.setCourseId(course.getId());
+        }
         contentItem.setDescription(taDescription.getText());
         contentItem.setTitle(tfTitle.getText());
         Date date = Date.valueOf(LocalDate.now());
         contentItem.setPublicationDate(date);
 
         databaseConnection.addContentItem(contentItem);
-
-
 
         int id = 0;
         int courseId = 0;
