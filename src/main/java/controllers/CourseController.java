@@ -176,7 +176,12 @@ public class CourseController {
     }
 
     public void showCourseEditPlace() {
+        if (!(courseList.getSelectionModel().isEmpty())) {
+            tFNameEditCourse.setText((String) courseList.getSelectionModel().getSelectedItem());
+        }
+
         String courseName = tFNameEditCourse.getText();
+
         lBSubjectEditCourse.setVisible(false);
         lBDifficultyEditCourse.setVisible(false);
         lBIntroTextEditCourse.setVisible(false);
@@ -293,7 +298,11 @@ public class CourseController {
     }
 
     public void selectCourse() {
+        if (!(courseList.getSelectionModel().isEmpty())) {
+            tFNameSelectCourse.setText((String) courseList.getSelectionModel().getSelectedItem());
+        }
         String courseName = tFNameSelectCourse.getText();
+
         lBCourseSelectionPercentage.setText("0%");
         pbCourseSelectionGender.setProgress(0.0);
         gender.selectToggle(null);
