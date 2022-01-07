@@ -216,11 +216,5 @@ public class ContentItemController {
             listView.getItems().add(contentItem.getTitle() + " - " + sort);
         }
     }
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> 6b7cf174ac2d9531e1b046479a67bb9e613209fd
 }
 
