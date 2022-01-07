@@ -1,8 +1,6 @@
 package controllers;
 
-import domain.ContentItem;
-import domain.Course;
-import domain.Difficulty;
+import domain.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
@@ -255,9 +253,13 @@ public class CourseController {
 
     public void selectCourse() {
         String courseName = tFNameSelectCourse.getText();
+        lBCourseSelectionPercentage.setText("0%");
+        pbCourseSelectionGender.setProgress(0.0);
+        gender.selectToggle(null);
+
         if (checkCourseName(courseName)) {
             // Shows how many students finished a course
-            makeVisible();
+            makeVisible(true);
             int amountOfStudents = databaseConnection.studentsFinishedCourse(courseName);
 
 
@@ -282,13 +284,18 @@ public class CourseController {
                 progressList.getItems().add(contentItemTitle + ": " + percentage + "%");
             }
         } else {
+            makeVisible(false);
             tFNameSelectCourse.setText("Wrong course name!");
         }
     }
 
     public void selectProgressGender() {
         String genderType = "";
-        int percentForLabel = 0;
+        String selectedCourse = tFNameSelectCourse.getText();
+
+        int countOfCertificates = 0;
+        int amountOfEnrollments = 0;
+        double percentForLabel = 0;
         double percentForProgressBar = 0.0;
 
         if (gender.getSelectedToggle().equals(rbCourseSelectionMen)) {
@@ -299,21 +306,53 @@ public class CourseController {
             genderType = "O";
         }
 
-        // TODO add a methode here
+        try {
+            ArrayList<Enrollment> enrollments = databaseConnection.getEnrollmentIDFromSpecificGenderStudents(genderType);
+            ArrayList<Course> courses = databaseConnection.retrieveCourses();
+            ArrayList<Certificate> certificates = databaseConnection.retrieveCertificates();
+
+            for (Enrollment enrollment : enrollments) {
+                int theEnrollmentId = 0;
+                for (Course course : courses) {
+                    if (course.getName().equals(selectedCourse) && course.getId()  == enrollment.getCourseId()) {
+                        theEnrollmentId = enrollment.getEnrollmentId();
+                        amountOfEnrollments++;
+
+                        for (Certificate certificate : certificates) {
+                            if (certificate.getEnrollmentId() == theEnrollmentId) {
+                                countOfCertificates++;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (!(amountOfEnrollments == 0)) {
+                System.out.println(countOfCertificates + " - " + amountOfEnrollments);
+                percentForLabel =  ((double) countOfCertificates / amountOfEnrollments) * 100;
+                percentForProgressBar = (double) countOfCertificates / amountOfEnrollments;
+                System.out.println(percentForLabel + ":" + percentForProgressBar);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
         pbCourseSelectionGender.setProgress(percentForProgressBar);
         lBCourseSelectionPercentage.setText(percentForLabel + "%");
     }
 
-    public void makeVisible() {
-        lBCourseSelectionAmount.setVisible(true);
-        lBCourseSelectionProgressTitle.setVisible(true);
-        progressList.setVisible(true);
-        lBCourseSelectionGender.setVisible(true);
-        rbCourseSelectionMen.setVisible(true);
-        rbCourseSelectionWomen.setVisible(true);
-        rbCourseSelectionOther.setVisible(true);
-        pbCourseSelectionGender.setVisible(true);
-        lBCourseSelectionPercentage.setVisible(true);
+
+    public void makeVisible(boolean bool) {
+        lBCourseSelectionAmount.setVisible(bool);
+        lBCourseSelectionProgressTitle.setVisible(bool);
+        progressList.setVisible(bool);
+        lBCourseSelectionGender.setVisible(bool);
+        rbCourseSelectionMen.setVisible(bool);
+        rbCourseSelectionWomen.setVisible(bool);
+        rbCourseSelectionOther.setVisible(bool);
+        pbCourseSelectionGender.setVisible(bool);
+        lBCourseSelectionPercentage.setVisible(bool);
     }
 }

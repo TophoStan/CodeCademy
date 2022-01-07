@@ -239,8 +239,8 @@ public class DatabaseConnection {
                 course.setName(rs.getString("CourseName"));
                 course.setText(rs.getString("IntroductoryText"));
                 course.setDifficulty(Difficulty.valueOf(rs.getString("Difficulty").trim()));
-                courses.add(course);
 
+                courses.add(course);
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -745,6 +745,32 @@ public class DatabaseConnection {
 
         return progressForCourse;
     }
+
+    public ArrayList<Enrollment> getEnrollmentIDFromSpecificGenderStudents(String gender) {
+        ArrayList<Enrollment> enrollmentsForSpecificGenderStudents = new ArrayList<>();
+
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT EnrollmentId, CourseId\n" +
+                    "FROM EnrollmentData\n" +
+                    "WHERE StudentId IN (SELECT StudentId\n" +
+                    "FROM Student\n" +
+                    "WHERE Gender = '" + gender + "')");
+            while (rs.next()) {
+                Enrollment enrollment = new Enrollment();
+                enrollment.setEnrollmentId(rs.getInt("EnrollmentId"));
+                enrollment.setCourseId(rs.getInt("CourseId"));
+
+                enrollmentsForSpecificGenderStudents.add(enrollment);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        System.out.println(enrollmentsForSpecificGenderStudents);
+        return enrollmentsForSpecificGenderStudents;
+    }
+
     public ArrayList<Progress> retrieveProgress(){
 
         ArrayList<Progress> progresses = new ArrayList<>();
@@ -763,9 +789,7 @@ public class DatabaseConnection {
         } catch (Exception e) {
             System.out.println(e);
         }
-
         return progresses;
-
 
     }
     public ArrayList<Employee> retrieveEmployee() {

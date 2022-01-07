@@ -67,7 +67,7 @@
             <RadioButton fx:id="rbCourseSelectionWomen" layoutX="260.0" layoutY="258.0" mnemonicParsing="false" onAction="#selectProgressGender" text="Women" toggleGroup="$gender" visible="false" />
             <RadioButton fx:id="rbCourseSelectionOther" layoutX="260.0" layoutY="277.0" mnemonicParsing="false" onAction="#selectProgressGender" text="Others" toggleGroup="$gender" visible="false" />
             <ProgressBar fx:id="pbCourseSelectionGender" layoutX="260.0" layoutY="312.0" prefWidth="200.0" progress="0.0" visible="false" />
-            <Label fx:id="lBCourseSelectionPercentage" layoutX="259.0" layoutY="331.0" text="Percentage%" visible="false" />
+            <Label fx:id="lBCourseSelectionPercentage" layoutX="259.0" layoutY="331.0" text="0%" visible="false" />
             <Button layoutX="347.0" layoutY="46.0" mnemonicParsing="false" onAction="#toCertificate" text="Certificate">
                <font>
                   <Font name="System Bold" size="12.0" />
