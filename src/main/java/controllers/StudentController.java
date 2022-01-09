@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import repository.DatabaseConnection;
+import validation.Validator;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -65,6 +66,7 @@ public class StudentController {
     private Controller controller = new Controller();
     private CertificateController certificateController = new CertificateController();
     private DatabaseConnection databaseConnection = new DatabaseConnection();
+    private Validator validator = new Validator();
 
     public void toHome(ActionEvent event) {
         controller.toPage(event, "Home");
@@ -125,6 +127,7 @@ public class StudentController {
             tFStudentEditCountry.setVisible(true);
             btnEditStudent.setVisible(true);
 
+
             showStudentInfo(email);
         } else {
             tFStudentEditEmail.setText("Wrong email!");
@@ -151,7 +154,7 @@ public class StudentController {
                     student.setBirthDate(convertDate(day, month, year));
                     student.setStreet(tFStudentEditStreet.getText());
                     student.setHouseNumber(Integer.parseInt(tFStudentEditHousenumber.getText()));
-                    student.setPostalCode(tFStudentEditPostalCode.getText());
+                    student.setPostalCode(validator.formatPostalCode(tFStudentEditPostalCode.getText()));
                     student.setCity(tFStudentEditCity.getText());
                     student.setCountry(tFStudentEditCountry.getText());
 
@@ -192,7 +195,9 @@ public class StudentController {
         databaseConnection.connect();
         Student student = new Student();
         student.setName(tfStudentAddName.getText());
-        student.setEmailAddress(tFStudentAddEmail.getText());
+        if (validator.isEmailAddressValid(tFStudentAddEmail.getText())) {
+            student.setEmailAddress(tFStudentAddEmail.getText());
+        }
         student.setGender(tFStudentAddGender.getText());
         int year = Integer.parseInt(tFStudentAddYear.getText());
         int month = Integer.parseInt(tFStudentAddMonth.getText());
@@ -200,7 +205,7 @@ public class StudentController {
         student.setBirthDate(convertDate(day, month, year));
         student.setStreet(tFStudentAddStreet.getText());
         student.setHouseNumber(Integer.parseInt(tFStudentAddHousenumber.getText()));
-        student.setPostalCode(tFStudentAddPostalCode.getText());
+        student.setPostalCode(validator.formatPostalCode(tFStudentAddPostalCode.getText()));
         student.setCity(tFStudentAddCity.getText());
         student.setCountry(tFStudentAddCountry.getText());
         try {

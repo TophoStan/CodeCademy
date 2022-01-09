@@ -49,9 +49,9 @@ public class Validator {
      * @return boolean
      */
     public boolean isGradeValid(int grade){
-        if (grade >= 10) {
+        if (grade > 10) {
             return false;
-        } else if (grade <= 0) {
+        } else if (grade < 1) {
             return false;
         } else {
             return true;
@@ -66,7 +66,7 @@ public class Validator {
         if (postalCode.length() == 6) {
             String numbers = postalCode.substring(0, 4);
             if (numbers.substring(0, 1).equals("0")) {
-                return "cant start with 0";
+                return null;
             }
             String letters = postalCode.substring(4, 6).toUpperCase();
             return numbers + " " + letters;
@@ -84,7 +84,7 @@ public class Validator {
      * @param objectType
      * @return boolean
      */
-    public boolean validateDate(Date date, String objectType) {
+    public boolean isDateValid(Date date, String objectType) {
         //Compares the given date to the current date
         if ("Student".equals(objectType)) {
             if (date.before(Date.valueOf(LocalDate.now()))) {
