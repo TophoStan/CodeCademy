@@ -89,7 +89,6 @@ public class HomeController {
             Webcast  webcast1 = (Webcast) controller.giveIdentifierReturnObject(webcastsTop3[0].getContentItemId(), "Webcast");
             Webcast  webcast2 = (Webcast) controller.giveIdentifierReturnObject(webcastsTop3[1].getContentItemId(), "Webcast");
             Webcast  webcast3 = (Webcast) controller.giveIdentifierReturnObject(webcastsTop3[2].getContentItemId(), "Webcast");
-            System.out.println(webcast1.getUrl());
 
             // first
             lBHomeWebcastCollapse1.setText(webcastsTop3[0].getTitle());
