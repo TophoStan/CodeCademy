@@ -247,10 +247,16 @@ public class CertificateController {
         } else {
             String[] splitter = cbEmployee.getValue().toString().split("-");
             certificate.setEmployeeId(Integer.parseInt(splitter[1]));
-            certificate.setGrade(Integer.parseInt(tfGrade.getText()));
-            databaseConnection.editCertificate(certificate);
-            getCertificates();
-            controller.clear(anchorPane);
+            int grade = Integer.parseInt(tfGrade.getText());
+            if (grade > 10 || grade < 1) {
+                controller.clear(anchorPane);
+                tfEmail.setText("No valid grade");
+            } else {
+                certificate.setGrade(grade);
+                databaseConnection.editCertificate(certificate);
+                getCertificates();
+                controller.clear(anchorPane);
+            }
             isVisible(false);
         }
 
