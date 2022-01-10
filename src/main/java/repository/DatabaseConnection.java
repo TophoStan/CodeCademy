@@ -589,6 +589,7 @@ public class DatabaseConnection {
                 Webcast webcast = new Webcast();
                 webcast.setContentItemId(rs.getInt("ContentItemId"));
                 webcast.setSpeakerId(rs.getInt("SpeakerId"));
+                webcast.setUrl(rs.getString("Url"));
                 webcast.setViews(rs.getInt("Views"));
                 webcast.setDuration(rs.getInt("Duration"));
                 webcasts.add(webcast);
