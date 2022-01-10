@@ -444,7 +444,7 @@ public class DatabaseConnection {
     public void editCertificate(Certificate certificate) {
         try {
             PreparedStatement preparedStatement = conn.prepareStatement("UPDATE Certificate SET Grade="
-                    + certificate.getGrade() + " WHERE EnrollmentId = " + certificate.getEnrollmentId());
+                    + certificate.getGrade() +",EmployeeId=" + certificate.getEmployeeId() + " WHERE EnrollmentId = " + certificate.getEnrollmentId());
             preparedStatement.executeUpdate();
         } catch (Exception e) {
             System.out.println(e);
