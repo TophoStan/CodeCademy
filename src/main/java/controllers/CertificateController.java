@@ -3,6 +3,7 @@ package controllers;
 import domain.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import repository.DatabaseConnection;
@@ -13,6 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CertificateController {
+    @FXML private Label resultLabel;
     @FXML private AnchorPane anchorPane;
     @FXML private TextField tfEmail;
     @FXML private ComboBox cbCompleted;
@@ -27,6 +29,8 @@ public class CertificateController {
     @FXML private ListView listCertificates;
 
 
+
+    private ArrayList<Node> nodes = new ArrayList<>();
     private Controller controller = new Controller();
     private DatabaseConnection databaseConnection = new DatabaseConnection();
 
@@ -103,13 +107,13 @@ public class CertificateController {
         String email = tfEmail.getText();
         if (controller.checkEmail(email)) {
             ArrayList<Course> courses = returnCompletedCoursesFromStudent(email);
-
+            Student student = (Student) controller.giveIdentifierReturnObject(email, "Student");
             cbDate.getItems().clear();
             if (!courses.isEmpty()) {
                 try {
                     for (Enrollment enrollment : databaseConnection.retrieveEnrollments()) {
                         for (Course course : courses) {
-                            if (course.getId() == enrollment.getCourseId()) {
+                            if (course.getId() == enrollment.getCourseId() && student.getId() == enrollment.getStudentId()) {
                                 cbDate.getItems().add(enrollment.getEnrollmentDate());
                             }
                         }
@@ -124,17 +128,17 @@ public class CertificateController {
     }
 
     public void isVisible(boolean bool) {
-        cbCompleted.setVisible(bool);
-        cbDate.setVisible(bool);
-        lbDate.setVisible(bool);
-        if (lbEmployee != null) {
-            cbEmployee.setVisible(bool);
-            lbEmployee.setVisible(bool);
+
+        for (Node node: anchorPane.getChildren()) {
+            if(!node.isVisible()){
+                nodes.add(node);
+            }
         }
-        lbCompleted.setVisible(bool);
-        btnSubmit.setVisible(bool);
-        lbGrade.setVisible(bool);
-        tfGrade.setVisible(bool);
+        for (Node node: nodes) {
+            node.setVisible(bool);
+        }
+
+
     }
 
     public HashMap<Course, ArrayList<ContentItem>> contentItemsWithCourse() {
@@ -168,6 +172,8 @@ public class CertificateController {
             certificate.setEnrollmentId(returnEnrollmentId());
             databaseConnection.addCertificate(certificate);
             controller.clear(anchorPane);
+            isVisible(false);
+            getCertificates();
         } catch (Exception e) {
             System.out.println(e);
             tfEmail.setText("Certificate already exists");
@@ -196,8 +202,6 @@ public class CertificateController {
                     enrollment = enrollmentFromDatabase;
                 }
             }
-
-
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -207,7 +211,6 @@ public class CertificateController {
     public void getCertificates() {
         databaseConnection.connect();
         listCertificates.getItems().clear();
-
         try {
             for (Certificate certificate : databaseConnection.retrieveCertificates()) {
                 Enrollment thisEnrollment = (Enrollment) controller.giveIdentifierReturnObject(certificate.getEnrollmentId(), "Enrollment");
@@ -221,14 +224,13 @@ public class CertificateController {
     }
 
     public void deleteCertificate() {
-
+        Certificate certificate = new Certificate();
         try {
-            for (Certificate certificate : databaseConnection.retrieveCertificates()) {
-                Enrollment thisEnrollment = (Enrollment) controller.giveIdentifierReturnObject(certificate.getEnrollmentId(), "Enrollment");
-                Course thisCourse = (Course) controller.giveIdentifierReturnObject(thisEnrollment.getCourseId(), "Course");
-                Student thisStudent = (Student) controller.giveIdentifierReturnObject(thisEnrollment.getStudentId(), "Student");
-                listCertificates.getItems().add(thisCourse.getName() + " by: " + thisStudent.getName() + " | " + certificate.getGrade());
-            }
+            certificate.setEnrollmentId(returnEnrollmentId());
+            databaseConnection.deleteCertificate(certificate);
+            controller.clear(anchorPane);
+            isVisible(false);
+            getCertificates();
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -238,10 +240,19 @@ public class CertificateController {
         databaseConnection.connect();
         int id = returnEnrollmentId();
         Certificate certificate = (Certificate) controller.giveIdentifierReturnObject(id, "Certificate");
-        certificate.setGrade(Integer.parseInt(tfGrade.getText()));
-        databaseConnection.editCertificate(certificate);
+        for (Certificate certificateFromDatabase : databaseConnection.retrieveCertificates()) {
+            if (certificate == null) {
+                resultLabel.setText("Add the certificate first before trying to edit the email ");
+                tfEmail.clear();
+                isVisible(false);
+            } else {
+                certificate.setGrade(Integer.parseInt(tfGrade.getText()));
+                databaseConnection.editCertificate(certificate);
+                getCertificates();
+                controller.clear(anchorPane);
+                isVisible(false);
+            }
+        }
         getCertificates();
-        controller.clear(anchorPane);
-        isVisible(false);
     }
 }

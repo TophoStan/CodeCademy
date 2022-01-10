@@ -141,6 +141,44 @@ public class EnrollmentController {
             System.out.println(e);
         }
     }
+
+    public void addCoursesToComboBox() {
+        databaseConnection.connect();
+        Student student;
+        if(tFEmailEnrollment == null){
+            student = (Student) controller.giveIdentifierReturnObject(tFEmailEnrollmentDelete.getText(), "Student");
+        } else {
+            student = (Student) controller.giveIdentifierReturnObject(tFEmailEnrollment.getText(), "Student");
+        }
+        ArrayList<String>notEnterableCourses = new ArrayList<>();
+        if(cbCourseEnrollment == null){
+            cbCourseEnrollmentToEdit.getItems().clear();
+        } else {
+            cbCourseEnrollment.getItems().clear();
+        }
+        try {
+            for (Enrollment enrollment : databaseConnection.retrieveEnrollments()) {
+
+                for (Course course : databaseConnection.retrieveCourses()) {
+                    if(enrollment.getStudentId() == student.getId() && enrollment.getCourseId() == course.getId()){
+                        notEnterableCourses.add(course.getName());
+                    }
+                }
+            }
+            for (Course course: databaseConnection.retrieveCourses()) {
+                if(!notEnterableCourses.contains(course.getName())){
+                    if(cbCourseEnrollmentToEdit != null){
+                        cbCourseEnrollmentToEdit.getItems().add(course.getName());
+                    } else {
+                        cbCourseEnrollment.getItems().add(course.getName());
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
     public void addCoursesToComboBoxOfStudent(){
         try {
             databaseConnection.connect();

@@ -47,16 +47,16 @@
          </font>
       </Label>
       <Button fx:id="btnAdd" layoutX="14.0" layoutY="85.0" mnemonicParsing="false" onAction="#toCertificate" text="Add" />
-      <Button fx:id="BtnEdit" defaultButton="true" layoutX="52.0" layoutY="85.0" mnemonicParsing="false" onAction="#toEdit" text="Edit" />
-      <Button fx:id="BtnDelete" layoutX="89.0" layoutY="85.0" mnemonicParsing="false" onAction="#toDelete" text="Delete" />
+      <Button fx:id="BtnEdit" layoutX="52.0" layoutY="85.0" mnemonicParsing="false" onAction="#toEdit" text="Edit" />
+      <Button fx:id="BtnDelete" defaultButton="true" layoutX="89.0" layoutY="85.0" mnemonicParsing="false" onAction="#toDelete" text="Delete" />
       <ListView fx:id="listCertificates" layoutX="346.0" layoutY="124.0" prefHeight="200.0" prefWidth="287.0" />
-      <Label layoutX="15.0" layoutY="117.0" text="Edit a certificate">
+      <Label layoutX="15.0" layoutY="117.0" text="Delete a certificate">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
       <Label layoutX="19.0" layoutY="147.0" text="Email" />
-      <Button fx:id="btnSubmit" layoutX="276.0" layoutY="374.0" mnemonicParsing="false" onAction="#editCertificate" text="Submit" visible="false" />
+      <Button fx:id="btnSubmit" layoutX="276.0" layoutY="374.0" mnemonicParsing="false" onAction="#deleteCertificate" text="Submit" visible="false" />
       <Label layoutX="378.0" layoutY="100.0" text="Certificates">
          <font>
             <Font size="14.0" />
@@ -72,8 +72,5 @@
       <Label fx:id="lbDate" layoutX="22.0" layoutY="264.0" text="Date" visible="false" />
       <ComboBox fx:id="cbDate" layoutX="21.0" layoutY="280.0" prefWidth="150.0" visible="false" />
       <Button layoutX="181.0" layoutY="172.0" mnemonicParsing="false" onAction="#addDatesTocbDate" text="Check" />
-      <TextField fx:id="tfGrade" layoutX="22.0" layoutY="337.0" prefHeight="25.0" prefWidth="37.0" visible="false" />
-      <Label fx:id="lbGrade" layoutX="24.0" layoutY="316.0" text="Grade" visible="false" />
-      <Label fx:id="resultLabel" layoutX="66.0" layoutY="147.0" prefHeight="17.0" prefWidth="10.0" />
    </children>
 </AnchorPane>

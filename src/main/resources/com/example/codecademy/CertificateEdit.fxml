@@ -74,5 +74,6 @@
       <Button layoutX="181.0" layoutY="172.0" mnemonicParsing="false" onAction="#addDatesTocbDate" text="Check" />
       <TextField fx:id="tfGrade" layoutX="22.0" layoutY="337.0" prefHeight="25.0" prefWidth="37.0" visible="false" />
       <Label fx:id="lbGrade" layoutX="24.0" layoutY="316.0" text="Grade" visible="false" />
+      <Label fx:id="resultLabel" layoutX="66.0" layoutY="147.0" prefHeight="17.0" prefWidth="10.0" />
    </children>
 </AnchorPane>

@@ -54,7 +54,7 @@
       <ComboBox fx:id="cbCourseEnrollmentDelete" layoutX="21.0" layoutY="200.0" onMouseClicked="#addCoursesToComboBoxOfStudent" prefWidth="150.0" />
       <ComboBox fx:id="cbDateEnrollment" layoutX="21.0" layoutY="249.0" onMouseClicked="#addDatesToComboBoxOfCourse" prefWidth="150.0" />
       <Label layoutX="22.0" layoutY="232.0" text="Date" />
-      <ComboBox fx:id="cbCourseEnrollmentToEdit" layoutX="21.0" layoutY="299.0" onMouseClicked="#addAllCoursesToCombobox" prefWidth="150.0" visible="false" />
+      <ComboBox fx:id="cbCourseEnrollmentToEdit" layoutX="21.0" layoutY="299.0" onMouseClicked="#addCoursesToComboBox" prefWidth="150.0" visible="false" />
       <Label fx:id="lbDateEdit" layoutX="23.0" layoutY="324.0" text="Date (DD/MM/YYYY)" visible="false" />
       <Label fx:id="lbCourseEdit" layoutX="21.0" layoutY="284.0" text="Course name" visible="false" />
       <Button fx:id="btnEditEnrollment" layoutX="202.0" layoutY="349.0" mnemonicParsing="false" onAction="#editEnrollment" text="Edit" visible="false" />
