@@ -240,19 +240,20 @@ public class CertificateController {
         databaseConnection.connect();
         int id = returnEnrollmentId();
         Certificate certificate = (Certificate) controller.giveIdentifierReturnObject(id, "Certificate");
-        for (Certificate certificateFromDatabase : databaseConnection.retrieveCertificates()) {
-            if (certificate == null) {
-                resultLabel.setText("Add the certificate first before trying to edit the email ");
-                tfEmail.clear();
-                isVisible(false);
-            } else {
-                certificate.setGrade(Integer.parseInt(tfGrade.getText()));
-                databaseConnection.editCertificate(certificate);
-                getCertificates();
-                controller.clear(anchorPane);
-                isVisible(false);
-            }
+        if (certificate == null) {
+            resultLabel.setText("Add the certificate first before trying to edit the email ");
+            tfEmail.clear();
+            isVisible(false);
+        } else {
+            String[] splitter = cbEmployee.getValue().toString().split("-");
+            certificate.setEmployeeId(Integer.parseInt(splitter[1]));
+            certificate.setGrade(Integer.parseInt(tfGrade.getText()));
+            databaseConnection.editCertificate(certificate);
+            getCertificates();
+            controller.clear(anchorPane);
+            isVisible(false);
         }
+
         getCertificates();
     }
 }

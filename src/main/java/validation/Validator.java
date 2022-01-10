@@ -35,9 +35,9 @@ public class Validator {
      */
 
     public boolean isPercentageValid(int percentage) {
-        if (percentage >= 100) {
+        if (percentage > 100) {
             return false;
-        } else if (percentage <= 0) {
+        } else if (percentage < 0) {
             return false;
         } else {
             return true;

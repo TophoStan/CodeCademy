@@ -75,5 +75,7 @@
       <TextField fx:id="tfGrade" layoutX="22.0" layoutY="337.0" prefHeight="25.0" prefWidth="37.0" visible="false" />
       <Label fx:id="lbGrade" layoutX="24.0" layoutY="316.0" text="Grade" visible="false" />
       <Label fx:id="resultLabel" layoutX="66.0" layoutY="147.0" prefHeight="17.0" prefWidth="10.0" />
+      <ComboBox fx:id="cbEmployee" layoutX="21.0" layoutY="383.0" onMouseClicked="#addEmployeesToCombobox" prefWidth="150.0" visible="false" />
+      <Label layoutX="24.0" layoutY="366.0" text="Employee" visible="false" />
    </children>
 </AnchorPane>
