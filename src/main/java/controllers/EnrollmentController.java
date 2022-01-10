@@ -99,19 +99,18 @@ public class EnrollmentController {
             databaseConnection.connect();
             Course course = (Course) controller.giveIdentifierReturnObject(enrollment.getCourseId(), "Course");
 
-            ArrayList<Module> modules = databaseConnection.retrieveModules();
+            ArrayList<ContentItem> contentItems = databaseConnection.retrieveContentItems();
 
-            for (Module module : modules) {
-                ContentItem contentItem = (ContentItem) controller.giveIdentifierReturnObject(module.getContentItemId(), "ContentItem");
+            for (ContentItem contentItem : contentItems) {
                 if (contentItem.getCourseId() == course.getId()) {
 
                     Progress progress = new Progress();
                     progress.setStudentId(enrollment.getStudentId());
-                    progress.setContentItemId(module.getContentItemId());
+                    progress.setContentItemId(contentItem.getContentItemId());
                     progress.setPercentage(0);
 
                     databaseConnection.addProgress(progress);
-                    System.out.println(module.getTitle() + ": progress added");
+                    System.out.println(contentItem.getTitle() + ": progress added");
                 }
             }
         } catch (Exception e) {
