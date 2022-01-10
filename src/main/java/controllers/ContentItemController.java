@@ -31,11 +31,13 @@ public class ContentItemController {
     @FXML private TextField tfURL;
     @FXML private ComboBox cbSpeaker;
     @FXML private Label lblSpeaker;
+    @FXML private Label lbDuration;
+    @FXML private TextField tfDuration;
 
     @FXML private ListView listView;
 
-    Controller controller = new Controller();
-    DatabaseConnection databaseConnection = new DatabaseConnection();
+    private Controller controller = new Controller();
+    private DatabaseConnection databaseConnection = new DatabaseConnection();
 
     public void toHome(ActionEvent event) {
         controller.toPage(event, "Home");
@@ -128,6 +130,7 @@ public class ContentItemController {
             webcast.setContentItemId(id);
             webcast.setCourseId(courseId);
             webcast.setTitle(tfTitle.getText());
+            webcast.setDuration(Integer.parseInt(tfDuration.getText()));
             webcast.setViews(0);
             databaseConnection.addWebcast(webcast);
         }
@@ -139,6 +142,7 @@ public class ContentItemController {
         cbSpeaker.getItems().clear();
         tfURL.clear();
         tfVersion.clear();
+        tfDuration.clear();
     }
 
     public void addValuesTocbCourses() {
@@ -188,6 +192,8 @@ public class ContentItemController {
             tfURL.setVisible(true);
             cbSpeaker.setVisible(true);
             lblSpeaker.setVisible(true);
+            lbDuration.setVisible(true);
+            tfDuration.setVisible(true);
 
             lblVersion.setVisible(false);
             tfVersion.setVisible(false);

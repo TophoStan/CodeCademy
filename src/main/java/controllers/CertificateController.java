@@ -253,7 +253,6 @@ public class CertificateController {
             controller.clear(anchorPane);
             isVisible(false);
         }
-
         getCertificates();
     }
 }

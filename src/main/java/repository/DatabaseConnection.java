@@ -531,13 +531,11 @@ public class DatabaseConnection {
     public void addModule(Module module) {
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(
-                    "INSERT INTO Module(ContentItemId,Title,Version, ContactPersonId, TrackingNumber) VALUES(?,?,?,?,?)");
+                    "INSERT INTO Module(ContentItemId,Version, ContactPersonId, TrackingNumber) VALUES(?,?,?,?)");
             preparedStatement.setInt(1, module.getContentItemId());
-            preparedStatement.setString(2, module.getTitle());
-            preparedStatement.setString(3, module.getVersion());
-            preparedStatement.setInt(4, module.getContactPersonId());
-            preparedStatement.setInt(5, module.getCourseId());
-
+            preparedStatement.setString(2, module.getVersion());
+            preparedStatement.setInt(3, module.getContactPersonId());
+            preparedStatement.setInt(4, module.getCourseId());
             preparedStatement.executeUpdate();
         } catch (Exception e) {
             System.out.println(e);
@@ -553,7 +551,6 @@ public class DatabaseConnection {
             while (rs.next()) {
                 Module module = new Module();
                 module.setContactPersonId(rs.getInt("ContactPersonId"));
-                module.setTitle(rs.getString("Title"));
                 module.setVersion(rs.getString("Version"));
                 module.setContentItemId(rs.getInt("ContentItemId"));
                 module.setTrackingNumber(rs.getInt("TrackingNumber"));
@@ -570,13 +567,12 @@ public class DatabaseConnection {
     public void addWebcast(Webcast webcast) {
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(
-                    "INSERT INTO Webcast(ContentItemId,Title,SpeakerId, Views, URL) VALUES(?,?,?,?,?)");
+                    "INSERT INTO Webcast(ContentItemId,SpeakerId, Views, URL, Duration) VALUES(?,?,?,?,?)");
             preparedStatement.setInt(1, webcast.getContentItemId());
-            preparedStatement.setString(2, webcast.getTitle());
-            preparedStatement.setInt(3, webcast.getSpeakerId());
-            preparedStatement.setInt(4, webcast.getViews());
-            preparedStatement.setString(5, webcast.getUrl());
-
+            preparedStatement.setInt(2, webcast.getSpeakerId());
+            preparedStatement.setInt(3, webcast.getViews());
+            preparedStatement.setString(4, webcast.getUrl());
+            preparedStatement.setInt(5, webcast.getDuration());
             preparedStatement.executeUpdate();
         } catch (Exception e) {
             System.out.println(e);
@@ -592,10 +588,9 @@ public class DatabaseConnection {
             while (rs.next()) {
                 Webcast webcast = new Webcast();
                 webcast.setContentItemId(rs.getInt("ContentItemId"));
-                webcast.setTitle(rs.getString("Title"));
                 webcast.setSpeakerId(rs.getInt("SpeakerId"));
                 webcast.setViews(rs.getInt("Views"));
-
+                webcast.setDuration(rs.getInt("Duration"));
                 webcasts.add(webcast);
             }
         } catch (Exception e) {
