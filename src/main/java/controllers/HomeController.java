@@ -1,5 +1,6 @@
 package controllers;
 
+import domain.ContentItem;
 import domain.Course;
 import domain.Webcast;
 import javafx.event.ActionEvent;
@@ -66,14 +67,14 @@ public class HomeController {
     }
 
     public void getTop3Webcasts() {
-        Webcast[] webcastsTop3 = new Webcast[3];
+        ContentItem[] webcastsTop3 = new ContentItem[3];
         databaseConnection.connect();
 
         try {
             webcastsTop3 = databaseConnection.retrieveTop3Webcasts();
 
             int webcastTop3Passed = -1;
-            for (Webcast webcast : webcastsTop3) {
+            for (ContentItem webcast : webcastsTop3) {
                 if (webcast == null) {
                     webcastTop3Passed++;
                     Webcast newWebcast = new Webcast();
@@ -85,24 +86,27 @@ public class HomeController {
                     webcastTop3Passed++;
                 }
             }
+            Webcast  webcast1 = (Webcast) controller.giveIdentifierReturnObject(webcastsTop3[0].getContentItemId(), "Webcast");
+            Webcast  webcast2 = (Webcast) controller.giveIdentifierReturnObject(webcastsTop3[1].getContentItemId(), "Webcast");
+            Webcast  webcast3 = (Webcast) controller.giveIdentifierReturnObject(webcastsTop3[2].getContentItemId(), "Webcast");
 
             // first
             lBHomeWebcastCollapse1.setText(webcastsTop3[0].getTitle());
             lBHomeWebcastTitle1.setText(webcastsTop3[0].getTitle());
-            lBHomeWebcastViews1.setText("Views: " + String.valueOf(webcastsTop3[0].getViews()));
-            lBHomeWebcastUrl1.setText(webcastsTop3[0].getUrl());
+            lBHomeWebcastViews1.setText("Views: " + String.valueOf(webcast1.getViews()));
+            lBHomeWebcastUrl1.setText(webcast1.getUrl());
 
             // second
             lBHomeWebcastCollapse2.setText(webcastsTop3[1].getTitle());
             lBHomeWebcastTitle2.setText(webcastsTop3[1].getTitle());
-            lBHomeWebcastViews2.setText("Views: " + String.valueOf(webcastsTop3[1].getViews()));
-            lBHomeWebcastUrl2.setText(webcastsTop3[1].getUrl());
+            lBHomeWebcastViews2.setText("Views: " + String.valueOf(webcast2.getViews()));
+            lBHomeWebcastUrl2.setText(webcast2.getUrl());
 
             // third
             lBHomeWebcastCollapse3.setText(webcastsTop3[2].getTitle());
             lBHomeWebcastTitle3.setText(webcastsTop3[2].getTitle());
-            lBHomeWebcastViews3.setText("Views: " + String.valueOf(webcastsTop3[2].getViews()));
-            lBHomeWebcastUrl3.setText(webcastsTop3[2].getUrl());
+            lBHomeWebcastViews3.setText("Views: " + String.valueOf(webcast3.getViews()));
+            lBHomeWebcastUrl3.setText(webcast3.getUrl());
 
         } catch (Exception e) {
             System.out.println(e);

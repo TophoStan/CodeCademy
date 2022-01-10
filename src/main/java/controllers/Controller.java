@@ -92,6 +92,12 @@ public class Controller {
                         return contactPerson;
                     }
                 }
+            } else if (type.equals("Webcast")) {
+                for (Webcast webcast : databaseConnection.retrieveWebcasts()) {
+                    if (webcast.getContentItemId() == id) {
+                        return webcast;
+                    }
+                }
             }
         } catch (Exception e) {
             System.out.println(e);

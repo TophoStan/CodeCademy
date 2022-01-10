@@ -601,21 +601,19 @@ public class DatabaseConnection {
         return webcasts;
     }
 
-    public Webcast[] retrieveTop3Webcasts() {
-        Webcast[] webcasts = new Webcast[3];
+    public ContentItem[] retrieveTop3Webcasts() {
+        ContentItem[] webcasts = new ContentItem[3];
         int i = 0;
 
         try {
             Statement stmt = conn.createStatement();
-            ResultSet rs =  stmt.executeQuery("SELECT TOP 3 title, views, URL FROM webcast\n" +
+            ResultSet rs =  stmt.executeQuery("SELECT TOP 3 ContentItemId FROM webcast\n" +
                     "ORDER BY Webcast.views DESC");
             while (rs.next()) {
-                Webcast webcast = new Webcast();
-                webcast.setTitle(rs.getString("Title"));
-                webcast.setViews(rs.getInt("Views"));
-                webcast.setUrl(rs.getString("URL"));
+                ContentItem contentItem = new ContentItem(){};
+                contentItem.setContentItemId(rs.getInt("ContentItemId"));
 
-                webcasts[i] = webcast;
+                webcasts[i] = contentItem;
                 i++;
             }
         } catch (SQLException e) {
