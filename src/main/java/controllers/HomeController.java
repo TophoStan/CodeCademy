@@ -39,8 +39,8 @@ public class HomeController {
     @FXML private Label lBHomeCourseCertificates3;
 
 
-    private Controller controller = new Controller();
     private DatabaseConnection databaseConnection = new DatabaseConnection();
+    private Controller controller = new Controller(databaseConnection);
 
     public void toHome(ActionEvent event) {
         controller.toPage(event, "Home");

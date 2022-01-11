@@ -366,7 +366,7 @@ public class DatabaseConnection {
     public void editEnrollment(Enrollment enrollment) throws SQLException {
 
         PreparedStatement preparedStatement = conn.prepareStatement("UPDATE EnrollmentData " +
-                  "SET studentId=" + enrollment.getStudentId() + ", CourseId="+ enrollment.getCourseId() + " ,EnrollmentDate ='" + enrollment.getEnrollmentDate()
+                "SET studentId=" + enrollment.getStudentId() + ", CourseId=" + enrollment.getCourseId() + " ,EnrollmentDate ='" + enrollment.getEnrollmentDate()
                 + "' WHERE EnrollmentId =" + enrollment.getEnrollmentId());
         preparedStatement.executeUpdate();
 
@@ -405,12 +405,12 @@ public class DatabaseConnection {
      * @throws NullPointerException Certificate == null
      */
     public void addCertificate(Certificate certificate) throws SQLException {
-            PreparedStatement preparedStatement = conn
-                    .prepareStatement("INSERT INTO Certificate(Grade, EmployeeId, EnrollmentId) VALUES (?,?,?)");
-            preparedStatement.setDouble(1, certificate.getGrade());
-            preparedStatement.setInt(2, certificate.getEmployeeId());
-            preparedStatement.setInt(3, certificate.getEnrollmentId());
-            preparedStatement.executeUpdate();
+        PreparedStatement preparedStatement = conn
+                .prepareStatement("INSERT INTO Certificate(Grade, EmployeeId, EnrollmentId) VALUES (?,?,?)");
+        preparedStatement.setDouble(1, certificate.getGrade());
+        preparedStatement.setInt(2, certificate.getEmployeeId());
+        preparedStatement.setInt(3, certificate.getEnrollmentId());
+        preparedStatement.executeUpdate();
     }
 
     /**
@@ -444,7 +444,7 @@ public class DatabaseConnection {
     public void editCertificate(Certificate certificate) {
         try {
             PreparedStatement preparedStatement = conn.prepareStatement("UPDATE Certificate SET Grade="
-                    + certificate.getGrade() +",EmployeeId=" + certificate.getEmployeeId() + " WHERE EnrollmentId = " + certificate.getEnrollmentId());
+                    + certificate.getGrade() + ",EmployeeId=" + certificate.getEmployeeId() + " WHERE EnrollmentId = " + certificate.getEnrollmentId());
             preparedStatement.executeUpdate();
         } catch (Exception e) {
             System.out.println(e);
@@ -516,16 +516,16 @@ public class DatabaseConnection {
 
         return contentItems;
     }
-    public void editContentItem(ContentItem contentItem){
+
+    public void editContentItem(ContentItem contentItem) {
         try {
             PreparedStatement preparedStatement = conn.prepareStatement("UPDATE ContentItem SET CourseId="
                     + contentItem.getCourseId() + " WHERE ContentItemId = " + contentItem.getContentItemId());
             preparedStatement.executeUpdate();
-        } catch (Exception e){
+        } catch (Exception e) {
 
         }
     }
-
 
 
     public void addModule(Module module) {
@@ -611,8 +611,10 @@ public class DatabaseConnection {
                     "FROM webcast AS t1\n" +
                     "JOIN ContentItem AS t2 ON t2.ContentItemID = t1.ContentItemId\n" +
                     "ORDER BY t1.views DESC");
+
             while (rs.next()) {
-                ContentItem contentItem = new ContentItem(){};
+                ContentItem contentItem = new ContentItem() {
+                };
                 contentItem.setContentItemId(rs.getInt("ContentItemId"));
                 contentItem.setTitle(rs.getString("Title"));
 
@@ -620,7 +622,8 @@ public class DatabaseConnection {
                 i++;
             }
         } catch (SQLException e) {
-            System.out.println(e);;
+            System.out.println(e);
+            ;
         }
 
         return webcasts;
@@ -632,7 +635,7 @@ public class DatabaseConnection {
 
         try {
             Statement stmt = conn.createStatement();
-            ResultSet rs =  stmt.executeQuery("SELECT TOP 3 Coursename, COUNT(T3.EnrollmentId) AS Certificates FROM Course AS T1\n" +
+            ResultSet rs = stmt.executeQuery("SELECT TOP 3 Coursename, COUNT(T3.EnrollmentId) AS Certificates FROM Course AS T1\n" +
                     " JOIN EnrollmentData AS T2 ON t1.CourseID = t2.CourseId\n" +
                     " JOIN Certificate AS T3 ON t3.EnrollmentId = t2.EnrollmentId\n" +
                     " GROUP BY Coursename;");
@@ -650,7 +653,8 @@ public class DatabaseConnection {
         }
         return courses;
     }
-    public ArrayList<Speaker> retrieveSpeakers(){
+
+    public ArrayList<Speaker> retrieveSpeakers() {
 
         ArrayList<Speaker> speakers = new ArrayList<>();
 
@@ -664,7 +668,7 @@ public class DatabaseConnection {
                 speaker.setId(rs.getInt("SpeakerId"));
                 speaker.setOrganisation(rs.getString("Organisation"));
 
-               speakers.add(speaker);
+                speakers.add(speaker);
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -696,7 +700,7 @@ public class DatabaseConnection {
     }
 
     public ArrayList<Integer> certificatesFromStudent(String email) {
-         ArrayList<Integer> certificatesFromStudentList = new ArrayList<>();
+        ArrayList<Integer> certificatesFromStudentList = new ArrayList<>();
 
 
         try {
@@ -704,7 +708,7 @@ public class DatabaseConnection {
             ResultSet rs = stmt.executeQuery("SELECT * FROM Student AS t1\n" +
                     " INNER JOIN EnrollmentData AS t2 ON t1.StudentId = t2.StudentId\n" +
                     " INNER JOIN Certificate AS t3 ON t3.EnrollmentId = t2.EnrollmentId\n" +
-                    "WHERE EmailAddress = '"+ email +"'");
+                    "WHERE EmailAddress = '" + email + "'");
 
 
             while (rs.next()) {
@@ -784,7 +788,7 @@ public class DatabaseConnection {
         return enrollmentsForSpecificGenderStudents;
     }
 
-    public ArrayList<Progress> retrieveProgress(){
+    public ArrayList<Progress> retrieveProgress() {
 
         ArrayList<Progress> progresses = new ArrayList<>();
         try {
@@ -805,6 +809,7 @@ public class DatabaseConnection {
         return progresses;
 
     }
+
     public ArrayList<Employee> retrieveEmployee() {
         ArrayList<Employee> employees = new ArrayList<>();
 

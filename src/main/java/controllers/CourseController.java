@@ -22,7 +22,8 @@ import java.util.Map;
 
 public class CourseController {
 
-    private Controller controller = new Controller();
+    private DatabaseConnection databaseConnection = new DatabaseConnection();
+    private Controller controller = new Controller(databaseConnection);
     private String[] difficulties = {Difficulty.EASY.toString(), Difficulty.NORMAL.toString(), Difficulty.HARD.toString(), Difficulty.EXPERT.toString()};
 
     // for course add page
@@ -62,7 +63,6 @@ public class CourseController {
     @FXML private ToggleGroup gender;
 
 
-    DatabaseConnection databaseConnection = new DatabaseConnection();
 
     public void toHome(ActionEvent event) {
         controller.toPage(event, "Home");

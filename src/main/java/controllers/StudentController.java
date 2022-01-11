@@ -63,9 +63,9 @@ public class StudentController {
     @FXML private TextField tFStudentSelectionEmail;
     @FXML private ListView certificatesList;
 
-    private Controller controller = new Controller();
     private CertificateController certificateController = new CertificateController();
     private DatabaseConnection databaseConnection = new DatabaseConnection();
+    private Controller controller = new Controller(databaseConnection);
     private Validator validator = new Validator();
 
     public void toHome(ActionEvent event) {
