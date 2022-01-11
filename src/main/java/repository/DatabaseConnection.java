@@ -607,12 +607,16 @@ public class DatabaseConnection {
 
         try {
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT TOP 3 ContentItemId FROM webcast\n" +
-                    "ORDER BY Webcast.views DESC");
+            ResultSet rs =  stmt.executeQuery("SELECT TOP 3 t2.ContentItemId, t2.Title\n" +
+                    "FROM webcast AS t1\n" +
+                    "JOIN ContentItem AS t2 ON t2.ContentItemID = t1.ContentItemId\n" +
+                    "ORDER BY t1.views DESC");
+
             while (rs.next()) {
                 ContentItem contentItem = new ContentItem() {
                 };
                 contentItem.setContentItemId(rs.getInt("ContentItemId"));
+                contentItem.setTitle(rs.getString("Title"));
 
                 webcasts[i] = contentItem;
                 i++;
