@@ -15,7 +15,6 @@ import java.util.Calendar;
 
 public class EnrollmentController {
 
-    private Controller controller = new Controller();
 
     @FXML private TextField tFEmailEnrollment;
     @FXML private ComboBox cbCourseEnrollment;
@@ -32,6 +31,7 @@ public class EnrollmentController {
     @FXML private Button btnEditEnrollment;
 
     private DatabaseConnection databaseConnection = new DatabaseConnection();
+    private Controller controller = new Controller(databaseConnection);
     private Course selectedCourse = new Course();
     private ArrayList<Enrollment> enrollmentsOfStudent = new ArrayList<>();
     private ArrayList<Course> enrolledCoursesOfStudent = new ArrayList<>();

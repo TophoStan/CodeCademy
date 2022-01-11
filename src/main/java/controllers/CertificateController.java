@@ -31,8 +31,8 @@ public class CertificateController {
 
 
     private ArrayList<Node> nodes = new ArrayList<>();
-    private Controller controller = new Controller();
     private DatabaseConnection databaseConnection = new DatabaseConnection();
+    private Controller controller = new Controller(databaseConnection);
 
     public CertificateController() {
 

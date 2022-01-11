@@ -12,6 +12,8 @@ import java.lang.reflect.Array;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ContentItemController {
     @FXML private ComboBox cbState;
@@ -36,8 +38,8 @@ public class ContentItemController {
 
     @FXML private ListView listView;
 
-    private Controller controller = new Controller();
     private DatabaseConnection databaseConnection = new DatabaseConnection();
+    private Controller controller = new Controller(databaseConnection);
 
     public void toHome(ActionEvent event) {
         controller.toPage(event, "Home");
@@ -147,9 +149,21 @@ public class ContentItemController {
 
     public void addValuesTocbCourses() {
         databaseConnection.connect();
+        ArrayList<String> coursesWithWebcasts = new ArrayList<>();
+        for (Map.Entry<Course, ArrayList<ContentItem>> e: contentItemsWithCourse().entrySet()){
+            for (ContentItem contentItem : e.getValue()) {
+                for (Webcast webcast: databaseConnection.retrieveWebcasts()) {
+                    if(contentItem.getContentItemId() == webcast.getContentItemId()){
+                        coursesWithWebcasts.add(e.getKey().getName());
+                    }
+                }
+            }
+        }
         cbCourses.getItems().clear();
-        for (Course course : databaseConnection.retrieveCourses()) {
-            cbCourses.getItems().add(course.toString());
+        for (Course course: databaseConnection.retrieveCourses()) {
+            if(!coursesWithWebcasts.contains(course.getName())){
+                cbCourses.getItems().add(course.getName());
+            }
         }
     }
     public void addValuesTocbState(){
@@ -202,7 +216,19 @@ public class ContentItemController {
         }
     }
 
-
+    public HashMap<Course, ArrayList<ContentItem>> contentItemsWithCourse() {
+        HashMap<Course, ArrayList<ContentItem>> map = new HashMap<>();
+        for (Course course : databaseConnection.retrieveCourses()) {
+            ArrayList<ContentItem> contentItems = new ArrayList<>();
+            for (ContentItem contentItem : databaseConnection.retrieveContentItems()) {
+                if (course.getId() == contentItem.getCourseId()) {
+                    contentItems.add(contentItem);
+                }
+            }
+            map.put(course, contentItems);
+        }
+        return map;
+    }
 
     public void listContentItems(){
         listView.getItems().clear();
