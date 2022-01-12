@@ -8,9 +8,6 @@ public class Course {
     private String subject;
     private String text;
     private Difficulty difficulty;
-    private ArrayList<Module> modules;
-    private ArrayList<Webcast> webcast;
-    private ArrayList<Enrollment> enrollments;
     private int certificates;
 
     public Course(String name, String subject, String text, Difficulty difficulty) {
@@ -18,8 +15,6 @@ public class Course {
         this.subject = subject;
         this.text = text;
         this.difficulty = difficulty;
-        this.modules = new ArrayList<>();
-        this.webcast = new ArrayList<>();
     }
 
     public Course() {
@@ -56,35 +51,6 @@ public class Course {
 
     public void setDifficulty(Difficulty difficulty) {
         this.difficulty = difficulty;
-    }
-
-    public void addWebcastToCourse(Webcast webcast) {
-        this.webcast.add(webcast);
-    }
-
-    public void removeWebcastFromCourse(Webcast webcast) {
-        this.webcast.remove(webcast);
-    }
-
-    public void addModuleCourse(Module module) {
-        this.modules.add(module);
-    }
-
-    public void removeModuleFromCourse(Module module) {
-        this.modules.remove(module);
-    }
-
-    public ArrayList<Module> getModulesFromCourse() {
-        return this.modules;
-    }
-
-    public ArrayList<Enrollment> listEnrollments() {
-        return this.enrollments;
-    }
-
-    public void addEnrolledStudentToCourse(Student student, Enrollment enrollment) {
-        student.addEnrollment(enrollment);
-        this.enrollments.add(enrollment);
     }
 
     public int getId() {

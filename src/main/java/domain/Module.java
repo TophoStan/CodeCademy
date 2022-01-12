@@ -9,7 +9,7 @@ public class Module extends ContentItem {
 
     public Module(String title, String description, String subject, Date publicationDate, Status status,
                   int percentage, String version) {
-        super(title, description, subject, publicationDate, status, percentage);
+        super(title, description, subject, publicationDate, status);
         this.version = version;
     }
 

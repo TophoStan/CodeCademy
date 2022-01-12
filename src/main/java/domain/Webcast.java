@@ -2,7 +2,7 @@ package domain;
 
 import java.sql.Date;
 
-public class Webcast extends ContentItem {
+public class Webcast extends ContentItem{
     private int duration;
     private String url;
     private int speakerId;
@@ -10,7 +10,7 @@ public class Webcast extends ContentItem {
 
     public Webcast(String title, String description, String subject, Date publicationDate, Status status,
                    int percentage, int duration, String url) {
-        super(title, description, subject, publicationDate, status, percentage);
+        super(title, description, subject, publicationDate, status);
         this.duration = duration;
         this.url = url;
         this.views = 0;

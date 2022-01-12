@@ -14,8 +14,6 @@ public class Student {
     private String postalCode;
     private String city;
     private String country;
-    private ArrayList<Certificate> certificates;
-    private ArrayList<Enrollment> enrollments;
 
     public Student(String emailAddress, String name, String gender, Date birthDate, String street, int houseNumber,
                    String postalCode, String city, String country) {
@@ -28,7 +26,6 @@ public class Student {
         this.postalCode = postalCode;
         this.city = city;
         this.country = country;
-        this.certificates = new ArrayList<Certificate>();
     }
 
     public Student() {
@@ -105,22 +102,6 @@ public class Student {
 
     public void setCountry(String country) {
         this.country = country;
-    }
-
-    public ArrayList<Certificate> getCertificates() {
-        return this.certificates;
-    }
-
-    public void addCertificate(Certificate certificate) {
-        this.certificates.add(certificate);
-    }
-
-    public ArrayList<Enrollment> getEnrollments() {
-        return this.enrollments;
-    }
-
-    public void addEnrollment(Enrollment enrollment) {
-        this.enrollments.add(enrollment);
     }
 
     public int getId() {

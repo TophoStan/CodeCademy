@@ -8,18 +8,15 @@ public abstract class ContentItem {
     private String subject;
     private Date publicationDate;
     private Status status;
-    private int percentage;
     private int courseId;
     private int contentItemId;
 
-    public ContentItem(String title, String description, String subject, Date publicationDate, Status status,
-                       int percentage) {
+    public ContentItem(String title, String description, String subject, Date publicationDate, Status status) {
         this.title = title;
         this.description = description;
         this.subject = subject;
         this.publicationDate = Date.valueOf(publicationDate.toLocalDate());
         this.status = status;
-        this.percentage = 0;
     }
 
     public ContentItem() {
@@ -64,14 +61,6 @@ public abstract class ContentItem {
 
     public void setStatus(Status status) {
         this.status = status;
-    }
-
-    public int getPercentage() {
-        return percentage;
-    }
-
-    public void setPercentage(int percentage) {
-        this.percentage = percentage;
     }
 
     public int getCourseId() {

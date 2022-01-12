@@ -48,7 +48,7 @@ public class Validator {
      * @param grade
      * @return boolean
      */
-    public boolean isGradeValid(int grade){
+    public boolean isGradeValid(double grade){
         if (grade > 10) {
             return false;
         } else if (grade < 1) {
