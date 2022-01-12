@@ -607,7 +607,7 @@ public class DatabaseConnection {
 
         try {
             Statement stmt = conn.createStatement();
-            ResultSet rs =  stmt.executeQuery("SELECT TOP 3 t2.ContentItemId, t2.Title\n" +
+            ResultSet rs =  stmt.executeQuery("SELECT TOP 3 t2.ContentItemId, t2.dTitle\n" +
                     "FROM webcast AS t1\n" +
                     "JOIN ContentItem AS t2 ON t2.ContentItemID = t1.ContentItemId\n" +
                     "ORDER BY t1.views DESC");
