@@ -1,6 +1,9 @@
 package validation;
 
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.regex.Pattern;
 
@@ -79,31 +82,51 @@ public class Validator {
      * Validates a date by comparing the current date.
      * If objectType equals Student then the date will need to be before the current date.
      * If objectType equals Enrollment then the date will need to be equal or after the current date.
-     *
+     *  Dates must be in YYYY-dd-MM or else false will be returned.
      * @param date
      * @param objectType
      * @return boolean
      */
-    public boolean isDateValid(Date date, String objectType) {
-        //Compares the given date to the current date
-        if ("Student".equals(objectType)) {
-            if (date.before(Date.valueOf(LocalDate.now()))) {
-                return true;
+    public boolean isDateValid(String date, String objectType) throws DateTimeException {
+        SimpleDateFormat format = new SimpleDateFormat("YYYY-MM-dd");
+        format.setLenient(false);
+        //Checks if date can exist
+        try {
+            format.parse(date);
+            System.out.println("Given StringDate: " + date);
+            String sqlDate = Date.valueOf(date).toString();
+            System.out.println("Given Date: " + sqlDate);
+            System.out.println("Current Date: " + LocalDate.now());
+            //Sql.date turns leap years into the day next after so this is to prevent that from happening
+            if(!Date.valueOf(date).toString().equals(date)){
+                return false;
+            }
+            //Compares the given date to the current date
+            if ("Student".equals(objectType)) {
+                if (Date.valueOf(date).before(Date.valueOf(LocalDate.now()))) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else if ("Enrollment".equals(objectType)) {
+                if (Date.valueOf(date).after(Date.valueOf(LocalDate.now()))) {
+                    return true;
+                } else if (date.equals(Date.valueOf(LocalDate.now()))) {
+                    return true;
+                } else {
+                    return false;
+                }
             } else {
                 return false;
             }
-        } else if ("Enrollment".equals(objectType)) {
-            if (date.after(Date.valueOf(LocalDate.now()))) {
-                return true;
-            } else if (date.equals(Date.valueOf(LocalDate.now()))) {
-                return true;
-            } else {
-                return false;
-            }
-        } else {
+        } catch (ParseException e) {
+            System.out.println(e);
+            return false;
+        } catch (IllegalArgumentException e) {
+            System.out.println(e);
             return false;
         }
+
+
     }
-
-
 }
