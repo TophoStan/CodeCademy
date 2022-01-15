@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import repository.DatabaseConnection;
+import validation.Validator;
 
 import java.lang.reflect.Array;
 import java.sql.Date;
@@ -23,6 +24,7 @@ public class ContentItemController {
     @FXML private ToggleGroup type;
     @FXML private RadioButton radWebcast;
     @FXML private RadioButton radModule;
+    @FXML private Label failedURL;
 
     @FXML private Label lblVersion;
     @FXML private TextField tfVersion;
@@ -40,6 +42,7 @@ public class ContentItemController {
 
     private DatabaseConnection databaseConnection = new DatabaseConnection();
     private Controller controller = new Controller(databaseConnection);
+    private Validator validator = new Validator();
 
     public void toHome(ActionEvent event) {
         controller.toPage(event, "Home");
@@ -66,6 +69,7 @@ public class ContentItemController {
     }
 
     public void addContentItem() {
+        failedURL.setText("");
         Course course = new Course();
         if (!(cbCourses.getValue() == null)) {
             for (Course courseFromList : databaseConnection.retrieveCourses()) {
@@ -87,19 +91,20 @@ public class ContentItemController {
         Date date = Date.valueOf(LocalDate.now());
         contentItem.setPublicationDate(date);
 
-        databaseConnection.addContentItem(contentItem);
 
-        int id = 0;
-        int courseId = 0;
-        for (ContentItem contentItemFromDatabase:databaseConnection.retrieveContentItems()) {
-            if(contentItemFromDatabase.getTitle().equals(contentItem.getTitle())){
-                id = contentItemFromDatabase.getContentItemId();
-                courseId = contentItemFromDatabase.getCourseId();
-                break;
-            }
-        }
+
 
         if(type.getSelectedToggle().equals(radModule)){
+            databaseConnection.addContentItem(contentItem);
+            int id = 0;
+            int courseId = 0;
+            for (ContentItem contentItemFromDatabase:databaseConnection.retrieveContentItems()) {
+                if(contentItemFromDatabase.getTitle().equals(contentItem.getTitle())){
+                    id = contentItemFromDatabase.getContentItemId();
+                    courseId = contentItemFromDatabase.getCourseId();
+                    break;
+                }
+            }
 
             ContactPerson contactPerson = new ContactPerson();
             for (ContactPerson contactPersonFromDatabase : databaseConnection.retrieveContactPersons()) {
@@ -127,14 +132,29 @@ public class ContentItemController {
             }
 
             Webcast webcast = new Webcast();
-            webcast.setUrl(tfURL.getText());
-            webcast.setSpeakerId(speaker.getId());
-            webcast.setContentItemId(id);
-            webcast.setCourseId(courseId);
-            webcast.setTitle(tfTitle.getText());
-            webcast.setDuration(Integer.parseInt(tfDuration.getText()));
-            webcast.setViews(0);
-            databaseConnection.addWebcast(webcast);
+            if (validator.isURLValid(tfURL.getText())) {
+                databaseConnection.addContentItem(contentItem);
+                int id = 0;
+                int courseId = 0;
+                for (ContentItem contentItemFromDatabase:databaseConnection.retrieveContentItems()) {
+                    if(contentItemFromDatabase.getTitle().equals(contentItem.getTitle())){
+                        id = contentItemFromDatabase.getContentItemId();
+                        courseId = contentItemFromDatabase.getCourseId();
+                        break;
+                    }
+                }
+
+                webcast.setUrl(tfURL.getText());
+                webcast.setSpeakerId(speaker.getId());
+                webcast.setContentItemId(id);
+                webcast.setCourseId(courseId);
+                webcast.setTitle(tfTitle.getText());
+                webcast.setDuration(Integer.parseInt(tfDuration.getText()));
+                webcast.setViews(0);
+                databaseConnection.addWebcast(webcast);
+            } else {
+                failedURL.setText("Invalid URL");
+            }
         }
         cbState.getItems().clear();
         tfTitle.clear();

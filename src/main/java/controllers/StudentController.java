@@ -169,7 +169,9 @@ public class StudentController {
                     int day = Integer.parseInt(tFStudentEditDay.getText());
                     int month = Integer.parseInt(tFStudentEditMonth.getText());
                     int year = Integer.parseInt(tFStudentEditYear.getText());
-                    student.setBirthDate(convertDate(day, month, year));
+                    if (validator.isDateValid(convertDate(day, month, year).toString(), "Student")) {
+                        student.setBirthDate(convertDate(day, month, year));
+                    }
                     student.setStreet(tFStudentEditStreet.getText());
                     student.setHouseNumber(Integer.parseInt(tFStudentEditHousenumber.getText()));
 
@@ -224,7 +226,9 @@ public class StudentController {
         int year = Integer.parseInt(tFStudentAddYear.getText());
         int month = Integer.parseInt(tFStudentAddMonth.getText());
         int day = Integer.parseInt(tFStudentAddDay.getText());
+        if(validator.isDateValid(convertDate(day, month, year).toString(), "Student")){
         student.setBirthDate(convertDate(day, month, year));
+        };
         student.setStreet(tFStudentAddStreet.getText());
         student.setHouseNumber(Integer.parseInt(tFStudentAddHousenumber.getText()));
         student.setPostalCode(validator.formatPostalCode(tFStudentAddPostalCode.getText()));

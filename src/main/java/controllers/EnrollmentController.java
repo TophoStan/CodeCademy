@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import repository.DatabaseConnection;
+import validation.Validator;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -36,6 +37,7 @@ public class EnrollmentController {
     private ArrayList<Enrollment> enrollmentsOfStudent = new ArrayList<>();
     private ArrayList<Course> enrolledCoursesOfStudent = new ArrayList<>();
     private Enrollment enrollmentFromDatabaseThatWillBeEdited = new Enrollment();
+    private Validator validator = new Validator();
 
     public void toHome(ActionEvent event) {
         controller.toPage(event, "Home");
@@ -292,7 +294,9 @@ public class EnrollmentController {
 
             enrollmentToEdit.setCourse(courseToEdit);
             enrollmentToEdit.setStudent(studentToEdit);
-            enrollmentToEdit.setEnrollmentDate(date);
+            if (validator.isDateValid(date.toString(), "Enrollment")) {
+                enrollmentToEdit.setEnrollmentDate(date);
+            }
             enrollmentToEdit.setEnrollmentId(enrollmentFromDatabaseThatWillBeEdited.getEnrollmentId());
             databaseConnection.editEnrollment(enrollmentToEdit);
             addProgresses(enrollmentToEdit);
@@ -348,23 +352,13 @@ public class EnrollmentController {
         }
     }
     public void setVisible(boolean truOrFalse){
-        if(truOrFalse){
-            cbCourseEnrollmentToEdit.setVisible(true);
-            lbCourseEdit.setVisible(true);
-            lbDateEdit.setVisible(true);
-            tfDateDay.setVisible(true);
-            tfDateMonth.setVisible(true);
-            tfDateYear.setVisible(true);
-            btnEditEnrollment.setVisible(true);
-        } else {
-            cbCourseEnrollmentToEdit.setVisible(false);
-            lbCourseEdit.setVisible(false);
-            lbDateEdit.setVisible(false);
-            tfDateDay.setVisible(false);
-            tfDateMonth.setVisible(false);
-            tfDateYear.setVisible(false);
-            btnEditEnrollment.setVisible(false);
-        }
+            cbCourseEnrollmentToEdit.setVisible(truOrFalse);
+            lbCourseEdit.setVisible(truOrFalse);
+            lbDateEdit.setVisible(truOrFalse);
+            tfDateDay.setVisible(truOrFalse);
+            tfDateMonth.setVisible(truOrFalse);
+            tfDateYear.setVisible(truOrFalse);
+            btnEditEnrollment.setVisible(truOrFalse);
     }
 
     public Date convertDate(int day, int month, int year) {

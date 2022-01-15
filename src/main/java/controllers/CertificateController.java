@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import repository.DatabaseConnection;
+import validation.Validator;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class CertificateController {
     @FXML private ListView listCertificates;
 
 
-
+    private Validator validator = new Validator();
     private ArrayList<Node> nodes = new ArrayList<>();
     private DatabaseConnection databaseConnection = new DatabaseConnection();
     private Controller controller = new Controller(databaseConnection);
@@ -168,7 +169,9 @@ public class CertificateController {
         try {
             String[] splitter = cbEmployee.getValue().toString().split("-");
             certificate.setEmployeeId(Integer.parseInt(splitter[1]));
-            certificate.setGrade(Integer.parseInt(tfGrade.getText()));
+            if (validator.isGradeValid(Double.parseDouble(tfGrade.getText()))) {
+                certificate.setGrade(Double.parseDouble(tfGrade.getText()));
+            }
             certificate.setEnrollmentId(returnEnrollmentId());
             databaseConnection.addCertificate(certificate);
             controller.clear(anchorPane);
@@ -247,15 +250,17 @@ public class CertificateController {
         } else {
             String[] splitter = cbEmployee.getValue().toString().split("-");
             certificate.setEmployeeId(Integer.parseInt(splitter[1]));
-            int grade = Integer.parseInt(tfGrade.getText());
-            if (grade > 10 || grade < 1) {
-                controller.clear(anchorPane);
-                tfEmail.setText("No valid grade");
-            } else {
+            double grade = Double.parseDouble(tfGrade.getText());
+
+            if (validator.isGradeValid(Double.parseDouble(tfGrade.getText()))) {
+                certificate.setGrade(Double.parseDouble(tfGrade.getText()));
                 certificate.setGrade(grade);
                 databaseConnection.editCertificate(certificate);
                 getCertificates();
                 controller.clear(anchorPane);
+            } else {
+                controller.clear(anchorPane);
+                tfEmail.setText("No valid grade");
             }
             isVisible(false);
         }
