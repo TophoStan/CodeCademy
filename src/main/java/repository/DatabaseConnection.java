@@ -763,6 +763,26 @@ public class DatabaseConnection {
         return progressForCourse;
     }
 
+    public HashMap<ContentItem, Integer> getContentItemsWithPercent(int id) {
+        HashMap<ContentItem, Integer> contentItemAndProgress = new HashMap<>();
+
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT DISTINCT t1.StudentID, t2.Title, t1.Percentage\n" +
+                    "FROM Progress AS t1\n" +
+                    "JOIN ContentItem AS t2 ON t2.ContentItemID = t1.ContentItemID\n" +
+                    "WHERE t1.StudentID = '"+ id +"'");
+            while (rs.next()) {
+                ContentItem contentItem = new ContentItem(){};
+                contentItem.setTitle(rs.getString("Title"));
+                contentItemAndProgress.put(contentItem, rs.getInt("Percentage"));
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return contentItemAndProgress;
+    }
+
     public ArrayList<Enrollment> getEnrollmentIDFromSpecificGenderStudents(String gender) {
         ArrayList<Enrollment> enrollmentsForSpecificGenderStudents = new ArrayList<>();
 
@@ -784,7 +804,6 @@ public class DatabaseConnection {
         } catch (Exception e) {
             System.out.println(e);
         }
-        System.out.println(enrollmentsForSpecificGenderStudents);
         return enrollmentsForSpecificGenderStudents;
     }
 

@@ -395,10 +395,8 @@ public class CourseController {
             }
 
             if (!(amountOfEnrollments == 0)) {
-                System.out.println(countOfCertificates + " - " + amountOfEnrollments);
                 percentForLabel =  ((double) countOfCertificates / amountOfEnrollments) * 100;
                 percentForProgressBar = (double) countOfCertificates / amountOfEnrollments;
-                System.out.println(percentForLabel + ":" + percentForProgressBar);
             }
 
         } catch (Exception e) {
