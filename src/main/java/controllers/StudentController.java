@@ -213,7 +213,6 @@ public class StudentController {
             }
     }
 
-
     public void addStudentToDatabase() {
         databaseConnection.connect();
         Student student = new Student();
@@ -225,9 +224,9 @@ public class StudentController {
         int year = Integer.parseInt(tFStudentAddYear.getText());
         int month = Integer.parseInt(tFStudentAddMonth.getText());
         int day = Integer.parseInt(tFStudentAddDay.getText());
-        if(validator.isDateValid(convertDate(day, month, year).toString(), "Student")){
-        student.setBirthDate(convertDate(day, month, year));
-        };
+        if (validator.isDateValid(convertDate(day, month, year).toString(), "Student")) {
+            student.setBirthDate(convertDate(day, month, year));
+        }
         student.setStreet(tFStudentAddStreet.getText());
         student.setHouseNumber(Integer.parseInt(tFStudentAddHousenumber.getText()));
         student.setPostalCode(validator.formatPostalCode(tFStudentAddPostalCode.getText()));

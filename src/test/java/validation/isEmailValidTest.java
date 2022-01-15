@@ -52,4 +52,11 @@ public class isEmailValidTest {
         boolean result = validator.isEmailAddressValid(emailAddress);
         assertEquals(false, result);
     }
+    @Test
+    public void testIsEmailAddressValidWithTestAtAtDotCom(){
+        String emailAddress = "test@@.com";
+        Validator validator = new Validator();
+        boolean result = validator.isEmailAddressValid(emailAddress);
+        assertEquals(false, result);
+    }
 }
