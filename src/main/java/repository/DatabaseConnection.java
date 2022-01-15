@@ -183,7 +183,6 @@ public class DatabaseConnection {
             System.out.println("Something went wrong with updating the student");
             System.out.println(e);
         }
-
         return wasSuccesful;
     }
 
