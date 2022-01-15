@@ -127,14 +127,32 @@ public class StudentController {
             tFStudentEditCountry.setVisible(true);
             btnEditStudent.setVisible(true);
 
-
+            fillStudentTF(email);
             showStudentInfo(email);
         } else {
             tFStudentEditEmail.setText("Wrong email!");
         }
     }
 
+    public void fillStudentTF(String email) {
+        databaseConnection.connect();
 
+        try {
+            Student student = (Student) controller.giveIdentifierReturnObject(email, "Student");
+            tFStudentEditCity.setText(student.getCity());
+            tFStudentEditCountry.setText(student.getCountry());
+            tFStudentEditGender.setText(student.getGender());
+            tFStudentEditHousenumber.setText(String.valueOf(student.getHouseNumber()));
+            tFStudentEditName.setText(student.getName());
+            tFStudentEditPostalCode.setText(student.getPostalCode());
+            tFStudentEditStreet.setText(student.getStreet());
+
+            convertDateToInt(student.getBirthDate());
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 
     public void editStudentToDatabase() {
         String email = tFStudentEditEmail.getText();
@@ -154,7 +172,11 @@ public class StudentController {
                     student.setBirthDate(convertDate(day, month, year));
                     student.setStreet(tFStudentEditStreet.getText());
                     student.setHouseNumber(Integer.parseInt(tFStudentEditHousenumber.getText()));
-                    student.setPostalCode(validator.formatPostalCode(tFStudentEditPostalCode.getText()));
+
+                    // Ik probeer hier de spaties tussen de getallen en letters weg te halen waardoor de validator het wel doet
+                    String postalCodeForValidator = tFStudentEditPostalCode.getText().replaceAll("\\s+", "");
+                    student.setPostalCode(validator.formatPostalCode(postalCodeForValidator));
+
                     student.setCity(tFStudentEditCity.getText());
                     student.setCountry(tFStudentEditCountry.getText());
 
@@ -293,5 +315,12 @@ public class StudentController {
         cal.set(Calendar.DAY_OF_MONTH, day);
         java.sql.Date date = new java.sql.Date(cal.getTimeInMillis());
         return date;
+    }
+
+    public void convertDateToInt(Date date) {
+        String[] split = date.toString().split("-");
+        tFStudentEditDay.setText(split[2]);
+        tFStudentEditMonth.setText(split[1]);
+        tFStudentEditYear.setText(split[0]);
     }
 }
