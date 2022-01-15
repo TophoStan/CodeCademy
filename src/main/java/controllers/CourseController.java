@@ -20,6 +20,7 @@ import repository.DatabaseConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class CourseController {
 
@@ -47,6 +48,7 @@ public class CourseController {
     @FXML private Button btnSubmitEditCourse;
     @FXML private ListView courseInfoList;
 
+
     // for course delete page
     @FXML private TextField tFNameDeleteCourse;
 
@@ -62,7 +64,8 @@ public class CourseController {
     @FXML private ProgressBar pbCourseSelectionGender;
     @FXML private Label lBCourseSelectionPercentage;
     @FXML private ToggleGroup gender;
-
+    @FXML private ListView interestingCourses;
+    @FXML private Label lbInterestingCourses;
 
 
     public void toHome(ActionEvent event) {
@@ -327,7 +330,7 @@ public class CourseController {
             // Shows how many students finished a course
             makeVisible(true);
             int amountOfStudents = databaseConnection.studentsFinishedCourse(courseName);
-
+            showInterestingCourses();
 
             lBCourseSelectionAmount.setText("Finished by " + String.valueOf(amountOfStudents) + " students");
 
@@ -418,8 +421,10 @@ public class CourseController {
         rbCourseSelectionOther.setVisible(bool);
         pbCourseSelectionGender.setVisible(bool);
         lBCourseSelectionPercentage.setVisible(bool);
+        lbInterestingCourses.setVisible(bool);
+        interestingCourses.setVisible(bool);
     }
-    //TODO deze in controller class zetten
+
     public HashMap<Course, ArrayList<ContentItem>> contentItemsWithCourse() {
         HashMap<Course, ArrayList<ContentItem>> map = new HashMap<>();
         for (Course course : databaseConnection.retrieveCourses()) {
@@ -435,5 +440,25 @@ public class CourseController {
     }
     public void clearFields(){
         controller.clear(anchorPane);
+    }
+
+    public void showInterestingCourses() {
+        Random random = new Random();
+        ArrayList<Course> courses = databaseConnection.retrieveCourses();
+        interestingCourses.getItems().clear();
+        ArrayList<Integer> usedNumbers = new ArrayList<>();
+        while (true) {
+            int j = random.nextInt(courses.size());
+            if (!(usedNumbers.contains(j))) {
+                if(!courses.get(j).getName().equals(tFNameSelectCourse.getText())){
+                    interestingCourses.getItems().add(courses.get(j).getName());
+                }
+            }
+            usedNumbers.add(j);
+            if (interestingCourses.getItems().size() == 3) {
+                break;
+            }
+        }
+        usedNumbers.clear();
     }
 }
