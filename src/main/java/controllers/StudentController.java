@@ -102,6 +102,9 @@ public class StudentController {
         controller.toPage(event, "StudentSelection");
     }
 
+    /**
+     * makes all the fields visible if the studentemail exists
+    * */
     public void showStudentEditPlace() {
         String email = tFStudentEditEmail.getText();
         if (controller.checkEmail(email)) {
@@ -133,7 +136,7 @@ public class StudentController {
             tFStudentEditEmail.setText("Wrong email!");
         }
     }
-
+    /** fills the student fields with the students information*/
     public void fillStudentTF(String email) {
         databaseConnection.connect();
 
@@ -153,7 +156,7 @@ public class StudentController {
             System.out.println(e);
         }
     }
-
+    /** creates a student object with the changed values then passes it to the DatabaseConnection class*/
     public void editStudentToDatabase() {
         String email = tFStudentEditEmail.getText();
         databaseConnection.connect();
@@ -193,7 +196,7 @@ public class StudentController {
             System.out.println(e);
         }
     }
-
+    /** adds the student info of the passed student to a listview*/
     public void showStudentInfo(String email) {
         studentInfoList.getItems().clear();
         databaseConnection.connect();
@@ -213,7 +216,7 @@ public class StudentController {
                 System.out.println(e);
             }
     }
-
+    /** creates a student object with the given values then passes it to the DatabaseConnection class*/
     public void addStudentToDatabase() {
         databaseConnection.connect();
         Student student = new Student();
@@ -240,6 +243,7 @@ public class StudentController {
             System.out.println(e);
         }
     }
+    /** adds all the students from the database to a listview*/
     public void showStudent(){
         databaseConnection.connect();
         try {
@@ -253,7 +257,7 @@ public class StudentController {
             System.out.println(e);
         }
     }
-
+    /** deletes a student from the database*/
     public void deleteStudent(){
         String email = tFStudentDeleteEmail.getText();
         ArrayList<Student> studentsToDelete = new ArrayList<>();
@@ -276,7 +280,7 @@ public class StudentController {
             tFStudentDeleteEmail.setText("Unknown email");
         }
     }
-
+    /** shows all field of the selection view if the student exists*/
     public void selectStudent() {
         String email = tFStudentSelectionEmail.getText();
 
@@ -289,7 +293,7 @@ public class StudentController {
             tFStudentSelectionEmail.setText("Wrong email!");
         }
     }
-
+    /** shows all contentItems their percentage of the passed student*/
     public void showContentItemsPercent(String email) {
         percentContentItemList.getItems().clear();
         Student student = (Student) controller.giveIdentifierReturnObject(email, "Student");
@@ -305,7 +309,7 @@ public class StudentController {
             System.out.println(e);
         }
     }
-
+    /** shows all the certificates achieved by the passed student*/
     public void showCertificates(String email) {
         ArrayList<Course> allCourses = new ArrayList<>();
         ArrayList<Integer> courseIdList = new ArrayList<>();
@@ -329,8 +333,7 @@ public class StudentController {
             System.out.println(e);
         }
     }
-
-
+    /** converts the values of the textfields to sql.date*/
     public Date convertDate(int day, int month, int year) {
         SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
         Calendar cal = Calendar.getInstance();
@@ -340,7 +343,7 @@ public class StudentController {
         java.sql.Date date = new java.sql.Date(cal.getTimeInMillis());
         return date;
     }
-
+    /** converts a date to 3 different integers*/
     public void convertDateToInt(Date date) {
         String[] split = date.toString().split("-");
         tFStudentEditDay.setText(split[2]);

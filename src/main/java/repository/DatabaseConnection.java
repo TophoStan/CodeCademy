@@ -308,6 +308,10 @@ public class DatabaseConnection {
         }
     }
 
+    /**
+     * This method uses the <code>Statement</code> and <code>execute()</code> to
+     * push the Progress to the database.
+     */
     public void addProgress(Progress progress) {
         try {
             PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO Progress(ContentItemID, StudentID, Percentage) VALUES (?,?,?)");
@@ -362,6 +366,10 @@ public class DatabaseConnection {
         return enrollments;
     }
 
+    /**
+     * Edits the enrollment's information.
+     * After execution the changes will take effect immediately.
+     */
     public void editEnrollment(Enrollment enrollment) throws SQLException {
 
         PreparedStatement preparedStatement = conn.prepareStatement("UPDATE EnrollmentData " +
@@ -388,6 +396,10 @@ public class DatabaseConnection {
         preparedStatement.executeUpdate();
     }
 
+    /**
+     * Deletes a progress from the database if the course table contains the
+     * courseId of the given <code>Progress</code> in the parameters
+     */
     public void deleteProgress(Progress progress) throws SQLException {
         PreparedStatement preparedStatement = conn.prepareStatement(
                 "DELETE FROM Progress WHERE ProgressID = " + progress.getId());
@@ -396,12 +408,7 @@ public class DatabaseConnection {
 
     /**
      * Uses the <code>Statement</code> and <code>execute()</code> to
-     * push the Certificite to the database with a number of
-     * <code>setString(x, student.getMethod)</code>.
-     *
-     * @param certificate
-     * @throws SQLException         conn == null
-     * @throws NullPointerException Certificate == null
+     * push the Certificite to the database.
      */
     public void addCertificate(Certificate certificate) throws SQLException {
         PreparedStatement preparedStatement = conn
@@ -440,6 +447,10 @@ public class DatabaseConnection {
         return certificates;
     }
 
+    /**
+     * Edits the certificate's information.
+     * After execution the changes will take effect immediately.
+     */
     public void editCertificate(Certificate certificate) {
         try {
             PreparedStatement preparedStatement = conn.prepareStatement("UPDATE Certificate SET Grade="
@@ -470,6 +481,10 @@ public class DatabaseConnection {
         }
     }
 
+    /**
+     * This method uses the <code>Statement</code> and <code>execute()</code> to
+     * push the contentItem to the database
+     */
     public void addContentItem(ContentItem content) {
         try {
             PreparedStatement preparedStatement;
@@ -492,6 +507,12 @@ public class DatabaseConnection {
         }
     }
 
+    /**
+     * Retrieves all the records from the ContentItem table on the SQL
+     * server.
+     * The method works by using <code>Statement </code> and <code>Resultset </code>
+     * to execute the query.
+     */
     public ArrayList<ContentItem> retrieveContentItems() {
         ArrayList<ContentItem> contentItems = new ArrayList<>();
 
@@ -516,6 +537,10 @@ public class DatabaseConnection {
         return contentItems;
     }
 
+    /**
+     * Edits the ContentItem's information.
+     * After execution the changes will take effect immediately.
+     */
     public void editContentItem(ContentItem contentItem) {
         try {
             PreparedStatement preparedStatement = conn.prepareStatement("UPDATE ContentItem SET CourseId="
@@ -526,7 +551,10 @@ public class DatabaseConnection {
         }
     }
 
-
+    /**
+     * This method uses the <code>Statement</code> and <code>execute()</code> to
+     * push the Module to the database.
+     */
     public void addModule(Module module) {
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(
@@ -541,6 +569,12 @@ public class DatabaseConnection {
         }
     }
 
+    /**
+     * Retrieves all the records from the Modules table on the SQL
+     * server.
+     * The method works by using <code>Statement </code> and <code>Resultset </code>
+     * to execute the query.
+     */
     public ArrayList<Module> retrieveModules() {
         ArrayList<Module> modules = new ArrayList<>();
 
@@ -563,6 +597,10 @@ public class DatabaseConnection {
 
     }
 
+    /**
+     * This method uses the <code>Statement</code> and <code>execute()</code> to
+     * push the Webcast to the database.
+     */
     public void addWebcast(Webcast webcast) {
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(
@@ -578,6 +616,12 @@ public class DatabaseConnection {
         }
     }
 
+    /**
+     * Retrieves all the records from the Webcast table on the SQL
+     * server.
+     * The method works by using <code>Statement </code> and <code>Resultset </code>
+     * to execute the query.
+     */
     public ArrayList<Webcast> retrieveWebcasts() {
         ArrayList<Webcast> webcasts = new ArrayList<>();
 
@@ -600,13 +644,19 @@ public class DatabaseConnection {
         return webcasts;
     }
 
+    /**
+     * Retrieves the top 3 Webcasts based on views from the webcast table on the SQL
+     * server.
+     * The method works by using <code>Statement </code> and <code>Resultset </code>
+     * to execute the query.
+     */
     public ContentItem[] retrieveTop3Webcasts() {
         ContentItem[] webcasts = new ContentItem[3];
         int i = 0;
 
         try {
             Statement stmt = conn.createStatement();
-            ResultSet rs =  stmt.executeQuery("SELECT TOP 3 t2.ContentItemId, t2.Title\n" +
+            ResultSet rs = stmt.executeQuery("SELECT TOP 3 t2.ContentItemId, t2.Title\n" +
                     "FROM webcast AS t1\n" +
                     "JOIN ContentItem AS t2 ON t2.ContentItemID = t1.ContentItemId\n" +
                     "ORDER BY t1.views DESC");
@@ -628,6 +678,12 @@ public class DatabaseConnection {
         return webcasts;
     }
 
+    /**
+     * Retrieves the top 3 courses based on certificates achieved from the course table on the SQL
+     * server.
+     * The method works by using <code>Statement </code> and <code>Resultset </code>
+     * to execute the query.
+     */
     public Course[] retrieveTop3Courses() {
         Course[] courses = new Course[3];
         int i = 0;
@@ -653,6 +709,12 @@ public class DatabaseConnection {
         return courses;
     }
 
+    /**
+     * Retrieves all the records from the Speakers table on the SQL
+     * server.
+     * The method works by using <code>Statement </code> and <code>Resultset </code>
+     * to execute the query.
+     */
     public ArrayList<Speaker> retrieveSpeakers() {
 
         ArrayList<Speaker> speakers = new ArrayList<>();
@@ -676,6 +738,12 @@ public class DatabaseConnection {
         return speakers;
     }
 
+    /**
+     * Retrieves all the records from the ContactPerson table on the SQL
+     * server.
+     * The method works by using <code>Statement </code> and <code>Resultset </code>
+     * to execute the query.
+     */
     public ArrayList<ContactPerson> retrieveContactPersons() {
 
         ArrayList<ContactPerson> contactPeople = new ArrayList<>();
@@ -698,6 +766,9 @@ public class DatabaseConnection {
         return contactPeople;
     }
 
+    /**
+     * Retrieves an arraylist of the certificates of the passed studentemail
+     */
     public ArrayList<Integer> certificatesFromStudent(String email) {
         ArrayList<Integer> certificatesFromStudentList = new ArrayList<>();
 
@@ -720,6 +791,9 @@ public class DatabaseConnection {
         return certificatesFromStudentList;
     }
 
+    /**
+     * Returns the amount of students who finished a course
+     */
     public int studentsFinishedCourse(String courseName) {
         int output = 0;
 
@@ -741,6 +815,9 @@ public class DatabaseConnection {
         return output;
     }
 
+    /**
+     * Retrieves a hashmap with the contentItemId as the key and the average progress is its value of the passed course
+     */
     public HashMap<Integer, Integer> getProgressForCourse(String courseName) {
         HashMap<Integer, Integer> progressForCourse = new HashMap<>();
 
@@ -762,6 +839,9 @@ public class DatabaseConnection {
         return progressForCourse;
     }
 
+    /**
+     * Returns a hashmap with the contentItem as the index and the percentage of progress as the value for a specific student
+     */
     public HashMap<ContentItem, Integer> getContentItemsWithPercent(int id) {
         HashMap<ContentItem, Integer> contentItemAndProgress = new HashMap<>();
 
@@ -770,9 +850,10 @@ public class DatabaseConnection {
             ResultSet rs = stmt.executeQuery("SELECT DISTINCT t1.StudentID, t2.Title, t1.Percentage\n" +
                     "FROM Progress AS t1\n" +
                     "JOIN ContentItem AS t2 ON t2.ContentItemID = t1.ContentItemID\n" +
-                    "WHERE t1.StudentID = '"+ id +"'");
+                    "WHERE t1.StudentID = '" + id + "'");
             while (rs.next()) {
-                ContentItem contentItem = new ContentItem(){};
+                ContentItem contentItem = new ContentItem() {
+                };
                 contentItem.setTitle(rs.getString("Title"));
                 contentItemAndProgress.put(contentItem, rs.getInt("Percentage"));
             }
@@ -782,6 +863,9 @@ public class DatabaseConnection {
         return contentItemAndProgress;
     }
 
+    /**
+     * Returns the enrollments of the specified gender
+     */
     public ArrayList<Enrollment> getEnrollmentIDFromSpecificGenderStudents(String gender) {
         ArrayList<Enrollment> enrollmentsForSpecificGenderStudents = new ArrayList<>();
 
@@ -806,6 +890,12 @@ public class DatabaseConnection {
         return enrollmentsForSpecificGenderStudents;
     }
 
+    /**
+     * Retrieves all the records from the Progress table on the SQL
+     * server.
+     * The method works by using <code>Statement </code> and <code>Resultset </code>
+     * to execute the query.
+     */
     public ArrayList<Progress> retrieveProgress() {
 
         ArrayList<Progress> progresses = new ArrayList<>();
@@ -828,6 +918,12 @@ public class DatabaseConnection {
 
     }
 
+    /**
+     * Retrieves all the records from the Employee table on the SQL
+     * server.
+     * The method works by using <code>Statement </code> and <code>Resultset </code>
+     * to execute the query.
+     */
     public ArrayList<Employee> retrieveEmployee() {
         ArrayList<Employee> employees = new ArrayList<>();
 
