@@ -44,30 +44,47 @@ public class ContentItemController {
     private Controller controller = new Controller(databaseConnection);
     private Validator validator = new Validator();
 
+    /**
+     * This methode uses the Controller to go to a page.
+     */
     public void toHome(ActionEvent event) {
         controller.toPage(event, "Home");
     }
-
+    /**
+     * This methode uses the Controller to go to a page.
+     */
     public void toStudent(ActionEvent event){
         controller.toPage(event, "StudentAdd");
     }
-
+    /**
+     * This methode uses the Controller to go to a page.
+     */
     public void toCourse(ActionEvent event) {
         controller.toPage(event, "CourseAdd");
     }
-
+    /**
+     * This methode uses the Controller to go to a page.
+     */
     public void toEnrollment(ActionEvent event) {
         controller.toPage(event, "EnrollmentAdd");
     }
-
+    /**
+     * This methode uses the Controller to go to a page.
+     */
     public void toContentItem(ActionEvent event) {
         controller.toPage(event, "ContentItemAdd");
     }
-
+    /**
+     * This methode uses the Controller to go to a page.
+     */
     public void toCertificate(ActionEvent event) {
         controller.toPage(event, "CertificateAdd");
     }
 
+    /**
+     * Creates a content item with all the necessary information and
+     * passes it to the databaseConnection.
+     */
     public void addContentItem() {
         failedURL.setText("");
         Course course = new Course();
@@ -90,9 +107,6 @@ public class ContentItemController {
         contentItem.setTitle(tfTitle.getText());
         Date date = Date.valueOf(LocalDate.now());
         contentItem.setPublicationDate(date);
-
-
-
 
         if(type.getSelectedToggle().equals(radModule)){
             databaseConnection.addContentItem(contentItem);
@@ -167,6 +181,9 @@ public class ContentItemController {
         tfDuration.clear();
     }
 
+    /**
+     * Adds courses to a ComboBox.
+     */
     public void addValuesTocbCourses() {
         databaseConnection.connect();
         ArrayList<String> coursesWithWebcasts = new ArrayList<>();
@@ -186,6 +203,10 @@ public class ContentItemController {
             }
         }
     }
+
+    /**
+     * Adds States to a ComboBox.
+     */
     public void addValuesTocbState(){
         cbState.getItems().clear();
 
@@ -193,6 +214,9 @@ public class ContentItemController {
         cbState.getItems().add(Status.ARCHIVED.toString());
         cbState.getItems().add(Status.CONCEPT.toString());
     }
+    /**
+     * Adds Speakers to a ComboBox.
+     */
     public void addValuesTocbSpeaker(){
         cbSpeaker.getItems().clear();
         databaseConnection.connect();
@@ -200,6 +224,9 @@ public class ContentItemController {
             cbSpeaker.getItems().add(speaker.getName());
         }
     }
+    /**
+     * Adds ContactPersons to a ComboBox.
+     */
     public void addValuesTocbContactPerson(){
         cbContactPerson.getItems().clear();
         databaseConnection.connect();
@@ -209,6 +236,9 @@ public class ContentItemController {
         }
     }
 
+    /**
+     * Sets fields and labels on visible or on invisible.
+     */
     public void setVisible(){
         if(type.getSelectedToggle().equals(radModule)){
             lblVersion.setVisible(true);
@@ -236,6 +266,10 @@ public class ContentItemController {
         }
     }
 
+    /**
+     * Makes a hashmap with courses and the content items who belong to the course.
+     * @return HashMap with Courses and ContentItems in an ArrayList
+     */
     public HashMap<Course, ArrayList<ContentItem>> contentItemsWithCourse() {
         HashMap<Course, ArrayList<ContentItem>> map = new HashMap<>();
         for (Course course : databaseConnection.retrieveCourses()) {
@@ -250,6 +284,10 @@ public class ContentItemController {
         return map;
     }
 
+    /**
+     * Fills a listview with content items and if it is a
+     * webcast or module.
+     */
     public void listContentItems(){
         listView.getItems().clear();
         databaseConnection.connect();

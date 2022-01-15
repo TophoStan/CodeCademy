@@ -175,7 +175,6 @@ public class StudentController {
                     student.setStreet(tFStudentEditStreet.getText());
                     student.setHouseNumber(Integer.parseInt(tFStudentEditHousenumber.getText()));
 
-                    // Ik probeer hier de spaties tussen de getallen en letters weg te halen waardoor de validator het wel doet
                     String postalCodeForValidator = tFStudentEditPostalCode.getText().replaceAll("\\s+", "");
                     student.setPostalCode(validator.formatPostalCode(postalCodeForValidator));
 

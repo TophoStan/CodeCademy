@@ -35,42 +35,62 @@ public class CertificateController {
     private DatabaseConnection databaseConnection = new DatabaseConnection();
     private Controller controller = new Controller(databaseConnection);
 
-    public CertificateController() {
+    public CertificateController() {}
 
-    }
-
+    /**
+     * This methode uses the Controller to go to a page.
+     */
     public void toHome(ActionEvent event) {
         controller.toPage(event, "Home");
     }
-
+    /**
+     * This methode uses the Controller to go to a page.
+     */
     public void toStudent(ActionEvent event) {
         controller.toPage(event, "StudentAdd");
     }
-
+    /**
+     * This methode uses the Controller to go to a page.
+     */
     public void toCourse(ActionEvent event) {
         controller.toPage(event, "CourseAdd");
     }
-
+    /**
+     * This methode uses the Controller to go to a page.
+     */
     public void toEnrollment(ActionEvent event) {
         controller.toPage(event, "EnrollmentAdd");
     }
-
+    /**
+     * This methode uses the Controller to go to a page.
+     */
     public void toContentItem(ActionEvent event) {
         controller.toPage(event, "ContentItemAdd");
     }
-
+    /**
+     * This methode uses the Controller to go to a page.
+     */
     public void toCertificate(ActionEvent event) {
         controller.toPage(event, "CertificateAdd");
     }
-
+    /**
+     * This methode uses the Controller to go to a page.
+     */
     public void toEdit(ActionEvent event) {
         controller.toPage(event, "CertificateEdit");
     }
-
+    /**
+     * This methode uses the Controller to go to a page.
+     */
     public void toDelete(ActionEvent event) {
         controller.toPage(event, "CertificateDelete");
     }
 
+    /**
+     * Shows the courses from a student who completed a course.
+     * @param studentEmailAddress
+     * @return Course ArrayList
+     */
     public ArrayList<Course> returnCompletedCoursesFromStudent(String studentEmailAddress) {
         databaseConnection.connect();
         cbCompleted.getItems().clear();
@@ -104,6 +124,10 @@ public class CertificateController {
         return completedCourses;
     }
 
+    /**
+     * This methode adds dates to the date ComboBox so the employee
+     * can pick a date from the ComboBox
+     */
     public void addDatesTocbDate() {
         String email = tfEmail.getText();
         if (controller.checkEmail(email)) {
@@ -128,6 +152,10 @@ public class CertificateController {
         }
     }
 
+    /**
+     * Sets nodes on visible or on invisible.
+     * @param bool
+     */
     public void isVisible(boolean bool) {
 
         for (Node node: anchorPane.getChildren()) {
@@ -142,6 +170,10 @@ public class CertificateController {
 
     }
 
+    /**
+     * Makes a hashmap with courses and the content items who belong to the course.
+     * @return HashMap with Courses and ContentItems in an ArrayList
+     */
     public HashMap<Course, ArrayList<ContentItem>> contentItemsWithCourse() {
         HashMap<Course, ArrayList<ContentItem>> map = new HashMap<>();
         for (Course course : databaseConnection.retrieveCourses()) {
@@ -156,6 +188,10 @@ public class CertificateController {
         return map;
     }
 
+    /**
+     * This methode adds the employees to a combobox.
+     * The employee can set the employee who checked the certificate.
+     */
     public void addEmployeesToCombobox() {
         cbEmployee.getItems().clear();
         for (Employee employee : databaseConnection.retrieveEmployee()) {
@@ -163,6 +199,10 @@ public class CertificateController {
         }
     }
 
+    /**
+     * This methode creates the certificate and passes is to the databaseConnection.
+     * It also checks if the certificate already exists.
+     */
     public void addCertificate() {
         databaseConnection.connect();
         Certificate certificate = new Certificate();
@@ -184,6 +224,10 @@ public class CertificateController {
         }
     }
 
+    /**
+     * Deze snap ik niet!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+     * @return enrollment ID
+     */
     public int returnEnrollmentId() {
         Enrollment enrollment = new Enrollment();
         try {
@@ -211,6 +255,10 @@ public class CertificateController {
         return enrollment.getEnrollmentId();
     }
 
+    /**
+     * Retrieves the certificates from all students and puts it
+     * in a ListView.
+     */
     public void getCertificates() {
         databaseConnection.connect();
         listCertificates.getItems().clear();
@@ -226,6 +274,10 @@ public class CertificateController {
         }
     }
 
+    /**
+     * Gives information to databaseConnection to delete a
+     * specific certificate.
+     */
     public void deleteCertificate() {
         Certificate certificate = new Certificate();
         try {
@@ -239,6 +291,11 @@ public class CertificateController {
         }
     }
 
+    /**
+     * This methode gives information to databaseConnection to edit a
+     * specific certificate.
+     * It also gives an alert if something isn't right.
+     */
     public void editCertificate() {
         databaseConnection.connect();
         int id = returnEnrollmentId();
