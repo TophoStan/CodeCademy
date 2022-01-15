@@ -12,6 +12,7 @@ import domain.Webcast;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
+import javafx.scene.Node;
 import javafx.scene.control.*;
 
 import javafx.scene.layout.AnchorPane;
@@ -164,14 +165,12 @@ public class CourseController {
             cBCourseAddDifficulty.getItems().clear();
             cBCourseAddDifficulty.getItems().addAll(difficulties);
         } catch (Exception e) {
-            System.out.println("Used for edit difficulties");
         }
 
         try {
             cBDifficultyEditCourse.getItems().clear();
             cBDifficultyEditCourse.getItems().addAll(difficulties);
         } catch (Exception e) {
-            System.out.println("Used for add difficulties");
         }
     }
 
@@ -199,9 +198,26 @@ public class CourseController {
             cBDifficultyEditCourse.setVisible(true);
             btnSubmitEditCourse.setVisible(true);
 
+            fillCourseTF(courseName);
             showCourseInfo(courseName);
         } else {
             tFNameEditCourse.setText("Wrong name!");
+        }
+    }
+
+    public void fillCourseTF(String courseName) {
+        databaseConnection.connect();
+
+        try {
+            Course course = (Course) controller.giveIdentifierReturnObject(courseName, "Course");
+
+            tFSubjectEditCourse.setText(course.getSubject());
+            cBDifficultyEditCourse.setPromptText(course.getDifficulty().toString());
+            cBDifficultyEditCourse.setValue(course.getDifficulty());
+            tAIntroTextEditCourse.setText(course.getText());
+
+        } catch (Exception e) {
+            System.out.println(e);
         }
     }
 
@@ -379,10 +395,8 @@ public class CourseController {
             }
 
             if (!(amountOfEnrollments == 0)) {
-                System.out.println(countOfCertificates + " - " + amountOfEnrollments);
                 percentForLabel =  ((double) countOfCertificates / amountOfEnrollments) * 100;
                 percentForProgressBar = (double) countOfCertificates / amountOfEnrollments;
-                System.out.println(percentForLabel + ":" + percentForProgressBar);
             }
 
         } catch (Exception e) {

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="472.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.StudentController">
+<AnchorPane prefHeight="472.0" prefWidth="674.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.StudentController">
    <children>
       <TextField fx:id="tFStudentSelectionEmail" layoutX="31.0" layoutY="214.0" />
       <Button fx:id="BtnHome" layoutX="24.0" layoutY="56.0" mnemonicParsing="false" onAction="#toHome" text="Home">
@@ -43,7 +43,7 @@
       <Button fx:id="btnStudentAdd" layoutX="24.0" layoutY="95.0" mnemonicParsing="false" onAction="#toStudent" text="Add" />
       <Button fx:id="BtnStudentEdit" layoutX="62.0" layoutY="95.0" mnemonicParsing="false" onAction="#toStudentEdit" text="Edit" />
       <Button fx:id="BtnStudentDelete" layoutX="99.0" layoutY="95.0" mnemonicParsing="false" onAction="#toStudentDelete" text="Delete" />
-      <ListView fx:id="listStudent" layoutX="432.0" layoutY="163.0" prefHeight="200.0" prefWidth="149.0" />
+      <ListView fx:id="percentContentItemList" layoutX="453.0" layoutY="163.0" prefHeight="200.0" prefWidth="208.0" />
       <Label layoutX="25.0" layoutY="127.0" text="Select a student">
          <font>
             <Font size="14.0" />
@@ -51,19 +51,10 @@
       </Label>
       <Label layoutX="31.0" layoutY="194.0" text="Email" />
       <Button fx:id="BtnSubmitSelectStudent" layoutX="35.0" layoutY="250.0" mnemonicParsing="false" onAction="#selectStudent" text="Submit" />
-      <Label layoutX="515.0" layoutY="137.0" text="Students">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Button fx:id="btnStudentRefresh" layoutX="523.0" layoutY="373.0" mnemonicParsing="false" onAction="#showStudent" text="Refresh">
-         <font>
-            <Font size="10.0" />
-         </font>
-      </Button>
+      <Label layoutX="497.0" layoutY="139.0" text="Progess for module or webcast" />
       <Button defaultButton="true" layoutX="148.0" layoutY="95.0" mnemonicParsing="false" onAction="#toStudentSelection" text="Selection" />
-      <ListView fx:id="certificatesList" layoutX="188.0" layoutY="163.0" prefHeight="200.0" prefWidth="237.0" />
-      <Label layoutX="351.0" layoutY="139.0" text="Certificates" />
+      <ListView fx:id="certificatesList" layoutX="269.0" layoutY="163.0" prefHeight="200.0" prefWidth="143.0" />
+      <Label layoutX="356.0" layoutY="139.0" text="Certificates" />
       <Button layoutX="357.0" layoutY="56.0" mnemonicParsing="false" onAction="#toCertificate" text="Certificate">
          <font>
             <Font name="System Bold" size="12.0" />

@@ -1,9 +1,6 @@
 package controllers;
 
-import domain.Certificate;
-import domain.Course;
-import domain.Enrollment;
-import domain.Student;
+import domain.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -15,6 +12,8 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class StudentController {
 
@@ -62,6 +61,7 @@ public class StudentController {
     // for Student selection page
     @FXML private TextField tFStudentSelectionEmail;
     @FXML private ListView certificatesList;
+    @FXML private ListView percentContentItemList;
 
     private CertificateController certificateController = new CertificateController();
     private DatabaseConnection databaseConnection = new DatabaseConnection();
@@ -127,14 +127,32 @@ public class StudentController {
             tFStudentEditCountry.setVisible(true);
             btnEditStudent.setVisible(true);
 
-
+            fillStudentTF(email);
             showStudentInfo(email);
         } else {
             tFStudentEditEmail.setText("Wrong email!");
         }
     }
 
+    public void fillStudentTF(String email) {
+        databaseConnection.connect();
 
+        try {
+            Student student = (Student) controller.giveIdentifierReturnObject(email, "Student");
+            tFStudentEditCity.setText(student.getCity());
+            tFStudentEditCountry.setText(student.getCountry());
+            tFStudentEditGender.setText(student.getGender());
+            tFStudentEditHousenumber.setText(String.valueOf(student.getHouseNumber()));
+            tFStudentEditName.setText(student.getName());
+            tFStudentEditPostalCode.setText(student.getPostalCode());
+            tFStudentEditStreet.setText(student.getStreet());
+
+            convertDateToInt(student.getBirthDate());
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 
     public void editStudentToDatabase() {
         String email = tFStudentEditEmail.getText();
@@ -154,7 +172,11 @@ public class StudentController {
                     student.setBirthDate(convertDate(day, month, year));
                     student.setStreet(tFStudentEditStreet.getText());
                     student.setHouseNumber(Integer.parseInt(tFStudentEditHousenumber.getText()));
-                    student.setPostalCode(validator.formatPostalCode(tFStudentEditPostalCode.getText()));
+
+                    // Ik probeer hier de spaties tussen de getallen en letters weg te halen waardoor de validator het wel doet
+                    String postalCodeForValidator = tFStudentEditPostalCode.getText().replaceAll("\\s+", "");
+                    student.setPostalCode(validator.formatPostalCode(postalCodeForValidator));
+
                     student.setCity(tFStudentEditCity.getText());
                     student.setCountry(tFStudentEditCountry.getText());
 
@@ -254,33 +276,54 @@ public class StudentController {
 
     public void selectStudent() {
         String email = tFStudentSelectionEmail.getText();
-        ArrayList<Course> allCourses = new ArrayList<>();
-        ArrayList<Integer> courseIdList = new ArrayList<>();
 
         if (controller.checkEmail(email)) {
-            certificatesList.getItems().clear();
             databaseConnection.connect();
-            try {
-                allCourses = databaseConnection.retrieveCourses();
-                courseIdList = databaseConnection.certificatesFromStudent(email);
-
-                for (Course course : allCourses) {
-                    for (Integer i : courseIdList) {
-                        if (i == course.getId()) {
-                            certificatesList.getItems().add(course.getName());
-                        }
-                    }
-                }
-                if (certificatesList.getItems().isEmpty()) {
-                    certificatesList.getItems().add("No certificates");
-                }
-
-            } catch (Exception e) {
-                System.out.println(e);
-            }
+            showCertificates(email);
+            showContentItemsPercent(email);
 
         } else {
             tFStudentSelectionEmail.setText("Wrong email!");
+        }
+    }
+
+    public void showContentItemsPercent(String email) {
+        percentContentItemList.getItems().clear();
+        Student student = (Student) controller.giveIdentifierReturnObject(email, "Student");
+        HashMap<ContentItem, Integer> percentForContentItems = new HashMap<>();
+        try {
+            percentForContentItems = databaseConnection.getContentItemsWithPercent(student.getId());
+
+            for (Map.Entry<ContentItem, Integer> e : percentForContentItems.entrySet()) {
+                percentContentItemList.getItems().add(e.getKey().getTitle() + ": " + e.getValue() + "%");
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void showCertificates(String email) {
+        ArrayList<Course> allCourses = new ArrayList<>();
+        ArrayList<Integer> courseIdList = new ArrayList<>();
+        certificatesList.getItems().clear();
+        try {
+            allCourses = databaseConnection.retrieveCourses();
+            courseIdList = databaseConnection.certificatesFromStudent(email);
+
+            for (Course course : allCourses) {
+                for (Integer i : courseIdList) {
+                    if (i == course.getId()) {
+                        certificatesList.getItems().add(course.getName());
+                    }
+                }
+            }
+            if (certificatesList.getItems().isEmpty()) {
+                certificatesList.getItems().add("No certificates");
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
         }
     }
 
@@ -293,5 +336,12 @@ public class StudentController {
         cal.set(Calendar.DAY_OF_MONTH, day);
         java.sql.Date date = new java.sql.Date(cal.getTimeInMillis());
         return date;
+    }
+
+    public void convertDateToInt(Date date) {
+        String[] split = date.toString().split("-");
+        tFStudentEditDay.setText(split[2]);
+        tFStudentEditMonth.setText(split[1]);
+        tFStudentEditYear.setText(split[0]);
     }
 }
