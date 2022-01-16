@@ -5,6 +5,12 @@ import org.junit.jupiter.api.Test;
 
 public class isPercentageValidTest {
 
+/**
+ * @subcontract is valid {
+ *      * @requires 0 <= percentage && percentage <= 100;
+ *      * @ensures \result = true
+ *      }
+ * */
     @Test
     public void testIsPercentageValidRequires0ReturnsTrue(){
         int input = 0;
@@ -12,6 +18,12 @@ public class isPercentageValidTest {
         boolean result = validator.isPercentageValid(input);
         assertEquals(true, result);
     }
+    /**
+     * @subcontract is valid {
+     *      * @requires 0 <= percentage && percentage <= 100;
+     *      * @ensures \result = true
+     *      }
+     * */
     @Test
     public void testIsPercentageValidRequires100ReturnsTrue(){
         int input = 100;
@@ -19,6 +31,12 @@ public class isPercentageValidTest {
         boolean result = validator.isPercentageValid(input);
         assertEquals(true, result);
     }
+    /**
+     * @subcontract is valid {
+     *      * @requires 0 <= percentage && percentage <= 100;
+     *      * @ensures \result = true
+     *      }
+     * */
     @Test
     public void testIsPercentageValidRequires50ReturnsTrue(){
         int input = 50;
@@ -26,6 +44,13 @@ public class isPercentageValidTest {
         boolean result = validator.isPercentageValid(input);
         assertEquals(true, result);
     }
+    /**
+     * @subcontract is not valid {
+     *      * @requires 0 > percentage && percentage > 100;
+     *      * @ensures \result = false
+     *     }
+     * */
+
     @Test
     public void testIsPercentageValidRequiresMinus1ReturnsFalse(){
         int input = -1;
@@ -33,6 +58,12 @@ public class isPercentageValidTest {
         boolean result = validator.isPercentageValid(input);
         assertEquals(false, result);
     }
+    /**
+     * @subcontract is not valid {
+     *     * @requires 0 > percentage && percentage > 100;
+     *     * @ensures \result = false
+     *      }
+     * */
     @Test
     public void testIsPercentageValidRequires101ReturnsFalse(){
         int input = 101;
