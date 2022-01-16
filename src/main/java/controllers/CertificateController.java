@@ -97,7 +97,7 @@ public class CertificateController {
         ArrayList<Course> completedCourses = new ArrayList<>();
 
         Student thisStudent = (Student) controller.giveIdentifierReturnObject(studentEmailAddress, "Student");
-        for (Map.Entry<Course, ArrayList<ContentItem>> e : contentItemsWithCourse().entrySet()) {
+        for (Map.Entry<Course, ArrayList<ContentItem>> e : controller.contentItemsWithCourse().entrySet()) {
             int passedContentItems = 0;
             for (Progress progress : databaseConnection.retrieveProgress()) {
                 if (progress.getStudentId() == thisStudent.getId() && progress.getPercentage() == 100) {
@@ -168,24 +168,6 @@ public class CertificateController {
         }
 
 
-    }
-
-    /**
-     * Makes a hashmap with courses and the content items who belong to the course.
-     * @return HashMap with Courses and ContentItems in an ArrayList
-     */
-    public HashMap<Course, ArrayList<ContentItem>> contentItemsWithCourse() {
-        HashMap<Course, ArrayList<ContentItem>> map = new HashMap<>();
-        for (Course course : databaseConnection.retrieveCourses()) {
-            ArrayList<ContentItem> contentItems = new ArrayList<>();
-            for (ContentItem contentItem : databaseConnection.retrieveContentItems()) {
-                if (course.getId() == contentItem.getCourseId()) {
-                    contentItems.add(contentItem);
-                }
-            }
-            map.put(course, contentItems);
-        }
-        return map;
     }
 
     /**

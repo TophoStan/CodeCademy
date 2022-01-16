@@ -187,7 +187,7 @@ public class ContentItemController {
     public void addValuesTocbCourses() {
         databaseConnection.connect();
         ArrayList<String> coursesWithWebcasts = new ArrayList<>();
-        for (Map.Entry<Course, ArrayList<ContentItem>> e: contentItemsWithCourse().entrySet()){
+        for (Map.Entry<Course, ArrayList<ContentItem>> e: controller.contentItemsWithCourse().entrySet()){
             for (ContentItem contentItem : e.getValue()) {
                 for (Webcast webcast: databaseConnection.retrieveWebcasts()) {
                     if(contentItem.getContentItemId() == webcast.getContentItemId()){
@@ -264,24 +264,6 @@ public class ContentItemController {
             lblContactPerson.setVisible(false);
             cbContactPerson.setVisible(false);
         }
-    }
-
-    /**
-     * Makes a hashmap with courses and the content items who belong to the course.
-     * @return HashMap with Courses and ContentItems in an ArrayList
-     */
-    public HashMap<Course, ArrayList<ContentItem>> contentItemsWithCourse() {
-        HashMap<Course, ArrayList<ContentItem>> map = new HashMap<>();
-        for (Course course : databaseConnection.retrieveCourses()) {
-            ArrayList<ContentItem> contentItems = new ArrayList<>();
-            for (ContentItem contentItem : databaseConnection.retrieveContentItems()) {
-                if (course.getId() == contentItem.getCourseId()) {
-                    contentItems.add(contentItem);
-                }
-            }
-            map.put(course, contentItems);
-        }
-        return map;
     }
 
     /**

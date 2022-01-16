@@ -15,6 +15,8 @@ import repository.DatabaseConnection;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+
 /** Universal controller*/
 public class Controller {
 
@@ -193,6 +195,23 @@ public class Controller {
                 ((ComboBox)node).getItems().clear();
             }
         }
+    }
 
+    /**
+     * Makes a hashmap with courses and the content items who belong to the course.
+     * @return HashMap with Courses and ContentItems in an ArrayList
+     */
+    public HashMap<Course, ArrayList<ContentItem>> contentItemsWithCourse() {
+        HashMap<Course, ArrayList<ContentItem>> map = new HashMap<>();
+        for (Course course : databaseConnection.retrieveCourses()) {
+            ArrayList<ContentItem> contentItems = new ArrayList<>();
+            for (ContentItem contentItem : databaseConnection.retrieveContentItems()) {
+                if (course.getId() == contentItem.getCourseId()) {
+                    contentItems.add(contentItem);
+                }
+            }
+            map.put(course, contentItems);
+        }
+        return map;
     }
 }
