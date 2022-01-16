@@ -15,7 +15,7 @@ import repository.DatabaseConnection;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
+/** Universal controller*/
 public class Controller {
 
     private Stage stage;

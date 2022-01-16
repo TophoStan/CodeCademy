@@ -9,7 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
 import repository.DatabaseConnection;
 
-
+/** Controller of the home view*/
 public class HomeController {
 
     // Webcasts
@@ -41,31 +41,43 @@ public class HomeController {
 
     private DatabaseConnection databaseConnection = new DatabaseConnection();
     private Controller controller = new Controller(databaseConnection);
-
+    /**
+     * This method uses the Controller to go to a page.
+     */
     public void toHome(ActionEvent event) {
         controller.toPage(event, "Home");
     }
-
+    /**
+     * This method uses the Controller to go to a page.
+     */
     public void toStudent(ActionEvent event) {
         controller.toPage(event, "StudentAdd");
     }
-
+    /**
+     * This method uses the Controller to go to a page.
+     */
     public void toCourse(ActionEvent event) {
         controller.toPage(event, "CourseAdd");
     }
-
+    /**
+     * This method uses the Controller to go to a page.
+     */
     public void toEnrollment(ActionEvent event) {
         controller.toPage(event, "EnrollmentAdd");
     }
-
+    /**
+     * This method uses the Controller to go to a page.
+     */
     public void toContentItem(ActionEvent event) {
         controller.toPage(event, "ContentItemAdd");
     }
-
+    /**
+     * This method uses the Controller to go to a page.
+     */
     public void toCertificate(ActionEvent event) {
         controller.toPage(event, "CertificateAdd");
     }
-
+    /** Shows the top 3 most viewed webcasts */
     public void getTop3Webcasts() {
         ContentItem[] webcastsTop3 = new ContentItem[3];
         databaseConnection.connect();
@@ -112,7 +124,9 @@ public class HomeController {
             System.out.println(e);
         }
     }
-
+    /**
+     * Shows the top 3 courses with the most certificates page.
+     */
     public void getTop3CourseCertificates() {
         Course[] coursesTop3 = new Course[3];
         databaseConnection.connect();

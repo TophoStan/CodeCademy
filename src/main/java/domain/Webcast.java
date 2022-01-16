@@ -1,7 +1,7 @@
 package domain;
 
 import java.sql.Date;
-
+/** Class for webcast extends ContentItem*/
 public class Webcast extends ContentItem{
     private int duration;
     private String url;

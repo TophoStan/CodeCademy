@@ -13,7 +13,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
+/** Controller of the Certificate views*/
 public class CertificateController {
     @FXML private Label resultLabel;
     @FXML private AnchorPane anchorPane;
@@ -38,49 +38,49 @@ public class CertificateController {
     public CertificateController() {}
 
     /**
-     * This methode uses the Controller to go to a page.
+     * This method uses the Controller to go to a page.
      */
     public void toHome(ActionEvent event) {
         controller.toPage(event, "Home");
     }
     /**
-     * This methode uses the Controller to go to a page.
+     * This method uses the Controller to go to a page.
      */
     public void toStudent(ActionEvent event) {
         controller.toPage(event, "StudentAdd");
     }
     /**
-     * This methode uses the Controller to go to a page.
+     * This method uses the Controller to go to a page.
      */
     public void toCourse(ActionEvent event) {
         controller.toPage(event, "CourseAdd");
     }
     /**
-     * This methode uses the Controller to go to a page.
+     * This method uses the Controller to go to a page.
      */
     public void toEnrollment(ActionEvent event) {
         controller.toPage(event, "EnrollmentAdd");
     }
     /**
-     * This methode uses the Controller to go to a page.
+     * This method uses the Controller to go to a page.
      */
     public void toContentItem(ActionEvent event) {
         controller.toPage(event, "ContentItemAdd");
     }
     /**
-     * This methode uses the Controller to go to a page.
+     * This method uses the Controller to go to a page.
      */
     public void toCertificate(ActionEvent event) {
         controller.toPage(event, "CertificateAdd");
     }
     /**
-     * This methode uses the Controller to go to a page.
+     * This method uses the Controller to go to a page.
      */
     public void toEdit(ActionEvent event) {
         controller.toPage(event, "CertificateEdit");
     }
     /**
-     * This methode uses the Controller to go to a page.
+     * This method uses the Controller to go to a page.
      */
     public void toDelete(ActionEvent event) {
         controller.toPage(event, "CertificateDelete");
@@ -225,8 +225,8 @@ public class CertificateController {
     }
 
     /**
-     * Deze snap ik niet!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-     * @return enrollment ID
+     * Returns the enrollment id of the student of the selected course & date
+     * @return enrollmentId
      */
     public int returnEnrollmentId() {
         Enrollment enrollment = new Enrollment();

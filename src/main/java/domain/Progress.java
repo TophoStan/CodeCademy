@@ -1,7 +1,7 @@
 package domain;
 
 import controllers.Controller;
-
+/** Class for progress*/
 public class Progress {
     private int id;
     private ContentItem contentItem;

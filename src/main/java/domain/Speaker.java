@@ -1,7 +1,7 @@
 package domain;
 
 import java.util.ArrayList;
-
+/** Class for speaker*/
 public class Speaker {
     private String name;
     private String organisation;

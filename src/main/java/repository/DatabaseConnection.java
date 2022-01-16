@@ -12,14 +12,7 @@ import java.util.HashMap;
 
 import domain.*;
 import domain.Module;
-
-/**
- * This program demonstrates how to establish database connection to Microsoft
- * SQL Server.
- *
- * @author www.codejava.net
- */
-
+/** Class to connect to database and execute queries*/
 public class DatabaseConnection {
     private Connection conn;
 

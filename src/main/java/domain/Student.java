@@ -2,7 +2,7 @@ package domain;
 
 import java.sql.Date;
 import java.util.ArrayList;
-
+/** Class for student*/
 public class Student {
     private int id;
     private String emailAddress;

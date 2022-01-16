@@ -20,4 +20,4 @@ Milestone 4 (Relationeel ontwerp)✔️
 
 MIlestone 5 (Vertical slice) ✔️
 
-Milestone 6 (Testsets & Validalidatiemethoden)❌
+Milestone 6 (Testsets & Validalidatiemethoden)✔️

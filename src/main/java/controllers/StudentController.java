@@ -14,7 +14,7 @@ import java.util.Calendar;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
+/** Controller of the student views*/
 public class StudentController {
 
     // for student add page
@@ -67,37 +67,57 @@ public class StudentController {
     private DatabaseConnection databaseConnection = new DatabaseConnection();
     private Controller controller = new Controller(databaseConnection);
     private Validator validator = new Validator();
-
+    /**
+     * This method uses the Controller to go to a page.
+     */
     public void toHome(ActionEvent event) {
         controller.toPage(event, "Home");
     }
-
+    /**
+     * This method uses the Controller to go to a page.
+     */
     public void toStudent(ActionEvent event) {
         controller.toPage(event, "StudentAdd");
     }
-
+    /**
+     * This method uses the Controller to go to a page.
+     */
     public void toCourse(ActionEvent event) {
         controller.toPage(event, "CourseAdd");
     }
-
+    /**
+     * This method uses the Controller to go to a page.
+     */
     public void toEnrollment(ActionEvent event) {
         controller.toPage(event, "EnrollmentAdd");
     }
-
+    /**
+     * This method uses the Controller to go to a page.
+     */
     public void toContentItem(ActionEvent event) {
         controller.toPage(event, "ContentItemAdd");
     }
-
+    /**
+     * This method uses the Controller to go to a page.
+     */
     public void toCertificate(ActionEvent event) {
         controller.toPage(event, "CertificateAdd");
     }
-
+    /**
+     * This method uses the Controller to go to a page.
+     */
     public void toStudentEdit(ActionEvent event) {
         controller.toPage(event, "StudentEdit");
     }
+    /**
+     * This method uses the Controller to go to a page.
+     */
     public void toStudentDelete(ActionEvent event){
         controller.toPage(event, "StudentDelete");
     }
+    /**
+     * This method uses the Controller to go to a page.
+     */
     public void toStudentSelection(ActionEvent event) {
         controller.toPage(event, "StudentSelection");
     }

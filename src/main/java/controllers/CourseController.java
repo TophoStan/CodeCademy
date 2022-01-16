@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
-
+/** Controller of the course views*/
 public class CourseController {
 
     private DatabaseConnection databaseConnection = new DatabaseConnection();
@@ -67,42 +67,62 @@ public class CourseController {
     @FXML private ListView interestingCourses;
     @FXML private Label lbInterestingCourses;
 
-
+    /**
+     * This method uses the Controller to go to a page.
+     */
     public void toHome(ActionEvent event) {
         controller.toPage(event, "Home");
     }
-
+    /**
+     * This method uses the Controller to go to a page.
+     */
     public void toStudent(ActionEvent event){
         controller.toPage(event, "StudentAdd");
     }
-
+    /**
+     * This method uses the Controller to go to a page.
+     */
     public void toCourse(ActionEvent event) {
         controller.toPage(event, "CourseAdd");
     }
-
+    /**
+     * This method uses the Controller to go to a page.
+     */
     public void toEnrollment(ActionEvent event) {
         controller.toPage(event, "EnrollmentAdd");
     }
-
+    /**
+     * This method uses the Controller to go to a page.
+     */
     public void toContentItem(ActionEvent event) {
         controller.toPage(event, "ContentItemAdd");
     }
-
+    /**
+     * This method uses the Controller to go to a page.
+     */
     public void toCertificate(ActionEvent event) {
         controller.toPage(event, "CertificateAdd");
     }
-
+    /**
+     * This method uses the Controller to go to a page.
+     */
     public void toCourseEdit(ActionEvent event) {
         controller.toPage(event, "CourseEdit");
     }
+    /**
+     * This method uses the Controller to go to a page.
+     */
     public void toCourseDelete(ActionEvent event) {
         controller.toPage(event,  "CourseDelete");
     }
+    /**
+     * This method uses the Controller to go to a page.
+     */
     public void toCourseSelection(ActionEvent event) {
         controller.toPage(event, "CourseSelection");
     }
 
-
+    /** Shows all the courses in a listview*/
     public void showCourses() {
         databaseConnection.connect();
         try {
@@ -116,7 +136,7 @@ public class CourseController {
             System.out.println(e);
         }
     }
-
+    /** creates a Course object with the given values then passes it to the DatabaseConnection class*/
     public void addCourseToDatabase() {
         databaseConnection.connect();
         Course course = new Course();
@@ -134,10 +154,12 @@ public class CourseController {
             contentItem.setCourseId(courseFromDatabase.getId());
             databaseConnection.editContentItem(contentItem);
             showCourses();
+            clearFields();
         } catch (Exception e) {
             System.out.println(e);
         }
     }
+    /** Adds the contentItems that don't have a course assigned to them yet*/
     public void loadContentItems(){
         databaseConnection.connect();
         cbContentItem.getItems().clear();
@@ -162,7 +184,7 @@ public class CourseController {
 
         }
     }
-
+    /** Adds the difficulties from the Difficulty Enum*/
     public void loadDifficulties() {
         try {
             cBCourseAddDifficulty.getItems().clear();
@@ -176,7 +198,7 @@ public class CourseController {
         } catch (Exception e) {
         }
     }
-
+    /** Turns all the fields of the edit view visible if the */
     public void showCourseEditPlace() {
         if (!(courseList.getSelectionModel().isEmpty())) {
             tFNameEditCourse.setText((String) courseList.getSelectionModel().getSelectedItem());
@@ -207,7 +229,7 @@ public class CourseController {
             tFNameEditCourse.setText("Wrong name!");
         }
     }
-
+    /** Fills the course fields with the selected course*/
     public void fillCourseTF(String courseName) {
         databaseConnection.connect();
 
@@ -223,7 +245,7 @@ public class CourseController {
             System.out.println(e);
         }
     }
-
+    /** Recreates a Course object with the given values then passes it to the DatabaseConnection class*/
     public void editCourse() {
         String courseName = tFNameEditCourse.getText();
         databaseConnection.connect();
@@ -237,9 +259,9 @@ public class CourseController {
                     course.setSubject(tFSubjectEditCourse.getText());
                     course.setDifficulty(Difficulty.valueOf(cBDifficultyEditCourse.getValue().toString()));
                     course.setText(tAIntroTextEditCourse.getText());
-
                     databaseConnection.editCourseInformation(course);
                     tFNameEditCourse.setText("Course info changed!");
+                    clearFields();
                     Thread.sleep(90);
                     showCourseInfo(courseName);
                     break;
@@ -250,7 +272,7 @@ public class CourseController {
             e.printStackTrace();
         }
     }
-
+    /** Shows the values of the selected course in a listview*/
     public void showCourseInfo(String courseName) {
         courseInfoList.getItems().clear();
         databaseConnection.connect();
@@ -271,7 +293,7 @@ public class CourseController {
             e.printStackTrace();
         }
     }
-
+    /** Recreates a Course object with the given values then passes it to the DatabaseConnection class*/
     public void deleteCourse() {
         String courseName = tFNameDeleteCourse.getText();
         ArrayList<Course> courseToDelete = new ArrayList<>();
@@ -296,7 +318,7 @@ public class CourseController {
             tFNameDeleteCourse.setText("Unknown course");
         }
     }
-
+    /** Checks if a course exists*/
     public boolean checkCourseName(String name) {
         boolean output = false;
         try {
@@ -315,7 +337,7 @@ public class CourseController {
         }
         return output;
     }
-
+    /** Shows the select view fields if the course exists */
     public void selectCourse() {
         if (!(courseList.getSelectionModel().isEmpty())) {
             tFNameSelectCourse.setText((String) courseList.getSelectionModel().getSelectedItem());
@@ -357,7 +379,7 @@ public class CourseController {
             tFNameSelectCourse.setText("Wrong course name!");
         }
     }
-
+    /** Shows the correct progress for the selected course and gender*/
     public void selectProgressGender() {
         String genderType = "";
         String selectedCourse = tFNameSelectCourse.getText();
@@ -409,8 +431,7 @@ public class CourseController {
         pbCourseSelectionGender.setProgress(percentForProgressBar);
         lBCourseSelectionPercentage.setText(percentForLabel + "%");
     }
-
-
+    /** Makes all fields (in)visible*/
     public void makeVisible(boolean bool) {
         lBCourseSelectionAmount.setVisible(bool);
         lBCourseSelectionProgressTitle.setVisible(bool);
@@ -424,24 +445,11 @@ public class CourseController {
         lbInterestingCourses.setVisible(bool);
         interestingCourses.setVisible(bool);
     }
-
-    public HashMap<Course, ArrayList<ContentItem>> contentItemsWithCourse() {
-        HashMap<Course, ArrayList<ContentItem>> map = new HashMap<>();
-        for (Course course : databaseConnection.retrieveCourses()) {
-            ArrayList<ContentItem> contentItems = new ArrayList<>();
-            for (ContentItem contentItem : databaseConnection.retrieveContentItems()) {
-                if (course.getId() == contentItem.getCourseId()) {
-                    contentItems.add(contentItem);
-                }
-            }
-            map.put(course, contentItems);
-        }
-        return map;
-    }
+    /** Clears all fields*/
     public void clearFields(){
         controller.clear(anchorPane);
     }
-
+    /** Shows courses that might be interesting*/
     public void showInterestingCourses() {
         Random random = new Random();
         ArrayList<Course> courses = databaseConnection.retrieveCourses();

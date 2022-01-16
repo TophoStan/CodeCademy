@@ -1,5 +1,5 @@
 package domain;
-
+/** Class for employee*/
 public class Employee {
     private int employeeId;
     private String name;

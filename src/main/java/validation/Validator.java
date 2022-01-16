@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.regex.Pattern;
-
+/** Class for validation*/
 public class Validator {
 
     /** validates if the emailAddress is valid according to the given guidelines

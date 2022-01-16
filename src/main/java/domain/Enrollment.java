@@ -1,7 +1,7 @@
 package domain;
 
 import java.sql.Date;
-
+/** Class for enrollment*/
 public class Enrollment {
     private int enrollmentId;
     private Date enrollmentDate;

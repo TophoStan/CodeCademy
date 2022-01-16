@@ -1,5 +1,5 @@
 package domain;
-
+/** Certificate class*/
 public class Certificate {
     private int enrollmentId;
     private Enrollment enrollment;

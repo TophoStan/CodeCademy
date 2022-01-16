@@ -1,7 +1,7 @@
 package domain;
 
 import java.sql.Date;
-
+/** Module class extends ContentItem*/
 public class Module extends ContentItem {
     private String version;
     private int contactPersonId;

@@ -1,7 +1,7 @@
 package domain;
 
 import java.util.ArrayList;
-
+/** Class for course*/
 public class Course {
     private int id;
     private String name;

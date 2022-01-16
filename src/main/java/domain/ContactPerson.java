@@ -1,7 +1,7 @@
 package domain;
 
 import java.util.ArrayList;
-
+/** Contact-person class*/
 public class ContactPerson {
     private String name;
     private String emailAddress;

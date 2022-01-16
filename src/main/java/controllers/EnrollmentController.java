@@ -13,7 +13,7 @@ import validation.Validator;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
-
+/** Controller of the enrollment views*/
 public class EnrollmentController {
 
 
@@ -38,36 +38,53 @@ public class EnrollmentController {
     private ArrayList<Course> enrolledCoursesOfStudent = new ArrayList<>();
     private Enrollment enrollmentFromDatabaseThatWillBeEdited = new Enrollment();
     private Validator validator = new Validator();
-
+    /**
+     * This method uses the Controller to go to a page.
+     */
     public void toHome(ActionEvent event) {
         controller.toPage(event, "Home");
     }
-
+    /**
+     * This method uses the Controller to go to a page.
+     */
     public void toStudent(ActionEvent event) {
         controller.toPage(event, "StudentAdd");
     }
-
+    /**
+     * This method uses the Controller to go to a page.
+     */
     public void toCourse(ActionEvent event) {
         controller.toPage(event, "CourseAdd");
     }
-
+    /**
+     * This method uses the Controller to go to a page.
+     */
     public void toEnrollment(ActionEvent event) {
         controller.toPage(event, "EnrollmentAdd");
     }
-
+    /**
+     * This method uses the Controller to go to a page.
+     */
     public void toContentItem(ActionEvent event) {
         controller.toPage(event, "ContentItemAdd");
     }
-
+    /**
+     * This method uses the Controller to go to a page.
+     */
     public void toCertificate(ActionEvent event) {
         controller.toPage(event, "CertificateAdd");
     }
-
+    /**
+     * This method uses the Controller to go to a page.
+     */
     public void toDelete(ActionEvent event){
         controller.toPage(event, "EnrollmentDelete");
     }
+    /**
+     * This method uses the Controller to go to a page.
+     */
     public void toEdit(ActionEvent event){ controller.toPage(event, "EnrollmentEdit");}
-
+    /** creates an Enrollment object with the passed values then passes it to the DatabaseConnection class*/
     public void addEnrollment(){
         databaseConnection.connect();
         Enrollment enrollment = new Enrollment();
@@ -95,7 +112,7 @@ public class EnrollmentController {
         cbCourseEnrollment.getItems().clear();
         listEnrollments();
     }
-
+    /** creates a Progress object with the passed values then passes it to the DatabaseConnection class*/
     public void addProgresses(Enrollment enrollment) {
         try {
             databaseConnection.connect();
@@ -120,16 +137,7 @@ public class EnrollmentController {
             e.printStackTrace();
         }
     }
-
-    public void addValuesToComboBox() {
-        databaseConnection.connect();
-        ArrayList<Course> courses = databaseConnection.retrieveCourses();
-        cbCourseEnrollment.getItems().clear();
-        for (Course course : courses) {
-            cbCourseEnrollment.getItems().add(course.getName());
-        }
-    }
-
+    /** Shows all the enrollments in a listview*/
     public void listEnrollments(){
         databaseConnection.connect();
         try {
@@ -142,7 +150,7 @@ public class EnrollmentController {
             System.out.println(e);
         }
     }
-
+    /** Add all the courses to a combobox a student has not enrolled in yet*/
     public void addCoursesToComboBox() {
         databaseConnection.connect();
         Student student;
@@ -179,7 +187,7 @@ public class EnrollmentController {
             System.out.println(e);
         }
     }
-
+    /** Add all the courses to a combobox a student has been enrolled in*/
     public void addCoursesToComboBoxOfStudent(){
         try {
             databaseConnection.connect();
@@ -207,6 +215,7 @@ public class EnrollmentController {
             System.out.println(e);
         }
     }
+    /** Add all the dates to a combobox a student has been enrolled in of the selected course*/
     public void addDatesToComboBoxOfCourse(){
 
         for (Course course: enrolledCoursesOfStudent) {
@@ -222,7 +231,7 @@ public class EnrollmentController {
             }
         }
     }
-
+    /** recreates an Enrollment object with the selected values then passes it to the DatabaseConnection class*/
     public void deleteEnrollment(){
         databaseConnection.connect();
         Enrollment enrollmentToDelete = new Enrollment();
@@ -255,7 +264,7 @@ public class EnrollmentController {
             System.out.println(e);
         }
     }
-
+    /** recreates a Progress object with the selected values then passes it to the DatabaseConnection class*/
     public void deleteProgresses(Enrollment enrollment) {
         Course course = (Course) controller.giveIdentifierReturnObject(enrollment.getCourseId(), "Course");
         try {
@@ -277,7 +286,7 @@ public class EnrollmentController {
             System.out.println(e);
         }
     }
-
+    /** recreates an Enrollment object with the edited values then passes it to the DatabaseConnection class*/
     public void editEnrollment(){
         databaseConnection.connect();
         Date date = convertDate(Integer.parseInt(tfDateDay.getText()),Integer.parseInt(tfDateMonth.getText()), Integer.parseInt(tfDateYear.getText()));
@@ -309,7 +318,7 @@ public class EnrollmentController {
             System.out.println(e);
         }
     }
-
+    /** Checks whether the student has any enrollments */
     public void checkEnrollment() {
         Student studentToCheck = new Student();
         Enrollment enrollmentToCheck = new Enrollment();
@@ -339,18 +348,7 @@ public class EnrollmentController {
             System.out.println(e);
         }
     }
-
-    public void addAllCoursesToCombobox() {
-        databaseConnection.connect();
-        try {
-            cbCourseEnrollmentToEdit.getItems().clear();
-            for (Course course : databaseConnection.retrieveCourses()) {
-                cbCourseEnrollmentToEdit.getItems().add(course.getName());
-            }
-        } catch (Exception e) {
-
-        }
-    }
+    /** Makes specific fields (in)visible with the passed parameter */
     public void setVisible(boolean truOrFalse){
             cbCourseEnrollmentToEdit.setVisible(truOrFalse);
             lbCourseEdit.setVisible(truOrFalse);
@@ -360,7 +358,7 @@ public class EnrollmentController {
             tfDateYear.setVisible(truOrFalse);
             btnEditEnrollment.setVisible(truOrFalse);
     }
-
+    /** converts the values of the textfields to sql.date*/
     public Date convertDate(int day, int month, int year) {
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.YEAR, year);

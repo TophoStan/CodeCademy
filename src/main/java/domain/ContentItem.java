@@ -1,7 +1,7 @@
 package domain;
 
 import java.sql.*;
-
+/** Super class of webcast and module*/
 public abstract class ContentItem {
     private String title;
     private String description;
