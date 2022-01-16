@@ -12,6 +12,7 @@ public class Validator {
     /** validates if the emailAddress is valid according to the given guidelines
      * @param emailAddress
      * @return boolean
+     * }
      */
 
     public boolean isEmailAddressValid(String emailAddress) {
@@ -35,6 +36,14 @@ public class Validator {
     /** validates if the percentage is valid according to the given guidelines
      * @param percentage
      * @return boolean
+     * @subcontract is valid {
+     *      * @requires 0 <= percentage && percentage <= 100;
+     *      * @ensures \result = true
+     *      }
+     * @subcontract is not valid {
+     *      *      * @requires 0 > percentage && percentage > 100;
+     *      *      * @ensures \result = false
+     *      *      }
      */
 
     public boolean isPercentageValid(int percentage) {
@@ -50,11 +59,18 @@ public class Validator {
     /** validates if the grade is valid according to the given guidelines
      * @param grade
      * @return boolean
+     * @subcontract is valid {
+     *      * @requires 1 <= grade && grade <= 10;
+     *      * @ensures \result = true
+     *      }
+     * @subcontract is not valid {
+     *      *      * @requires 1 > grade && grade > 10;
+     *      *      * @ensures \result = false
+     *      *      }
      */
+
     public boolean isGradeValid(double grade){
-        if (grade > 10) {
-            return false;
-        } else if (grade < 1) {
+        if (grade > 10 || grade < 1) {
             return false;
         } else {
             return true;
@@ -64,6 +80,7 @@ public class Validator {
     /** Formats the postal code, so it's valid according to the given guidelines.
      * @param postalCode
      * @return String
+
      */
     public String formatPostalCode(String postalCode) {
         if (postalCode.length() == 6) {
