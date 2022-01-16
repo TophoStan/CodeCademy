@@ -268,14 +268,16 @@ public class DatabaseConnection {
      * @throws NullPointerException course == null
      * @requires course != null && conn != null
      */
-    public void deleteCourse(Course course) {
+    public boolean deleteCourse(Course course) {
         try {
             PreparedStatement preparedStatement = conn
                     .prepareStatement("DELETE FROM Course WHERE CourseName='" + course.getName() + "'");
             preparedStatement.executeUpdate();
+            return true;
         } catch (Exception e) {
             System.out.println(e);
         }
+        return false;
     }
 
     /**

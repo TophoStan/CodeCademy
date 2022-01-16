@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -188,11 +189,13 @@ public class Controller {
         for (Node node : anchorPane.getChildren()) {
 
             if (node instanceof TextField) {
-                // clear
                 ((TextField)node).clear();
             }
             if(node instanceof ComboBox){
                 ((ComboBox)node).getItems().clear();
+            }
+            if (node instanceof TextArea) {
+                ((TextArea)node).clear();
             }
         }
     }

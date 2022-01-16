@@ -323,7 +323,9 @@ public class StudentController {
             for (Map.Entry<ContentItem, Integer> e : percentForContentItems.entrySet()) {
                 percentContentItemList.getItems().add(e.getKey().getTitle() + ": " + e.getValue() + "%");
             }
-
+            if (percentContentItemList.getItems().isEmpty()) {
+                percentContentItemList.getItems().add("Did not enroll a course..");
+            }
         } catch (Exception e) {
             System.out.println(e);
         }

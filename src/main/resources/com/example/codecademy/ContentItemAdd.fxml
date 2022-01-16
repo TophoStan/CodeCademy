@@ -70,7 +70,7 @@
       <ComboBox fx:id="cbContactPerson" layoutX="214.0" layoutY="224.0" onMouseClicked="#addValuesTocbContactPerson" prefWidth="150.0" visible="false" />
       <Label fx:id="lblContactPerson" layoutX="214.0" layoutY="205.0" text="ContactPerson" visible="false" />
       <Label fx:id="lblURL" layoutX="214.0" layoutY="155.0" text="URL" visible="false" />
-      <TextField fx:id="tfURL" layoutX="215.0" layoutY="172.0" visible="false" />
+      <TextField fx:id="tfURL" layoutX="215.0" layoutY="172.0" onMouseClicked="#clearField" prefHeight="25.0" prefWidth="185.0" text="https://www.example.com" visible="false" />
       <Label fx:id="lblSpeaker" layoutX="216.0" layoutY="204.0" text="Speaker" visible="false" />
       <ComboBox fx:id="cbSpeaker" layoutX="217.0" layoutY="224.0" onMouseClicked="#addValuesTocbSpeaker" prefWidth="150.0" visible="false" />
       <Button layoutX="347.0" layoutY="46.0" mnemonicParsing="false" onAction="#toCertificate" text="Certificate">

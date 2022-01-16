@@ -144,8 +144,7 @@ public class CourseController {
         course.setText(tACourseAddIntroText.getText());
         course.setDifficulty(Difficulty.valueOf(cBCourseAddDifficulty.getValue().toString()));
         course.setSubject(tFCourseAddSubject.getText());
-        String[] splitter = cbContentItem.getValue().toString().split("-");
-
+        String[] splitter = cbContentItem.getValue().toString().split(" - ");
 
         try {
             databaseConnection.addCourseToDatabase(course);
@@ -304,10 +303,12 @@ public class CourseController {
                 courseToDelete = databaseConnection.retrieveCourses();
                 for (Course i : courseToDelete) {
                     if (i.getName().equals(courseName)) {
-                        databaseConnection.deleteCourse(i);
-                        tFNameDeleteCourse.setText("Course removed");
+                        if (databaseConnection.deleteCourse(i)) {
+                            tFNameDeleteCourse.setText("Course removed");
+                        } else {
+                            tFNameDeleteCourse.setText("Course NOT removed");
+                        }
                         showCourses();
-                        showCourseInfo(courseName);
                         break;
                     }
                 }
@@ -358,21 +359,44 @@ public class CourseController {
 
             // Shows for every module the progress percentage of all students
             progressList.getItems().clear();
-            HashMap<Integer, Integer> progressHashMap = databaseConnection.getProgressForCourse(courseName);
-            ArrayList<ContentItem> allContentItems = databaseConnection.retrieveContentItems();
+            try {
+                ArrayList<Enrollment> allEnrollments = databaseConnection.retrieveEnrollments();
+                Course course = (Course) controller.giveIdentifierReturnObject(courseName, "Course");
+                int count = 0;
 
-            for (Map.Entry<Integer, Integer> i : progressHashMap.entrySet()) {
-                int contentItemId = i.getKey();
-                int percentage = i.getValue();
-                String contentItemTitle = "";
-
-                for (ContentItem contentItem : allContentItems) {
-                    if (contentItemId == contentItem.getContentItemId()) {
-                        contentItemTitle = contentItem.getTitle();
-                        break;
+                for (Enrollment e : allEnrollments) {
+                    if (e.getCourseId() == course.getId()) {
+                        count++;
                     }
                 }
-                progressList.getItems().add(contentItemTitle + ": " + percentage + "%");
+
+                ArrayList<ContentItem> allContentItems = databaseConnection.retrieveContentItems();
+                if (count != 0) {
+                    HashMap<Integer, Integer> progressHashMap = databaseConnection.getProgressForCourse(courseName);
+
+
+                    for (Map.Entry<Integer, Integer> i : progressHashMap.entrySet()) {
+                        int contentItemId = i.getKey();
+                        int percentage = i.getValue();
+                        String contentItemTitle = "";
+
+                        for (ContentItem contentItem : allContentItems) {
+                            if (contentItemId == contentItem.getContentItemId()) {
+                                contentItemTitle = contentItem.getTitle();
+                                break;
+                            }
+                        }
+                        progressList.getItems().add(contentItemTitle + ": " + percentage + "%");
+                    }
+                } else {
+                    for (ContentItem c : allContentItems) {
+                        if (c.getCourseId() == course.getId()) {
+                            progressList.getItems().add(c.getTitle()+ ": 0%");
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                System.out.println(e);
             }
         } else {
             makeVisible(false);

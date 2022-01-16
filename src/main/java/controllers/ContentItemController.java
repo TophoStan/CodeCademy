@@ -108,6 +108,7 @@ public class ContentItemController {
         Date date = Date.valueOf(LocalDate.now());
         contentItem.setPublicationDate(date);
 
+        // creates a module
         if(type.getSelectedToggle().equals(radModule)){
             databaseConnection.addContentItem(contentItem);
             int id = 0;
@@ -135,6 +136,8 @@ public class ContentItemController {
             module.setVersion(tfVersion.getText());
             module.setContactPersonId(contactPerson.getId());
             databaseConnection.addModule(module);
+
+        // creates a webcast
         } else {
 
             Speaker speaker = new Speaker();
@@ -170,6 +173,10 @@ public class ContentItemController {
                 failedURL.setText("Invalid URL");
             }
         }
+
+        // Adds progress to students who are enrolled in the course for which a new content item is created.
+        addProgressToStudentsNewContentItem(contentItem);
+
         cbState.getItems().clear();
         tfTitle.clear();
         taDescription.clear();
@@ -179,6 +186,31 @@ public class ContentItemController {
         tfURL.clear();
         tfVersion.clear();
         tfDuration.clear();
+    }
+
+    public void addProgressToStudentsNewContentItem(ContentItem contentItem) {
+        databaseConnection.connect();
+        ContentItem theContentItem = (ContentItem) controller.giveIdentifierReturnObject(contentItem.getTitle(), "ContentItem");
+        try {
+            ArrayList<Enrollment> enrollments = databaseConnection.retrieveEnrollments();
+
+            for (Enrollment e : enrollments) {
+                if (theContentItem.getCourseId() == e.getCourseId()) {
+                    Progress newProgress = new Progress();
+                    newProgress.setStudentId(e.getStudentId());
+                    System.out.println(e.getStudentId());
+                    newProgress.setContentItemId(theContentItem.getContentItemId());
+                    System.out.println(theContentItem.getContentItemId());
+                    newProgress.setPercentage(0);
+
+                    databaseConnection.addProgress(newProgress);
+                    System.out.println("Progress added: " + newProgress);
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     /**
@@ -236,11 +268,16 @@ public class ContentItemController {
         }
     }
 
+    public void clearField() {
+        tfURL.setText("");
+    }
+
     /**
      * Sets fields and labels on visible or on invisible.
      */
     public void setVisible(){
         if(type.getSelectedToggle().equals(radModule)){
+            failedURL.setText("");
             lblVersion.setVisible(true);
             tfVersion.setVisible(true);
             lblContactPerson.setVisible(true);
@@ -250,8 +287,12 @@ public class ContentItemController {
             tfURL.setVisible(false);
             cbSpeaker.setVisible(false);
             lblSpeaker.setVisible(false);
+            lbDuration.setVisible(false);
+            tfDuration.setVisible(false);
 
         } else if(type.getSelectedToggle().equals(radWebcast)){
+            failedURL.setText("");
+            tfURL.setText("https://www.example.com");
             lblURL.setVisible(true);
             tfURL.setVisible(true);
             cbSpeaker.setVisible(true);
@@ -285,7 +326,7 @@ public class ContentItemController {
                     sort = "M";
                 }
             }
-            listView.getItems().add(contentItem.getTitle() + " - " + sort);
+            listView.getItems().add(sort + " - " + contentItem.getTitle());
         }
     }
 }
