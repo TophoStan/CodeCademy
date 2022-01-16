@@ -27,6 +27,11 @@ public class Controller {
         this.databaseConnection = databaseConnection;
     }
 
+    /**
+     * Opens a page
+     * @param event
+     * @param page
+     */
     public void toPage(ActionEvent event, String page) {
         try {
             root = FXMLLoader.load(App.class.getResource(page + ".fxml"));
@@ -38,6 +43,13 @@ public class Controller {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Get all the information from a specific object with an integer
+     * @param id
+     * @param type
+     * @return an Object dependent on the type
+     */
     public Object giveIdentifierReturnObject(int id, String type) {
         databaseConnection.connect();
         try {
@@ -108,6 +120,12 @@ public class Controller {
         return null;
     }
 
+    /**
+     * Get all the information from a specific object with a string
+     * @param id
+     * @param type
+     * @return an Object dependent on the type
+     */
     public Object giveIdentifierReturnObject(String id, String type) {
         databaseConnection.connect();
         try {
@@ -136,6 +154,11 @@ public class Controller {
         return null;
     }
 
+    /**
+     * Checks if an email exists
+     * @param email
+     * @return true or false
+     */
     public boolean checkEmail(String email){
         boolean output = false;
         try {
@@ -155,6 +178,10 @@ public class Controller {
         return output;
     }
 
+    /**
+     * Clear TextFields of TextArea's in an anchorPane
+     * @param anchorPane
+     */
     public void clear(AnchorPane anchorPane){
         for (Node node : anchorPane.getChildren()) {
 
